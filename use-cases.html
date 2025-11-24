@@ -21,100 +21,198 @@
             </ul>
         </nav>
         
-        <section>
-            <h2>Creative Work</h2>
+        <!-- Creative Work Section - Main Dropdown -->
+        <details class="main-dropdown">
+            <summary class="dropdown-header">
+                <h2>Creative Work</h2>
+            </summary>
             
-            <h3>Summarize Long Documents</h3>
-            <p>Extract key points from articles, papers, or reports.</p>
-            <ul>
-                <li>Turn a 20-page research paper into 5 bullet points</li>
-                <li>Create meeting notes from a transcript</li>
-                <li>Digest a long email thread</li>
-            </ul>
-            <p><strong>Try this:</strong> "Summarize this article in 3 paragraphs: [paste text]"</p>
-            
-            <h3>Brainstorm Variations</h3>
-            <p>Generate multiple versions of an idea.</p>
-            <ul>
-                <li>10 headlines for a blog post</li>
-                <li>5 ways to describe a product feature</li>
-                <li>Different plot twists for a story</li>
-            </ul>
-            <p><strong>Try this:</strong> "Give me 5 variations of 'AI helps with productivity'"</p>
-            
-            <h3>Code Assistance</h3>
-            <p>Help with programming tasks.</p>
-            <ul>
-                <li>Explain a confusing function</li>
-                <li>Debug an error message</li>
-                <li>Convert code from one language to another</li>
-            </ul>
-            <p><strong>Try this:</strong> "Explain this Python code line by line: [paste code]"</p>
-        </section>
+            <div class="dropdown-content">
+                
+                <!-- Research, Summarize, & Study Subsection -->
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Research, Summarize, & Study</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Beyond searching and summarizing information from various sources far more quickly than a human would be able to, the ways AI is capable of summarizing are very powerful. AIs are now commonly loaded with a sophisticated understanding of how to teach and explain things to humans, and even unprompted they'll regularly offer metaphors and use other teaching tools that break down complex ideas to help you understand them intuitively.</p>
+                        
+                        <h4>Example 1:</h4>
+                        <p>Say you want to understand a difficult or counterintuitive science concept, like time as a fourth dimension. You ask the AI to explain it to you and the level of the explanation is too advanced. You can send it a follow up message asking it to explain the concept using plain language, or to explain it like you're a child—you could even specify the age of the child or the education level you're at. You could ask it to explain just one element of the concept at a time, or to use metaphors and explain it intuitively. If it uses a term you're unfamiliar with, ask it to break down to the term.</p>
+                        
+                        <h4>Example 2:</h4>
+                        <p>You're studying for a biology test and you need to memorize the phases of mitosis and meiosis. Ask the AI to help you develop a mnemonic or a series of metaphors to help you with this memorization task. Then use it as a study partner and have it drill you—if you get stuck, ask for a hint. Here is some sample output from Kimi K2:</p>
+                        
+                        <!-- Kimi Output Dropdown -->
+                        <details class="code-dropdown">
+                            <summary class="code-header">
+                                <em>Click to view Kimi K2 sample output</em>
+                            </summary>
+                            <div class="code-content">
+                                <pre><code>[Q: Help me develop a mnemonic or a series of metaphors to memorize the phases of mitosis and meiosis.
+								Kimi K2: Here are several mnemonic devices and metaphorical stories to help you memorize the phases of mitosis and meiosis:
+
+---
+
+### **MITOSIS (PMAT)**
+
+**Classic Acronym Mnemonic:**
+- **P**lease **M**ake **A**nother **T**aco
+- **P**retty **M**ajestic **A**lbatross **T**akeoff
+- **P**eaceful **M**editation **A**llows **T**ranquility
+
+**Metaphor: "The Great Concert Setup"**
+- **Interphase:** The band members are in their dressing rooms, duplicating their instruments (DNA replication).
+- **Prophase:** Stagehands begin setting up—chromosomes coil up like tangled microphone cables, the nuclear membrane (backstage curtain) starts to dissolve.
+- **Metaphase:** All equipment is aligned perfectly at center stage (the metaphase plate), ready for the big moment.
+- **Anaphase:** The roadies yank the equipment apart to opposite ends of the stage, separating sister chromatids.
+- **Telophase:** Two separate stages begin forming, each with its own curtain (nuclear membrane reforms).
+
+---
+
+### **MEIOSIS I (PMAT I)**
+
+**Acronym Mnemonic:**
+- **P**eople **M**eet **A**nd **T**ango (In pairs!)
+- **P**aired **M**atchmakers **A**rrange **T**hreads
+
+**Metaphor: "The Chromosome Square Dance"**
+- **Prophase I:** Chromosomes find their dance partners (homologous pairs) and swap dance moves (crossing over) while holding hands tightly (synapsis).
+- **Metaphase I:** Couples line up at the center, side-by-side, still paired—like partners ready for a paired dance-off.
+- **Anaphase I:** The caller shouts "Separate!" and each *couple* splits—partners are pulled to opposite sides, but each still has their original outfit (chromatids remain attached).
+- **Telophase I:** Two smaller dance floors appear, each with half the couples.
+
+---
+
+### **MEIOSIS II (PMAT II)**
+
+**Acronym Mnemonic:**
+- **P**artners **M**ust **A**lso **T**wirl (Individually!)
+- **P**arted **M**embers **A**lign **T**wice
+
+**Metaphor: "The Solo Performance"**
+- **Prophase II:** No duplication this time—it’s like each performer prepares for their solo act without rehearsing.
+- **Metaphase II:** Individual performers line up solo at center stage (like mitosis).
+- **Anaphase II:** The final separation—sister chromatids finally part ways, like twins walking to opposite exits.
+- **Telophase II:** Four separate stages emerge, each with a unique, haploid performer.
+
+---
+
+### **Combined Mnemonic Story: "The Traveling Band"**
+
+**Interphase:** Four musicians each duplicate their instrument.
+**Mitosis:** One band splits into two identical bands that tour separately.
+**Meiosis I:** The original band pairs up (two musicians per pair), swaps musical ideas (crossing over), then splits into two groups *by pair* (each group has one member from each original duo).
+**Meiosis II:** Those two groups each split again, separating individual musicians—resulting in four solo artists, each with unique genetic "style."
+
+---
+
+**Tips for Recall:**
+- Remember **I** before **II**—Meiosis I is about separating *pairs*, Meiosis II is about separating *individuals*.
+- **Crossing over = exchanging gifts** only happens in Prophase I.
+- **Mitosis = identical** (makes two identical cells); **Meiosis = half** (makes four unique haploid cells).
+
+Choose whichever metaphor clicks with your learning style—visual, kinesthetic, or story-based—and practice drawing them out!]</code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+                
+                <!-- Brainstorm Variations Subsection -->
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Brainstorm Variations</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Generate multiple versions of an idea.</p>
+                        <ul>
+                            <li>10 headlines for a blog post</li>
+                            <li>5 ways to describe a product feature</li>
+                            <li>Different plot twists for a story</li>
+                        </ul>
+                        <p><strong>Try this:</strong> "Give me 5 variations of 'AI helps with productivity'"</p>
+                    </div>
+                </details>
+                
+                <!-- Code Assistance Subsection -->
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Code Assistance</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Help with programming tasks.</p>
+                        <ul>
+                            <li>Explain a confusing function</li>
+                            <li>Debug an error message</li>
+                            <li>Convert code from one language to another</li>
+                        </ul>
+                        <p><strong>Try this:</strong> "Explain this Python code line by line: [paste code]"</p>
+                    </div>
+                </details>
+            </div>
+        </details>
         
-        <section>
-            <h2>Analytical Tasks</h2>
-            
-            <h3>Data Pattern Recognition</h3>
-            <p>Find patterns in unstructured data.</p>
-            <ul>
-                <li>Sort survey responses by sentiment</li>
-                <li>Extract names and dates from messy notes</li>
-                <li>Categorize customer feedback</li>
-            </ul>
-            
-            <h3>Comparative Analysis</h3>
-            <p>Compare options systematically.</p>
-            <ul>
-                <li>Pros and cons of two products</li>
-                <li>Compare three business strategies</li>
-                <li>Weigh different decision factors</li>
-            </ul>
-        </section>
+        <!-- Analytical Tasks Section - Main Dropdown -->
+        <details class="main-dropdown">
+            <summary class="dropdown-header">
+                <h2>Analytical Tasks</h2>
+            </summary>
+            <div class="dropdown-content">
+                
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Data Pattern Recognition</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Find patterns in unstructured data.</p>
+                        <ul>
+                            <li>Sort survey responses by sentiment</li>
+                            <li>Extract names and dates from messy notes</li>
+                            <li>Categorize customer feedback</li>
+                        </ul>
+                    </div>
+                </details>
+                
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Comparative Analysis</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Compare options systematically.</p>
+                        <ul>
+                            <li>Pros and cons of two products</li>
+                            <li>Compare three business strategies</li>
+                            <li>Weigh different decision factors</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </details>
         
-        <section>
-            <h2>Communication</h2>
-            
-            <h3>Rewrite for Different Audiences</h3>
-            <p>Adapt tone and complexity.</p>
-            <ul>
-                <li>Explain quantum computing to a 10-year-old</li>
-                <li>Make technical documentation user-friendly</li>
-                <li>Formalize casual notes</li>
-            </ul>
-            
-            <h3>Translation & Localization</h3>
-            <p>Translate with context (better than Google Translate for nuance).</p>
-            <ul>
-                <li>Email translation with cultural context</li>
-                <li>Localize a product description</li>
-                <li>Explain idioms and slang</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Productivity</h2>
-            
-            <h3>Task Breakdown</h3>
-            <p>Turn vague goals into actionable steps.</p>
-            <ul>
-                <li>"Plan a conference" → specific task list</li>
-                <li>Break down a research project</li>
-                <li>Create a study schedule</li>
-            </ul>
-            
-            <h3>Email Drafting</h3>
-            <p>Get past the blank page.</p>
-            <ul>
-                <li>Draft a polite rejection</li>
-                <li>Follow up on a delayed project</li>
-                <li>Request a meeting with context</li>
-            </ul>
-        </section>
-        
-        <footer>
-            <p><a href="index.html">← Back to Home</a></p>
-        </footer>
-    </main>
-</body>
-</html>
+        <!-- Communication Section - Main Dropdown -->
+        <details class="main-dropdown">
+            <summary class="dropdown-header">
+                <h2>Communication</h2>
+            </summary>
+            <div class="dropdown-content">
+                
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Rewrite for Different Audiences</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Adapt tone and complexity.</p>
+                        <ul>
+                            <li>Explain quantum computing to a 10-year-old</li>
+                            <li>Make technical documentation user-friendly</li>
+                            <li>Formalize casual notes</li>
+                        </ul>
+                    </div>
+                </details>
+                
+                <details class="nested-dropdown">
+                    <summary class="nested-header">
+                        <h3>Translation & Localization</h3>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Translate
