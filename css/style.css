@@ -120,3 +120,83 @@ footer {
         gap: 1em;
     }
 }
+/* DROPDOWN STYLES - FIXED VERSION */
+
+/* Main dropdown container */
+.main-dropdown {
+    margin: 2em 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* The clickable header - fixed arrow alignment */
+.dropdown-header {
+    cursor: pointer;
+    padding: 1em;
+    background-color: #f9f9f9;
+}
+
+/* This makes the heading inline so the arrow aligns correctly */
+.dropdown-header h2 {
+    display: inline;
+    margin: 0;
+    vertical-align: middle;
+}
+
+/* Nested dropdowns inside main dropdowns */
+.nested-dropdown {
+    margin: 1em 0;
+    border-left: 3px solid #0066cc;
+    padding-left: 1em;
+}
+
+.nested-header {
+    cursor: pointer;
+    padding: 0.5em 0;
+    color: #0066cc;
+}
+
+.nested-header h3 {
+    display: inline;
+    font-weight: 500;
+}
+
+/* Content that appears when dropdown is open */
+.dropdown-content, .nested-content {
+    padding: 0 1em 1em 1em;
+}
+
+/* Code dropdown for Kimi output */
+.code-dropdown {
+    margin: 1em 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: #f5f5f5;
+}
+
+.code-header {
+    cursor: pointer;
+    padding: 0.8em;
+    background-color: #e8e8e8;
+}
+
+.code-content {
+    padding: 0 1em 1em 1em;
+}
+
+.code-content pre {
+    margin: 0;
+    padding: 1em;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    /* FIXED: This will make text wrap properly */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.code-content code {
+    font-family: 'Courier New', monospace;
+}
