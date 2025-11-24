@@ -120,7 +120,7 @@ footer {
         gap: 1em;
     }
 }
-/* DROPDOWN STYLES */
+/* DROPDOWN STYLES - FIXED VERSION */
 
 /* Main dropdown container */
 .main-dropdown {
@@ -129,16 +129,18 @@ footer {
     border-radius: 4px;
 }
 
-/* Header that you click to toggle */
+/* The clickable header - fixed arrow alignment */
 .dropdown-header {
     cursor: pointer;
     padding: 1em;
     background-color: #f9f9f9;
-    list-style: none; /* Removes default arrow in some browsers */
 }
 
-.dropdown-header::-webkit-details-marker {
-    display: none; /* Hides default arrow in Chrome/Safari */
+/* This makes the heading inline so the arrow aligns correctly */
+.dropdown-header h2 {
+    display: inline;
+    margin: 0;
+    vertical-align: middle;
 }
 
 /* Nested dropdowns inside main dropdowns */
@@ -152,11 +154,6 @@ footer {
     cursor: pointer;
     padding: 0.5em 0;
     color: #0066cc;
-    list-style: none;
-}
-
-.nested-header::-webkit-details-marker {
-    display: none;
 }
 
 .nested-header h3 {
@@ -181,16 +178,10 @@ footer {
     cursor: pointer;
     padding: 0.8em;
     background-color: #e8e8e8;
-    list-style: none;
-}
-
-.code-header::-webkit-details-marker {
-    display: none;
 }
 
 .code-content {
     padding: 0 1em 1em 1em;
-    overflow-x: auto;
 }
 
 .code-content pre {
@@ -200,10 +191,12 @@ footer {
     border-radius: 3px;
     font-size: 0.9em;
     line-height: 1.4;
-    overflow-x: auto;
+    /* FIXED: This will make text wrap properly */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .code-content code {
     font-family: 'Courier New', monospace;
-    white-space: pre-wrap;
 }
