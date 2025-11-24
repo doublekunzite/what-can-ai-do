@@ -1,0 +1,122 @@
+/* 
+ * MINIMALIST STYLESHEET
+ * No external fonts, no frameworks, no dependencies
+ */
+
+/* Reset default browser spacing - makes layout consistent */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling - sets overall page appearance */
+body {
+    /* System font stack - uses your device's native fonts, no downloads */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                 Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    
+    /* Limit line length for readability */
+    max-width: 700px;
+    
+    /* Center the content horizontally */
+    margin: 40px auto;
+    
+    /* Add breathing room on mobile */
+    padding: 0 20px;
+    
+    /* Comfortable line spacing */
+    line-height: 1.6;
+    
+    /* Dark gray instead of pure black - easier on eyes */
+    color: #222;
+    
+    /* White background - high contrast, accessible */
+    background-color: #ffffff;
+}
+
+/* Main heading */
+h1 {
+    font-size: 2.5em;
+    margin: 0 0 0.5em 0;
+    font-weight: 700;
+}
+
+/* Subtitle paragraph */
+.subtitle {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 2em;
+}
+
+/* Navigation styling */
+nav ul {
+    /* Remove bullet points */
+    list-style: none;
+    
+    /* Add space below nav */
+    margin: 2em 0 3em 0;
+    
+    /* Create horizontal layout on larger screens */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+/* Navigation links */
+nav a {
+    /* Blue accent color - change #0066cc if you want a different shade */
+    color: #0066cc;
+    
+    /* Slightly larger tap target */
+    padding: 0.2em 0;
+    
+    /* Weight makes it clear these are clickable */
+    font-weight: 500;
+}
+
+/* Hover effect for links */
+nav a:hover {
+    /* Underline on hover - clear feedback */
+    text-decoration: underline;
+}
+
+/* Section headings */
+h2 {
+    margin: 2em 0 0.5em 0;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+/* Paragraphs and list items */
+p, li {
+    margin-bottom: 1em;
+}
+
+/* Ordered lists - numbered steps */
+ol {
+    /* Add space inside for numbers */
+    padding-left: 1.5em;
+}
+
+/* Footer styling - visually separate from main content */
+footer {
+    margin-top: 4em;
+    padding-top: 2em;
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Mobile adjustments - automatically applied on small screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    
+    nav ul {
+        /* Stack navigation vertically on small screens */
+        flex-direction: column;
+        gap: 1em;
+    }
+}
