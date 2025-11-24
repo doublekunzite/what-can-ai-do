@@ -121,168 +121,38 @@ footer {
     }
 }
 /* ===================================================================== */
-/* DROPDOWN STYLES - ROBUST VERSION WITH HIGH SPECIFICITY */
+/* FIX: Hide duplicate arrows on mobile for nested dropdowns */
 /* ===================================================================== */
 
-/* Main dropdown container - very specific selector */
-body main details.main-dropdown {
-    margin: 2em 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: block;
-}
-
-/* The clickable header - aggressive specificity */
-body main details.main-dropdown > summary.dropdown-header {
-    cursor: pointer;
-    padding: 1em;
-    background-color: #f9f9f9;
-    position: relative;
-    list-style: none; /* Chrome/Safari */
-}
-
-/* Firefox specific */
-body main details.main-dropdown > summary.dropdown-header::-moz-list-bullet {
-    display: none;
-}
-
-/* Chrome/Safari specific */
-body main details.main-dropdown > summary.dropdown-header::-webkit-details-marker {
-    display: none;
-}
-
-/* Edge/IE specific */
-body main details.main-dropdown > summary.dropdown-header::marker {
-    display: none;
-}
-
-/* Force heading inline - extremely specific */
-body main details.main-dropdown > summary.dropdown-header > h2 {
-    display: inline-block !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
-    font-size: 1.8em !important;
-}
-
-/* Add custom arrow using pseudo-element */
-body main details.main-dropdown > summary.dropdown-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    transition: transform 0.2s;
-    vertical-align: middle;
-}
-
-/* Rotate arrow when open */
-body main details.main-dropdown[open] > summary.dropdown-header::before {
-    transform: rotate(90deg);
-}
-
-/* Nested dropdowns - high specificity */
-body main details.nested-dropdown {
-    margin: 1em 0;
-    border-left: 3px solid #0066cc;
-    padding-left: 1em;
-}
-
+/* Apply list-style: none directly to the element */
 body main details.nested-dropdown > summary.nested-header {
-    cursor: pointer;
-    padding: 0.5em 0;
-    color: #0066cc;
-    list-style: none;
-    position: relative;
+    list-style: none !important;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-/* Hide default markers for nested too */
+/* Aggressively hide default markers with !important */
 body main details.nested-dropdown > summary.nested-header::-webkit-details-marker,
-body main details.nested-dropdown > summary.nested-header::-moz-list-bullet,
 body main details.nested-dropdown > summary.nested-header::marker {
-    display: none;
+    display: none !important;
+    content: '' !important;
 }
 
-body main details.nested-dropdown > summary.nested-header > h3 {
-    display: inline-block !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
+/* Also target the details element itself */
+body main details.nested-dropdown::-webkit-details-marker {
+    display: none !important;
 }
 
+/* Ensure our custom arrow is the only one visible */
 body main details.nested-dropdown > summary.nested-header::before {
     content: "▶";
     display: inline-block;
     margin-right: 0.5em;
-    font-size: 0.8em;
+    font-size: 0.7em; /* Slightly smaller for mobile */
     transition: transform 0.2s;
     vertical-align: middle;
 }
 
 body main details.nested-dropdown[open] > summary.nested-header::before {
     transform: rotate(90deg);
-}
-
-/* Content areas */
-body main .dropdown-content, 
-body main .nested-content {
-    padding: 0 1em 1em 1em;
-}
-
-/* Code dropdown - high specificity */
-body main details.code-dropdown {
-    margin: 1em 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 3px;
-    background-color: #f5f5f5;
-}
-
-body main details.code-dropdown > summary.code-header {
-    cursor: pointer;
-    padding: 0.8em;
-    background-color: #e8e8e8;
-    list-style: none;
-}
-
-body main details.code-dropdown > summary.code-header::-webkit-details-marker {
-    display: none;
-}
-
-body main details.code-dropdown > summary.code-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 0.8em;
-    transition: transform 0.2s;
-}
-
-body main details.code-dropdown[open] > summary.code-header::before {
-    transform: rotate(90deg);
-}
-
-body main .code-content {
-    padding: 0 1em 1em 1em;
-}
-
-/* Code block - THE FIX for text wrapping */
-body main .code-content pre {
-    margin: 0;
-    padding: 1em;
-    background-color: #f0f0f0;
-    border-radius: 3px;
-    font-size: 0.9em;
-    line-height: 1.4;
-    font-family: 'Courier New', monospace;
-    
-    /* FORCE WRAP - multiple declarations for cross-browser */
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
-    
-    /* Prevent horizontal scroll */
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-}
-
-body main .code-content code {
-    font-family: 'Courier New', monospace;
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
 }
