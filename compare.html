@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Models - What can I do with AI?</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <h1>Compare AI Models</h1>
+        <p class="subtitle">Different tools for different tasks. Updated: November 2024</p>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="use-cases.html">Explore Uses</a></li>
+                <li><a href="risks.html">Learn the Risks</a></li>
+                <li><a href="compare.html">Compare Models</a></li>
+                <li><a href="faq.html">Common Concerns</a></li>
+            </ul>
+        </nav>
+        
+        <section>
+            <h2>Quick Comparison Table</h2>
+            <table style="width:100%; border-collapse: collapse; margin: 1em 0;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #ddd;">
+                        <th style="text-align: left; padding: 8px;">Model</th>
+                        <th style="text-align: left; padding: 8px;">Best For</th>
+                        <th style="text-align: left; padding: 8px;">Cost</th>
+                        <th style="text-align: left; padding: 8px;">Context</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px;">GPT-4o</td>
+                        <td style="padding: 8px;">Complex reasoning, coding</td>
+                        <td style="padding: 8px;">$20/month</td>
+                        <td style="padding: 8px;">128K tokens</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px;">Claude 3.5 Sonnet</td>
+                        <td style="padding: 8px;">Long documents, writing</td>
+                        <td style="padding: 8px;">$20/month</td>
+                        <td style="padding: 8px;">200K tokens</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px;">Gemini 1.5 Flash</td>
+                        <td style="padding: 8px;">Fast, free tasks</td>
+                        <td style="padding: 8px;">Free</td>
+                        <td style="padding: 8px;">1M tokens</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 8px;">Llama 3 (local)</td>
+                        <td style="padding: 8px;">Privacy, customization</td>
+                        <td style="padding: 8px;">Free</td>
+                        <td style="padding: 8px;">8-128K tokens</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 0.9em; color: #666;">Context = how much text the model can process at once. 1K tokens ≈ 750 words.</p>
+        </section>
+        
+        <section>
+            <h2>Which Model Should I Use?</h2>
+            
+            <h3>"I need to analyze a 100-page PDF"</h3>
+            <p><strong>Use:</strong> Claude 3.5 Sonnet (200K token context)</p>
+            
+            <h3>"I want the best coding help"</h3>
+            <p><strong>Use:</strong> GPT-4o or Claude 3.5 Sonnet</p>
+            
+            <h3>"I need something free for basic tasks"</h3>
+            <p><strong>Use:</strong> Gemini 1.5 Flash or free tier of GPT-4o</p>
+            
+            <h3>"I'm concerned about privacy"</h3>
+            <p><strong>Use:</strong> Llama 3 running locally on your computer</p>
+            
+            <h3>"I need the fastest response"</h3>
+            <p><strong>Use:</strong> Gemini 1.5 Flash or smaller models</p>
+        </section>
+        
+        <section>
+            <h2>Understanding Benchmarks</h2>
+            
+            <h3>MMLU (Massive Multitask Language Understanding)</h3>
+            <p>Tests knowledge across 57 subjects (math, history, law, etc.). Higher score = broader knowledge.</p>
+            
+            <h3>HumanEval</h3>
+            <p>Measures coding ability. Tests if model can write correct code from descriptions.</p>
+            
+            <h3>Important Caveat</h3>
+            <p>Benchmarks don't capture real-world usefulness. A model with slightly lower scores might be better for your specific task. Always test with your actual use case.</p>
+        </section>
+        
+        <section>
+            <h2>Free vs. Paid: What's the Difference?</h2>
+            
+            <h3>Free Tiers</h3>
+            <ul>
+                <li>Rate limits (messages per hour)</li>
+                <li>May use older models</li>
+                <li>Your data might be used for training</li>
+            </ul>
+            
+            <h3>Paid Versions ($20/month)</h3>
+            <ul>
+                <li>Higher rate limits</li>
+                <li>Access to best models</li>
+                <li>Option to disable training data usage</li>
+                <li>Priority during high-traffic periods</li>
+            </ul>
+        </section>
+        
+        <footer>
+            <p><a href="index.html">← Back to Home</a></p>
+        </footer>
+    </main>
+</body>
+</html>
