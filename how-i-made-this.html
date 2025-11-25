@@ -371,4 +371,197 @@ Related: [Link to risks page section on copyright]
                 <li>No account setup needed initially</li>
                 <li>Instant deployment</li>
                 <li>Free HTTPS certificate</li>
-                <li>Super fast</li
+                <li>Super fast</li>
+            </ul>
+            
+            <h4>Cons:</h4>
+            <ul>
+                <li>Less control than GitHub Pages</li>
+                <li>Can feel "magical" in an opaque way</li>
+            </ul>
+            
+            <hr>
+            
+            <h3>Option 4: WordPress (If You Must)</h3>
+            <p>You <em>can</em> use WordPress, but it defeats the minimalist purpose. Here's how:</p>
+            
+            <ol>
+                <li><strong>Create a "Static Page"</strong> for each of your 5 pages</li>
+                <li><strong>Switch to a minimalist theme</strong> like "Twenty Twenty-Four" or "Astra"</li>
+                <li><strong>Disable comments</strong> globally</li>
+                <li><strong>Edit each page</strong> in "Code Editor" mode (not Visual Editor)</li>
+                <li><strong>Paste your HTML</strong> into the code view</li>
+                <li><strong>Disable plugins</strong> you don't need for speed</li>
+            </ol>
+            
+            <p><strong>Warning:</strong> This adds complexity, security updates, and loading time for no benefit on a static site.</p>
+            
+            <hr>
+            
+            <h3>How to Edit the Files</h3>
+            
+            <p>You'll need a text editor <strong>better than Notepad</strong>:</p>
+            <ul>
+                <li><strong>Windows:</strong> Notepad++ or VS Code</li>
+                <li><strong>Mac:</strong> VS Code or TextMate</li>
+                <li><strong>Cross-platform:</strong> VS Code (free, best choice)</li>
+            </ul>
+            
+            <p><strong>To edit:</strong></p>
+            <ol>
+                <li>Open the <code>.html</code> file in the editor</li>
+                <li>Make changes</li>
+                <li>Save</li>
+                <li>Re-upload to your host (or sync via GitHub Desktop)</li>
+            </ol>
+            
+            <hr>
+            
+            <h3>Domain Name Setup</h3>
+            
+            <p>Once your site is live at a temporary URL:</p>
+            
+            <ol>
+                <li><strong>Buy a domain</strong> from Namecheap, Porkbun, or Cloudflare ($10-15/year)</li>
+                <li><strong>In your host's settings</strong>, add the domain</li>
+                <li><strong>Update DNS records</strong> (your host will give you exact values):
+                    <ul>
+                        <li>Point <code>@</code> and <code>www</code> to their servers</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p>For GitHub Pages, you just add a <code>CNAME</code> file with your domain name.</p>
+            
+            <hr>
+            
+            <h3>My Recommendation</h3>
+            
+            <p><strong>Start with Netlify Drop</strong> to test everything. If you like it, move to <strong>GitHub Pages</strong> for long-term control. Both are free and perfectly match your minimalist vision.</p>
+            
+            <p><strong>WordPress is the wrong tool</strong> for a 5-page static educational site—it adds 20+ database tables and PHP processing for no benefit.</p>
+            
+            <hr>
+            
+            <p><strong>Would you like me to:</strong></p>
+            <ol>
+                <li>Create the actual HTML/CSS files so you can just drag-and-drop them into Netlify?</li>
+                <li>Show you a screen recording of the GitHub Pages setup process?</li>
+                <li>Draft the complete content for one page as a working example?</li>
+            </ol>
+        </div>
+        
+        <div style="background: #f9f9f9; padding: 1.5em; border-left: 4px solid #0066cc; margin: 2em 0;">
+            <p><strong>User:</strong> <strong>before you go ahead and draft the full HTML for the main page, a friend expressed security concerns about using AI to code. any thoughts or advice on avoiding potential risks? can you adjust the code to ensure security?</strong></p>
+        </div>
+        
+        <div style="background: #f5f5f5; padding: 1.5em; margin: 2em 0;">
+            <h3><strong>Assistant:</strong></h3>
+            <p>Excellent question. Your friend's concerns are valid, and it's smart to address this before building. Here are the specific risks and how to mitigate them:</p>
+            
+            <hr>
+            
+            <h3>AI Code Generation Risks (And Why They're Minimal Here)</h3>
+            
+            <h4>Real Risks:</h4>
+            <ol>
+                <li><strong>Hidden malicious code</strong> - AI could insert invisible tracking scripts or crypto-miners</li>
+                <li><strong>Outdated dependencies</strong> - Recommending libraries with known vulnerabilities</li>
+                <li><strong>Insecure patterns</strong> - Improper input sanitization (if you add forms later)</li>
+                <li><strong>CDN hijacking</strong> - Linking to external scripts that could be compromised</li>
+            </ol>
+            
+            <h4>Why Your Static Site is Inherently Secure:</h4>
+            <ul>
+                <li><strong>No server-side code</strong> → No database injections, no server hacking</li>
+                <li><strong>No user logins</strong> → No authentication bypasses</li>
+                <li><strong>No dynamic content</strong> → No XSS attacks (unless you add forms)</li>
+                <li><strong>No external dependencies</strong> → No supply chain attacks</li>
+            </ul>
+            
+            <hr>
+            
+            <h3>Security-First Code Principles</h3>
+            
+            <p>Here's how I'll adjust the code:</p>
+            
+            <h4>✅ DO:</h4>
+            <ul>
+                <li><strong>Zero external dependencies</strong> - No CDN links, no Google Fonts, no third-party scripts</li>
+                <li><strong>Self-contained everything</strong> - All CSS, all content in one folder</li>
+                <li><strong>Semantic HTML</strong> - Prevents certain parsing attacks</li>
+                <li><strong>Minimal JavaScript</strong> - Only vanilla JS, and only if essential</li>
+                <li><strong>Clear comments</strong> - So you can audit every line</li>
+            </ul>
+            
+            <h4>❌ DON'T:</h4>
+            <ul>
+                <li>No <code>&lt;script src="https://..."&gt;</code> tags</li>
+                <li>No <code>@import url('https://...')</code> in CSS</li>
+                <li>No embedded iframes or external content</li>
+                <li>No analytics scripts (unless you add them yourself later)</li>
+                <li>No forms (for now) - they require input validation</li>
+            </ul>
+            
+            <hr>
+            
+            <h3>Secure File Structure</h3>
+            
+            <pre><code>/what-can-ai-do/
+├── index.html
+├── use-cases.html
+├── risks.html
+├── compare.html
+├── faq.html
+├── css/
+│   └── style.css
+└── js/
+    └── main.js (optional - only if you want copy-to-clipboard)
+</code></pre>
+            
+            <p><strong>No other files. No node_modules. No package.json. No build process.</strong></p>
+            
+            <hr>
+            
+            <h3>Manual Security Audit Checklist</h3>
+            
+            <p>Before uploading, <strong>manually verify every line</strong>:</p>
+            
+            <ul>
+                <li>No <code>&lt;script&gt;</code> tags pointing to external URLs</li>
+                <li>No <code>&lt;link&gt;</code> tags to external stylesheets</li>
+                <li>No <code>&lt;iframe&gt;</code> elements</li>
+                <li>No <code>onload="..."</code> or inline JavaScript events</li>
+                <li>No hidden elements (<code>display: none;</code> should be suspicious)</li>
+                <li>No base64-encoded blobs you don't understand</li>
+                <li>All text content makes sense when you read it</li>
+            </ul>
+            
+            <p><strong>If you see something you don't understand, delete it and ask me to explain.</strong></p>
+            
+            <hr>
+            
+            <h3>My Commitment</h3>
+            
+            <p>I'll generate code that:</p>
+            <ol>
+                <li><strong>Contains zero external links</strong> except your own navigation</li>
+                <li><strong>Has minimal JavaScript</strong> (only a simple copy-to-clipboard function)</li>
+                <li><strong>Uses only system fonts</strong> (no external font calls)</li>
+                <li><strong>Is fully readable</strong> - you can understand every tag and attribute</li>
+                <li><strong>Passes basic security scanners</strong> like Mozilla Observatory</li>
+            </ol>
+            
+            <hr>
+            
+            <p><strong>Bottom line:</strong> For a static educational site with no user data, the security risk is <strong>extremely low</strong>—lower than using WordPress with plugins. The biggest risk is <em>adding complexity later</em> without understanding it.</p>
+            
+            <p><strong>Should I proceed with the secure HTML/CSS code now?</strong> I can also add comments explaining what each section does so you can audit it confidently.</p>
+        </div>
+        
+        <footer>
+            <p><a href="index.html">← Back to Home</a></p>
+        </footer>
+    </main>
+</body>
+</html>
