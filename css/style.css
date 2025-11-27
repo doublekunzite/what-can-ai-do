@@ -370,3 +370,39 @@ th {
 .ai-output-box li {
     margin-bottom: 0.5em;
 }
+
+/* AI Output Box - distinct formatting for quoted content */
+.ai-output-box {
+    background-color: #e8f4f8;
+    border: 1px solid #b0d4e0;
+    border-radius: 4px;
+    padding: 1.2em;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+
+.ai-output-box h4 {
+    margin-top: 0;
+    color: #0066cc;
+    font-size: 1em;
+    margin-bottom: 0.8em;
+}
+
+.ai-output-box h5 {
+    margin: 1em 0 0.5em 0;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.ai-output-box p {
+    margin-bottom: 0.8em;
+}
+
+.ai-output-box ul {
+    margin-left: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+.ai-output-box li {
+    margin-bottom: 0.5em;
+}
