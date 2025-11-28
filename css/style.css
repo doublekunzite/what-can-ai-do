@@ -341,6 +341,56 @@ th {
     font-weight: 600;
 }
 
+/* ===================================================================== */
+/* BENCHMARK TABLE STYLES - Responsive table formatting */
+/* ===================================================================== */
+
+/* Table wrapper for horizontal scrolling on mobile */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1.5em 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Benchmark table - condensed, scannable format */
+.benchmark-table {
+    font-size: 0.85em;
+    min-width: 900px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.benchmark-table th,
+.benchmark-table td {
+    padding: 0.6em 0.5em;
+    border: 1px solid #ccc;
+}
+
+.benchmark-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    vertical-align: bottom;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.benchmark-table th small {
+    font-weight: normal;
+    display: block;
+    margin-top: 0.3em;
+    font-size: 0.9em;
+}
+
+.benchmark-table td {
+    text-align: center;
+}
+
+.benchmark-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+}
+
 /* AI Output Box - distinct formatting for quoted content */
 .ai-output-box {
     background-color: #e8f4f8;
