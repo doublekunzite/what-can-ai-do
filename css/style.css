@@ -692,11 +692,11 @@ footer {
 }
 
 /* ===================================================================== */
-/* DARK MODE TOGGLE BUTTON */
+/* DARK MODE TOGGLE - Fixed positioning and high z-index */
 /* ===================================================================== */
 
 .theme-toggle {
-    position: absolute;
+    position: fixed; /* Change to fixed so it stays visible while scrolling */
     top: 20px;
     right: 20px;
     background-color: var(--dropdown-header-bg);
@@ -710,11 +710,14 @@ footer {
     display: flex;
     align-items: center;
     gap: 0.5em;
+    z-index: 9999; /* High z-index to ensure it's on top */
+    box-shadow: var(--shadow);
 }
 
 .theme-toggle:hover {
     background-color: var(--nav-link-color);
     color: white;
+    transform: translateY(-1px);
 }
 
 /* Mobile adjustments */
