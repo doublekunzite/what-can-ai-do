@@ -323,7 +323,11 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
     transform: rotate(90deg);
 }
 
-/* Table styling */
+/* ===================================================================== */
+/* TABLE STYLING - Generic fallback for basic tables */
+/* ===================================================================== */
+
+/* Generic table styling - works for simple tables */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -342,7 +346,7 @@ th {
 }
 
 /* ===================================================================== */
-/* BENCHMARK TABLE STYLES - Responsive table formatting */
+/* BENCHMARK TABLE STYLES - Enhanced for complex comparison tables */
 /* ===================================================================== */
 
 /* Table wrapper for horizontal scrolling on mobile */
@@ -353,10 +357,10 @@ th {
     border-radius: 4px;
 }
 
-/* Benchmark table - condensed, scannable format */
+/* Benchmark table - condensed, scannable format for data-heavy comparisons */
 .benchmark-table {
     font-size: 0.85em;
-    min-width: 900px;
+    min-width: 900px; /* Prevents excessive squishing */
     border-collapse: collapse;
     width: 100%;
 }
@@ -389,36 +393,6 @@ th {
 .benchmark-table td:first-child {
     text-align: left;
     font-weight: 600;
-}
-
-/* AI Output Box - distinct formatting for quoted content */
-.ai-output-box {
-    background-color: #e8f4f8;
-    border: 1px solid #b0d4e0;
-    border-radius: 4px;
-    padding: 1.2em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-
-.ai-output-box h4 {
-    margin-top: 0;
-    color: #0066cc;
-    font-size: 1em;
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box p {
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box ul {
-    margin-left: 1.5em;
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box li {
-    margin-bottom: 0.5em;
 }
 
 /* AI Output Box - distinct formatting for quoted content */
