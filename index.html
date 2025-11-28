@@ -2,19 +2,25 @@
 <!-- Tells browsers this is modern HTML5 - no quirks mode -->
 <html lang="en">
 <head>
-    <!-- Character encoding - prevents weird character display -->
     <meta charset="UTF-8">
-    
-    <!-- Makes site responsive on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Page title that appears in browser tabs -->
-    <title>What can I do with AI?</title>
+    <!-- CRITICAL: Theme script must be FIRST to prevent flash -->
+    <script>
+        // Apply theme immediately before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            
+            // Default to dark mode unless user explicitly chose light
+            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+                document.documentElement.style.backgroundColor = '#1a1a1a';
+            }
+        })();
+    </script>
     
-    <!-- Links to your local CSS file - NO EXTERNAL URLS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- No JavaScript, no analytics, no tracking scripts -->
+    <title>Your Page Title Here</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 
 <body>
