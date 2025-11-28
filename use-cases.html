@@ -537,5 +537,47 @@
             <p><a href="index.html">← Back to Home</a></p>
         </footer>
     </main>
+	<script>
+    // Dark mode toggle functionality - SIMPLIFIED and more robust
+    (function() {
+        'use strict';
+        
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        // Apply the theme on page load
+        if (currentTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        }
+        
+        // Create and insert the toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'theme-toggle';
+        toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+        toggleButton.setAttribute('aria-label', 'Toggle theme');
+        
+        // Insert at the beginning of body so it appears immediately
+        document.body.insertBefore(toggleButton, document.body.firstChild);
+        
+        // Toggle function
+        function toggleTheme() {
+            const isLightMode = document.body.hasAttribute('data-theme') && 
+                               document.body.getAttribute('data-theme') === 'light';
+            
+            if (isLightMode) {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                toggleButton.innerHTML = '☀️ Light Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                toggleButton.innerHTML = '🌙 Dark Mode';
+            }
+        }
+        
+        // Add click listener
+        toggleButton.addEventListener('click', toggleTheme);
+    })();
+    </script>
 </body>
 </html>
