@@ -72,95 +72,116 @@
         </footer>
     </main>
     <script src="js/navigation.js"></script>
-	<!-- Add this after the first conversation example -->
-
-<!-- How I Made This Website Example -->
-<details class="main-dropdown">
-    <summary class="dropdown-header">
-        <h2>How I Made This Website</h2>
-        <p style="margin: 0.5em 0 0 0; font-size: 0.9em; color: #666;">Date: 2024-12-01 | Model: Kimi K2</p>
-    </summary>
     
     <script>
-        
-// Sample data structure for conversations
+        // Sample data structure for conversations
         const conversations = [
-   {
-    id: 1,
-    title: "How I Made This Website",
-    date: "2024-12-01",
-    model: "kimi",
-    modelName: "Kimi K2",
-    tags: ["coding", "creative"],
-    rating: 4.9,
-    prompt: "help me create an educational website about AI. the name i have in mind for now is \"what can I do with AI?\". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:\n\na page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.\n\na page about the risks, dangers, and other challenges of using AI\n\na page comparing different AI LLMs, how they perform on various metrics\n\na page titled something like \"Isn't AI bad?\" which will address common talking points against AI",
-    response: `<div class="ai-output-box">
-            <h4>Background</h4>
-            <p>This shows the original conversation that led to creating this entire website. It demonstrates how AI can help plan, structure, and execute a complete project from scratch.</p>
-            <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
-        </div>
-        
-        <h3>Initial Prompts</h3>
-        <details class="nested-dropdown">
-            <summary class="nested-header">
-                <h4>View Planning Conversation</h4>
-            </summary>
-            <div class="nested-content">
-                <div class="ai-output-box">
-                    <h4>User:</h4>
-                    <p>help me create an educational website about AI. the name i have in mind for now is "what can I do with AI?". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:</p>
-                    <p>a page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.</p>
-                    <p>a page about the risks, dangers, and other challenges of using AI</p>
-                    <p>a page comparing different AI LLMs, how they perform on various metrics</p>
-                    <p>a page titled something like "Isn't AI bad?" which will address common talking points against AI</p>
+            {
+                id: 1,
+                title: "How I Made This Website",
+                date: "2024-12-01",
+                model: "kimi",
+                modelName: "Kimi K2",
+                tags: ["coding", "creative"],
+                rating: 4.9,
+                prompt: "help me create an educational website about AI. the name i have in mind for now is \"what can I do with AI?\". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:\n\na page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.\n\na page about the risks, dangers, and other challenges of using AI\n\na page comparing different AI LLMs, how they perform on various metrics\n\na page titled something like \"Isn't AI bad?\" which will address common talking points against AI",
+                response: `<div class="ai-output-box">
+                        <h4>Background</h4>
+                        <p>This shows the original conversation that led to creating this entire website. It demonstrates how AI can help plan, structure, and execute a complete project from scratch.</p>
+                        <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
+                    </div>
                     
-                    <h4>Kimi K2:</h4>
-                    <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
-                    
-                    <h5>Overall Structure</h5>
-                    <pre class="code-block"><code>index.html (Homepage)
+                    <h3>Initial Prompts</h3>
+                    <details class="nested-dropdown">
+                        <summary class="nested-header">
+                            <h4>View Planning Conversation</h4>
+                        </summary>
+                        <div class="nested-content">
+                            <div class="ai-output-box">
+                                <h4>User:</h4>
+                                <p>help me create an educational website about AI. the name i have in mind for now is "what can I do with AI?". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:</p>
+                                <p>a page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.</p>
+                                <p>a page about the risks, dangers, and other challenges of using AI</p>
+                                <p>a page comparing different AI LLMs, how they perform on various metrics</p>
+                                <p>a page titled something like "Isn't AI bad?" which will address common talking points against AI</p>
+                                
+                                <h4>Kimi K2:</h4>
+                                <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
+                                
+                                <h5>Overall Structure</h5>
+                                <pre class="code-block"><code>index.html (Homepage)
 ├── use-cases.html (AI Uses)
 ├── risks.html (Risks & Challenges)
 ├── compare.html (LLM Comparison)
 └── faq.html ("Isn't AI Bad?")</code></pre>
-                    
-                    <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
-                    <ul>
-                        <li>Single-column layout with generous white space</li>
-                        <li>Monochromatic color scheme (black text, white background, one accent color like #0066cc)</li>
-                        <li>System fonts only</li>
-                        <li>No images unless absolutely necessary</li>
-                        <li>No JavaScript frameworks—vanilla JS only where essential</li>
-                    </ul>
-                    
-                    <h5>Page-by-Page Content Strategy</h5>
-                    <p><strong>Homepage:</strong> Simple hero with clear navigation and 2-sentence descriptions of each section.</p>
-                    <p><strong>Use Cases Page:</strong> Organize by domains (Creative, Analytical, Communication, Productivity, Learning, Professional). For each use case, include sample prompts people can copy and try immediately.</p>
-                    <p><strong>Risks Page:</strong> Organize by severity and mitigation. Include Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption.</p>
-                    <p><strong>LLM Comparison Page:</strong> Comparison table with 4-5 major models. Add a "Which model should I use?" decision tree.</p>
-                    <p><strong>"Isn't AI Bad?" Page:</strong> Frame as a dialogue. List common objections with nuanced, non-defensive responses.</p>
-                    
-                    <h5>Technical Implementation</h5>
-                    <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
-                </div>
-                
-                <h3>Key Takeaways</h3>
-                <ul>
-                    <li>AI can plan entire project structures from a simple description</li>
-                    <li>Specificity in prompts ("minimalist and bare bones") guides better design decisions</li>
-                    <li>Requesting examples and decision trees makes content more actionable</li>
-                    <li>Security is built-in by keeping things simple (static HTML, no external dependencies)</li>
-                </ul>
-            </div>
-        </details>`,
-    takeaways: [
-        "AI can transform a vague idea into a complete project plan in minutes",
-        "Starting with design constraints (minimalist) leads to better technical decisions",
-        "The conversation demonstrates end-to-end AI collaboration from idea to deployment"
-    ]
-},
+                                
+                                <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
+                                <ul>
+                                    <li>Single-column layout with generous white space</li>
+                                    <li>Monochromatic color scheme (black text, white background, one accent color like #0066cc)</li>
+                                    <li>System fonts only</li>
+                                    <li>No images unless absolutely necessary</li>
+                                    <li>No JavaScript frameworks—vanilla JS only where essential</li>
+                                </ul>
+                                
+                                <h5>Page-by-Page Content Strategy</h5>
+                                <p><strong>Homepage:</strong> Simple hero with clear navigation and 2-sentence descriptions of each section.</p>
+                                <p><strong>Use Cases Page:</strong> Organize by domains (Creative, Analytical, Communication, Productivity, Learning, Professional). For each use case, include sample prompts people can copy and try immediately.</p>
+                                <p><strong>Risks Page:</strong> Organize by severity and mitigation. Include Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption.</p>
+                                <p><strong>LLM Comparison Page:</strong> Comparison table with 4-5 major models. Add a "Which model should I use?" decision tree.</p>
+                                <p><strong>"Isn't AI Bad?" Page:</strong> Frame as a dialogue. List common objections with nuanced, non-defensive responses.</p>
+                                
+                                <h5>Technical Implementation</h5>
+                                <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
+                            </div>
+                            
+                            <h3>Key Takeaways</h3>
+                            <ul>
+                                <li>AI can plan entire project structures from a simple description</li>
+                                <li>Specificity in prompts ("minimalist and bare bones") guides better design decisions</li>
+                                <li>Requesting examples and decision trees makes content more actionable</li>
+                                <li>Security is built-in by keeping things simple (static HTML, no external dependencies)</li>
+                            </ul>
+                        </div>
+                    </details>`,
+                takeaways: [
+                    "AI can transform a vague idea into a complete project plan in minutes",
+                    "Starting with design constraints (minimalist) leads to better technical decisions",
+                    "The conversation demonstrates end-to-end AI collaboration from idea to deployment"
+                ]
+            },
             {
                 id: 2,
+                title: "How to Copy Tables from AI Chats",
+                date: "2024-11-26",
+                model: "kimi",
+                modelName: "Kimi K2",
+                tags: ["coding", "formatting"],
+                rating: 4.5,
+                prompt: "How do I copy our conversation including tables while preserving formatting for my website?",
+                response: `<p>For tables, use this HTML structure:</p>
+                    <pre class="code-block"><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Header 1&lt;/th&gt;
+      &lt;th&gt;Header 2&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Data 1&lt;/td&gt;
+      &lt;td&gt;Data 2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>`,
+                takeaways: [
+                    "Convert markdown tables to HTML &lt;table&gt; syntax",
+                    "Use &lt;thead&gt; for headers and &lt;tbody&gt; for data",
+                    "Wrap code in &lt;pre&gt;&lt;code&gt; blocks for proper formatting"
+                ]
+            },
+            {
+                id: 3,
                 title: "Role-Based Prompt for Marketing Copy",
                 date: "2024-11-25",
                 model: "gpt-4",
@@ -187,7 +208,7 @@
                 ]
             },
             {
-                id: 3,
+                id: 4,
                 title: "Data Analysis Prompt for Survey Results",
                 date: "2024-11-24",
                 model: "claude",
@@ -196,7 +217,7 @@
                 rating: 4.3,
                 prompt: "I have survey data in CSV format: user_id, satisfaction_rating (1-5), feature_request (text), usage_frequency (daily/weekly/monthly). Analyze this data and provide:\n1. Summary statistics with visualizations\n2. Thematic analysis of feature requests\n3. Correlation between usage frequency and satisfaction\n4. Actionable recommendations\n\nPlease use Python code blocks for any data processing.",
                 response: `<p>Here's a comprehensive analysis framework:</p>
-                    <pre style="background: #f0f0f0; padding: 1em; overflow-x: auto;"><code>import pandas as pd
+                    <pre class="code-block"><code>import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from collections import Counter
@@ -225,7 +246,7 @@ plt.show()</code></pre>
         // Store user ratings in localStorage
         const userRatings = JSON.parse(localStorage.getItem('userRatings') || '{}');
         
-        // Render conversations
+        // Updated render function with dark mode fixes
         function renderConversations(filteredConversations = conversations) {
             const container = document.getElementById('conversationsContainer');
             
@@ -247,68 +268,47 @@ plt.show()</code></pre>
                                     Date: ${conv.date} | Model: ${conv.modelName}
                                 </p>
                                 <div class="tags">
-                                    ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}function renderConversations(filteredConversations = conversations) {
-    const container = document.getElementById('conversationsContainer');
-    
-    if (filteredConversations.length === 0) {
-        container.innerHTML = '<div class="no-results">No conversations match your filters. Try adjusting your search.</div>';
-        return;
-    }
-    
-    container.innerHTML = filteredConversations.map(conv => {
-        const userRating = userRatings[conv.id] || 0;
-        const avgRating = conv.rating;
-        
-        return `
-            <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
-                <summary class="dropdown-header">
-                    <h2>Conversation: ${conv.title}</h2>
-                    <div class="conversation-meta">
-                        <p style="margin: 0; font-size: 0.9em; color: #666;">
-                            Date: ${conv.date} | Model: ${conv.modelName}
-                        </p>
-                        <div class="tags">
-                            ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                    ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
+                                <div class="rating" data-conversation-id="${conv.id}">
+                                    ${[1,2,3,4,5].map(i => `
+                                        <span class="star ${i <= userRating ? 'active' : ''}" 
+                                              data-rating="${i}"
+                                              title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
+                                            ★
+                                        </span>
+                                    `).join('')}
+                                    <small style="margin-left: 0.5em; color: #666;">
+                                        (${avgRating.toFixed(1)})
+                                    </small>
+                                </div>
+                            </div>
+                        </summary>
+                        <div class="dropdown-content">
+                            <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
+                            
+                            <h3>Prompt:</h3>
+                            <div class="prompt-box" style="padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
+                                <pre style="margin: 0; white-space: pre-wrap; font-family: inherit;">${conv.prompt}</pre>
+                            </div>
+                            
+                            <h3>Response:</h3>
+                            <div class="response-box" style="padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
+                                ${conv.response}
+                            </div>
+                            
+                            <h3>Takeaways:</h3>
+                            <ul>
+                                ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
+                            </ul>
                         </div>
-                        <div class="rating" data-conversation-id="${conv.id}">
-                            ${[1,2,3,4,5].map(i => `
-                                <span class="star ${i <= userRating ? 'active' : ''}" 
-                                      data-rating="${i}"
-                                      title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
-                                    ★
-                                </span>
-                            `).join('')}
-                            <small style="margin-left: 0.5em; color: #666;">
-                                (${avgRating.toFixed(1)})
-                            </small>
-                        </div>
-                    </div>
-                </summary>
-                <div class="dropdown-content">
-                    <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
-                    
-                    <h3>Prompt:</h3>
-                    <div class="prompt-box" style="padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
-                        <pre style="margin: 0; white-space: pre-wrap; font-family: inherit;">${conv.prompt}</pre>
-                    </div>
-                    
-                    <h3>Response:</h3>
-                    <div class="response-box" style="padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
-                        ${conv.response}
-                    </div>
-                    
-                    <h3>Takeaways:</h3>
-                    <ul>
-                        ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
-                    </ul>
-                </div>
-            </details>
-        `;
-    }).join('');
-    
-    // Re-attach event listeners for ratings
-    attachRatingListeners();
-}
+                    </details>
+                `;
+            }).join('');
+            
+            // Re-attach event listeners for ratings
+            attachRatingListeners();
+        }
         
         // Copy prompt function
         function copyPrompt(convId) {
@@ -392,47 +392,48 @@ plt.show()</code></pre>
         // Initial render
         renderConversations();
     </script>
-	<script>
-    // Dark mode toggle functionality - SIMPLIFIED and more robust
-    (function() {
-        'use strict';
-        
-        // Check for saved theme preference or default to dark mode
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        
-        // Apply the theme on page load
-        if (currentTheme === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-        }
-        
-        // Create and insert the toggle button
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'theme-toggle';
-        toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        
-        // Insert at the beginning of body so it appears immediately
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-        
-        // Toggle function
-        function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme') && 
-                               document.body.getAttribute('data-theme') === 'light';
+    
+    <script>
+        // Dark mode toggle functionality
+        (function() {
+            'use strict';
             
-            if (isLightMode) {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
-                toggleButton.innerHTML = '☀️ Light Mode';
-            } else {
+            // Check for saved theme preference or default to dark mode
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            
+            // Apply the theme on page load
+            if (currentTheme === 'light') {
                 document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                toggleButton.innerHTML = '🌙 Dark Mode';
             }
-        }
-        
-        // Add click listener
-        toggleButton.addEventListener('click', toggleTheme);
-    })();
+            
+            // Create and insert the toggle button
+            const toggleButton = document.createElement('button');
+            toggleButton.className = 'theme-toggle';
+            toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+            toggleButton.setAttribute('aria-label', 'Toggle theme');
+            
+            // Insert at the beginning of body so it appears immediately
+            document.body.insertBefore(toggleButton, document.body.firstChild);
+            
+            // Toggle function
+            function toggleTheme() {
+                const isLightMode = document.body.hasAttribute('data-theme') && 
+                                   document.body.getAttribute('data-theme') === 'light';
+                
+                if (isLightMode) {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'dark');
+                    toggleButton.innerHTML = '☀️ Light Mode';
+                } else {
+                    document.body.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    toggleButton.innerHTML = '🌙 Dark Mode';
+                }
+            }
+            
+            // Add click listener
+            toggleButton.addEventListener('click', toggleTheme);
+        })();
     </script>
 </body>
 </html>
