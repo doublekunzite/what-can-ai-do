@@ -26,12 +26,12 @@
         <h1>Prompt Builder</h1>
         <p class="subtitle">Create structured, multi-step AI conversations for common tasks.</p>
         
+        <!-- Navigation will be injected here by navigation.js -->
         <div id="nav-container"></div>
-
         
         <section class="intro-section">
             <p>Instead of crafting individual prompts, build complete AI workflows. Each template provides a series of prompts designed to work together for a specific goal—like having an AI tutor, research assistant, or creative partner.</p>
-            <p>Click a category below, customize the parameters, then copy the entire conversation flow.</p>
+            <p>Click a category below, customize the parameters, then copy the entire conversation flow. You can edit any step, add new steps, or remove steps to fit your exact needs.</p>
         </section>
         
         <section class="builder-section">
@@ -79,52 +79,23 @@
                         </label>
                     </div>
                     
-                    <div class="conversation-flow">
-                        <h3>Conversation Flow:</h3>
-                        <div class="flow-step">
-                            <h4>Step 1: Foundation (5 min)</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('study-step-1')">Copy</button>
-                                <pre id="study-step-1">I need to study <span class="placeholder">{{subject}}</span> at a <span class="placeholder">{{level}}</span> level. 
-First, create a concise study guide that covers the key concepts I must understand. 
-Include 3-5 main topics with brief descriptions.</pre>
-                            </div>
+                    <div class="conversation-flow" id="study-flow">
+                        <div class="flow-header">
+                            <h3>Conversation Flow:</h3>
+                            <button class="add-step-btn" onclick="addStep('study')" title="Add new step">+ Add Step</button>
                         </div>
                         
-                        <div class="flow-step">
-                            <h4>Step 2: Active Recall (10 min)</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('study-step-2')">Copy</button>
-                                <pre id="study-step-2">Based on the study guide you just provided, generate 10 practice questions about <span class="placeholder">{{subject}}</span>. 
-Mix question types: 4 definition/fact-based, 3 application problems, and 3 "explain in your own words" prompts. 
-Don't provide the answers yet—I'll answer them first.</pre>
-                            </div>
-                        </div>
-                        
-                        <div class="flow-step">
-                            <h4>Step 3: Check & Explain (10 min)</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('study-step-3')">Copy</button>
-                                <pre id="study-step-3">Here are my answers to your questions: [PASTE YOUR ANSWERS HERE]
-                                
-Grade my responses and explain what I got wrong or could improve. 
-For each incorrect answer, provide a detailed explanation and a mnemonic to help me remember it.</pre>
-                            </div>
-                        </div>
-                        
-                        <div class="flow-step">
-                            <h4>Step 4: Connection & Application (5 min)</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('study-step-4')">Copy</button>
-                                <pre id="study-step-4">Now connect <span class="placeholder">{{subject}}</span> to real-world applications or current research. 
-Give me 2 examples of how this is used in practice, and 1 area where our understanding is still developing.</pre>
-                            </div>
-                        </div>
+                        <!-- Steps will be dynamically generated here -->
                     </div>
                     
-                    <button class="filter-btn" onclick="copyAllPrompts('study')" style="margin-top: 1.5em;">
-                        📋 Copy Complete Flow
-                    </button>
+                    <div class="builder-actions">
+                        <button class="filter-btn" onclick="copyAllPrompts('study')" style="margin-right: 1em;">
+                            📋 Copy Complete Flow
+                        </button>
+                        <button class="filter-btn secondary" onclick="resetTemplate('study')">
+                            🔄 Reset Template
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- Research Project Template -->
@@ -143,47 +114,23 @@ Give me 2 examples of how this is used in practice, and 1 area where our underst
                         </label>
                     </div>
                     
-                    <div class="conversation-flow">
-                        <div class="flow-step">
-                            <h4>Step 1: Research Plan</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('research-step-1')">Copy</button>
-                                <pre id="research-step-1">I need to research "<span class="placeholder">{{topic}}</span>". 
-First, help me create a research plan. What are the 5-7 key sub-topics I should investigate? 
-For each, suggest 2-3 search terms and 1-2 types of sources to look for.</pre>
-                            </div>
+                    <div class="conversation-flow" id="research-flow">
+                        <div class="flow-header">
+                            <h3>Conversation Flow:</h3>
+                            <button class="add-step-btn" onclick="addStep('research')" title="Add new step">+ Add Step</button>
                         </div>
-                        
-                        <div class="flow-step">
-                            <h4>Step 2: Source Evaluation</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('research-step-2')">Copy</button>
-                                <pre id="research-step-2">I've found <span class="placeholder">{{sources}}</span> sources. Help me evaluate them:
-1. Sort them by credibility (peer-reviewed > academic > government > NGO > news > blog)
-2. Identify 3 sources that might have bias and explain what to watch for
-3. Suggest which 5-7 sources I should prioritize reading first</pre>
-                            </div>
-                        </div>
-                        
-                        <div class="flow-step">
-                            <h4>Step 3: Synthesis</h4>
-                            <div class="prompt-box">
-                                <button class="copy-btn" onclick="copyPrompt('research-step-3')">Copy</button>
-                                <pre id="research-step-3">Based on these sources about "<span class="placeholder">{{topic}}</span>", create a synthesis matrix:
-- 3 main schools of thought or approaches
-- 2 areas of consensus across sources
-- 3 major debates or disagreements
-- 4 gaps in current research</pre>
-                            </div>
-                        </div>
+                        <!-- Steps will be dynamically generated -->
                     </div>
                     
-                    <button class="filter-btn" onclick="copyAllPrompts('research')" style="margin-top: 1.5em;">
-                        📋 Copy Complete Flow
-                    </button>
+                    <div class="builder-actions">
+                        <button class="filter-btn" onclick="copyAllPrompts('research')" style="margin-right: 1em;">
+                            📋 Copy Complete Flow
+                        </button>
+                        <button class="filter-btn secondary" onclick="resetTemplate('research')">
+                            🔄 Reset Template
+                        </button>
+                    </div>
                 </div>
-                
-                <!-- Other templates would go here, hidden by default -->
             </div>
         </section>
         
@@ -191,8 +138,8 @@ For each, suggest 2-3 search terms and 1-2 types of sources to look for.</pre>
             <p><a href="index.html">← Back to Home</a></p>
         </footer>
     </main>
-    <script src="js/navigation.js"></script>
-    <!-- JavaScript for the builder functionality -->
+    
+    <!-- JavaScript -->
     <script>
     // Dark mode toggle functionality
     (function() {
@@ -228,97 +175,262 @@ For each, suggest 2-3 search terms and 1-2 types of sources to look for.</pre>
         toggleButton.addEventListener('click', toggleTheme);
     })();
     
-    // Prompt Builder Functionality
-    (function() {
+    // Navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inject navigation
+        const navItems = [
+            { name: 'Home', url: 'index.html' },
+            { name: 'Explore Uses', url: 'use-cases.html' },
+            { name: 'Prompts', url: 'prompts.html' },
+            { name: 'Prompt Builder', url: 'prompt-builder.html' },
+            { name: 'Learn the Risks', url: 'risks.html' },
+            { name: 'Compare Models', url: 'compare.html' },
+            { name: 'Common Concerns', url: 'faq.html' },
+            { name: 'How I Made This', url: 'how-i-made-this.html' }
+        ];
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        const navHTML = `
+            <nav>
+                <ul>
+                    ${navItems.map(item => `
+                        <li><a href="${item.url}" ${item.url === currentPage ? 'class="active"' : ''}>${item.name}</a></li>
+                    `).join('')}
+                </ul>
+            </nav>
+        `;
+        
+        const navContainer = document.getElementById('nav-container');
+        if (navContainer) {
+            navContainer.innerHTML = navHTML;
+        }
+    });
+    
+    // Prompt Builder Templates
+    const templates = {
+        study: [
+            {
+                title: "Step 1: Foundation (5 min)",
+                content: "I need to study {{subject}} at a {{level}} level.\nFirst, create a concise study guide that covers the key concepts I must understand.\nInclude 3-5 main topics with brief descriptions."
+            },
+            {
+                title: "Step 2: Active Recall (10 min)",
+                content: "Based on the study guide you just provided, generate 10 practice questions about {{subject}}.\nMix question types: 4 definition/fact-based, 3 application problems, and 3 \"explain in your own words\" prompts.\nDon't provide the answers yet—I'll answer them first."
+            },
+            {
+                title: "Step 3: Check & Explain (10 min)",
+                content: "Here are my answers to your questions: [PASTE YOUR ANSWERS HERE]\n\nGrade my responses and explain what I got wrong or could improve.\nFor each incorrect answer, provide a detailed explanation and a mnemonic to help me remember it."
+            },
+            {
+                title: "Step 4: Connection & Application (5 min)",
+                content: "Now connect {{subject}} to real-world applications or current research.\nGive me 2 examples of how this is used in practice, and 1 area where our understanding is still developing."
+            }
+        ],
+        research: [
+            {
+                title: "Step 1: Research Plan",
+                content: "I need to research \"{{topic}}\".\nFirst, help me create a research plan. What are the 5-7 key sub-topics I should investigate?\nFor each, suggest 2-3 search terms and 1-2 types of sources to look for."
+            },
+            {
+                title: "Step 2: Source Evaluation",
+                content: "I've found {{sources}} sources. Help me evaluate them:\n1. Sort them by credibility (peer-reviewed > academic > government > NGO > news > blog)\n2. Identify 3 sources that might have bias and explain what to watch for\n3. Suggest which 5-7 sources I should prioritize reading first"
+            },
+            {
+                title: "Step 3: Synthesis",
+                content: "Based on these sources about \"{{topic}}\", create a synthesis matrix:\n- 3 main schools of thought or approaches\n- 2 areas of consensus across sources\n- 3 major debates or disagreements\n- 4 gaps in current research"
+            }
+        ]
+    };
+    
+    // Initialize flow
+    function initializeFlow(category) {
+        const flowContainer = document.getElementById(category + '-flow');
+        const steps = templates[category] || [];
+        
+        // Clear existing steps
+        const existingSteps = flowContainer.querySelectorAll('.flow-step-wrapper');
+        existingSteps.forEach(s => s.remove());
+        
+        // Add steps
+        steps.forEach((step, index) => {
+            createStepElement(category, step, index);
+        });
+    }
+    
+    // Create step element
+    function createStepElement(category, step, index) {
+        const flowContainer = document.getElementById(category + '-flow');
+        
+        const stepWrapper = document.createElement('div');
+        stepWrapper.className = 'flow-step-wrapper';
+        stepWrapper.innerHTML = `
+            <div class="flow-step">
+                <div class="step-header">
+                    <h4 contenteditable="true" data-step-title="${index}">${step.title}</h4>
+                    <button class="delete-step-btn" onclick="deleteStep('${category}', ${index})" title="Delete this step">✕</button>
+                </div>
+                <div class="prompt-box">
+                    <button class="copy-btn" onclick="copyPromptByIndex('${category}', ${index})">Copy</button>
+                    <pre contenteditable="true" data-step-content="${index}">${step.content}</pre>
+                </div>
+            </div>
+        `;
+        
+        flowContainer.appendChild(stepWrapper);
+        
+        // Add input listeners for dynamic updating
+        const titleEl = stepWrapper.querySelector('[data-step-title="' + index + '"]');
+        const contentEl = stepWrapper.querySelector('[data-step-content="' + index + '"]');
+        
+        titleEl.addEventListener('input', () => updateStepData(category, index));
+        contentEl.addEventListener('input', () => updateStepData(category, index));
+    }
+    
+    // Update step data when edited
+    function updateStepData(category, index) {
+        const titleEl = document.querySelector(`[data-step-title="${index}"]`);
+        const contentEl = document.querySelector(`[data-step-content="${index}"]`);
+        
+        templates[category][index].title = titleEl.textContent;
+        templates[category][index].content = contentEl.textContent;
+        
+        // Update placeholders in real-time
+        updatePlaceholders(category);
+    }
+    
+    // Add new step
+    window.addStep = function(category) {
+        const newIndex = templates[category].length;
+        const newStep = {
+            title: `Step ${newIndex + 1}: New Step`,
+            content: "Add your prompt content here. Use {{parameter}} for dynamic values."
+        };
+        
+        templates[category].push(newStep);
+        createStepElement(category, newStep, newIndex);
+    };
+    
+    // Delete step
+    window.deleteStep = function(category, index) {
+        if (templates[category].length <= 1) {
+            alert('You must have at least one step.');
+            return;
+        }
+        
+        if (confirm('Delete this step?')) {
+            templates[category].splice(index, 1);
+            
+            // Re-render the flow
+            initializeFlow(category);
+            updatePlaceholders(category);
+        }
+    };
+    
+    // Copy prompt by index
+    window.copyPromptByIndex = function(category, index) {
+        const step = templates[category][index];
+        const fullPrompt = step.title + '\n\n' + step.content;
+        
+        navigator.clipboard.writeText(fullPrompt).then(() => {
+            const btn = document.querySelector(`[data-step-content="${index}"]`).parentElement.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                btn.textContent = originalText;
+            }, 1500);
+        });
+    };
+    
+    // Update all placeholders
+    function updatePlaceholders(category) {
+        const template = document.getElementById(category + '-template');
+        const placeholders = template.querySelectorAll('.placeholder');
+        
+        let params = {};
+        switch(category) {
+            case 'study':
+                params.subject = document.getElementById('study-subject')?.value || 'the subject';
+                params.level = document.getElementById('study-level')?.value || 'college';
+                params.duration = document.getElementById('study-duration')?.value || '30';
+                break;
+            case 'research':
+                params.topic = document.getElementById('research-topic')?.value || 'the topic';
+                params.sources = document.getElementById('research-sources')?.value || '15';
+                break;
+        }
+        
+        // Update each placeholder
+        placeholders.forEach(placeholder => {
+            // Find which step this placeholder is in
+            const stepContent = placeholder.closest('pre') || placeholder.closest('div');
+            if (stepContent) {
+                let content = stepContent.textContent;
+                Object.keys(params).forEach(key => {
+                    const regex = new RegExp(`{{${key}}}`, 'g');
+                    content = content.replace(regex, params[key]);
+                });
+                stepContent.innerHTML = content.replace(/(Step \d+: [^\n]+)/, '<strong>$1</strong>');
+            }
+        });
+    }
+    
+    // Copy all prompts
+    window.copyAllPrompts = function(category) {
+        const steps = templates[category];
+        const allPrompts = steps.map((step, index) => 
+            `${step.title}\n\n${step.content}`
+        ).join('\n\n---\n\n');
+        
+        navigator.clipboard.writeText(allPrompts).then(() => {
+            alert(`✓ Copied ${steps.length} steps to clipboard!`);
+        });
+    };
+    
+    // Reset template
+    window.resetTemplate = function(category) {
+        if (confirm('Reset all steps to default? This will lose any customizations.')) {
+            initializeFlow(category);
+            updatePlaceholders(category);
+        }
+    };
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeFlow('study');
+        updatePlaceholders('study');
+        
         // Category switching
         const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
-        const templates = document.querySelectorAll('.builder-template');
-        
         categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Update active button
                 categoryButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 
-                // Show corresponding template
                 const category = button.dataset.category;
-                templates.forEach(template => {
+                document.querySelectorAll('.builder-template').forEach(template => {
                     if (template.id === category + '-template') {
                         template.classList.remove('hidden');
                     } else {
                         template.classList.add('hidden');
                     }
                 });
+                
+                if (templates[category]) {
+                    initializeFlow(category);
+                    updatePlaceholders(category);
+                }
             });
         });
         
-        // Dynamic prompt updating
-        function updatePrompts(category) {
-            const template = document.getElementById(category + '-template');
-            const placeholders = template.querySelectorAll('.placeholder');
-            
-            // Get parameter values based on category
-            let params = {};
-            switch(category) {
-                case 'study':
-                    params.subject = document.getElementById('study-subject')?.value || 'the subject';
-                    params.level = document.getElementById('study-level')?.value || 'college';
-                    params.duration = document.getElementById('study-duration')?.value || '30';
-                    break;
-                case 'research':
-                    params.topic = document.getElementById('research-topic')?.value || 'the topic';
-                    params.sources = document.getElementById('research-sources')?.value || '15';
-                    break;
-            }
-            
-            // Replace placeholders in all prompts
-            placeholders.forEach(placeholder => {
-                const key = placeholder.textContent.replace(/[{}]/g, '');
-                if (params[key]) {
-                    placeholder.textContent = params[key];
-                }
-            });
-        }
-        
-        // Add event listeners to all parameter inputs
+        // Parameter input listeners
         document.querySelectorAll('.parameter-inputs input, .parameter-inputs select').forEach(input => {
             input.addEventListener('input', () => {
                 const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
-                updatePrompts(activeCategory);
+                updatePlaceholders(activeCategory);
             });
         });
-        
-        // Copy individual prompt
-        window.copyPrompt = function(promptId) {
-            const promptElement = document.getElementById(promptId);
-            const promptText = promptElement.textContent;
-            
-            navigator.clipboard.writeText(promptText).then(() => {
-                // Visual feedback
-                const btn = promptElement.parentElement.querySelector('.copy-btn');
-                const originalText = btn.textContent;
-                btn.textContent = '✓ Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 1500);
-            });
-        };
-        
-        // Copy all prompts
-        window.copyAllPrompts = function(category) {
-            const template = document.getElementById(category + '-template');
-            const allPrompts = Array.from(template.querySelectorAll('.prompt-box pre'))
-                .map((pre, index) => `Step ${index + 1}:\n${pre.textContent}`)
-                .join('\n\n---\n\n');
-            
-            navigator.clipboard.writeText(allPrompts).then(() => {
-                alert('Complete conversation flow copied to clipboard!');
-            });
-        };
-        
-        // Initialize
-        updatePrompts('study');
-    })();
+    });
     </script>
 </body>
 </html>
