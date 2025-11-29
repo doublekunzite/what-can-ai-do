@@ -3,11 +3,11 @@ const navItems = [
     { name: 'Home', url: 'index.html' },
     { name: 'Explore Uses', url: 'use-cases.html' },
     { name: 'Prompts', url: 'prompts.html' },
-    { name: 'Prompt Builder', url: 'prompt-builder.html' }, // Add new pages here
+    { name: 'Prompt Builder', url: 'prompt-builder.html' },
     { name: 'Learn the Risks', url: 'risks.html' },
     { name: 'Compare Models', url: 'compare.html' },
-    { name: 'Common Concerns', url: 'faq.html' },
-    { name: 'How I Made This', url: 'how-i-made-this.html' }
+    { name: 'Common Concerns', url: 'faq.html' }
+    // REMOVED: 'How I Made This'
 ];
 
 function injectNavigation() {
