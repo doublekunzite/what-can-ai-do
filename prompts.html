@@ -117,6 +117,25 @@ a page titled something like "Isn't AI bad?" which will address common talking p
 ├── risks.html (Risks & Challenges)
 ├── compare.html (LLM Comparison)
 └── faq.html ("Isn't AI Bad?")</code></pre>
+                                
+                                <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
+                                <ul>
+                                    <li>Single-column layout with generous white space</li>
+                                    <li>Monochromatic color scheme (black text, white background, one accent color like #0066cc)</li>
+                                    <li>System fonts only</li>
+                                    <li>No images unless absolutely necessary</li>
+                                    <li>No JavaScript frameworks—vanilla JS only where essential</li>
+                                </ul>
+                                
+                                <h5>Page-by-Page Content Strategy</h5>
+                                <p><strong>Homepage:</strong> Simple hero with clear navigation and 2-sentence descriptions of each section.</p>
+                                <p><strong>Use Cases Page:</strong> Organize by domains (Creative, Analytical, Communication, Productivity, Learning, Professional). For each use case, include sample prompts people can copy and try immediately.</p>
+                                <p><strong>Risks Page:</strong> Organize by severity and mitigation. Include Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption.</p>
+                                <p><strong>LLM Comparison Page:</strong> Comparison table with 4-5 major models. Add a "Which model should I use?" decision tree.</p>
+                                <p><strong>"Isn't AI Bad?" Page:</strong> Frame as a dialogue. List common objections with nuanced, non-defensive responses.</p>
+                                
+                                <h5>Technical Implementation</h5>
+                                <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
                             </div>
                         </div>
                     </details>
@@ -131,58 +150,41 @@ a page titled something like "Isn't AI bad?" which will address common talking p
                             
                             <h4>Response:</h4>
                             <div class="response-box">
-                                <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
-                                <ul>
-                                    <li>Single-column layout with generous white space</li>
-                                    <li>Monochromatic color scheme (black text, white background, one accent color like #0066cc)</li>
-                                    <li>System fonts only</li>
-                                    <li>No images unless absolutely necessary</li>
-                                    <li>No JavaScript frameworks—vanilla JS only where essential</li>
-                                </ul>
+                                <p>Focus on clarity, speed, and accessibility. Prioritize content over decoration. Use semantic HTML for better SEO and screen reader support. Keep the codebase simple so others can easily learn from it.</p>
                             </div>
                         </div>
                     </details>
                     
                     <details class="nested-dropdown">
                         <summary class="nested-header">
-                            <h4>Prompt 3: Content Strategy</h4>
+                            <h4>Prompt 3: Content Structure</h4>
                         </summary>
                         <div class="nested-content">
                             <h4>Prompt:</h4>
-                            <div class="prompt-box"><pre>Can you break down the content strategy for each page of the website?</pre></div>
+                            <div class="prompt-box"><pre>How should I organize the content for each page?</pre></div>
                             
                             <h4>Response:</h4>
                             <div class="response-box">
-                                <h5>Page-by-Page Content Strategy</h5>
-                                <p><strong>Homepage:</strong> Simple hero with clear navigation and 2-sentence descriptions of each section.</p>
-                                <p><strong>Use Cases Page:</strong> Organize by domains (Creative, Analytical, Communication, Productivity, Learning, Professional). For each use case, include sample prompts people can copy and try immediately.</p>
-                                <p><strong>Risks Page:</strong> Organize by severity and mitigation. Include Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption.</p>
-                                <p><strong>LLM Comparison Page:</strong> Comparison table with 4-5 major models. Add a "Which model should I use?" decision tree.</p>
-                                <p><strong>"Isn't AI Bad?" Page:</strong> Frame as a dialogue. List common objections with nuanced, non-defensive responses.</p>
+                                <p>Use consistent patterns: descriptive headers, short paragraphs, bullet points for scannability, and interactive elements like dropdowns. Each page should answer specific user questions quickly.</p>
                             </div>
                         </div>
                     </details>
                     
                     <details class="nested-dropdown">
                         <summary class="nested-header">
-                            <h4>Prompt 4: Technical Implementation</h4>
+                            <h4>Prompt 4: Deployment Plan</h4>
                         </summary>
                         <div class="nested-content">
                             <h4>Prompt:</h4>
-                            <div class="prompt-box"><pre>What's the technical implementation approach for this website?</pre></div>
+                            <div class="prompt-box"><pre>What's the fastest way to deploy this website?</pre></div>
                             
                             <h4>Response:</h4>
                             <div class="response-box">
-                                <h5>Technical Implementation</h5>
-                                <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
+                                <p>Use GitHub Pages. Create a repository, push your files, enable Pages in settings, and your site will be live in minutes. It's free and perfect for static educational sites.</p>
                             </div>
                         </div>
                     </details>`,
-                takeaways: [
-                    "AI can transform a vague idea into a complete project plan in minutes",
-                    "Starting with design constraints (minimalist) leads to better technical decisions",
-                    "The conversation demonstrates end-to-end AI collaboration from idea to deployment"
-                ]
+                takeaways: [] // Empty for this conversation
             },
             {
                 id: 2,
@@ -280,7 +282,7 @@ plt.show()</code></pre>
         // Store user ratings in localStorage
         const userRatings = JSON.parse(localStorage.getItem('userRatings') || '{}');
         
-        // Updated render function with dark mode fixes
+        // Updated render function with special handling for id: 1
         function renderConversations(filteredConversations = conversations) {
             const container = document.getElementById('conversationsContainer');
             
@@ -293,6 +295,42 @@ plt.show()</code></pre>
                 const userRating = userRatings[conv.id] || 0;
                 const avgRating = conv.rating;
                 
+                // Special handling for "How I Made This Website"
+                if (conv.id === 1) {
+                    return `
+                        <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                            <summary class="dropdown-header">
+                                <h2>Conversation: ${conv.title}</h2>
+                                <div class="conversation-meta">
+                                    <p style="margin: 0; font-size: 0.9em; color: #666;">
+                                        Date: ${conv.date} | Model: ${conv.modelName}
+                                    </p>
+                                    <div class="tags">
+                                        ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                    </div>
+                                    <div class="rating" data-conversation-id="${conv.id}">
+                                        ${[1,2,3,4,5].map(i => `
+                                            <span class="star ${i <= userRating ? 'active' : ''}" 
+                                                  data-rating="${i}"
+                                                  title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
+                                                ★
+                                            </span>
+                                        `).join('')}
+                                        <small style="margin-left: 0.5em; color: #666;">
+                                            (${avgRating.toFixed(1)})
+                                        </small>
+                                    </div>
+                                </div>
+                            </summary>
+                            <div class="dropdown-content">
+                                <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
+                                ${conv.response}
+                            </div>
+                        </details>
+                    `;
+                }
+                
+                // Standard rendering for other conversations
                 return `
                     <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
                         <summary class="dropdown-header">

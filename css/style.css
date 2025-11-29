@@ -1194,3 +1194,9 @@ nav a.active {
     border: 1px solid #444 !important;
     color: #e0e0e0 !important;
 }
+
+/* Hide takeaways for conversation id: 1 */
+[data-id="1"] .dropdown-content > h3:nth-of-type(3),
+[data-id="1"] .dropdown-content > ul:last-of-type {
+    display: none;
+}
