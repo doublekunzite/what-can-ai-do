@@ -729,3 +729,108 @@ footer {
         padding: 0.4em 0.8em;
     }
 }
+
+/* ===================================================================== */
+/* PROMPT BUILDER STYLES */
+/* ===================================================================== */
+
+.builder-template {
+    margin: 2em 0;
+}
+
+.builder-template.hidden {
+    display: none;
+}
+
+.parameter-inputs {
+    background-color: var(--dropdown-header-bg);
+    padding: 1.5em;
+    border-radius: 8px;
+    margin: 1.5em 0;
+    display: grid;
+    gap: 1em;
+}
+
+.parameter-inputs label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+.parameter-inputs input,
+.parameter-inputs select {
+    width: 100%;
+    padding: 0.6em;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.conversation-flow {
+    margin: 2em 0;
+}
+
+.flow-step {
+    margin: 1.5em 0;
+    padding: 1em;
+    border-left: 3px solid var(--nav-link-color);
+    background-color: var(--dropdown-header-bg);
+    border-radius: 0 4px 4px 0;
+}
+
+.flow-step h4 {
+    margin-top: 0;
+    color: var(--nav-link-color);
+}
+
+.prompt-box {
+    position: relative;
+    margin: 1em 0;
+    background-color: var(--code-bg);
+    border-radius: 4px;
+}
+
+.prompt-box pre {
+    margin: 0;
+    padding: 1.5em;
+    padding-right: 5em;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.placeholder {
+    color: var(--nav-link-color);
+    font-weight: 600;
+    background-color: rgba(0, 102, 204, 0.1);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+/* Make sure copy button is visible inside prompt boxes */
+.prompt-box .copy-btn {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    background-color: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background 0.3s;
+    z-index: 10;
+}
+
+.prompt-box .copy-btn:hover {
+    background-color: var(--nav-link-hover);
+}
+
+/* Active page highlighting */
+nav a.active {
+    font-weight: 600;
+    color: var(--nav-link-color);
+}
