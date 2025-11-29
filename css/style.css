@@ -967,3 +967,49 @@ nav a.active {
 #website-purpose, #website-pages {
     width: 100%;
 }
+
+/* Fix #1: Move add button to the right and add spacing */
+.step-controls {
+    margin-top: 1.5em;
+    text-align: right; /* Changed from center to right */
+    padding-right: 1em; /* Add some right padding */
+}
+
+.add-step-btn {
+    background-color: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background 0.3s;
+    margin-bottom: 1em; /* Add space below add button */
+}
+
+.builder-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5em; /* Increased from 1em to 1.5em */
+    margin-top: 2em; /* Add more top margin */
+    padding-top: 1.5em; /* Add padding above button group */
+    border-top: 1px solid var(--border-color); /* Visual separator */
+}
+
+/* Fix #2: Ensure website parameter inputs trigger updates */
+#website-name, #website-purpose, #website-pages {
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.parameter-inputs label {
+    display: block;
+    margin-bottom: 1em; /* Add space between parameter inputs */
+}
+
+.parameter-inputs label strong {
+    display: block;
+    margin-bottom: 0.3em;
+}

@@ -1,474 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- CRITICAL: Theme script must be FIRST -->
-    <script>
-        // Apply theme immediately before page renders
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-            
-            // Default to dark mode unless user explicitly chose light
-            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
-                document.documentElement.style.backgroundColor = '#1a1a1a';
-            }
-        })();
-    </script>
-    
-    <title>Prompt Builder - What can I do with AI?</title>
-    <link rel="stylesheet" href="css/style.css?v=2">
-</head>
-<body>
-    <main>
-        <h1>Prompt Builder</h1>
-        <p class="subtitle">Create structured, multi-step AI conversations for common tasks.</p>
-        
-        <!-- Navigation will be injected here by navigation.js -->
-        <div id="nav-container"></div>
-        
-        <section class="intro-section">
-            <p>Instead of crafting individual prompts, build complete AI workflows. Each template provides a series of prompts designed to work together for a specific goal—like having an AI tutor, research assistant, or creative partner.</p>
-            <p>Click a category below, customize the parameters, then copy the entire conversation flow. You can edit any prompt content, add new steps, or remove steps to fit your exact needs.</p>
-        </section>
-        
-        <section class="builder-section">
-            <!-- Category Selection -->
-            <div class="filter-controls">
-                <h3>Choose Your Goal:</h3>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-category="study">📚 Study Session</button>
-                    <button class="filter-btn" data-category="research">🔬 Research Project</button>
-                    <button class="filter-btn" data-category="write">✍️ Content Creation</button>
-                    <button class="filter-btn" data-category="solve">🧩 Problem Solving</button>
-                    <button class="filter-btn" data-category="code">💻 Code Project</button>
-                    <button class="filter-btn" data-category="analyze">📊 Data Analysis</button>
-                    <button class="filter-btn" data-category="website">🌐 Build a Website</button>
-                </div>
-            </div>
-            
-            <!-- Dynamic Builder Interface -->
-            <div id="builder-content">
-                <!-- Study Session Template (Default) -->
-                <div class="builder-template" id="study-template">
-                    <h2>30-Minute Study Session Builder</h2>
-                    <p>Create a structured learning workflow with an AI tutor.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label>
-                            <strong>Subject:</strong>
-                            <input type="text" id="study-subject" placeholder="e.g., Mitosis and Meiosis" value="Mitosis and Meiosis">
-                        </label>
-                        <label>
-                            <strong>Your level:</strong>
-                            <select id="study-level">
-                                <option value="high school">High School</option>
-                                <option value="college">College</option>
-                                <option value="graduate">Graduate</option>
-                                <option value="casual">Casual Learner</option>
-                            </select>
-                        </label>
-                        <label>
-                            <strong>Time available:</strong>
-                            <select id="study-duration">
-                                <option value="15">15 minutes</option>
-                                <option value="30" selected>30 minutes</option>
-                                <option value="60">60 minutes</option>
-                            </select>
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="study-flow">
-                        <h3>Conversation Flow:</h3>
-                        <!-- Steps will be dynamically generated here -->
-                    </div>
-                    
-                    <div class="step-controls">
-                        <button class="add-step-btn" onclick="addStep('study')" title="Add new step">+ Add Step</button>
-                    </div>
-                    
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('study')" style="margin-right: 1em;">
-                            📋 Copy Complete Flow
-                        </button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('study')">
-                            🔄 Reset Template
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Website Builder Template -->
-                <div class="builder-template hidden" id="website-template">
-                    <h2>Website Building Guide</h2>
-                    <p>Build a basic static website using GitHub Pages and simple tools.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label>
-                            <strong>Website name:</strong>
-                            <input type="text" id="website-name" placeholder="e.g., My Portfolio" value="My Personal Site">
-                        </label>
-                        <label>
-                            <strong>Purpose:</strong>
-                            <select id="website-purpose">
-                                <option value="personal">Personal Blog/Portfolio</option>
-                                <option value="project">Project Documentation</option>
-                                <option value="business">Small Business</option>
-                                <option value="education">Educational Resource</option>
-                            </select>
-                        </label>
-                        <label>
-                            <strong>Pages needed:</strong>
-                            <select id="website-pages">
-                                <option value="1-2">1-2 pages</option>
-                                <option value="3-4" selected>3-4 pages</option>
-                                <option value="5+">5+ pages</option>
-                            </select>
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="website-flow">
-                        <h3>Conversation Flow:</h3>
-                        <!-- Steps will be dynamically generated -->
-                    </div>
-                    
-                    <div class="step-controls">
-                        <button class="add-step-btn" onclick="addStep('website')" title="Add new step">+ Add Step</button>
-                    </div>
-                    
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('website')" style="margin-right: 1em;">
-                            📋 Copy Complete Flow
-                        </button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('website')">
-                            🔄 Reset Template
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Other templates would go here, hidden by default -->
-            </div>
-        </section>
-        
-        <footer>
-            <p><a href="index.html">← Back to Home</a></p>
-        </footer>
-    </main>
-    
-    <!-- JavaScript -->
-    <script>
-    // Dark mode toggle functionality
-    (function() {
-        'use strict';
-        
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        
-        if (currentTheme === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-        }
-        
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'theme-toggle';
-        toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-        
-        function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme') && 
-                               document.body.getAttribute('data-theme') === 'light';
-            
-            if (isLightMode) {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
-                toggleButton.innerHTML = '☀️ Light Mode';
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                toggleButton.innerHTML = '🌙 Dark Mode';
-            }
-        }
-        
-        toggleButton.addEventListener('click', toggleTheme);
-    })();
-    
-    // Navigation
-    document.addEventListener('DOMContentLoaded', function() {
-        // Inject navigation
-        const navItems = [
-            { name: 'Home', url: 'index.html' },
-            { name: 'Explore Uses', url: 'use-cases.html' },
-            { name: 'Prompts', url: 'prompts.html' },
-            { name: 'Prompt Builder', url: 'prompt-builder.html' },
-            { name: 'Learn the Risks', url: 'risks.html' },
-            { name: 'Compare Models', url: 'compare.html' },
-            { name: 'Common Concerns', url: 'faq.html' },
-            { name: 'How I Made This', url: 'how-i-made-this.html' }
-        ];
+/* Fix #1: Move add button to the right and add spacing */
+.step-controls {
+    margin-top: 1.5em;
+    text-align: right; /* Changed from center to right */
+    padding-right: 1em; /* Add some right padding */
+}
 
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        
-        const navHTML = `
-            <nav>
-                <ul>
-                    ${navItems.map(item => `
-                        <li><a href="${item.url}" ${item.url === currentPage ? 'class="active"' : ''}>${item.name}</a></li>
-                    `).join('')}
-                </ul>
-            </nav>
-        `;
-        
-        const navContainer = document.getElementById('nav-container');
-        if (navContainer) {
-            navContainer.innerHTML = navHTML;
-        }
-    });
-    
-    // Prompt Builder Templates
-    const templates = {
-        study: [
-            {
-                title: "Step 1: Foundation (5 min)",
-                content: "I need to study {{subject}} at a {{level}} level.\nFirst, create a concise study guide that covers the key concepts I must understand.\nInclude 3-5 main topics with brief descriptions."
-            },
-            {
-                title: "Step 2: Active Recall (10 min)",
-                content: "Based on the study guide you just provided, generate 10 practice questions about {{subject}}.\nMix question types: 4 definition/fact-based, 3 application problems, and 3 \"explain in your own words\" prompts.\nDon't provide the answers yet—I'll answer them first."
-            },
-            {
-                title: "Step 3: Check & Explain (10 min)",
-                content: "Here are my answers to your questions: [PASTE YOUR ANSWERS HERE]\n\nGrade my responses and explain what I got wrong or could improve.\nFor each incorrect answer, provide a detailed explanation and a mnemonic to help me remember it."
-            },
-            {
-                title: "Step 4: Connection & Application (5 min)",
-                content: "Now connect {{subject}} to real-world applications or current research.\nGive me 2 examples of how this is used in practice, and 1 area where our understanding is still developing."
-            }
-        ],
-        website: [
-            {
-                title: "Step 1: Concept & Structure",
-                content: "I want to build a website called \"{{website-name}}\" for {{website-purpose}} with {{website-pages}} pages.\nBased on this, suggest:\n1. The essential pages I need and their purpose\n2. A simple folder structure\n3. Whether GitHub Pages is suitable or if I need alternatives\n4. Any security considerations I should know about"
-            },
-            {
-                title: "Step 2: Setup & Initial Files",
-                content: "Walk me through the exact steps to set up {{website-name}}:\n1. Create GitHub repository and enable Pages\n2. Create the main index.html with proper HTML5 boilerplate\n3. Create the navigation menu that links all pages\n4. Add basic CSS file with dark/light mode support\n5. Include meta tags for SEO and mobile responsiveness\n\nProvide the complete, ready-to-use code for each file."
-            },
-            {
-                title: "Step 3: Build All Pages",
-                content: "Now generate the complete code for all pages of {{website-name}}:\n\nFor each page, provide:\n1. Full HTML with proper semantic tags\n2. Inline CSS for unique styling (if any)\n3. Any necessary JavaScript\n4. Comments explaining security best practices\n\nFocus on: clean structure, accessibility, and loading performance."
-            },
-            {
-                title: "Step 4: Security & Deployment Review",
-                content: "Review my {{website-name}} website for security issues and deployment readiness:\n\n1. Check for: XSS vulnerabilities, insecure links, exposed email addresses\n2. Suggest improvements to the code structure\n3. Provide a pre-launch checklist\n4. Explain how to update the site after deployment\n5. Suggest tools for monitoring and maintenance"
-            },
-            {
-                title: "Step 5: Customization Guide",
-                content: "I want to customize {{website-name}} further. Guide me through:\n\n1. How to modify the design without breaking functionality\n2. Adding new pages or sections\n3. Integrating simple forms (contact, newsletter) securely\n4. Adding analytics while respecting privacy\n5. Optimizing for search engines"
-            }
-        ],
-        research: [
-            {
-                title: "Step 1: Research Plan",
-                content: "I need to research \"{{topic}}\".\nFirst, help me create a research plan. What are the 5-7 key sub-topics I should investigate?\nFor each, suggest 2-3 search terms and 1-2 types of sources to look for."
-            },
-            {
-                title: "Step 2: Source Evaluation",
-                content: "I've found {{sources}} sources. Help me evaluate them:\n1. Sort them by credibility (peer-reviewed > academic > government > NGO > news > blog)\n2. Identify 3 sources that might have bias and explain what to watch for\n3. Suggest which 5-7 sources I should prioritize reading first"
-            },
-            {
-                title: "Step 3: Synthesis",
-                content: "Based on these sources about \"{{topic}}\", create a synthesis matrix:\n- 3 main schools of thought or approaches\n- 2 areas of consensus across sources\n- 3 major debates or disagreements\n- 4 gaps in current research"
-            }
-        ]
-    };
-    
-    // Initialize flow
-    function initializeFlow(category) {
-        const flowContainer = document.getElementById(category + '-flow');
-        const steps = templates[category] || [];
-        
-        // Clear existing steps
-        const existingSteps = flowContainer.querySelectorAll('.flow-step-wrapper');
-        existingSteps.forEach(s => s.remove());
-        
-        // Add steps
-        steps.forEach((step, index) => {
-            createStepElement(category, step, index);
-        });
-    }
-    
-    // Create step element
-    function createStepElement(category, step, index) {
-        const flowContainer = document.getElementById(category + '-flow');
-        
-        const stepWrapper = document.createElement('div');
-        stepWrapper.className = 'flow-step-wrapper';
-        stepWrapper.innerHTML = `
-            <div class="flow-step">
-                <div class="step-header">
-                    <h4>${step.title}</h4>
-                    <button class="delete-step-btn" onclick="deleteStep('${category}', ${index})" title="Delete this step">✕</button>
-                </div>
-                <div class="prompt-box">
-                    <button class="copy-btn" onclick="copyPromptByIndex('${category}', ${index})">Copy</button>
-                    <pre contenteditable="true" data-step-content="${index}">${step.content}</pre>
-                </div>
-            </div>
-        `;
-        
-        flowContainer.appendChild(stepWrapper);
-        
-        // Add input listener for content editing only
-        const contentEl = stepWrapper.querySelector('[data-step-content="' + index + '"]');
-        contentEl.addEventListener('input', () => updateStepData(category, index));
-    }
-    
-    // Update step data when edited
-    function updateStepData(category, index) {
-        const contentEl = document.querySelector(`[data-step-content="${index}"]`);
-        templates[category][index].content = contentEl.textContent;
-        
-        // Update placeholders in real-time
-        updatePlaceholders(category);
-    }
-    
-    // Add new step
-    window.addStep = function(category) {
-        const newIndex = templates[category].length;
-        const newStep = {
-            title: `Step ${newIndex + 1}: New Step`,
-            content: "Add your prompt content here. Use {{parameter}} for dynamic values."
-        };
-        
-        templates[category].push(newStep);
-        createStepElement(category, newStep, newIndex);
-    };
-    
-    // Delete step
-    window.deleteStep = function(category, index) {
-        if (templates[category].length <= 1) {
-            alert('You must have at least one step.');
-            return;
-        }
-        
-        if (confirm('Delete this step?')) {
-            templates[category].splice(index, 1);
-            
-            // Re-render the flow
-            initializeFlow(category);
-            updatePlaceholders(category);
-        }
-    };
-    
-    // Copy prompt by index
-    window.copyPromptByIndex = function(category, index) {
-        const step = templates[category][index];
-        const fullPrompt = step.title + '\n\n' + step.content;
-        
-        navigator.clipboard.writeText(fullPrompt).then(() => {
-            const btn = document.querySelector(`[data-step-content="${index}"]`).parentElement.querySelector('.copy-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '✓ Copied!';
-            setTimeout(() => {
-                btn.textContent = originalText;
-            }, 1500);
-        });
-    };
-    
-    // Update all placeholders
-    function updatePlaceholders(category) {
-        const template = document.getElementById(category + '-template');
-        const placeholders = template.querySelectorAll('.placeholder');
-        
-        let params = {};
-        switch(category) {
-            case 'study':
-                params.subject = document.getElementById('study-subject')?.value || 'the subject';
-                params.level = document.getElementById('study-level')?.value || 'college';
-                params.duration = document.getElementById('study-duration')?.value || '30';
-                break;
-            case 'research':
-                params.topic = document.getElementById('research-topic')?.value || 'the topic';
-                params.sources = document.getElementById('research-sources')?.value || '15';
-                break;
-            case 'website':
-                params['website-name'] = document.getElementById('website-name')?.value || 'my website';
-                params['website-purpose'] = document.getElementById('website-purpose')?.value || 'personal';
-                params['website-pages'] = document.getElementById('website-pages')?.value || '3-4';
-                break;
-        }
-        
-        // Update each placeholder
-        placeholders.forEach(placeholder => {
-            // Find which step this placeholder is in
-            const stepContent = placeholder.closest('pre') || placeholder.closest('div');
-            if (stepContent) {
-                let content = stepContent.textContent;
-                Object.keys(params).forEach(key => {
-                    const regex = new RegExp(`{{${key}}}`, 'g');
-                    content = content.replace(regex, params[key]);
-                });
-                stepContent.innerHTML = content.replace(/(Step \d+: [^\n]+)/, '<strong>$1</strong>');
-            }
-        });
-    }
-    
-    // Copy all prompts
-    window.copyAllPrompts = function(category) {
-        const steps = templates[category];
-        const allPrompts = steps.map((step, index) => 
-            `${step.title}\n\n${step.content}`
-        ).join('\n\n---\n\n');
-        
-        navigator.clipboard.writeText(allPrompts).then(() => {
-            alert(`✓ Copied ${steps.length} steps to clipboard!`);
-        });
-    };
-    
-    // Reset template
-    window.resetTemplate = function(category) {
-        if (confirm('Reset all steps to default? This will lose any customizations.')) {
-            initializeFlow(category);
-            updatePlaceholders(category);
-        }
-    };
-    
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        initializeFlow('study');
-        updatePlaceholders('study');
-        
-        // Category switching
-        const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                const category = button.dataset.category;
-                document.querySelectorAll('.builder-template').forEach(template => {
-                    if (template.id === category + '-template') {
-                        template.classList.remove('hidden');
-                    } else {
-                        template.classList.add('hidden');
-                    }
-                });
-                
-                if (templates[category]) {
-                    initializeFlow(category);
-                    updatePlaceholders(category);
-                }
-            });
-        });
-        
-        // Parameter input listeners
-        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select').forEach(input => {
-            input.addEventListener('input', () => {
-                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
-                updatePlaceholders(activeCategory);
-            });
-        });
-    });
-    </script>
-</body>
-</html>
+.add-step-btn {
+    background-color: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background 0.3s;
+    margin-bottom: 1em; /* Add space below add button */
+}
+
+.builder-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5em; /* Increased from 1em to 1.5em */
+    margin-top: 2em; /* Add more top margin */
+    padding-top: 1.5em; /* Add padding above button group */
+    border-top: 1px solid var(--border-color); /* Visual separator */
+}
+
+/* Fix #2: Ensure website parameter inputs trigger updates */
+#website-name, #website-purpose, #website-pages {
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.parameter-inputs label {
+    display: block;
+    margin-bottom: 1em; /* Add space between parameter inputs */
+}
+
+.parameter-inputs label strong {
+    display: block;
+    margin-bottom: 0.3em;
+}
+
+/* Step header styling */
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.step-header h4 {
+    margin: 0;
+    cursor: default; /* Not editable */
+}
+
+.delete-step-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.3em 0.6em;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 1em;
+}
+
+/* Editable content styling */
+.prompt-box pre {
+    cursor: text;
+    line-height: 1.5;
+}
+
+.prompt-box pre:focus {
+    outline: 2px solid var(--nav-link-color);
+    background-color: var(--bg-color);
+}
+
+.hidden {
+    display: none;
+}
