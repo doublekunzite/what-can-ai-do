@@ -86,15 +86,15 @@
 // Sample data structure for conversations
         const conversations = [
     {
-        id: 1,
-        title: "How I Made This Website",
-        date: "2024-12-01",
-        model: "kimi",
-        modelName: "Kimi K2",
-        tags: ["coding", "creative"],
-        rating: 4.9,
-        prompt: "help me create an educational website about AI. the name i have in mind for now is \"what can I do with AI?\". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:\n\na page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.\n\na page about the risks, dangers, and other challenges of using AI\n\na page comparing different AI LLMs, how they perform on various metrics\n\na page titled something like \"Isn't AI bad?\" which will address common talking points against AI",
-        response: `<div class="ai-output-box">
+    id: 1,
+    title: "How I Made This Website",
+    date: "2024-12-01",
+    model: "kimi",
+    modelName: "Kimi K2",
+    tags: ["coding", "creative"],
+    rating: 4.9,
+    prompt: "help me create an educational website about AI. the name i have in mind for now is \"what can I do with AI?\". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:\n\na page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.\n\na page about the risks, dangers, and other challenges of using AI\n\na page comparing different AI LLMs, how they perform on various metrics\n\na page titled something like \"Isn't AI bad?\" which will address common talking points against AI",
+    response: `<div class="ai-output-box">
             <h4>Background</h4>
             <p>This shows the original conversation that led to creating this entire website. It demonstrates how AI can help plan, structure, and execute a complete project from scratch.</p>
             <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
@@ -118,11 +118,11 @@
                     <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
                     
                     <h5>Overall Structure</h5>
-                    <pre style="background: #f0f0f0; padding: 1em; overflow-x: auto;">index.html (Homepage)
+                    <pre style="background: #f0f0f0; padding: 1em; overflow-x: auto;"><code>index.html (Homepage)
 ├── use-cases.html (AI Uses)
 ├── risks.html (Risks & Challenges)
 ├── compare.html (LLM Comparison)
-└── faq.html ("Isn't AI Bad?")</pre>
+└── faq.html ("Isn't AI Bad?")</code></pre>
                     
                     <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
                     <ul>
@@ -143,66 +143,25 @@
                     <h5>Technical Implementation</h5>
                     <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
                 </div>
+                
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>AI can plan entire project structures from a simple description</li>
+                    <li>Specificity in prompts ("minimalist and bare bones") guides better design decisions</li>
+                    <li>Requesting examples and decision trees makes content more actionable</li>
+                    <li>Security is built-in by keeping things simple (static HTML, no external dependencies)</li>
+                </ul>
             </div>
-        </details>
-        
-        <h3>Key Takeaways</h3>
-        <ul>
-            <li>AI can plan entire project structures from a simple description</li>
-            <li>Specificity in prompts ("minimalist and bare bones") guides better design decisions</li>
-            <li>Requesting examples and decision trees makes content more actionable</li>
-            <li>Security is built-in by keeping things simple (static HTML, no external dependencies)</li>
-        </ul>
-        
-        <h3>Results</h3>
-        <p>Following Kimi's guidance, I created a complete 5-page website with clear navigation, minimalist design, and educational content. The entire process took 15 minutes from conversation to live site using GitHub Pages.</p>
-        
-        <div class="table-wrapper">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Phase</th>
-                        <th>Time Spent</th>
-                        <th>AI Assistance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Planning & Structure</td>
-                        <td>5 min</td>
-                        <td>Kimi generated complete sitemap and design philosophy</td>
-                    </tr>
-                    <tr>
-                        <td>HTML/CSS Generation</td>
-                        <td>5 min</td>
-                        <td>Kimi wrote all code from sitemap</td>
-                    </tr>
-                    <tr>
-                        <td>Deployment to GitHub</td>
-                        <td>5 min</td>
-                        <td>Kimi guided GitHub Pages setup step-by-step</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="ai-output-box">
-            <h4>Sources</h4>
-            <ol>
-                <li>Original conversation with Kimi K2 (November 2024) - Available in chat history</li>
-                <li>GitHub Pages documentation - <a href="https://pages.github.com/" target="_blank">pages.github.com</a></li>
-            </ol>
-        </div>`,
-        takeaways: [
-            "AI can plan entire project structures from a simple description",
-            "Specificity in prompts (\"minimalist and bare bones\") guides better design decisions",
-            "Requesting examples and decision trees makes content more actionable",
-            "Security is built-in by keeping things simple (static HTML, no external dependencies)"
-        ]
-    },
-    // ... keep the rest of the conversations but increment their IDs (2→3, 3→4, etc.)
+        </details>`,
+    takeaways: [
+        "AI can transform a vague idea into a complete project plan in minutes",
+        "Starting with design constraints (minimalist) leads to better technical decisions",
+        "The conversation demonstrates end-to-end AI collaboration from idea to deployment"
+    ]
+},
+// ... rest of conversations (id: 2, id: 3, id: 4...)
             {
-                id: 3,
+                id: 2,
                 title: "Role-Based Prompt for Marketing Copy",
                 date: "2024-11-25",
                 model: "gpt-4",
@@ -229,7 +188,7 @@
                 ]
             },
             {
-                id: 4,
+                id: 3,
                 title: "Data Analysis Prompt for Survey Results",
                 date: "2024-11-24",
                 model: "claude",

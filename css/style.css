@@ -1013,3 +1013,58 @@ nav a.active {
     display: block;
     margin-bottom: 0.3em;
 }
+
+/* Dark mode dropdown and content styling */
+[data-theme="light"] .dropdown-content,
+[data-theme="light"] .nested-content,
+[data-theme="light"] .ai-output-box {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+[data-theme="light"] .dropdown-content h3,
+[data-theme="light"] .nested-content h3,
+[data-theme="light"] .dropdown-content h4,
+[data-theme="light"] .nested-content h4,
+[data-theme="light"] .ai-output-box h4 {
+    color: #ffffff;
+}
+
+[data-theme="light"] .dropdown-content pre,
+[data-theme="light"] .nested-content pre,
+[data-theme="light"] .ai-output-box pre {
+    background-color: #1a1a1a !important;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+[data-theme="light"] .dropdown-content ul li,
+[data-theme="light"] .nested-content ul li,
+[data-theme="light"] .ai-output-box ul li {
+    color: #e0e0e0;
+}
+
+[data-theme="light"] .dropdown-content p,
+[data-theme="light"] .nested-content p,
+[data-theme="light"] .ai-output-box p {
+    color: #e0e0e0;
+}
+
+/* Fix nested dropdown styling in dark mode */
+[data-theme="light"] details.nested-dropdown {
+    background-color: #333;
+    border: 1px solid #555;
+}
+
+[data-theme="light"] summary.nested-header {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border-bottom: 1px solid #444;
+}
+
+/* Fix tag styling in dark mode */
+[data-theme="light"] .tag {
+    background-color: #0066cc;
+    color: #ffffff;
+}
