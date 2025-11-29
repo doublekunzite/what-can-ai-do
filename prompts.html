@@ -85,7 +85,7 @@
         
 // Sample data structure for conversations
         const conversations = [
-    {
+   {
     id: 1,
     title: "How I Made This Website",
     date: "2024-12-01",
@@ -118,7 +118,7 @@
                     <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
                     
                     <h5>Overall Structure</h5>
-                    <pre style="background: #f0f0f0; padding: 1em; overflow-x: auto;"><code>index.html (Homepage)
+                    <pre class="code-block"><code>index.html (Homepage)
 ├── use-cases.html (AI Uses)
 ├── risks.html (Risks & Challenges)
 ├── compare.html (LLM Comparison)
@@ -159,7 +159,6 @@
         "The conversation demonstrates end-to-end AI collaboration from idea to deployment"
     ]
 },
-// ... rest of conversations (id: 2, id: 3, id: 4...)
             {
                 id: 2,
                 title: "Role-Based Prompt for Marketing Copy",
@@ -248,47 +247,68 @@ plt.show()</code></pre>
                                     Date: ${conv.date} | Model: ${conv.modelName}
                                 </p>
                                 <div class="tags">
-                                    ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                </div>
-                                <div class="rating" data-conversation-id="${conv.id}">
-                                    ${[1,2,3,4,5].map(i => `
-                                        <span class="star ${i <= userRating ? 'active' : ''}" 
-                                              data-rating="${i}"
-                                              title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
-                                            ★
-                                        </span>
-                                    `).join('')}
-                                    <small style="margin-left: 0.5em; color: #666;">
-                                        (${avgRating.toFixed(1)})
-                                    </small>
-                                </div>
-                            </div>
-                        </summary>
-                        <div class="dropdown-content">
-                            <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
-                            
-                            <h3>Prompt:</h3>
-                            <div style="background: #f5f5f5; padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
-                                <pre style="margin: 0; white-space: pre-wrap; font-family: inherit;">${conv.prompt}</pre>
-                            </div>
-                            
-                            <h3>Response:</h3>
-                            <div style="background: #f9f9f9; padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
-                                ${conv.response}
-                            </div>
-                            
-                            <h3>Takeaways:</h3>
-                            <ul>
-                                ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
-                            </ul>
+                                    ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}function renderConversations(filteredConversations = conversations) {
+    const container = document.getElementById('conversationsContainer');
+    
+    if (filteredConversations.length === 0) {
+        container.innerHTML = '<div class="no-results">No conversations match your filters. Try adjusting your search.</div>';
+        return;
+    }
+    
+    container.innerHTML = filteredConversations.map(conv => {
+        const userRating = userRatings[conv.id] || 0;
+        const avgRating = conv.rating;
+        
+        return `
+            <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                <summary class="dropdown-header">
+                    <h2>Conversation: ${conv.title}</h2>
+                    <div class="conversation-meta">
+                        <p style="margin: 0; font-size: 0.9em; color: #666;">
+                            Date: ${conv.date} | Model: ${conv.modelName}
+                        </p>
+                        <div class="tags">
+                            ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
-                    </details>
-                `;
-            }).join('');
-            
-            // Re-attach event listeners for ratings
-            attachRatingListeners();
-        }
+                        <div class="rating" data-conversation-id="${conv.id}">
+                            ${[1,2,3,4,5].map(i => `
+                                <span class="star ${i <= userRating ? 'active' : ''}" 
+                                      data-rating="${i}"
+                                      title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
+                                    ★
+                                </span>
+                            `).join('')}
+                            <small style="margin-left: 0.5em; color: #666;">
+                                (${avgRating.toFixed(1)})
+                            </small>
+                        </div>
+                    </div>
+                </summary>
+                <div class="dropdown-content">
+                    <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
+                    
+                    <h3>Prompt:</h3>
+                    <div class="prompt-box" style="padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
+                        <pre style="margin: 0; white-space: pre-wrap; font-family: inherit;">${conv.prompt}</pre>
+                    </div>
+                    
+                    <h3>Response:</h3>
+                    <div class="response-box" style="padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
+                        ${conv.response}
+                    </div>
+                    
+                    <h3>Takeaways:</h3>
+                    <ul>
+                        ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
+                    </ul>
+                </div>
+            </details>
+        `;
+    }).join('');
+    
+    // Re-attach event listeners for ratings
+    attachRatingListeners();
+}
         
         // Copy prompt function
         function copyPrompt(convId) {
