@@ -91,21 +91,24 @@
                         <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
                     </div>
                     
-                    <h3>Initial Prompts</h3>
                     <details class="nested-dropdown">
                         <summary class="nested-header">
-                            <h4>View Planning Conversation</h4>
+                            <h4>Prompt 1: Website Conception</h4>
                         </summary>
                         <div class="nested-content">
-                            <div class="ai-output-box">
-                                <h4>User:</h4>
-                                <p>help me create an educational website about AI. the name i have in mind for now is "what can I do with AI?". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:</p>
-                                <p>a page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.</p>
-                                <p>a page about the risks, dangers, and other challenges of using AI</p>
-                                <p>a page comparing different AI LLMs, how they perform on various metrics</p>
-                                <p>a page titled something like "Isn't AI bad?" which will address common talking points against AI</p>
-                                
-                                <h4>Kimi K2:</h4>
+                            <h4>Prompt:</h4>
+                            <div class="prompt-box"><pre>help me create an educational website about AI. the name i have in mind for now is "what can I do with AI?". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:
+
+a page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.
+
+a page about the risks, dangers, and other challenges of using AI
+
+a page comparing different AI LLMs, how they perform on various metrics
+
+a page titled something like "Isn't AI bad?" which will address common talking points against AI</pre></div>
+                            
+                            <h4>Response:</h4>
+                            <div class="response-box">
                                 <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
                                 
                                 <h5>Overall Structure</h5>
@@ -114,7 +117,20 @@
 ├── risks.html (Risks & Challenges)
 ├── compare.html (LLM Comparison)
 └── faq.html ("Isn't AI Bad?")</code></pre>
-                                
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details class="nested-dropdown">
+                        <summary class="nested-header">
+                            <h4>Prompt 2: Design Philosophy</h4>
+                        </summary>
+                        <div class="nested-content">
+                            <h4>Prompt:</h4>
+                            <div class="prompt-box"><pre>What should the design philosophy be for a minimalist AI education website?</pre></div>
+                            
+                            <h4>Response:</h4>
+                            <div class="response-box">
                                 <h5>Design Philosophy (Minimalist & Bare Bones)</h5>
                                 <ul>
                                     <li>Single-column layout with generous white space</li>
@@ -123,25 +139,43 @@
                                     <li>No images unless absolutely necessary</li>
                                     <li>No JavaScript frameworks—vanilla JS only where essential</li>
                                 </ul>
-                                
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details class="nested-dropdown">
+                        <summary class="nested-header">
+                            <h4>Prompt 3: Content Strategy</h4>
+                        </summary>
+                        <div class="nested-content">
+                            <h4>Prompt:</h4>
+                            <div class="prompt-box"><pre>Can you break down the content strategy for each page of the website?</pre></div>
+                            
+                            <h4>Response:</h4>
+                            <div class="response-box">
                                 <h5>Page-by-Page Content Strategy</h5>
                                 <p><strong>Homepage:</strong> Simple hero with clear navigation and 2-sentence descriptions of each section.</p>
                                 <p><strong>Use Cases Page:</strong> Organize by domains (Creative, Analytical, Communication, Productivity, Learning, Professional). For each use case, include sample prompts people can copy and try immediately.</p>
                                 <p><strong>Risks Page:</strong> Organize by severity and mitigation. Include Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption.</p>
                                 <p><strong>LLM Comparison Page:</strong> Comparison table with 4-5 major models. Add a "Which model should I use?" decision tree.</p>
                                 <p><strong>"Isn't AI Bad?" Page:</strong> Frame as a dialogue. List common objections with nuanced, non-defensive responses.</p>
-                                
+                            </div>
+                        </div>
+                    </details>
+                    
+                    <details class="nested-dropdown">
+                        <summary class="nested-header">
+                            <h4>Prompt 4: Technical Implementation</h4>
+                        </summary>
+                        <div class="nested-content">
+                            <h4>Prompt:</h4>
+                            <div class="prompt-box"><pre>What's the technical implementation approach for this website?</pre></div>
+                            
+                            <h4>Response:</h4>
+                            <div class="response-box">
                                 <h5>Technical Implementation</h5>
                                 <p>File structure with 5 HTML pages, one CSS file, and optional JS for copy-to-clipboard functionality.</p>
                             </div>
-                            
-                            <h3>Key Takeaways</h3>
-                            <ul>
-                                <li>AI can plan entire project structures from a simple description</li>
-                                <li>Specificity in prompts ("minimalist and bare bones") guides better design decisions</li>
-                                <li>Requesting examples and decision trees makes content more actionable</li>
-                                <li>Security is built-in by keeping things simple (static HTML, no external dependencies)</li>
-                            </ul>
                         </div>
                     </details>`,
                 takeaways: [

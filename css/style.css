@@ -1171,3 +1171,26 @@ nav a.active {
 [data-theme="light"] .no-results {
     color: #e0e0e0 !important;
 }
+
+/* Dark mode fixes */
+[data-theme="light"] .dropdown-content,
+[data-theme="light"] .nested-content,
+[data-theme="light"] .ai-output-box,
+[data-theme="light"] .prompt-box,
+[data-theme="light"] .response-box {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-color: #444 !important;
+}
+
+[data-theme="light"] .dropdown-content h3,
+[data-theme="light"] .dropdown-content h4,
+[data-theme="light"] .dropdown-content h5 {
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .code-block {
+    background-color: #1a1a1a !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+}
