@@ -1,250 +1,179 @@
 /* 
- * MINIMALIST STYLESHEET
+ * MINIMALIST STYLESHEET - Fixed Dark Mode
  * No external fonts, no frameworks, no dependencies
  */
 
-/* Reset default browser spacing - makes layout consistent */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling - sets overall page appearance */
-body {
-    /* System font stack - uses your device's native fonts, no downloads */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                 Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-    
-    /* Limit line length for readability */
-    max-width: 700px;
-    
-    /* Center the content horizontally */
-    margin: 40px auto;
-    
-    /* Add breathing room on mobile */
-    padding: 0 20px;
-    
-    /* Comfortable line spacing */
-    line-height: 1.6;
-    
-    /* Dark gray instead of pure black - easier on eyes */
-    color: #222;
-    
-    /* White background - high contrast, accessible */
-    background-color: #ffffff;
+/* CSS Variables - Clean Theme System */
+:root {
+    /* Light Mode (Default) */
+    --bg-color: #ffffff;
+    --text-color: #222222;
+    --text-secondary: #555555;
+    --border-color: #dddddd;
+    --nav-link-color: #0066cc;
+    --nav-link-hover: #0052a3;
+    --dropdown-bg: #f9f9f9;
+    --dropdown-header-bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --footer-border: #dddddd;
+    --accent-color: #0066cc;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Main heading */
+/* Dark Mode - Applied when data-theme="dark" */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --border-color: #444444;
+    --nav-link-color: #4da6ff;
+    --nav-link-hover: #66b3ff;
+    --dropdown-bg: #2d2d2d;
+    --dropdown-header-bg: #252525;
+    --card-bg: #2a2a2a;
+    --footer-border: #444444;
+    --accent-color: #4da6ff;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Base Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                 Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
 h1 {
     font-size: 2.5em;
     margin: 0 0 0.5em 0;
-    font-weight: 700;
 }
 
-/* Subtitle paragraph */
+h2 {
+    margin: 2em 0 0.5em 0;
+    font-size: 1.8em;
+}
+
 .subtitle {
     font-size: 1.2em;
-    color: #555;
+    color: var(--text-secondary);
     margin-bottom: 2em;
 }
 
-/* Navigation styling */
+p, li {
+    margin-bottom: 1em;
+}
+
+ol {
+    padding-left: 1.5em;
+}
+
+/* Navigation */
 nav ul {
-    /* Remove bullet points */
     list-style: none;
-    
-    /* Add space below nav */
     margin: 2em 0 3em 0;
-    
-    /* Create horizontal layout on larger screens */
     display: flex;
     flex-wrap: wrap;
     gap: 2em;
 }
 
-/* Navigation links */
 nav a {
-    /* Blue accent color - change #0066cc if you want a different shade */
-    color: #0066cc;
-    
-    /* Slightly larger tap target */
+    color: var(--nav-link-color);
     padding: 0.2em 0;
-    
-    /* Weight makes it clear these are clickable */
     font-weight: 500;
+    text-decoration: none;
 }
 
-/* Hover effect for links */
 nav a:hover {
-    /* Underline on hover - clear feedback */
     text-decoration: underline;
 }
 
-/* Section headings */
-h2 {
-    margin: 2em 0 0.5em 0;
-    font-size: 1.8em;
-    font-weight: 600;
-}
-
-/* Paragraphs and list items */
-p, li {
-    margin-bottom: 1em;
-}
-
-/* Ordered lists - numbered steps */
-ol {
-    /* Add space inside for numbers */
-    padding-left: 1.5em;
-}
-
-/* Footer styling - visually separate from main content */
+/* Footer */
 footer {
     margin-top: 4em;
     padding-top: 2em;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--footer-border);
     font-size: 0.9em;
-    color: #666;
+    color: var(--text-secondary);
 }
 
-/* Mobile adjustments - automatically applied on small screens */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-    
-    nav ul {
-        /* Stack navigation vertically on small screens */
-        flex-direction: column;
-        gap: 1em;
-    }
-}
-/* ===================================================================== */
-/* DROPDOWN STYLES - ROBUST VERSION WITH HIGH SPECIFICITY */
-/* ===================================================================== */
-
-/* Main dropdown container - very specific selector */
-body main details.main-dropdown {
+/* Dropdowns */
+details.main-dropdown {
     margin: 2em 0;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    display: block;
+    background-color: var(--dropdown-bg);
+    box-shadow: var(--shadow);
 }
 
-/* The clickable header - aggressive specificity */
-body main details.main-dropdown > summary.dropdown-header {
+summary.dropdown-header {
     cursor: pointer;
     padding: 1em;
-    background-color: #f9f9f9;
+    background-color: var(--dropdown-header-bg);
+    list-style: none;
     position: relative;
-    list-style: none; /* Chrome/Safari */
 }
 
-/* Firefox specific */
-body main details.main-dropdown > summary.dropdown-header::-moz-list-bullet {
+summary.dropdown-header::-webkit-details-marker {
     display: none;
 }
 
-/* Chrome/Safari specific */
-body main details.main-dropdown > summary.dropdown-header::-webkit-details-marker {
-    display: none;
-}
-
-/* Edge/IE specific */
-body main details.main-dropdown > summary.dropdown-header::marker {
-    display: none;
-}
-
-/* Force heading inline - extremely specific */
-body main details.main-dropdown > summary.dropdown-header > h2 {
-    display: inline-block !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
-    font-size: 1.8em !important;
-}
-
-/* Add custom arrow using pseudo-element */
-body main details.main-dropdown > summary.dropdown-header::before {
+summary.dropdown-header::before {
     content: "▶";
     display: inline-block;
     margin-right: 0.5em;
     transition: transform 0.2s;
-    vertical-align: middle;
 }
 
-/* Rotate arrow when open */
-body main details.main-dropdown[open] > summary.dropdown-header::before {
+details.main-dropdown[open] > summary.dropdown-header::before {
     transform: rotate(90deg);
 }
 
-/* Nested dropdowns - high specificity */
-body main details.nested-dropdown {
+summary.dropdown-header > h2 {
+    display: inline-block;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.dropdown-content {
+    padding: 0 1em 1em 1em;
+}
+
+/* Nested Dropdowns */
+details.nested-dropdown {
     margin: 1em 0;
-    border-left: 3px solid #0066cc;
+    border-left: 3px solid var(--accent-color);
     padding-left: 1em;
 }
 
-body main details.nested-dropdown > summary.nested-header {
+summary.nested-header {
     cursor: pointer;
     padding: 0.5em 0;
-    color: #0066cc;
-    list-style: none;
-    position: relative;
-}
-
-/* Hide default markers for nested too */
-body main details.nested-dropdown > summary.nested-header::-webkit-details-marker,
-body main details.nested-dropdown > summary.nested-header::-moz-list-bullet,
-body main details.nested-dropdown > summary.nested-header::marker {
-    display: none;
-}
-
-body main details.nested-dropdown > summary.nested-header > h3 {
-    display: inline-block !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
-}
-
-body main details.nested-dropdown > summary.nested-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 0.8em;
-    transition: transform 0.2s;
-    vertical-align: middle;
-}
-
-body main details.nested-dropdown[open] > summary.nested-header::before {
-    transform: rotate(90deg);
-}
-
-/* Content areas */
-body main .dropdown-content, 
-body main .nested-content {
-    padding: 0 1em 1em 1em;
-}
-
-/* Code dropdown - high specificity */
-body main details.code-dropdown {
-    margin: 1em 0;
-    border: 1px solid #e0e0e0;
-    border-radius: 3px;
-    background-color: #f5f5f5;
-}
-
-body main details.code-dropdown > summary.code-header {
-    cursor: pointer;
-    padding: 0.8em;
-    background-color: #e8e8e8;
+    color: var(--nav-link-color);
     list-style: none;
 }
 
-body main details.code-dropdown > summary.code-header::-webkit-details-marker {
+summary.nested-header::-webkit-details-marker {
     display: none;
 }
 
-body main details.code-dropdown > summary.code-header::before {
+summary.nested-header::before {
     content: "▶";
     display: inline-block;
     margin-right: 0.5em;
@@ -252,94 +181,25 @@ body main details.code-dropdown > summary.code-header::before {
     transition: transform 0.2s;
 }
 
-body main details.code-dropdown[open] > summary.code-header::before {
+details.nested-dropdown[open] > summary.nested-header::before {
     transform: rotate(90deg);
 }
 
-body main .code-content {
-    padding: 0 1em 1em 1em;
+.nested-content {
+    padding: 0 1em 1em 0;
 }
 
-/* Code block - THE FIX for text wrapping */
-body main .code-content pre {
-    margin: 0;
-    padding: 1em;
-    background-color: #f0f0f0;
-    border-radius: 3px;
-    font-size: 0.9em;
-    line-height: 1.4;
-    font-family: 'Courier New', monospace;
-    
-    /* FORCE WRAP - multiple declarations for cross-browser */
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
-    
-    /* Prevent horizontal scroll */
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-}
-
-body main .code-content code {
-    font-family: 'Courier New', monospace;
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-}
-/* ===================================================================== */
-/* FIX: Hide duplicate arrows on mobile for nested dropdowns */
-/* ===================================================================== */
-
-/* Apply list-style: none directly to the element */
-body main details.nested-dropdown > summary.nested-header {
-    list-style: none !important;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-/* Aggressively hide default markers with !important */
-body main details.nested-dropdown > summary.nested-header::-webkit-details-marker,
-body main details.nested-dropdown > summary.nested-header::marker {
-    display: none !important;
-    content: '' !important;
-}
-
-/* Also target the details element itself */
-body main details.nested-dropdown::-webkit-details-marker {
-    display: none !important;
-}
-
-/* Ensure our custom arrow is the only one visible */
-body main details.nested-dropdown > summary.nested-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 0.7em; /* Slightly smaller for mobile */
-    transition: transform 0.2s;
-    vertical-align: middle;
-}
-
-body main details.nested-dropdown[open] > summary.nested-header::before {
-    transform: rotate(90deg);
-}
-
-
-/* ===================================================================== */
-/* UNIFIED DATA TABLE STYLES - Use for ALL tables across the site */
-/* ===================================================================== */
-
-/* Table wrapper for horizontal scrolling on mobile - use on ALL tables */
+/* Tables */
 .table-wrapper {
     overflow-x: auto;
     margin: 1.5em 0;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
-/* Unified table style - use class="data-table" on ALL tables */
 .data-table {
     font-size: 0.85em;
-    min-width: 700px; /* Minimum width before scrolling kicks in */
+    min-width: 700px;
     border-collapse: collapse;
     width: 100%;
 }
@@ -347,23 +207,14 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
 .data-table th,
 .data-table td {
     padding: 0.6em 0.5em;
-    border: 1px solid #ccc;
+    border: 1px solid var(--table-border);
     vertical-align: top;
 }
 
 .data-table th {
-    background-color: #f5f5f5;
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
     font-weight: 600;
-    vertical-align: bottom;
-    text-align: center;
-    line-height: 1.2;
-}
-
-.data-table th small {
-    font-weight: normal;
-    display: block;
-    margin-top: 0.3em;
-    font-size: 0.9em;
 }
 
 .data-table td {
@@ -375,22 +226,58 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
     font-weight: 600;
 }
 
-/* Alternative: Left-align specific columns if needed */
-.data-table td.left-align {
-    text-align: left;
-    font-weight: normal;
+/* Code Blocks */
+.code-content pre {
+    margin: 0;
+    padding: 1em;
+    background-color: var(--code-bg);
+    border-radius: 3px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
-/* ===================================================================== */
-/* PROMPT REPOSITORY INTERACTIVE STYLES - Use CSS variables for theming */
-/* ===================================================================== */
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--dropdown-header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    box-shadow: var(--shadow);
+}
 
+.theme-toggle:hover {
+    background-color: var(--nav-link-color);
+    color: white;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        font-size: 0.8em;
+        padding: 0.4em 0.8em;
+    }
+}
+
+/* Prompt Repository Specific */
 .filter-controls {
     background-color: var(--dropdown-header-bg);
     padding: 1em;
     margin: 1.5em 0;
     border-radius: 8px;
-    border: 1px solid var(--dropdown-border);
+    border: 1px solid var(--border-color);
 }
 
 .search-box {
@@ -478,13 +365,10 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
 }
 
 .star.active {
-    color: #ffc107; /* Keep gold star in both themes */
+    color: #ffc107;
 }
 
 .copy-btn {
-    position: absolute;
-    top: 1em;
-    right: 1em;
     background: var(--nav-link-color);
     color: white;
     border: none;
@@ -499,10 +383,6 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
     background: var(--nav-link-hover);
 }
 
-.hidden {
-    display: none !important;
-}
-
 .no-results {
     text-align: center;
     padding: 3em;
@@ -510,10 +390,10 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
     font-style: italic;
 }
 
-/* AI Output Box - distinct formatting for quoted content */
+/* AI Output Box */
 .ai-output-box {
-    background-color: #e8f4f8;
-    border: 1px solid #b0d4e0;
+    background-color: var(--ai-output-bg);
+    border: 1px solid var(--ai-output-border);
     border-radius: 4px;
     padding: 1.2em;
     margin: 1.5em 0;
@@ -521,690 +401,10 @@ body main details.nested-dropdown[open] > summary.nested-header::before {
 }
 
 .ai-output-box h4 {
-    margin-top: 0;
-    color: #0066cc;
-    font-size: 1em;
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box h5 {
-    margin: 1em 0 0.5em 0;
-    font-size: 0.95em;
-    color: #333;
-}
-
-.ai-output-box p {
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box ul {
-    margin-left: 1.5em;
-    margin-bottom: 0.8em;
-}
-
-.ai-output-box li {
-    margin-bottom: 0.5em;
-}
-
-/* ===================================================================== */
-/* CSS VARIABLES FOR THEMING - Dark mode default */
-/* ===================================================================== */
-
-:root {
-    /* Dark mode (default) */
-    --bg-color: #1a1a1a;
-    --text-color: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --border-color: #333;
-    --nav-link-color: #4da6ff;
-    --nav-link-hover: #66b3ff;
-    --dropdown-bg: #2d2d2d;
-    --dropdown-header-bg: #252525;
-    --dropdown-border: #404040;
-    --table-header-bg: #252525;
-    --table-header-text: #e0e0e0;
-    --table-border: #404040;
-    --table-row-hover: #333333;
-    --ai-output-bg: #1e2a35;
-    --ai-output-border: #2a4a6b;
-    --code-bg: #2d2d2d;
-    --footer-border: #333;
-    
-    /* Shadows for dark mode */
-    --shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-/* Light mode - applied when data-theme="light" is on body */
-[data-theme="light"] {
-    --bg-color: #ffffff;
-    --text-color: #222222;
-    --text-secondary: #555555;
-    --border-color: #dddddd;
-    --nav-link-color: #0066cc;
-    --nav-link-hover: #0052a3;
-    --dropdown-bg: #f9f9f9;
-    --dropdown-header-bg: #f5f5f5;
-    --dropdown-border: #dddddd;
-    --table-header-bg: #f5f5f5;
-    --table-header-text: #222222;
-    --table-border: #cccccc;
-    --table-row-hover: #f0f0f0;
-    --ai-output-bg: #e8f4f8;
-    --ai-output-border: #b0d4e0;
-    --code-bg: #f0f0f0;
-    --footer-border: #dddddd;
-    
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Apply theme colors */
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-color);
-}
-
-.subtitle {
-    color: var(--text-secondary);
-}
-
-/* Nav link colors */
-nav a {
     color: var(--nav-link-color);
 }
 
-nav a:hover {
-    color: var(--nav-link-hover);
-}
-
-/* Dropdown styling with theme */
-body main details.main-dropdown {
-    border-color: var(--dropdown-border);
-    background-color: var(--dropdown-bg);
-    box-shadow: var(--shadow);
-}
-
-body main details.main-dropdown > summary.dropdown-header {
-    background-color: var(--dropdown-header-bg);
-    color: var(--text-color);
-}
-
-/* Nested dropdown */
-body main details.nested-dropdown {
-    border-left-color: var(--nav-link-color);
-}
-
-body main details.nested-dropdown > summary.nested-header {
-    color: var(--nav-link-color);
-}
-
-/* Code dropdown */
-body main details.code-dropdown {
-    background-color: var(--dropdown-bg);
-    border-color: var(--dropdown-border);
-}
-
-body main details.code-dropdown > summary.code-header {
-    background-color: var(--code-bg);
-}
-
-/* AI Output Box */
-.ai-output-box {
-    background-color: var(--ai-output-bg);
-    border-color: var(--ai-output-border);
-}
-
-.ai-output-box h4 {
-    color: var(--nav-link-color);
-}
-
-/* Table styling with theme */
-.table-wrapper {
-    border-color: var(--table-border);
-}
-
-.data-table th {
-    background-color: var(--table-header-bg);
-    color: var(--table-header-text);
-    border-color: var(--table-border);
-}
-
-.data-table td {
-    border-color: var(--table-border);
-}
-
-.data-table tr:hover {
-    background-color: var(--table-row-hover);
-}
-
-/* Code content */
-body main .code-content pre {
-    background-color: var(--code-bg);
-}
-
-/* Footer */
-footer {
-    border-top-color: var(--footer-border);
-    color: var(--text-secondary);
-}
-
-/* ===================================================================== */
-/* DARK MODE TOGGLE - Fixed positioning and high z-index */
-/* ===================================================================== */
-
-.theme-toggle {
-    position: fixed; /* Change to fixed so it stays visible while scrolling */
-    top: 20px;
-    right: 20px;
-    background-color: var(--dropdown-header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 0.5em 1em;
-    cursor: pointer;
-    font-size: 0.9em;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    z-index: 9999; /* High z-index to ensure it's on top */
-    box-shadow: var(--shadow);
-}
-
-.theme-toggle:hover {
-    background-color: var(--nav-link-color);
-    color: white;
-    transform: translateY(-1px);
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-    .theme-toggle {
-        top: 10px;
-        right: 10px;
-        font-size: 0.8em;
-        padding: 0.4em 0.8em;
-    }
-}
-
-/* ===================================================================== */
-/* PROMPT BUILDER STYLES */
-/* ===================================================================== */
-
-.builder-template {
-    margin: 2em 0;
-}
-
-.builder-template.hidden {
-    display: none;
-}
-
-.parameter-inputs {
-    background-color: var(--dropdown-header-bg);
-    padding: 1.5em;
-    border-radius: 8px;
-    margin: 1.5em 0;
-    display: grid;
-    gap: 1em;
-}
-
-.parameter-inputs label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-}
-
-.parameter-inputs input,
-.parameter-inputs select {
-    width: 100%;
-    padding: 0.6em;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-.conversation-flow {
-    margin: 2em 0;
-}
-
-.flow-step {
-    margin: 1.5em 0;
-    padding: 1em;
-    border-left: 3px solid var(--nav-link-color);
-    background-color: var(--dropdown-header-bg);
-    border-radius: 0 4px 4px 0;
-}
-
-.flow-step h4 {
-    margin-top: 0;
-    color: var(--nav-link-color);
-}
-
-.prompt-box {
-    position: relative;
-    margin: 1em 0;
-    background-color: var(--code-bg);
-    border-radius: 4px;
-}
-
-.prompt-box pre {
-    margin: 0;
-    padding: 1.5em;
-    padding-right: 5em;
-    white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-}
-
-.placeholder {
-    color: var(--nav-link-color);
-    font-weight: 600;
-    background-color: rgba(0, 102, 204, 0.1);
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-}
-
-/* Make sure copy button is visible inside prompt boxes */
-.prompt-box .copy-btn {
-    position: absolute;
-    top: 0.5em;
-    right: 0.5em;
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.4em 0.8em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8em;
-    transition: background 0.3s;
-    z-index: 10;
-}
-
-.prompt-box .copy-btn:hover {
-    background-color: var(--nav-link-hover);
-}
-
-/* Active page highlighting */
-nav a.active {
-    font-weight: 600;
-    color: var(--nav-link-color);
-}
-
-/* ===================================================================== */
-/* PROMPT BUILDER DYNAMIC STEP STYLES */
-/* ===================================================================== */
-
-.flow-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1em;
-}
-
-.add-step-btn {
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.add-step-btn:hover {
-    background-color: var(--nav-link-hover);
-}
-
-.step-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5em;
-}
-
-.step-header h4 {
-    margin: 0;
-    flex: 1;
-    padding: 0.3em;
-    border-radius: 3px;
-    cursor: text;
-}
-
-.step-header h4:focus {
-    background-color: var(--bg-color);
-    outline: 2px solid var(--nav-link-color);
-}
-
-.delete-step-btn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 0.3em 0.6em;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.8em;
-    margin-left: 1em;
-    transition: background 0.3s;
-}
-
-.delete-step-btn:hover {
-    background: #c0392b;
-}
-
-.prompt-box pre {
-    cursor: text;
-    line-height: 1.5;
-}
-
-.prompt-box pre:focus {
-    outline: 2px solid var(--nav-link-color);
-    background-color: var(--bg-color);
-}
-
-.builder-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1em;
-}
-
-.filter-btn.secondary {
-    background-color: var(--dropdown-header-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-.filter-btn.secondary:hover {
-    background-color: var(--border-color);
-}
-
-/* Move add button to bottom */
-.step-controls {
-    margin-top: 1.5em;
-    text-align: center;
-}
-
-/* Center the add button */
-.add-step-btn {
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.8em 1.5em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background 0.3s;
-    margin: 0 auto;
-    display: inline-block;
-}
-
-.add-step-btn:hover {
-    background-color: var(--nav-link-hover);
-}
-
-/* Ensure step titles are not styled as editable */
-.step-header h4 {
-    margin: 0;
-    padding: 0.3em;
-    cursor: default; /* Not editable */
-}
-
-/* Keep content editable styling */
-.prompt-box pre:focus {
-    outline: 2px solid var(--nav-link-color);
-    background-color: var(--bg-color);
-}
-
-/* Website template specific */
-#website-purpose, #website-pages {
-    width: 100%;
-}
-
-/* Fix #1: Move add button to the right and add spacing */
-.step-controls {
-    margin-top: 1.5em;
-    text-align: right; /* Changed from center to right */
-    padding-right: 1em; /* Add some right padding */
-}
-
-.add-step-btn {
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.8em 1.5em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background 0.3s;
-    margin-bottom: 1em; /* Add space below add button */
-}
-
-.builder-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5em; /* Increased from 1em to 1.5em */
-    margin-top: 2em; /* Add more top margin */
-    padding-top: 1.5em; /* Add padding above button group */
-    border-top: 1px solid var(--border-color); /* Visual separator */
-}
-
-/* Fix #2: Ensure website parameter inputs trigger updates */
-#website-name, #website-purpose, #website-pages {
-    width: 100%;
-    margin-bottom: 0.5em;
-}
-
-.parameter-inputs label {
-    display: block;
-    margin-bottom: 1em; /* Add space between parameter inputs */
-}
-
-.parameter-inputs label strong {
-    display: block;
-    margin-bottom: 0.3em;
-}
-
-/* Dark mode dropdown and content styling */
-[data-theme="light"] .dropdown-content,
-[data-theme="light"] .nested-content,
-[data-theme="light"] .ai-output-box {
-    background-color: #2a2a2a;
-    border-color: #444;
-    color: #e0e0e0;
-}
-
-[data-theme="light"] .dropdown-content h3,
-[data-theme="light"] .nested-content h3,
-[data-theme="light"] .dropdown-content h4,
-[data-theme="light"] .nested-content h4,
-[data-theme="light"] .ai-output-box h4 {
-    color: #ffffff;
-}
-
-[data-theme="light"] .dropdown-content pre,
-[data-theme="light"] .nested-content pre,
-[data-theme="light"] .ai-output-box pre {
-    background-color: #1a1a1a !important;
-    border-color: #444;
-    color: #e0e0e0;
-}
-
-[data-theme="light"] .dropdown-content ul li,
-[data-theme="light"] .nested-content ul li,
-[data-theme="light"] .ai-output-box ul li {
-    color: #e0e0e0;
-}
-
-[data-theme="light"] .dropdown-content p,
-[data-theme="light"] .nested-content p,
-[data-theme="light"] .ai-output-box p {
-    color: #e0e0e0;
-}
-
-/* Fix nested dropdown styling in dark mode */
-[data-theme="light"] details.nested-dropdown {
-    background-color: #333;
-    border: 1px solid #555;
-}
-
-[data-theme="light"] summary.nested-header {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border-bottom: 1px solid #444;
-}
-
-/* Fix tag styling in dark mode */
-[data-theme="light"] .tag {
-    background-color: #0066cc;
-    color: #ffffff;
-}
-
-/* ============================================================================
-   DARK MODE FIXES FOR PROMPTS PAGE
-   ============================================================================ */
-
-/* Base dark mode backgrounds for all content areas */
-[data-theme="light"] .dropdown-content,
-[data-theme="light"] .nested-content,
-[data-theme="light"] .ai-output-box {
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-    border-color: #444 !important;
-}
-
-/* Remove white backgrounds from prompt/response boxes */
-[data-theme="light"] .dropdown-content > div[style*="background: #f5f5f5"],
-[data-theme="light"] .dropdown-content > div[style*="background: #f9f9f9"] {
-    background-color: #1a1a1a !important;
-    border-color: #0066cc !important;
-}
-
-/* Fix ALL headings inside dropdowns */
-[data-theme="light"] .dropdown-content h2,
-[data-theme="light"] .dropdown-content h3,
-[data-theme="light"] .dropdown-content h4,
-[data-theme="light"] .dropdown-content h5,
-[data-theme="light"] .nested-content h2,
-[data-theme="light"] .nested-content h3,
-[data-theme="light"] .nested-content h4,
-[data-theme="light"] .nested-content h5,
-[data-theme="light"] .ai-output-box h2,
-[data-theme="light"] .ai-output-box h3,
-[data-theme="light"] .ai-output-box h4,
-[data-theme="light"] .ai-output-box h5 {
-    color: #ffffff !important;
-}
-
-/* Fix paragraph text */
-[data-theme="light"] .dropdown-content p,
-[data-theme="light"] .nested-content p,
-[data-theme="light"] .ai-output-box p,
-[data-theme="light"] .dropdown-content li,
-[data-theme="light"] .nested-content li,
-[data-theme="light"] .ai-output-box li {
-    color: #e0e0e0 !important;
-}
-
-/* Fix code blocks - REMOVE hardcoded backgrounds */
-[data-theme="light"] .dropdown-content pre,
-[data-theme="light"] .nested-content pre,
-[data-theme="light"] .code-block {
-    background-color: #1a1a1a !important;
-    border: 1px solid #444 !important;
-    color: #e0e0e0 !important;
-}
-
-/* Fix nested dropdown summary text */
-[data-theme="light"] summary.nested-header h4 {
-    color: #ffffff !important;
-}
-
-/* Fix "Key Takeaways" section */
-[data-theme="light"] h3 {
-    color: #ffffff !important;
-    border-bottom: 1px solid #444 !important;
-}
-
-/* Override inline styles for prompt/response boxes */
-[data-theme="light"] .prompt-box,
-[data-theme="light"] .response-box {
-    background-color: #1a1a1a !important;
-    border-color: #0066cc !important;
-}
-
-/* Fix copy button visibility */
-[data-theme="light"] .copy-btn {
-    background-color: #0066cc !important;
-    color: #ffffff !important;
-}
-
-[data-theme="light"] .copy-btn:hover {
-    background-color: #0052a3 !important;
-}
-
-/* Fix tags */
-[data-theme="light"] .tag {
-    background-color: #0066cc !important;
-    color: #ffffff !important;
-}
-
-/* Fix rating stars */
-[data-theme="light"] .star {
-    color: #666 !important;
-}
-
-[data-theme="light"] .star.active {
-    color: #ffd700 !important;
-}
-
-/* Fix empty state message */
-[data-theme="light"] .no-results {
-    color: #e0e0e0 !important;
-}
-
-/* Dark mode fixes */
-[data-theme="light"] .dropdown-content,
-[data-theme="light"] .nested-content,
-[data-theme="light"] .ai-output-box,
-[data-theme="light"] .prompt-box,
-[data-theme="light"] .response-box {
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-    border-color: #444 !important;
-}
-
-[data-theme="light"] .dropdown-content h3,
-[data-theme="light"] .dropdown-content h4,
-[data-theme="light"] .dropdown-content h5 {
-    color: #ffffff !important;
-}
-
-[data-theme="light"] .code-block {
-    background-color: #1a1a1a !important;
-    border: 1px solid #444 !important;
-    color: #e0e0e0 !important;
-}
-
-/* Hide takeaways for conversation id: 1 */
-[data-id="1"] .dropdown-content > h3:nth-of-type(3),
-[data-id="1"] .dropdown-content > ul:last-of-type {
-    display: none;
-}
-
-/* ============================================================================
-   INDEX PAGE STYLES
-   ============================================================================ */
-
+/* Index Page Specific */
 .hero {
     text-align: center;
     padding: 3em 0 2em;
@@ -1213,13 +413,6 @@ nav a.active {
 .hero h1 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
-}
-
-.subtitle {
-    font-size: 1.2em;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto 2em;
 }
 
 .cta-buttons {
@@ -1238,34 +431,25 @@ nav a.active {
 }
 
 .cta-primary {
-    background: #0066cc;
+    background: var(--nav-link-color);
     color: white;
 }
 
 .cta-secondary {
-    background: #f0f0f0;
-    color: #333;
-    border: 2px solid #0066cc;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 2px solid var(--nav-link-color);
 }
 
 .cta-primary:hover, .cta-secondary:hover {
     transform: translateY(-2px);
 }
 
-[data-theme="light"] .cta-secondary {
-    background: #2a2a2a;
-    color: #e0e0e0;
-}
-
 .intro-section {
-    background: #f5f5f5;
+    background: var(--dropdown-header-bg);
     padding: 2em;
     border-radius: 8px;
     margin: 2em 0;
-}
-
-[data-theme="light"] .intro-section {
-    background: #2a2a2a;
 }
 
 .features h2 {
@@ -1281,22 +465,18 @@ nav a.active {
 }
 
 .feature-card {
-    background: white;
+    background: var(--card-bg);
     padding: 1.5em;
     border-radius: 8px;
-    border: 2px solid #f0f0f0;
+    border: 2px solid var(--border-color);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .feature-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0,102,204,0.15);
-}
-
-[data-theme="light"] .feature-card {
-    background: #2a2a2a;
-    border-color: #444;
+    box-shadow: var(--shadow);
+    border-color: var(--nav-link-color);
 }
 
 .card-icon {
@@ -1306,8 +486,8 @@ nav a.active {
 }
 
 .feature-card h3 {
-    margin-top: 0;
-    color: #0066cc;
+    color: var(--nav-link-color);
+    margin-bottom: 0.5em;
 }
 
 .feature-card p {
@@ -1315,19 +495,15 @@ nav a.active {
 }
 
 .feature-card small {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.8em;
 }
 
 .quick-start {
-    background: #f9f9f9;
+    background: var(--dropdown-header-bg);
     padding: 2em;
     border-radius: 8px;
     margin: 2em 0;
-}
-
-[data-theme="light"] .quick-start {
-    background: #2a2a2a;
 }
 
 .steps {
@@ -1348,7 +524,7 @@ nav a.active {
     position: absolute;
     left: 0;
     top: 0;
-    background: #0066cc;
+    background: var(--nav-link-color);
     color: white;
     width: 1.8em;
     height: 1.8em;
@@ -1370,11 +546,7 @@ nav a.active {
 
 .updates li {
     padding: 0.5em 0;
-    border-bottom: 1px solid #eee;
-}
-
-[data-theme="light"] .updates li {
-    border-color: #444;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .updates li:last-child {
@@ -1382,294 +554,34 @@ nav a.active {
 }
 
 .contribute {
-    background: #f0f0f0;
+    background: var(--dropdown-header-bg);
     padding: 1.5em;
     border-radius: 8px;
     text-align: center;
     margin: 2em 0;
 }
 
-[data-theme="light"] .contribute {
-    background: #2a2a2a;
-}
-
 footer {
     text-align: center;
     padding: 2em 0 1em;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--footer-border);
     margin-top: 2em;
+    color: var(--text-secondary);
 }
 
-[data-theme="light"] footer {
-    border-color: #444;
-}
-
-/* ============================================================================
-   INDEX PAGE DARK MODE FIXES - Comprehensive
-   ============================================================================ */
-
-/* Force all text to be light in dark mode with maximum specificity */
-[data-theme="light"] body,
-[data-theme="light"] main,
-[data-theme="light"] section,
-[data-theme="light"] div,
-[data-theme="light"] p,
-[data-theme="light"] li,
-[data-theme="light"] span,
-[data-theme="light"] small,
-[data-theme="light"] footer {
-    color: #e0e0e0 !important;
-}
-
-[data-theme="light"] h1,
-[data-theme="light"] h2,
-[data-theme="light"] h3,
-[data-theme="light"] h4,
-[data-theme="light"] h5,
-[data-theme="light"] h6 {
-    color: #ffffff !important;
-}
-
-/* Specific fixes for subtitle */
-[data-theme="light"] .subtitle {
-    color: #b0b0b0 !important;
-}
-
-/* Fix links */
-[data-theme="light"] a {
-    color: #66b3ff !important;
-}
-
-[data-theme="light"] a:hover {
-    color: #99ccff !important;
-}
-
-/* Fix feature card text */
-[data-theme="light"] .feature-card p,
-[data-theme="light"] .feature-card small {
-    color: #e0e0e0 !important;
-}
-
-/* Fix feature card title */
-[data-theme="light"] .feature-card h3 {
-    color: #66b3ff !important;
-}
-
-/* Fix steps */
-[data-theme="light"] .steps li {
-    color: #e0e0e0 !important;
-}
-
-/* Fix updates section */
-[data-theme="light"] .updates li {
-    color: #e0e0e0 !important;
-}
-
-/* Fix contribute section */
-[data-theme="light"] .contribute p {
-    color: #e0e0e0 !important;
-}
-
-/* Fix footer */
-[data-theme="light"] footer p,
-[data-theme="light"] footer a {
-    color: #b0b0b0 !important;
-}
-
-/* Ensure step numbers are visible */
-[data-theme="light"] .steps li::before {
-    background: #0066cc !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 0 2px #333 !important;
-}
-
-/* Fix borders in dark mode */
-[data-theme="light"] .feature-card {
-    border-color: #444 !important;
-}
-
-[data-theme="light"] .feature-card:hover {
-    border-color: #0066cc !important;
-}
-
-/* ============================================================================
-   DARK MODE FIXES - INDEX PAGE
-   ============================================================================ */
-
-/* Base dark mode text color */
-[data-theme="light"],
-[data-theme="light"] body,
-[data-theme="light"] main {
-    color: #e0e0e0 !important;
-    background-color: #1a1a1a !important;
-}
-
-/* Force all headings to white in dark mode */
-[data-theme="light"] h1,
-[data-theme="light"] h2,
-[data-theme="light"] h3,
-[data-theme="light"] h4,
-[data-theme="light"] h5,
-[data-theme="light"] h6 {
-    color: #ffffff !important;
-}
-
-/* Specific subtitle color */
-[data-theme="light"] .subtitle {
-    color: #b0b0b0 !important;
-}
-
-/* Paragraph text */
-[data-theme="light"] p,
-[data-theme="light"] li {
-    color: #e0e0e0 !important;
-}
-
-/* Links */
-[data-theme="light"] a {
-    color: #66b3ff !important;
-}
-
-[data-theme="light"] a:hover {
-    color: #99ccff !important;
-}
-
-/* Feature cards */
-[data-theme="light"] .feature-card {
-    background-color: #2a2a2a !important;
-    border-color: #444 !important;
-}
-
-[data-theme="light"] .feature-card h3 {
-    color: #66b3ff !important;
-}
-
-[data-theme="light"] .feature-card p,
-[data-theme="light"] .feature-card small {
-    color: #e0e0e0 !important;
-}
-
-/* Sections */
-[data-theme="light"] .intro-section,
-[data-theme="light"] .quick-start,
-[data-theme="light"] .contribute {
-    background-color: #2a2a2a !important;
-}
-
-/* Steps */
-[data-theme="light"] .steps li {
-    color: #e0e0e0 !important;
-}
-
-[data-theme="light"] .steps li::before {
-    background-color: #0066cc !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 0 2px #333 !important;
-}
-
-/* Updates */
-[data-theme="light"] .updates li {
-    color: #e0e0e0 !important;
-    border-color: #444 !important;
-}
-
-/* Footer */
-[data-theme="light"] footer {
-    border-color: #444 !important;
-}
-
-[data-theme="light"] footer p,
-[data-theme="light"] footer a {
-    color: #b0b0b0 !important;
-}
-
-/* Buttons */
-[data-theme="light"] .cta-primary {
-    background-color: #0066cc !important;
-    color: #ffffff !important;
-}
-
-[data-theme="light"] .cta-secondary {
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-    border-color: #0066cc !important;
-}
-
-/* ============================================================================
-   ULTIMATE DARK MODE FIX - INDEX PAGE (Maximum Specificity)
-   ============================================================================ */
-
-/* Force ALL text elements to proper dark mode colors */
-[data-theme="light"] body,
-[data-theme="light"] main,
-[data-theme="light"] header,
-[data-theme="light"] section,
-[data-theme="light"] footer,
-[data-theme="light"] div,
-[data-theme="light"] p,
-[data-theme="light"] li,
-[data-theme="light"] span,
-[data-theme="light"] small,
-[data-theme="light"] strong,
-[data-theme="light"] em {
-    color: #e0e0e0 !important;
-}
-
-/* Force ALL headings to white */
-[data-theme="light"] h1,
-[data-theme="light"] h2,
-[data-theme="light"] h3,
-[data-theme="light"] h4,
-[data-theme="light"] h5,
-[data-theme="light"] h6 {
-    color: #ffffff !important;
-}
-
-/* Specific fixes for common elements */
-[data-theme="light"] .subtitle,
-[data-theme="light"] .feature-card small,
-[data-theme="light"] footer p {
-    color: #b0b0b0 !important;
-}
-
-/* Ensure links stand out */
-[data-theme="light"] a {
-    color: #66b3ff !important;
-}
-
-[data-theme="light"] a:hover {
-    color: #99ccff !important;
-}
-
-/* Card-specific fixes */
-[data-theme="light"] .feature-card {
-    background-color: #2a2a2a !important;
-    border-color: #444 !important;
-}
-
-[data-theme="light"] .feature-card h3 {
-    color: #66b3ff !important;
-}
-
-/* Section backgrounds */
-[data-theme="light"] .intro-section,
-[data-theme="light"] .quick-start,
-[data-theme="light"] .contribute {
-    background-color: #2a2a2a !important;
-}
-
-/* Remove any lingering white backgrounds */
-[data-theme="light"] * {
-    background-color: transparent !important;
-}
-
-[data-theme="light"] body,
-[data-theme="light"] main {
-    background-color: #1a1a1a !important;
-}
-
-/* Ensure step numbers are visible */
-[data-theme="light"] .steps li::before {
-    background-color: #0066cc !important;
-    color: #ffffff !important;
+/* Mobile */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 1em;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
 }
