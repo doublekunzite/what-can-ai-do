@@ -7,11 +7,13 @@ const navItems = [
     { name: 'Learn the Risks', url: 'risks.html' },
     { name: 'Compare Models', url: 'compare.html' },
     { name: 'Common Concerns', url: 'faq.html' }
-    // REMOVED: 'How I Made This'
 ];
 
 function injectNavigation() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Inject site title BEFORE nav
+    const titleHTML = `<h1 class="site-title" style="text-align:center; margin: 1em 0 0.5em; font-size: 2.5em;">What Can AI Do?</h1>`;
     
     const navHTML = `
         <nav>
@@ -23,22 +25,15 @@ function injectNavigation() {
         </nav>
     `;
     
-    // Find or create nav container
     let navContainer = document.getElementById('nav-container');
     if (!navContainer) {
         navContainer = document.createElement('div');
         navContainer.id = 'nav-container';
-        
-        // Insert after h1 if it exists, otherwise at the top
-        const h1 = document.querySelector('h1');
-        if (h1) {
-            h1.after(navContainer);
-        } else {
-            document.querySelector('main').prepend(navContainer);
-        }
+        const main = document.querySelector('main');
+        if (main) main.prepend(navContainer);
     }
     
-    navContainer.innerHTML = navHTML;
+    navContainer.innerHTML = titleHTML + navHTML;
 }
 
 // Run on page load

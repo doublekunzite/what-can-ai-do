@@ -1,6 +1,8 @@
-// Prompt Builder - Complete Functionality
+// Prompt Builder - Ultra Reliable Version
 (function() {
-    // Template definitions with ALL steps for each category
+    'use strict';
+
+    // Template definitions with ALL steps
     const templates = {
         study: [
             {
@@ -122,32 +124,46 @@
         ]
     };
 
-    // DOM Ready check
-    function ready(fn) {
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            setTimeout(fn, 1);
-        } else {
-            document.addEventListener('DOMContentLoaded', fn);
-        }
+    // Ultra-reliable initialization
+    function initializeWhenReady() {
+        const checkReady = setInterval(() => {
+            const studyFlow = document.getElementById('study-flow');
+            if (studyFlow) {
+                clearInterval(checkReady);
+                console.log('Prompt Builder: DOM ready, initializing...');
+                
+                // Initialize first category
+                initializeFlow('study');
+                
+                // Bind category buttons
+                bindCategoryButtons();
+                
+                console.log('Prompt Builder: Initialization complete!');
+            }
+        }, 100);
     }
 
-    // Initialize flow with proper timing
+    // Initialize flow
     function initializeFlow(category) {
-        ready(() => {
-            const flowContainer = document.getElementById(category + '-flow');
-            if (!flowContainer) return;
-            
-            const steps = templates[category] || [];
-            
-            // Clear existing steps (keep the h3)
-            const existingSteps = flowContainer.querySelectorAll('.builder-step');
-            existingSteps.forEach(s => s.remove());
-            
-            // Add steps
-            steps.forEach((step, index) => {
-                createStepElement(category, step, index);
-            });
+        const flowContainer = document.getElementById(category + '-flow');
+        if (!flowContainer) {
+            console.error(`Flow container not found: ${category}-flow`);
+            return;
+        }
+        
+        const steps = templates[category] || [];
+        
+        // Clear existing steps (keep h3)
+        while (flowContainer.children.length > 1) {
+            flowContainer.removeChild(flowContainer.lastChild);
+        }
+        
+        // Add steps
+        steps.forEach((step, index) => {
+            createStepElement(category, step, index);
         });
+        
+        updatePlaceholders(category);
     }
 
     // Create step element
@@ -180,17 +196,48 @@
         contentEl.addEventListener('input', () => updateStepData(category, index));
         copyBtn.addEventListener('click', () => copyPromptByIndex(category, index));
         deleteBtn.addEventListener('click', () => deleteStep(category, index));
-        
-        // Initial placeholder update
-        updatePlaceholders(category);
     }
     
-    // Update step data when edited
+    // Update step data
     function updateStepData(category, index) {
         const contentEl = document.querySelector(`[data-step-index="${index}"]`);
         if (contentEl) {
             templates[category][index].content = contentEl.textContent;
         }
+    }
+    
+    // Bind category buttons
+    function bindCategoryButtons() {
+        const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                console.log('Switching to category:', category);
+                
+                document.querySelectorAll('.builder-template').forEach(template => {
+                    if (template.id === category + '-template') {
+                        template.classList.remove('hidden');
+                    } else {
+                        template.classList.add('hidden');
+                    }
+                });
+                
+                initializeFlow(category);
+            });
+        });
+        
+        // Bind parameter inputs
+        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
+                if (activeCategory) {
+                    updatePlaceholders(activeCategory);
+                }
+            });
+        });
     }
     
     // Add new step
@@ -227,65 +274,61 @@
             const btn = document.querySelector(`[data-step-index="${index}"]`).parentElement.querySelector('.btn-copy');
             const originalText = btn.textContent;
             btn.textContent = '✓ Copied!';
-            setTimeout(() => {
-                btn.textContent = originalText;
-            }, 1500);
+            setTimeout(() => btn.textContent = originalText, 1500);
         });
     };
     
     // Update all placeholders
     function updatePlaceholders(category) {
-        ready(() => {
-            const template = document.getElementById(category + '-template');
-            if (!template) return;
-            
-            let params = {};
-            switch(category) {
-                case 'study':
-                    params.subject = document.getElementById('study-subject')?.value || 'the subject';
-                    params.level = document.getElementById('study-level')?.value || 'college';
-                    params.duration = document.getElementById('study-duration')?.value || '30';
-                    break;
-                case 'research':
-                    params.topic = document.getElementById('research-topic')?.value || 'the topic';
-                    params.sources = document.getElementById('research-sources')?.value || '15';
-                    break;
-                case 'website':
-                    params['website-name'] = document.getElementById('website-name')?.value || 'my website';
-                    params['website-purpose'] = document.getElementById('website-purpose')?.value || 'personal';
-                    params['website-pages'] = document.getElementById('website-pages')?.value || '3-4';
-                    break;
-                case 'write':
-                    params['content-type'] = document.getElementById('write-type')?.value || 'a blog post';
-                    params.topic = document.getElementById('write-topic')?.value || 'the topic';
-                    params.audience = document.getElementById('write-audience')?.value || 'general readers';
-                    params['word-count'] = document.getElementById('write-count')?.value || '800';
-                    break;
-                case 'solve':
-                    params['problem-description'] = document.getElementById('solve-problem')?.value || 'this problem';
-                    break;
-                case 'code':
-                    params['project-description'] = document.getElementById('code-project')?.value || 'this project';
-                    params.language = document.getElementById('code-language')?.value || 'Python';
-                    break;
-                case 'analyze':
-                    params['dataset-description'] = document.getElementById('analyze-dataset')?.value || 'this dataset';
-                    break;
+        const template = document.getElementById(category + '-template');
+        if (!template) return;
+        
+        let params = {};
+        switch(category) {
+            case 'study':
+                params.subject = document.getElementById('study-subject')?.value || 'the subject';
+                params.level = document.getElementById('study-level')?.value || 'college';
+                params.duration = document.getElementById('study-duration')?.value || '30';
+                break;
+            case 'research':
+                params.topic = document.getElementById('research-topic')?.value || 'the topic';
+                params.sources = document.getElementById('research-sources')?.value || '15';
+                break;
+            case 'website':
+                params['website-name'] = document.getElementById('website-name')?.value || 'my website';
+                params['website-purpose'] = document.getElementById('website-purpose')?.value || 'personal';
+                params['website-pages'] = document.getElementById('website-pages')?.value || '3-4';
+                break;
+            case 'write':
+                params['content-type'] = document.getElementById('write-type')?.value || 'a blog post';
+                params.topic = document.getElementById('write-topic')?.value || 'the topic';
+                params.audience = document.getElementById('write-audience')?.value || 'general readers';
+                params['word-count'] = document.getElementById('write-count')?.value || '800';
+                break;
+            case 'solve':
+                params['problem-description'] = document.getElementById('solve-problem')?.value || 'this problem';
+                break;
+            case 'code':
+                params['project-description'] = document.getElementById('code-project')?.value || 'this project';
+                params.language = document.getElementById('code-language')?.value || 'Python';
+                break;
+            case 'analyze':
+                params['dataset-description'] = document.getElementById('analyze-dataset')?.value || 'this dataset';
+                break;
+        }
+        
+        // Update all step content with placeholders
+        const steps = templates[category] || [];
+        steps.forEach((step, index) => {
+            const contentEl = document.querySelector(`[data-step-index="${index}"]`);
+            if (contentEl) {
+                let content = step.content;
+                Object.keys(params).forEach(key => {
+                    const regex = new RegExp(`{{${key}}}`, 'g');
+                    content = content.replace(regex, params[key]);
+                });
+                contentEl.textContent = content;
             }
-            
-            // Update all step content with placeholders
-            const steps = templates[category] || [];
-            steps.forEach((step, index) => {
-                const contentEl = document.querySelector(`[data-step-index="${index}"]`);
-                if (contentEl) {
-                    let content = step.content;
-                    Object.keys(params).forEach(key => {
-                        const regex = new RegExp(`{{${key}}}`, 'g');
-                        content = content.replace(regex, params[key]);
-                    });
-                    contentEl.textContent = content;
-                }
-            });
         });
     }
     
@@ -305,57 +348,9 @@
     window.resetTemplate = function(category) {
         if (confirm('Reset all steps to default? This will lose any customizations.')) {
             initializeFlow(category);
-            updatePlaceholders(category);
         }
     };
     
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('Prompt Builder: Initializing...');
-        
-        // Initialize first category
-        setTimeout(() => {
-            initializeFlow('study');
-            updatePlaceholders('study');
-        }, 100);
-        
-        // Category switching
-        const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Show/hide templates
-                const category = button.dataset.category;
-                console.log('Switching to category:', category);
-                
-                document.querySelectorAll('.builder-template').forEach(template => {
-                    if (template.id === category + '-template') {
-                        template.classList.remove('hidden');
-                    } else {
-                        template.classList.add('hidden');
-                    }
-                });
-                
-                // Initialize flow if not already done
-                const flowContainer = document.getElementById(category + '-flow');
-                if (flowContainer && flowContainer.children.length <= 1) {
-                    initializeFlow(category);
-                }
-                updatePlaceholders(category);
-            });
-        });
-        
-        // Parameter input listeners
-        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
-            input.addEventListener('input', () => {
-                const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
-                if (activeCategory) {
-                    updatePlaceholders(activeCategory);
-                }
-            });
-        });
-    });
+    // Start initialization
+    initializeWhenReady();
 })();
