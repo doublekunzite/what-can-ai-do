@@ -95,46 +95,54 @@
     </main>
 	<!-- IMPROVED JavaScript - placed BEFORE closing body tag -->
     <script>
-    // Dark mode toggle functionality - SIMPLIFIED and more robust
+    // Dark mode toggle functionality - FIXED
     (function() {
         'use strict';
         
         // Check for saved theme preference or default to dark mode
-        const currentTheme = localStorage.getItem('theme') || 'dark';
+        const savedTheme = localStorage.getItem('theme');
         
-        // Apply the theme on page load
-        if (currentTheme === 'dark') {
-    document.body.setAttribute('data-theme', 'dark');
-}
+        // Apply dark mode by default (no attribute = dark mode)
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        }
         
         // Create and insert the toggle button
         const toggleButton = document.createElement('button');
         toggleButton.className = 'theme-toggle';
-        toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+        
+        // Set button text based on current theme
+        function updateButtonText() {
+            const isLightMode = document.body.hasAttribute('data-theme');
+            toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
+        }
+        
+        updateButtonText();
         toggleButton.setAttribute('aria-label', 'Toggle theme');
         
-        // Insert at the beginning of body so it appears immediately
+        // Insert at the beginning of body
         document.body.insertBefore(toggleButton, document.body.firstChild);
         
         // Toggle function
         function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme') && 
-                               document.body.getAttribute('data-theme') === 'light';
+            const isLightMode = document.body.hasAttribute('data-theme');
             
             if (isLightMode) {
+                // Switch to dark mode
                 document.body.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
-                toggleButton.innerHTML = '☀️ Light Mode';
             } else {
+                // Switch to light mode
                 document.body.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
-                toggleButton.innerHTML = '🌙 Dark Mode';
             }
+            
+            updateButtonText();
         }
         
         // Add click listener
         toggleButton.addEventListener('click', toggleTheme);
     })();
-    </script>
+</script>
 </body>
 </html>

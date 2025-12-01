@@ -99,31 +99,54 @@
     <script src="js/navigation.js"></script>
     
     <script>
-        (function() {
-            const currentTheme = localStorage.getItem('theme') || 'dark';
-            if (currentTheme === 'dark') {
-    document.body.setAttribute('data-theme', 'dark');
-}
+    // Dark mode toggle functionality - FIXED
+    (function() {
+        'use strict';
+        
+        // Check for saved theme preference or default to dark mode
+        const savedTheme = localStorage.getItem('theme');
+        
+        // Apply dark mode by default (no attribute = dark mode)
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        }
+        
+        // Create and insert the toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'theme-toggle';
+        
+        // Set button text based on current theme
+        function updateButtonText() {
+            const isLightMode = document.body.hasAttribute('data-theme');
+            toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
+        }
+        
+        updateButtonText();
+        toggleButton.setAttribute('aria-label', 'Toggle theme');
+        
+        // Insert at the beginning of body
+        document.body.insertBefore(toggleButton, document.body.firstChild);
+        
+        // Toggle function
+        function toggleTheme() {
+            const isLightMode = document.body.hasAttribute('data-theme');
             
-            const toggleButton = document.createElement('button');
-            toggleButton.className = 'theme-toggle';
-            toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-            toggleButton.setAttribute('aria-label', 'Toggle theme');
-            document.body.insertBefore(toggleButton, document.body.firstChild);
+            if (isLightMode) {
+                // Switch to dark mode
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                // Switch to light mode
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
             
-            toggleButton.addEventListener('click', function() {
-                const isLightMode = document.body.hasAttribute('data-theme');
-                if (isLightMode) {
-                    document.body.removeAttribute('data-theme');
-                    localStorage.setItem('theme', 'dark');
-                    toggleButton.innerHTML = '☀️ Light Mode';
-                } else {
-                    document.body.setAttribute('data-theme', 'light');
-                    localStorage.setItem('theme', 'light');
-                    toggleButton.innerHTML = '🌙 Dark Mode';
-                }
-            });
-        })();
-    </script>
+            updateButtonText();
+        }
+        
+        // Add click listener
+        toggleButton.addEventListener('click', toggleTheme);
+    })();
+</script>
 </body>
 </html>
