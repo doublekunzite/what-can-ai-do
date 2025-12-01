@@ -347,12 +347,11 @@
     <script src="/what-can-ai-do/js/navigation.js"></script>
     <script src="/what-can-ai-do/js/theme.js"></script>
 
-<!-- INLINE PROMPT BUILDER JS - COMPLETE FIX -->
+<!-- INLINE PROMPT BUILDER JS - FINAL POLISHED VERSION -->
 <script>
-// DEVELOPER: Open browser console (F12) to see debug logs
-console.log('🚀 PROMPT BUILDER: Script starting...');
+console.log('🚀 PROMPT BUILDER: Final version loading...');
 
-// Template definitions - ALL CATEGORIES POPULATED
+// Template definitions - ALL CATEGORIES
 const templates = {
     study: [
         {
@@ -370,6 +369,24 @@ const templates = {
         {
             title: "Step 4: Connection & Application (5 min)",
             content: "Now connect {{subject}} to real-world applications or current research.\nGive me 2 examples of how this is used in practice, and 1 area where our understanding is still developing."
+        }
+    ],
+    research: [
+        {
+            title: "Step 1: Research Plan",
+            content: "I need to research \"{{topic}}\".\nFirst, help me create a research plan. What are the 5-7 key sub-topics I should investigate?\nFor each, suggest 2-3 search terms and 1-2 types of sources to look for."
+        },
+        {
+            title: "Step 2: Source Evaluation",
+            content: "I've found {{sources}} sources. Help me evaluate them:\n1. Sort them by credibility (peer-reviewed > academic > government > NGO > news > blog)\n2. Identify 3 sources that might have bias and explain what to watch for\n3. Suggest which 5-7 sources I should prioritize reading first"
+        },
+        {
+            title: "Step 3: Synthesis",
+            content: "Based on these sources about \"{{topic}}\", create a synthesis matrix:\n- 3 main schools of thought or approaches\n- 2 areas of consensus across sources\n- 3 major debates or disagreements\n- 4 gaps in current research"
+        },
+        {
+            title: "Step 4: Outline & Draft",
+            content: "Create a detailed outline for my research report on \"{{topic}}\".\n\nInclude:\n1. Executive summary structure\n2. Main sections with key points\n3. Data visualization suggestions\n4. References format\n\nThen help me draft the introduction section."
         }
     ],
     website: [
@@ -392,24 +409,6 @@ const templates = {
         {
             title: "Step 5: Customization Guide",
             content: "I want to customize {{website-name}} further. Guide me through:\n\n1. How to modify the design without breaking functionality\n2. Adding new pages or sections\n3. Integrating simple forms (contact, newsletter) securely\n4. Adding analytics while respecting privacy\n5. Optimizing for search engines"
-        }
-    ],
-    research: [
-        {
-            title: "Step 1: Research Plan",
-            content: "I need to research \"{{topic}}\".\nFirst, help me create a research plan. What are the 5-7 key sub-topics I should investigate?\nFor each, suggest 2-3 search terms and 1-2 types of sources to look for."
-        },
-        {
-            title: "Step 2: Source Evaluation",
-            content: "I've found {{sources}} sources. Help me evaluate them:\n1. Sort them by credibility (peer-reviewed > academic > government > NGO > news > blog)\n2. Identify 3 sources that might have bias and explain what to watch for\n3. Suggest which 5-7 sources I should prioritize reading first"
-        },
-        {
-            title: "Step 3: Synthesis",
-            content: "Based on these sources about \"{{topic}}\", create a synthesis matrix:\n- 3 main schools of thought or approaches\n- 2 areas of consensus across sources\n- 3 major debates or disagreements\n- 4 gaps in current research"
-        },
-        {
-            title: "Step 4: Outline & Draft",
-            content: "Create a detailed outline for my research report on \"{{topic}}\".\n\nInclude:\n1. Executive summary structure\n2. Main sections with key points\n3. Data visualization suggestions\n4. References format\n\nThen help me draft the introduction section."
         }
     ],
     write: [
@@ -478,24 +477,18 @@ const templates = {
 function initWhenReady() {
     const flow = document.getElementById('study-flow');
     if (flow) {
-        console.log('✅ Found study-flow element:', flow);
+        console.log('✅ DOM ready, initializing...');
         renderSteps('study');
         bindEvents();
     } else {
-        console.log('⏳ Waiting for study-flow element...');
         setTimeout(initWhenReady, 200);
     }
 }
 
 // Render steps for a category
 function renderSteps(category) {
-    console.log(`🎨 Rendering steps for: ${category}`);
     const flow = document.getElementById(category + '-flow');
-    
-    if (!flow) {
-        console.error('❌ Flow container not found:', category + '-flow');
-        return;
-    }
+    if (!flow) return;
     
     // Clear existing steps (keep h3)
     while (flow.children.length > 1) {
@@ -504,34 +497,33 @@ function renderSteps(category) {
     
     // Add each step
     templates[category].forEach((step, index) => {
-        console.log(`📝 Adding step ${index + 1}:`, step.title);
-        try {
-            const stepEl = createStepElement(category, step, index);
-            flow.appendChild(stepEl);
-            console.log(`✅ Step ${index + 1} added successfully`);
-        } catch (err) {
-            console.error(`❌ Failed to add step ${index + 1}:`, err);
-        }
+        const stepEl = createStepElement(category, step, index);
+        flow.appendChild(stepEl);
     });
     
-    console.log('🎉 All steps rendered');
-    updatePlaceholders(category); // CRITICAL: Update placeholders after rendering
+    // CRITICAL: Update placeholders immediately after rendering
+    updatePlaceholders(category);
 }
 
-// Create a single step element
+// Create a single step element - NEW BUTTON LAYOUT
 function createStepElement(category, step, index) {
     const div = document.createElement('div');
     div.className = 'builder-step';
     div.innerHTML = `
-        <div class="step-box editable" style="border: 2px dashed var(--nav-link-color); margin: 1em 0; padding: 1.5em; background: var(--dropdown-bg); border-radius: 8px;">
-            <div class="step-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1em;">
-                <h4 style="margin: 0; flex: 1; color: var(--text-color); font-weight: 600;">${step.title}</h4>
-                <div class="step-actions">
-                    <button class="btn-copy" style="background: var(--nav-link-color); color: white; border: none; padding: 0.5em 1em; margin-right: 0.5em; cursor: pointer; border-radius: 4px; font-size: 0.9em;">Copy</button>
-                    <button class="btn-x" style="background: #dc3545; color: white; border: none; padding: 0.5em 1em; cursor: pointer; border-radius: 4px; font-size: 0.9em;">×</button>
-                </div>
+        <div class="step-box editable" style="border: 2px solid var(--border-color); margin: 1.5em 0; padding: 1.5em; background: #2a1a3a; border-radius: 12px; position: relative;">
+            <!-- X button in top right -->
+            <button class="btn-x" style="position: absolute; top: 1em; right: 1em; background: #dc3545; color: white; border: none; padding: 0.4em 0.8em; cursor: pointer; border-radius: 4px; font-size: 0.9em; font-weight: bold;">×</button>
+            
+            <div class="step-header" style="margin-bottom: 1em; padding-right: 3em;">
+                <h4 style="margin: 0; color: var(--text-color); font-weight: 600; font-size: 1.1em; letter-spacing: 0.5px;">${step.title}</h4>
             </div>
-            <pre class="step-content" contenteditable="true" data-step-content="${index}" style="margin: 0; padding: 1em; background: var(--card-bg); border: 1px solid var(--border-color); white-space: pre-wrap; font-family: 'Courier New', monospace; color: var(--text-color); border-radius: 4px; line-height: 1.5;">${step.content}</pre>
+            
+            <pre class="step-content" contenteditable="true" data-step-content="${index}" style="margin: 0; padding: 1.5em; background: var(--card-bg); border: 1px solid var(--border-color); white-space: pre-wrap; font-family: 'Courier New', monospace; color: var(--text-color); border-radius: 6px; line-height: 1.6; min-height: 100px;">${step.content}</pre>
+            
+            <!-- Copy button in bottom right -->
+            <div style="margin-top: 1em; text-align: right;">
+                <button class="btn-copy" style="background: var(--nav-link-color); color: white; border: none; padding: 0.6em 1.2em; cursor: pointer; border-radius: 4px; font-size: 0.9em; font-weight: 500;">Copy</button>
+            </div>
         </div>
     `;
     
@@ -544,7 +536,7 @@ function createStepElement(category, step, index) {
     delBtn.addEventListener('click', () => deleteStep(category, index));
     contentEl.addEventListener('input', () => {
         templates[category][index].content = contentEl.textContent;
-        updatePlaceholders(category);
+        // Don't call updatePlaceholders here to avoid overwriting while typing
     });
     
     return div;
@@ -552,13 +544,10 @@ function createStepElement(category, step, index) {
 
 // Bind events
 function bindEvents() {
-    console.log('🎯 Binding events...');
-    
     // Category buttons
     document.querySelectorAll('.filter-btn[data-category]').forEach(btn => {
         btn.addEventListener('click', () => {
             const category = btn.dataset.category;
-            console.log('🖱️ Category clicked:', category);
             
             // Update active button
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -573,21 +562,18 @@ function bindEvents() {
         });
     });
     
-    // Parameter inputs - CRITICAL FOR DYNAMIC REPLACEMENT
+    // Parameter inputs - CRITICAL FOR DYNAMIC FILL
     document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
         input.addEventListener('input', () => {
             const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
             if (activeCategory) {
-                console.log('📝 Parameter changed, updating placeholders for:', activeCategory);
                 updatePlaceholders(activeCategory);
             }
         });
     });
-    
-    console.log('✅ Events bound');
 }
 
-// Update placeholders - FIXED TO WORK CORRECTLY
+// Update placeholders - FIXED TO WORK ON ALL CATEGORIES
 function updatePlaceholders(category) {
     console.log('🔄 Updating placeholders for:', category);
     
@@ -625,20 +611,22 @@ function updatePlaceholders(category) {
             break;
     }
     
-    console.log('📊 Parameters:', params);
+    console.log('📊 Parameters object:', params);
     
-    // Update all step content with placeholders
+    // Update ALL step content with placeholders
     const steps = templates[category] || [];
     steps.forEach((step, index) => {
-        const contentEl = document.querySelector(`[data-step-content="${index}"]`);
+        const contentEl = document.querySelector(`#${category}-flow [data-step-content="${index}"]`);
         if (contentEl) {
-            let content = step.content; // Start with original template content
+            // Start with original template content, not current content
+            let content = step.content;
+            // Replace all placeholders
             Object.keys(params).forEach(key => {
                 const regex = new RegExp(`{{${key}}}`, 'g');
                 content = content.replace(regex, params[key]);
             });
             contentEl.textContent = content;
-            console.log(`✏️ Updated step ${index + 1}:`, content.substring(0, 60) + '...');
+            console.log(`✏️ Step ${index + 1} updated:`, content.substring(0, 50) + '...');
         }
     });
 }
@@ -647,9 +635,10 @@ function updatePlaceholders(category) {
 function copyPrompt(category, index) {
     const step = templates[category][index];
     navigator.clipboard.writeText(`${step.title}\n\n${step.content}`).then(() => {
-        const btn = document.querySelector(`[data-step-content="${index}"]`).parentElement.querySelector('.btn-copy');
+        const btn = document.querySelector(`#${category}-flow [data-step-content="${index}"]`).parentElement.querySelector('.btn-copy');
+        const originalText = btn.textContent;
         btn.textContent = '✓ Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 1500);
+        setTimeout(() => btn.textContent = originalText, 1500);
     });
 }
 
@@ -690,8 +679,7 @@ window.resetTemplate = function(category) {
     }
 };
 
-// Start
-console.log('🔄 Starting initialization...');
+// Start initialization
 initWhenReady();
 </script>
 </body>
