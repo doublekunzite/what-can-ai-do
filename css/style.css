@@ -838,3 +838,52 @@ footer {
     color: white;
     border-color: var(--nav-link-color);
 }
+
+/* Add to the END of css/style.css */
+/* PROMPT BUILDER VISIBILITY FIX */
+
+/* Force steps to be visible */
+.builder-step,
+.step-box,
+.step-box * {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: auto !important;
+}
+
+/* Force conversation flow to be visible */
+.conversation-flow {
+    display: block !important;
+    min-height: 200px !important;
+}
+
+/* Highlight steps with bright colors for debugging */
+.builder-step {
+    border: 3px solid #ff0000 !important; /* Red border */
+    background: #ffff00 !important; /* Yellow background */
+    margin: 20px !important;
+    padding: 20px !important;
+}
+
+.step-header h4 {
+    color: #000 !important; /* Black text */
+    font-size: 18px !important;
+}
+
+.step-content {
+    color: #000 !important; /* Black text */
+    background: #fff !important; /* White background */
+    padding: 10px !important;
+    margin-top: 10px !important;
+}
+
+/* Remove any display:none from templates */
+.builder-template {
+    display: block !important;
+}
+
+.builder-template.hidden {
+    display: none !important; /* Keep this one */
+}

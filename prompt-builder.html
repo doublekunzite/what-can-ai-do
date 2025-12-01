@@ -279,6 +279,9 @@ function renderSteps(category) {
     console.log('🎉 All steps rendered');
 }
 
+// Add this right after the "All steps rendered" log
+console.log('🔍 Final DOM check:', document.getElementById('study-flow').innerHTML);
+
 // Create a single step element
 function createStepElement(step, index) {
     const div = document.createElement('div');
@@ -340,6 +343,8 @@ window.resetTemplate = function(category) {
 // Start initialization
 console.log('🔄 Starting initialization...');
 initWhenReady();
+
+
 </script>
 </body>
 </html>
