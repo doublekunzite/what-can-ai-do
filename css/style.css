@@ -1594,3 +1594,82 @@ footer {
     color: #e0e0e0 !important;
     border-color: #0066cc !important;
 }
+
+/* ============================================================================
+   ULTIMATE DARK MODE FIX - INDEX PAGE (Maximum Specificity)
+   ============================================================================ */
+
+/* Force ALL text elements to proper dark mode colors */
+[data-theme="light"] body,
+[data-theme="light"] main,
+[data-theme="light"] header,
+[data-theme="light"] section,
+[data-theme="light"] footer,
+[data-theme="light"] div,
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] span,
+[data-theme="light"] small,
+[data-theme="light"] strong,
+[data-theme="light"] em {
+    color: #e0e0e0 !important;
+}
+
+/* Force ALL headings to white */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+    color: #ffffff !important;
+}
+
+/* Specific fixes for common elements */
+[data-theme="light"] .subtitle,
+[data-theme="light"] .feature-card small,
+[data-theme="light"] footer p {
+    color: #b0b0b0 !important;
+}
+
+/* Ensure links stand out */
+[data-theme="light"] a {
+    color: #66b3ff !important;
+}
+
+[data-theme="light"] a:hover {
+    color: #99ccff !important;
+}
+
+/* Card-specific fixes */
+[data-theme="light"] .feature-card {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+}
+
+[data-theme="light"] .feature-card h3 {
+    color: #66b3ff !important;
+}
+
+/* Section backgrounds */
+[data-theme="light"] .intro-section,
+[data-theme="light"] .quick-start,
+[data-theme="light"] .contribute {
+    background-color: #2a2a2a !important;
+}
+
+/* Remove any lingering white backgrounds */
+[data-theme="light"] * {
+    background-color: transparent !important;
+}
+
+[data-theme="light"] body,
+[data-theme="light"] main {
+    background-color: #1a1a1a !important;
+}
+
+/* Ensure step numbers are visible */
+[data-theme="light"] .steps li::before {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+}

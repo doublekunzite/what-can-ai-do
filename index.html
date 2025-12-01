@@ -3,21 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- CRITICAL: Theme script must be FIRST -->
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-            
-            // Default to dark mode unless user explicitly chose light
-            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
-                document.documentElement.style.backgroundColor = '#1a1a1a';
-            }
-        })();
-    </script>
-    
-    <title>What can AI do?</title>
+    <title>What can I do with AI?</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
@@ -25,7 +11,6 @@
     <main>
         <div id="nav-container"></div>
         
-        <!-- Hero Section -->
         <header class="hero">
             <h1>What can I do with AI?</h1>
             <p class="subtitle">A practical, no-hype guide to understanding and using artificial intelligence</p>
@@ -36,13 +21,11 @@
             </div>
         </header>
         
-        <!-- Why this site exists -->
         <section class="intro-section">
             <h2>Why this site exists</h2>
             <p>AI tools are powerful but often misunderstood. This site helps you think clearly about what AI can and can't do—without marketing fluff or doom-mongering.</p>
         </section>
         
-        <!-- Feature Cards -->
         <section class="features">
             <h2>Start exploring</h2>
             <div class="feature-cards">
@@ -85,7 +68,6 @@
             </div>
         </section>
         
-        <!-- Quick Start Guide -->
         <section class="quick-start">
             <h2>Quick start guide</h2>
             <ol class="steps">
@@ -96,7 +78,6 @@
             </ol>
         </section>
         
-        <!-- Latest Updates -->
         <section class="updates">
             <h2>Recently added</h2>
             <ul>
@@ -106,7 +87,6 @@
             </ul>
         </section>
         
-        <!-- Contribute -->
         <section class="contribute">
             <h2>Contribute</h2>
             <p>This site is open source. Found a useful AI conversation? <a href="https://github.com/deltadash2/what-can-ai-do" target="_blank">Submit it on GitHub</a>.</p>
@@ -119,10 +99,7 @@
     <script src="js/navigation.js"></script>
     
     <script>
-        // Dark mode toggle functionality
         (function() {
-            'use strict';
-            
             const currentTheme = localStorage.getItem('theme') || 'dark';
             if (currentTheme === 'light') {
                 document.body.setAttribute('data-theme', 'light');
@@ -132,13 +109,10 @@
             toggleButton.className = 'theme-toggle';
             toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
             toggleButton.setAttribute('aria-label', 'Toggle theme');
-            
             document.body.insertBefore(toggleButton, document.body.firstChild);
             
-            function toggleTheme() {
-                const isLightMode = document.body.hasAttribute('data-theme') && 
-                                   document.body.getAttribute('data-theme') === 'light';
-                
+            toggleButton.addEventListener('click', function() {
+                const isLightMode = document.body.hasAttribute('data-theme');
                 if (isLightMode) {
                     document.body.removeAttribute('data-theme');
                     localStorage.setItem('theme', 'dark');
@@ -148,9 +122,7 @@
                     localStorage.setItem('theme', 'light');
                     toggleButton.innerHTML = '🌙 Dark Mode';
                 }
-            }
-            
-            toggleButton.addEventListener('click', toggleTheme);
+            });
         })();
     </script>
 </body>
