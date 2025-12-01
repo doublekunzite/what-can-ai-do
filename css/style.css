@@ -10,25 +10,9 @@
     box-sizing: border-box;
 }
 
-/* CSS Variables - Clean Theme System */
+/* CSS Variables - Dark Mode Default */
 :root {
-    /* Light Mode (Default) */
-    --bg-color: #ffffff;
-    --text-color: #222222;
-    --text-secondary: #555555;
-    --border-color: #dddddd;
-    --nav-link-color: #0066cc;
-    --nav-link-hover: #0052a3;
-    --dropdown-bg: #f9f9f9;
-    --dropdown-header-bg: #f5f5f5;
-    --card-bg: #ffffff;
-    --footer-border: #dddddd;
-    --accent-color: #0066cc;
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Dark Mode - Applied when data-theme="dark" */
-[data-theme="dark"] {
+    /* DARK MODE (Default) */
     --bg-color: #1a1a1a;
     --text-color: #e0e0e0;
     --text-secondary: #b0b0b0;
@@ -41,6 +25,22 @@
     --footer-border: #444444;
     --accent-color: #4da6ff;
     --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Light Mode - Applied when data-theme="light" is set */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #222222;
+    --text-secondary: #555555;
+    --border-color: #dddddd;
+    --nav-link-color: #0066cc;
+    --nav-link-hover: #0052a3;
+    --dropdown-bg: #f9f9f9;
+    --dropdown-header-bg: #f5f5f5;
+    --card-bg: #ffffff;
+    --footer-border: #dddddd;
+    --accent-color: #0066cc;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Base Styles */
@@ -207,13 +207,12 @@ details.nested-dropdown[open] > summary.nested-header::before {
 .data-table th,
 .data-table td {
     padding: 0.6em 0.5em;
-    border: 1px solid var(--table-border);
+    border: 1px solid var(--border-color);
     vertical-align: top;
 }
 
 .data-table th {
-    background-color: var(--table-header-bg);
-    color: var(--table-header-text);
+    background-color: var(--dropdown-header-bg);
     font-weight: 600;
 }
 
@@ -230,7 +229,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
 .code-content pre {
     margin: 0;
     padding: 1em;
-    background-color: var(--code-bg);
+    background-color: var(--dropdown-header-bg);
     border-radius: 3px;
     font-size: 0.9em;
     line-height: 1.4;
@@ -392,8 +391,8 @@ details.nested-dropdown[open] > summary.nested-header::before {
 
 /* AI Output Box */
 .ai-output-box {
-    background-color: var(--ai-output-bg);
-    border: 1px solid var(--ai-output-border);
+    background-color: var(--dropdown-header-bg);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 1.2em;
     margin: 1.5em 0;

@@ -99,7 +99,7 @@
     <script src="js/navigation.js"></script>
     
     <script>
-    // Dark mode toggle functionality - FIXED
+    // Dark mode toggle functionality - FIXED VERSION
     (function() {
         'use strict';
         
@@ -107,6 +107,7 @@
         const savedTheme = localStorage.getItem('theme');
         
         // Apply dark mode by default (no attribute = dark mode)
+        // Only add attribute if user explicitly chose light mode
         if (savedTheme === 'light') {
             document.body.setAttribute('data-theme', 'light');
         }
@@ -114,15 +115,15 @@
         // Create and insert the toggle button
         const toggleButton = document.createElement('button');
         toggleButton.className = 'theme-toggle';
+        toggleButton.setAttribute('aria-label', 'Toggle theme');
         
-        // Set button text based on current theme
+        // Set initial button text
         function updateButtonText() {
             const isLightMode = document.body.hasAttribute('data-theme');
             toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
         }
         
         updateButtonText();
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
         
         // Insert at the beginning of body
         document.body.insertBefore(toggleButton, document.body.firstChild);
