@@ -1403,3 +1403,91 @@ footer {
 [data-theme="light"] footer {
     border-color: #444;
 }
+
+/* ============================================================================
+   INDEX PAGE DARK MODE FIXES - Comprehensive
+   ============================================================================ */
+
+/* Force all text to be light in dark mode with maximum specificity */
+[data-theme="light"] body,
+[data-theme="light"] main,
+[data-theme="light"] section,
+[data-theme="light"] div,
+[data-theme="light"] p,
+[data-theme="light"] li,
+[data-theme="light"] span,
+[data-theme="light"] small,
+[data-theme="light"] footer {
+    color: #e0e0e0 !important;
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+    color: #ffffff !important;
+}
+
+/* Specific fixes for subtitle */
+[data-theme="light"] .subtitle {
+    color: #b0b0b0 !important;
+}
+
+/* Fix links */
+[data-theme="light"] a {
+    color: #66b3ff !important;
+}
+
+[data-theme="light"] a:hover {
+    color: #99ccff !important;
+}
+
+/* Fix feature card text */
+[data-theme="light"] .feature-card p,
+[data-theme="light"] .feature-card small {
+    color: #e0e0e0 !important;
+}
+
+/* Fix feature card title */
+[data-theme="light"] .feature-card h3 {
+    color: #66b3ff !important;
+}
+
+/* Fix steps */
+[data-theme="light"] .steps li {
+    color: #e0e0e0 !important;
+}
+
+/* Fix updates section */
+[data-theme="light"] .updates li {
+    color: #e0e0e0 !important;
+}
+
+/* Fix contribute section */
+[data-theme="light"] .contribute p {
+    color: #e0e0e0 !important;
+}
+
+/* Fix footer */
+[data-theme="light"] footer p,
+[data-theme="light"] footer a {
+    color: #b0b0b0 !important;
+}
+
+/* Ensure step numbers are visible */
+[data-theme="light"] .steps li::before {
+    background: #0066cc !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 2px #333 !important;
+}
+
+/* Fix borders in dark mode */
+[data-theme="light"] .feature-card {
+    border-color: #444 !important;
+}
+
+[data-theme="light"] .feature-card:hover {
+    border-color: #0066cc !important;
+}
