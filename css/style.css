@@ -554,3 +554,113 @@ footer {
         align-items: center;
     }
 }
+
+/* Prompt Builder Specific Fixes */
+.step-box {
+    background-color: var(--dropdown-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1em 0;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.step-box:hover {
+    border-color: var(--nav-link-color);
+    box-shadow: var(--shadow);
+}
+
+.step-box.editable {
+    cursor: text;
+    border-style: dashed;
+}
+
+.step-box.editable:hover {
+    background-color: var(--dropdown-header-bg);
+}
+
+.step-content {
+    margin-right: 80px; /* Space for buttons */
+    min-height: 60px;
+    outline: none;
+}
+
+.step-actions {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    display: flex;
+    gap: 0.5em;
+}
+
+.btn-x, .btn-copy {
+    background: var(--dropdown-header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.4em 0.8em;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.2s;
+}
+
+.btn-x:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-copy:hover {
+    background: var(--nav-link-color);
+    color: white;
+    border-color: var(--nav-link-color);
+}
+
+/* Conversation flow container */
+.conversation-flow {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    display: none; /* Hidden by default */
+}
+
+.conversation-flow.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Prompt selector buttons */
+.prompt-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    margin: 1.5em 0;
+}
+
+.prompt-btn {
+    padding: 1em;
+    background: var(--dropdown-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.prompt-btn:hover {
+    border-color: var(--nav-link-color);
+    transform: translateY(-2px);
+}
+
+.prompt-btn.active {
+    background: var(--nav-link-color);
+    color: white;
+    border-color: var(--nav-link-color);
+}
