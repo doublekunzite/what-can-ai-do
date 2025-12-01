@@ -1,7 +1,5 @@
-/* 
- * MINIMALIST STYLESHEET - Fixed Dark Mode
- * No external fonts, no frameworks, no dependencies
- */
+/* MINIMALIST STYLESHEET - Fixed Dark Mode */
+/* No external fonts, no frameworks, no dependencies */
 
 /* Reset */
 * {
@@ -53,35 +51,7 @@ body {
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-color);
-    font-weight: 600;
-}
-
-h1 {
-    font-size: 2.5em;
-    margin: 0 0 0.5em 0;
-}
-
-h2 {
-    margin: 2em 0 0.5em 0;
-    font-size: 1.8em;
-}
-
-.subtitle {
-    font-size: 1.2em;
-    color: var(--text-secondary);
-    margin-bottom: 2em;
-}
-
-p, li {
-    margin-bottom: 1em;
-}
-
-ol {
-    padding-left: 1.5em;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 /* Navigation */
@@ -238,7 +208,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     word-wrap: break-word;
 }
 
-/* Theme Toggle */
+/* Theme Toggle - Fixed positioning */
 .theme-toggle {
     position: fixed;
     top: 20px;

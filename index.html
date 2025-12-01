@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What can I do with AI?</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <title>What can AI do?</title>
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Add this script to the head to prevent flash of unstyled content -->
+    <script>
+        // Immediately apply theme before page renders
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+            // If no theme is saved, default to dark (by not setting data-theme)
+        })();
+    </script>
 </head>
 <body>
     <main>
@@ -96,58 +109,11 @@
             <p>Last updated: December 1, 2024 | <a href="https://github.com/deltadash2/what-can-ai-do" target="_blank">View source on GitHub</a></p>
         </footer>
     </main>
-    <script src="js/navigation.js"></script>
-    
-    <script>
-    // Dark mode toggle functionality - FIXED VERSION
-    (function() {
-        'use strict';
-        
-        // Check for saved theme preference or default to dark mode
-        const savedTheme = localStorage.getItem('theme');
-        
-        // Apply dark mode by default (no attribute = dark mode)
-        // Only add attribute if user explicitly chose light mode
-        if (savedTheme === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-        }
-        
-        // Create and insert the toggle button
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'theme-toggle';
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        
-        // Set initial button text
-        function updateButtonText() {
-            const isLightMode = document.body.hasAttribute('data-theme');
-            toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
-        }
-        
-        updateButtonText();
-        
-        // Insert at the beginning of body
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-        
-        // Toggle function
-        function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme');
-            
-            if (isLightMode) {
-                // Switch to dark mode
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                // Switch to light mode
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-            
-            updateButtonText();
-        }
-        
-        // Add click listener
-        toggleButton.addEventListener('click', toggleTheme);
-    })();
-</script>
+	
+	<!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+	
+    <script src="js/theme.js"></script>
+	<script src="js/navigation.js"></script>
 </body>
 </html>
