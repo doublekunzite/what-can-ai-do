@@ -664,3 +664,177 @@ footer {
     color: white;
     border-color: var(--nav-link-color);
 }
+
+/* PROMPT BUILDER STYLES - Add to end of styles.css */
+
+.builder-section {
+    margin: 2em 0;
+}
+
+.parameter-inputs {
+    background-color: var(--dropdown-header-bg);
+    padding: 1.5em;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin: 1.5em 0;
+}
+
+.parameter-inputs label {
+    display: block;
+    margin-bottom: 1em;
+    font-weight: 600;
+}
+
+.parameter-inputs input,
+.parameter-inputs select {
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 0.5em;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.parameter-inputs input:focus,
+.parameter-inputs select:focus {
+    border-color: var(--nav-link-color);
+    outline: none;
+}
+
+.builder-template {
+    display: block;
+}
+
+.builder-template.hidden {
+    display: none;
+}
+
+.builder-template h2 {
+    margin-top: 0;
+}
+
+.conversation-flow {
+    margin: 1.5em 0;
+}
+
+.builder-step {
+    margin: 1em 0;
+}
+
+.step-box {
+    background-color: var(--dropdown-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.step-box.editable {
+    cursor: text;
+    border-style: dashed;
+}
+
+.step-box.editable:hover {
+    border-color: var(--nav-link-color);
+    box-shadow: var(--shadow);
+}
+
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
+.step-header h4 {
+    margin: 0;
+    flex: 1;
+    padding-right: 1em;
+}
+
+.step-actions {
+    display: flex;
+    gap: 0.5em;
+}
+
+.step-content {
+    margin: 0;
+    padding: 1em;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.5;
+    outline: none;
+}
+
+.step-content:focus {
+    border-color: var(--nav-link-color);
+    background-color: var(--bg-color);
+}
+
+.step-controls {
+    margin: 1.5em 0;
+}
+
+.add-step-btn {
+    background-color: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.75em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.add-step-btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--nav-link-hover);
+}
+
+.builder-actions {
+    margin: 2em 0;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--footer-border);
+}
+
+.filter-btn.secondary {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 2px solid var(--nav-link-color);
+}
+
+.filter-btn.secondary:hover {
+    background: var(--nav-link-color);
+    color: white;
+}
+
+/* Button styles */
+.btn-x, .btn-copy {
+    background: var(--dropdown-header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.4em 0.8em;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+    color: var(--text-color);
+}
+
+.btn-x:hover {
+    background: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.btn-copy:hover {
+    background: var(--nav-link-color);
+    color: white;
+    border-color: var(--nav-link-color);
+}

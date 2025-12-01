@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Builder - What can AI do?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    
+    <!-- Use absolute path for GitHub Pages -->
     <link rel="stylesheet" href="css/style.css?v=2">
+    
+    <!-- CRITICAL: Apply theme BEFORE page renders -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
+            // ONLY apply light theme if explicitly saved - default to dark
             if (savedTheme === 'light') {
                 document.documentElement.setAttribute('data-theme', 'light');
             }
@@ -15,87 +21,176 @@
     </script>
 </head>
 <body>
+    <!-- Theme toggle - will be positioned by CSS -->
     <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="use-cases.html">Explore Uses</a></li>
-            <li><a href="prompts.html">Prompts</a></li>
-            <li><a href="prompt-builder.html">Prompt Builder</a></li>
-            <li><a href="risks.html">Learn the Risks</a></li>
-            <li><a href="compare.html">Compare Models</a></li>
-            <li><a href="faq.html">Common Concerns</a></li>
-        </ul>
-    </nav>
+    <!-- Navigation will be injected here by navigation.js -->
+    <div id="nav-container"></div>
 
     <main>
-        <h1>30-Minute Study Session Builder</h1>
-        <p class="subtitle">Create a structured learning workflow with an AI tutor.</p>
-
-        <!-- Prompt Selector -->
-        <div class="prompt-selector">
-            <button class="prompt-btn active" data-flow="study-session-flow">Study Session</button>
-            <button class="prompt-btn" data-flow="writing-flow">Writing Assistant</button>
-            <button class="prompt-btn" data-flow="coding-flow">Code Review</button>
-            <button class="prompt-btn" data-flow="brainstorming-flow">Brainstorming</button>
-        </div>
-
-        <!-- Study Session Flow (default) -->
-        <div id="study-session-flow" class="conversation-flow active">
-            <div class="step-box editable">
-                <div class="step-content">I need to study {{subject}} at a {{level}} level. First, create a concise study guide that covers the key concepts I must understand. Include 3-5 main topics with brief descriptions.</div>
-                <div class="step-actions">
-                    <button class="btn-copy">Copy</button>
-                    <button class="btn-x">×</button>
+        <h1>Prompt Builder</h1>
+        <p class="subtitle">Create structured, multi-step AI conversations for common tasks.</p>
+        
+        <section class="intro-section">
+            <p>Instead of crafting individual prompts, build complete AI workflows. Each template provides a series of prompts designed to work together for a specific goal—like having an AI tutor, research assistant, or creative partner.</p>
+            <p>Click a category below, customize the parameters, then copy the entire conversation flow. You can edit any prompt content, add new steps, or remove steps to fit your exact needs.</p>
+        </section>
+        
+        <section class="builder-section">
+            <!-- Category Selection -->
+            <div class="filter-controls">
+                <h3>Choose Your Goal:</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="study">📚 Study Session</button>
+                    <button class="filter-btn" data-category="research">🔬 Research Project</button>
+                    <button class="filter-btn" data-category="write">✍️ Content Creation</button>
+                    <button class="filter-btn" data-category="solve">🧩 Problem Solving</button>
+                    <button class="filter-btn" data-category="code">💻 Code Project</button>
+                    <button class="filter-btn" data-category="analyze">📊 Data Analysis</button>
+                    <button class="filter-btn" data-category="website">🌐 Build a Website</button>
                 </div>
             </div>
             
-            <div class="step-box editable">
-                <div class="step-content">Based on the study guide you just provided, generate 10 practice questions about {{subject}}. Mix question types: 4 definition/fact-based, 3 application problems, and 3 "explain in your own words" prompts. Don't provide the answers yet—I'll answer them first.</div>
-                <div class="step-actions">
-                    <button class="btn-copy">Copy</button>
-                    <button class="btn-x">×</button>
+            <!-- Dynamic Builder Interface -->
+            <div id="builder-content">
+                <!-- Study Session Template (Default) -->
+                <div class="builder-template" id="study-template">
+                    <h2>30-Minute Study Session Builder</h2>
+                    <p>Create a structured learning workflow with an AI tutor.</p>
+                    
+                    <div class="parameter-inputs">
+                        <label>
+                            <strong>Subject:</strong>
+                            <input type="text" id="study-subject" placeholder="e.g., Mitosis and Meiosis" value="Mitosis and Meiosis">
+                        </label>
+                        <label>
+                            <strong>Your level:</strong>
+                            <select id="study-level">
+                                <option value="high school">High School</option>
+                                <option value="college">College</option>
+                                <option value="graduate">Graduate</option>
+                                <option value="casual">Casual Learner</option>
+                            </select>
+                        </label>
+                        <label>
+                            <strong>Time available:</strong>
+                            <select id="study-duration">
+                                <option value="15">15 minutes</option>
+                                <option value="30" selected>30 minutes</option>
+                                <option value="60">60 minutes</option>
+                            </select>
+                        </label>
+                    </div>
+                    
+                    <div class="conversation-flow" id="study-flow">
+                        <h3>Conversation Flow:</h3>
+                        <!-- Steps will be dynamically generated here -->
+                    </div>
+                    
+                    <div class="step-controls">
+                        <button class="add-step-btn" onclick="addStep('study')" title="Add new step">+ Add Step</button>
+                    </div>
+                    
+                    <div class="builder-actions">
+                        <button class="filter-btn" onclick="copyAllPrompts('study')" style="margin-right: 1em;">
+                            📋 Copy Complete Flow
+                        </button>
+                        <button class="filter-btn secondary" onclick="resetTemplate('study')">
+                            🔄 Reset Template
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Website Builder Template -->
+                <div class="builder-template hidden" id="website-template">
+                    <h2>Website Building Guide</h2>
+                    <p>Build a basic static website using GitHub Pages and simple tools.</p>
+                    
+                    <div class="parameter-inputs">
+                        <label>
+                            <strong>Website name:</strong>
+                            <input type="text" id="website-name" placeholder="e.g., My Portfolio" value="My Personal Site">
+                        </label>
+                        <label>
+                            <strong>Purpose:</strong>
+                            <select id="website-purpose">
+                                <option value="personal">Personal Blog/Portfolio</option>
+                                <option value="project">Project Documentation</option>
+                                <option value="business">Small Business</option>
+                                <option value="education">Educational Resource</option>
+                            </select>
+                        </label>
+                        <label>
+                            <strong>Pages needed:</strong>
+                            <select id="website-pages">
+                                <option value="1-2">1-2 pages</option>
+                                <option value="3-4" selected>3-4 pages</option>
+                                <option value="5+">5+ pages</option>
+                            </select>
+                        </label>
+                    </div>
+                    
+                    <div class="conversation-flow" id="website-flow">
+                        <h3>Conversation Flow:</h3>
+                        <!-- Steps will be dynamically generated -->
+                    </div>
+                    
+                    <div class="step-controls">
+                        <button class="add-step-btn" onclick="addStep('website')" title="Add new step">+ Add Step</button>
+                    </div>
+                    
+                    <div class="builder-actions">
+                        <button class="filter-btn" onclick="copyAllPrompts('website')" style="margin-right: 1em;">
+                            📋 Copy Complete Flow
+                        </button>
+                        <button class="filter-btn secondary" onclick="resetTemplate('website')">
+                            🔄 Reset Template
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Other templates would go here, hidden by default -->
+                <div class="builder-template hidden" id="research-template">
+                    <h2>Research Project Builder</h2>
+                    <p>Systematically research and synthesize information on any topic.</p>
+                    
+                    <div class="parameter-inputs">
+                        <label>
+                            <strong>Research topic:</strong>
+                            <input type="text" id="research-topic" placeholder="e.g., Climate adaptation strategies" value="Climate adaptation strategies">
+                        </label>
+                        <label>
+                            <strong>Number of sources:</strong>
+                            <input type="number" id="research-sources" placeholder="e.g., 15" value="15" min="5" max="50">
+                        </label>
+                    </div>
+                    
+                    <div class="conversation-flow" id="research-flow">
+                        <h3>Conversation Flow:</h3>
+                    </div>
+                    
+                    <div class="step-controls">
+                        <button class="add-step-btn" onclick="addStep('research')" title="Add new step">+ Add Step</button>
+                    </div>
+                    
+                    <div class="builder-actions">
+                        <button class="filter-btn" onclick="copyAllPrompts('research')" style="margin-right: 1em;">
+                            📋 Copy Complete Flow
+                        </button>
+                        <button class="filter-btn secondary" onclick="resetTemplate('research')">
+                            🔄 Reset Template
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Other flows (hidden by default) -->
-        <div id="writing-flow" class="conversation-flow">
-            <div class="step-box editable">
-                <div class="step-content">Act as a writing coach. Help me outline a blog post about {{topic}} for {{audience}}. Provide a clear structure with 3-5 main sections.</div>
-                <div class="step-actions">
-                    <button class="btn-copy">Copy</button>
-                    <button class="btn-x">×</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="coding-flow" class="conversation-flow">
-            <div class="step-box editable">
-                <div class="step-content">Review my {{language}} code for best practices and potential bugs. Focus on: 1) Performance optimization 2) Security vulnerabilities 3) Code readability.</div>
-                <div class="step-actions">
-                    <button class="btn-copy">Copy</button>
-                    <button class="btn-x">×</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="brainstorming-flow" class="conversation-flow">
-            <div class="step-box editable">
-                <div class="step-content">Help me brainstorm ideas for {{project}}. For each idea, provide: 1) Brief description 2) Potential benefits 3) Challenges to consider.</div>
-                <div class="step-actions">
-                    <button class="btn-copy">Copy</button>
-                    <button class="btn-x">×</button>
-                </div>
-            </div>
-        </div>
+        </section>
+        
+        <footer>
+            <p><a href="index.html">← Back to Home</a></p>
+        </footer>
     </main>
 
-    <footer>
-        <p>© 2024 What Can AI Do | <a href="https://github.com/deltadash2/what-can-ai-do">GitHub</a></p>
-    </footer>
-
+    <!-- Load all scripts -->
     <script src="/what-can-ai-do/js/navigation.js"></script>
     <script src="/what-can-ai-do/js/theme.js"></script>
     <script src="/what-can-ai-do/js/prompt-builder.js"></script>
