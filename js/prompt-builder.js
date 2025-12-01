@@ -1,6 +1,6 @@
 // Prompt Builder - Complete Functionality
 (function() {
-    // Template definitions
+    // Template definitions with ALL steps for each category
     const templates = {
         study: [
             {
@@ -54,6 +54,10 @@
             {
                 title: "Step 3: Synthesis",
                 content: "Based on these sources about \"{{topic}}\", create a synthesis matrix:\n- 3 main schools of thought or approaches\n- 2 areas of consensus across sources\n- 3 major debates or disagreements\n- 4 gaps in current research"
+            },
+            {
+                title: "Step 4: Outline & Draft",
+                content: "Create a detailed outline for my research report on \"{{topic}}\".\n\nInclude:\n1. Executive summary structure\n2. Main sections with key points\n3. Data visualization suggestions\n4. References format\n\nThen help me draft the introduction section."
             }
         ],
         write: [
@@ -68,6 +72,10 @@
             {
                 title: "Step 3: Review & Improve",
                 content: "Review this draft and provide detailed feedback: [PASTE YOUR DRAFT HERE]\n\nEvaluate for:\n1. Clarity and coherence (is the message clear?)\n2. Engagement (will {{audience}} care?)\n3. Accuracy (are facts correct and well-supported?)\n4. Style (is the tone consistent and appropriate?)\n\nProvide specific suggestions for improvement."
+            },
+            {
+                title: "Step 4: Polish & Finalize",
+                content: "Now help me create the final version:\n1. Apply all suggested improvements\n2. Optimize the headline/title for engagement\n3. Strengthen the opening and conclusion\n4. Ensure consistent voice and tone\n5. Add any missing transitions or examples"
             }
         ],
         solve: [
@@ -114,23 +122,38 @@
         ]
     };
 
-    // Initialize flow
+    // DOM Ready check
+    function ready(fn) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    // Initialize flow with proper timing
     function initializeFlow(category) {
-        const flowContainer = document.getElementById(category + '-flow');
-        const steps = templates[category] || [];
-        
-        // Clear existing steps
-        flowContainer.innerHTML = '<h3>Conversation Flow:</h3>';
-        
-        // Add steps
-        steps.forEach((step, index) => {
-            createStepElement(category, step, index);
+        ready(() => {
+            const flowContainer = document.getElementById(category + '-flow');
+            if (!flowContainer) return;
+            
+            const steps = templates[category] || [];
+            
+            // Clear existing steps (keep the h3)
+            const existingSteps = flowContainer.querySelectorAll('.builder-step');
+            existingSteps.forEach(s => s.remove());
+            
+            // Add steps
+            steps.forEach((step, index) => {
+                createStepElement(category, step, index);
+            });
         });
     }
 
     // Create step element
     function createStepElement(category, step, index) {
         const flowContainer = document.getElementById(category + '-flow');
+        if (!flowContainer) return;
         
         const stepWrapper = document.createElement('div');
         stepWrapper.className = 'builder-step';
@@ -158,7 +181,7 @@
         copyBtn.addEventListener('click', () => copyPromptByIndex(category, index));
         deleteBtn.addEventListener('click', () => deleteStep(category, index));
         
-        // Update placeholders
+        // Initial placeholder update
         updatePlaceholders(category);
     }
     
@@ -212,55 +235,57 @@
     
     // Update all placeholders
     function updatePlaceholders(category) {
-        const template = document.getElementById(category + '-template');
-        if (!template) return;
-        
-        let params = {};
-        switch(category) {
-            case 'study':
-                params.subject = document.getElementById('study-subject')?.value || 'the subject';
-                params.level = document.getElementById('study-level')?.value || 'college';
-                params.duration = document.getElementById('study-duration')?.value || '30';
-                break;
-            case 'research':
-                params.topic = document.getElementById('research-topic')?.value || 'the topic';
-                params.sources = document.getElementById('research-sources')?.value || '15';
-                break;
-            case 'website':
-                params['website-name'] = document.getElementById('website-name')?.value || 'my website';
-                params['website-purpose'] = document.getElementById('website-purpose')?.value || 'personal';
-                params['website-pages'] = document.getElementById('website-pages')?.value || '3-4';
-                break;
-            case 'write':
-                params['content-type'] = document.getElementById('write-type')?.value || 'a blog post';
-                params.topic = document.getElementById('write-topic')?.value || 'the topic';
-                params.audience = document.getElementById('write-audience')?.value || 'general readers';
-                params['word-count'] = document.getElementById('write-count')?.value || '800';
-                break;
-            case 'solve':
-                params['problem-description'] = document.getElementById('solve-problem')?.value || 'this problem';
-                break;
-            case 'code':
-                params['project-description'] = document.getElementById('code-project')?.value || 'this project';
-                params.language = document.getElementById('code-language')?.value || 'Python';
-                break;
-            case 'analyze':
-                params['dataset-description'] = document.getElementById('analyze-dataset')?.value || 'this dataset';
-                break;
-        }
-        
-        // Update all step content with placeholders
-        const steps = templates[category] || [];
-        steps.forEach((step, index) => {
-            const contentEl = document.querySelector(`[data-step-index="${index}"]`);
-            if (contentEl) {
-                let content = step.content;
-                Object.keys(params).forEach(key => {
-                    const regex = new RegExp(`{{${key}}}`, 'g');
-                    content = content.replace(regex, params[key]);
-                });
-                contentEl.textContent = content;
+        ready(() => {
+            const template = document.getElementById(category + '-template');
+            if (!template) return;
+            
+            let params = {};
+            switch(category) {
+                case 'study':
+                    params.subject = document.getElementById('study-subject')?.value || 'the subject';
+                    params.level = document.getElementById('study-level')?.value || 'college';
+                    params.duration = document.getElementById('study-duration')?.value || '30';
+                    break;
+                case 'research':
+                    params.topic = document.getElementById('research-topic')?.value || 'the topic';
+                    params.sources = document.getElementById('research-sources')?.value || '15';
+                    break;
+                case 'website':
+                    params['website-name'] = document.getElementById('website-name')?.value || 'my website';
+                    params['website-purpose'] = document.getElementById('website-purpose')?.value || 'personal';
+                    params['website-pages'] = document.getElementById('website-pages')?.value || '3-4';
+                    break;
+                case 'write':
+                    params['content-type'] = document.getElementById('write-type')?.value || 'a blog post';
+                    params.topic = document.getElementById('write-topic')?.value || 'the topic';
+                    params.audience = document.getElementById('write-audience')?.value || 'general readers';
+                    params['word-count'] = document.getElementById('write-count')?.value || '800';
+                    break;
+                case 'solve':
+                    params['problem-description'] = document.getElementById('solve-problem')?.value || 'this problem';
+                    break;
+                case 'code':
+                    params['project-description'] = document.getElementById('code-project')?.value || 'this project';
+                    params.language = document.getElementById('code-language')?.value || 'Python';
+                    break;
+                case 'analyze':
+                    params['dataset-description'] = document.getElementById('analyze-dataset')?.value || 'this dataset';
+                    break;
             }
+            
+            // Update all step content with placeholders
+            const steps = templates[category] || [];
+            steps.forEach((step, index) => {
+                const contentEl = document.querySelector(`[data-step-index="${index}"]`);
+                if (contentEl) {
+                    let content = step.content;
+                    Object.keys(params).forEach(key => {
+                        const regex = new RegExp(`{{${key}}}`, 'g');
+                        content = content.replace(regex, params[key]);
+                    });
+                    contentEl.textContent = content;
+                }
+            });
         });
     }
     
@@ -279,7 +304,6 @@
     // Reset template
     window.resetTemplate = function(category) {
         if (confirm('Reset all steps to default? This will lose any customizations.')) {
-            // Reset templates to default (simplified - in production, load from defaults)
             initializeFlow(category);
             updatePlaceholders(category);
         }
@@ -287,8 +311,13 @@
     
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
+        console.log('Prompt Builder: Initializing...');
+        
         // Initialize first category
-        initializeFlow('study');
+        setTimeout(() => {
+            initializeFlow('study');
+            updatePlaceholders('study');
+        }, 100);
         
         // Category switching
         const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
@@ -300,6 +329,8 @@
                 
                 // Show/hide templates
                 const category = button.dataset.category;
+                console.log('Switching to category:', category);
+                
                 document.querySelectorAll('.builder-template').forEach(template => {
                     if (template.id === category + '-template') {
                         template.classList.remove('hidden');
@@ -309,7 +340,8 @@
                 });
                 
                 // Initialize flow if not already done
-                if (templates[category] && document.getElementById(category + '-flow').children.length <= 1) {
+                const flowContainer = document.getElementById(category + '-flow');
+                if (flowContainer && flowContainer.children.length <= 1) {
                     initializeFlow(category);
                 }
                 updatePlaceholders(category);
@@ -317,10 +349,12 @@
         });
         
         // Parameter input listeners
-        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select').forEach(input => {
+        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
             input.addEventListener('input', () => {
-                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
-                updatePlaceholders(activeCategory);
+                const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
+                if (activeCategory) {
+                    updatePlaceholders(activeCategory);
+                }
             });
         });
     });
