@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<!-- Tells browsers this is modern HTML5 - no quirks mode -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- CRITICAL: Theme script must be FIRST to prevent flash -->
+    <!-- CRITICAL: Theme script must be FIRST -->
     <script>
-        // Apply theme immediately before page renders
         (function() {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-            
-            // Default to dark mode unless user explicitly chose light
             if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
                 document.documentElement.style.backgroundColor = '#1a1a1a';
             }
@@ -20,88 +16,140 @@
     </script>
     
     <title>What can AI do?</title>
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
-
 <body>
-    <!-- Main container - everything goes inside this -->
     <main>
-        <!-- Site title -->
-        <h1>What can I do with AI?</h1>
-        
-        <!-- Brief description of the site -->
-        <p class="subtitle">A practical, no-hype guide to understanding and using artificial intelligence.</p>
-        
-        <!-- Navigation to other pages -->
-        <!-- These are simple, safe links to your other HTML files -->
         <div id="nav-container"></div>
         
-        <!-- Introduction section -->
-        <section>
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>What can I do with AI?</h1>
+            <p class="subtitle">A practical, no-hype guide to understanding and using artificial intelligence</p>
+            
+            <div class="cta-buttons">
+                <a href="use-cases.html" class="cta-primary">Explore AI Uses →</a>
+                <a href="prompts.html" class="cta-secondary">See Real Examples →</a>
+            </div>
+        </header>
+        
+        <!-- Why this site exists -->
+        <section class="intro-section">
             <h2>Why this site exists</h2>
             <p>AI tools are powerful but often misunderstood. This site helps you think clearly about what AI can and can't do—without marketing fluff or doom-mongering.</p>
         </section>
         
-        <!-- Quick start guide -->
-        <section>
-            <h2>Start here</h2>
-            <ol>
-                <li>Read <a href="use-cases.html">use cases</a> to get ideas</li>
-                <li>Understand the <a href="risks.html">risks and challenges</a></li>
-                <li>See how different <a href="compare.html">models compare</a></li>
-                <li>Get answers to <a href="faq.html">common objections</a></li>
+        <!-- Feature Cards -->
+        <section class="features">
+            <h2>Start exploring</h2>
+            <div class="feature-cards">
+                
+                <div class="feature-card" onclick="window.location.href='use-cases.html'">
+                    <div class="card-icon">💡</div>
+                    <h3>Explore Uses</h3>
+                    <p>Get concrete ideas for using AI in creative, analytical, and professional work</p>
+                    <small>Over 50+ use cases with sample prompts</small>
+                </div>
+                
+                <div class="feature-card" onclick="window.location.href='prompts.html'">
+                    <div class="card-icon">💬</div>
+                    <h3>Prompt Repository</h3>
+                    <p>View real AI conversations with techniques, results, and lessons learned</p>
+                    <small>See how "How I Made This Website" was created</small>
+                </div>
+                
+                <div class="feature-card" onclick="window.location.href='risks.html'">
+                    <div class="card-icon">⚠️</div>
+                    <h3>Learn the Risks</h3>
+                    <p>Understand privacy, accuracy, bias, and other challenges</p>
+                    <small>Practical mitigation strategies</small>
+                </div>
+                
+                <div class="feature-card" onclick="window.location.href='compare.html'">
+                    <div class="card-icon">📊</div>
+                    <h3>Compare Models</h3>
+                    <p>See how different AI models perform on real tasks</p>
+                    <small>GPT-4, Claude, Kimi, Gemini comparisons</small>
+                </div>
+                
+                <div class="feature-card" onclick="window.location.href='faq.html'">
+                    <div class="card-icon">❓</div>
+                    <h3>Common Concerns</h3>
+                    <p>Address objections like "Isn't AI bad?" with nuanced answers</p>
+                    <small>AI ethics, job impact, environmental concerns</small>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Quick Start Guide -->
+        <section class="quick-start">
+            <h2>Quick start guide</h2>
+            <ol class="steps">
+                <li><a href="use-cases.html">Browse use cases</a> to get inspiration for your own projects</li>
+                <li><a href="prompts.html">Study real conversations</a> to learn effective prompting techniques</li>
+                <li><a href="compare.html">Compare models</a> to choose the right tool for your needs</li>
+                <li><a href="risks.html">Understand the risks</a> before using AI for important work</li>
             </ol>
         </section>
         
-        <!-- Footer with minimal info -->
+        <!-- Latest Updates -->
+        <section class="updates">
+            <h2>Recently added</h2>
+            <ul>
+                <li><strong>Dec 1, 2024:</strong> Added "How I Made This Website" case study showing the entire AI-assisted development process</li>
+                <li><strong>Nov 26, 2024:</strong> Expanded prompt repository with 15+ new real-world examples</li>
+                <li><strong>Nov 24, 2024:</strong> Added dark mode support and interactive filters</li>
+            </ul>
+        </section>
+        
+        <!-- Contribute -->
+        <section class="contribute">
+            <h2>Contribute</h2>
+            <p>This site is open source. Found a useful AI conversation? <a href="https://github.com/deltadash2/what-can-ai-do" target="_blank">Submit it on GitHub</a>.</p>
+        </section>
+        
         <footer>
-            <p>Educational resource. No tracking, no ads, no data collection.</p>
-            <p>Last updated: November 2025</p>
+            <p>Last updated: December 1, 2024 | <a href="https://github.com/deltadash2/what-can-ai-do" target="_blank">View source on GitHub</a></p>
         </footer>
     </main>
-	<script src="js/navigation.js"></script>
-	<script>
-    // Dark mode toggle functionality - SIMPLIFIED and more robust
-    (function() {
-        'use strict';
-        
-        // Check for saved theme preference or default to dark mode
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        
-        // Apply the theme on page load
-        if (currentTheme === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-        }
-        
-        // Create and insert the toggle button
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'theme-toggle';
-        toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        
-        // Insert at the beginning of body so it appears immediately
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-        
-        // Toggle function
-        function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme') && 
-                               document.body.getAttribute('data-theme') === 'light';
+    <script src="js/navigation.js"></script>
+    
+    <script>
+        // Dark mode toggle functionality
+        (function() {
+            'use strict';
             
-            if (isLightMode) {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
-                toggleButton.innerHTML = '☀️ Light Mode';
-            } else {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            if (currentTheme === 'light') {
                 document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                toggleButton.innerHTML = '🌙 Dark Mode';
             }
-        }
-        
-        // Add click listener
-        toggleButton.addEventListener('click', toggleTheme);
-    })();
+            
+            const toggleButton = document.createElement('button');
+            toggleButton.className = 'theme-toggle';
+            toggleButton.innerHTML = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+            toggleButton.setAttribute('aria-label', 'Toggle theme');
+            
+            document.body.insertBefore(toggleButton, document.body.firstChild);
+            
+            function toggleTheme() {
+                const isLightMode = document.body.hasAttribute('data-theme') && 
+                                   document.body.getAttribute('data-theme') === 'light';
+                
+                if (isLightMode) {
+                    document.body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'dark');
+                    toggleButton.innerHTML = '☀️ Light Mode';
+                } else {
+                    document.body.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    toggleButton.innerHTML = '🌙 Dark Mode';
+                }
+            }
+            
+            toggleButton.addEventListener('click', toggleTheme);
+        })();
     </script>
 </body>
 </html>
