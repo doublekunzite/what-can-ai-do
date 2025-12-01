@@ -1491,3 +1491,106 @@ footer {
 [data-theme="light"] .feature-card:hover {
     border-color: #0066cc !important;
 }
+
+/* ============================================================================
+   DARK MODE FIXES - INDEX PAGE
+   ============================================================================ */
+
+/* Base dark mode text color */
+[data-theme="light"],
+[data-theme="light"] body,
+[data-theme="light"] main {
+    color: #e0e0e0 !important;
+    background-color: #1a1a1a !important;
+}
+
+/* Force all headings to white in dark mode */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+    color: #ffffff !important;
+}
+
+/* Specific subtitle color */
+[data-theme="light"] .subtitle {
+    color: #b0b0b0 !important;
+}
+
+/* Paragraph text */
+[data-theme="light"] p,
+[data-theme="light"] li {
+    color: #e0e0e0 !important;
+}
+
+/* Links */
+[data-theme="light"] a {
+    color: #66b3ff !important;
+}
+
+[data-theme="light"] a:hover {
+    color: #99ccff !important;
+}
+
+/* Feature cards */
+[data-theme="light"] .feature-card {
+    background-color: #2a2a2a !important;
+    border-color: #444 !important;
+}
+
+[data-theme="light"] .feature-card h3 {
+    color: #66b3ff !important;
+}
+
+[data-theme="light"] .feature-card p,
+[data-theme="light"] .feature-card small {
+    color: #e0e0e0 !important;
+}
+
+/* Sections */
+[data-theme="light"] .intro-section,
+[data-theme="light"] .quick-start,
+[data-theme="light"] .contribute {
+    background-color: #2a2a2a !important;
+}
+
+/* Steps */
+[data-theme="light"] .steps li {
+    color: #e0e0e0 !important;
+}
+
+[data-theme="light"] .steps li::before {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 2px #333 !important;
+}
+
+/* Updates */
+[data-theme="light"] .updates li {
+    color: #e0e0e0 !important;
+    border-color: #444 !important;
+}
+
+/* Footer */
+[data-theme="light"] footer {
+    border-color: #444 !important;
+}
+
+[data-theme="light"] footer p,
+[data-theme="light"] footer a {
+    color: #b0b0b0 !important;
+}
+
+/* Buttons */
+[data-theme="light"] .cta-primary {
+    background-color: #0066cc !important;
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .cta-secondary {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-color: #0066cc !important;
+}

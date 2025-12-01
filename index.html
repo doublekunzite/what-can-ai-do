@@ -9,6 +9,8 @@
         (function() {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            
+            // Default to dark mode unless user explicitly chose light
             if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
                 document.documentElement.style.backgroundColor = '#1a1a1a';
             }
