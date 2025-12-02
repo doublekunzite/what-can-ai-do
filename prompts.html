@@ -11,7 +11,6 @@
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
             
-            // Default to dark mode unless user explicitly chose light
             if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
                 document.documentElement.style.backgroundColor = '#1a1a1a';
             }
@@ -19,13 +18,80 @@
     </script>
     
     <title>Prompt Repo - What can AI do?</title>
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
+    
+    <!-- Inline CSS fixes -->
+    <style>
+        /* Fix text wrapping in code blocks */
+        .code-block {
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            overflow-x: auto !important;
+            max-width: 100% !important;
+        }
+        
+        /* Fix bullet point collision in nested dropdowns */
+        .nested-content ul {
+            padding-left: 1.5em !important;
+            margin-left: 0 !important;
+        }
+        
+        .nested-content li {
+            margin-left: 0 !important;
+            padding-left: 0.5em !important;
+        }
+        
+        /* Ensure proper header hierarchy in responses */
+        .response-box h4 {
+            font-size: 1.2em !important;
+            margin: 1em 0 0.5em 0 !important;
+            font-weight: 600 !important;
+        }
+        
+        .response-box h5 {
+            font-size: 1.1em !important;
+            margin: 0.8em 0 0.4em 0 !important;
+            font-weight: 600 !important;
+        }
+        
+        .response-box p {
+            font-size: 1em !important;
+            margin: 0.5em 0 !important;
+        }
+        
+        /* Share button styling */
+        .share-btn {
+            background: var(--nav-link-color);
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 0.5em;
+            transition: background 0.3s;
+        }
+        
+        .share-btn:hover {
+            background: var(--nav-link-hover);
+        }
+        
+        /* Highlight shared prompt temporarily */
+        @keyframes highlight {
+            from { background-color: var(--nav-link-color); }
+            to { background-color: transparent; }
+        }
+        
+        .prompt-highlight {
+            animation: highlight 2s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <main>
         <div id="nav-container"></div>
-		<h1>Prompts & Conversations</h1>
+        <h1>Prompts & Conversations</h1>
         <p class="subtitle">Real AI conversations showing techniques, results, and lessons learned.</p>
         
         <!-- Interactive Filter Controls -->
@@ -55,7 +121,7 @@
             <h2>How to Use This Section</h2>
             <p>Each entry below shows a real conversation with AI, including:</p>
             <ul>
-                <li>The exact prompt used (click copy button to grab it)</li>
+                <li>The exact prompt used</li>
                 <li>AI's response (with formatting preserved)</li>
                 <li>Key takeaways or techniques demonstrated</li>
                 <li>Community ratings and tags for filtering</li>
@@ -184,7 +250,7 @@ a page titled something like "Isn't AI bad?" which will address common talking p
                             </div>
                         </div>
                     </details>`,
-                takeaways: [] // Empty for this conversation
+                takeaways: []
             },
             {
                 id: 2,
@@ -238,9 +304,9 @@ a page titled something like "Isn't AI bad?" which will address common talking p
                     <p><strong>Headline:</strong> The Last Project Management Tool Your Remote Team Will Ever Need</p>
                     <p><strong>Sub-headline:</strong> Proven workflows that adapt to your team—not the other way around. Onboard in minutes, not weeks.</p>`,
                 takeaways: [
-                    "Role-definition establishes expertise and tone",
+                    "Role-definition sets tone and expertise level",
                     "Specific constraints (3 variations) prevent generic output",
-                    "Benefit-focused framing resonates more than feature lists"
+                    "Benefit-focused framing resonates more than features"
                 ]
             },
             {
@@ -282,7 +348,59 @@ plt.show()</code></pre>
         // Store user ratings in localStorage
         const userRatings = JSON.parse(localStorage.getItem('userRatings') || '{}');
         
-        // Updated render function with special handling for id: 1
+        // Share prompt function
+        function sharePrompt(convId) {
+            const url = window.location.origin + window.location.pathname + '#prompt-' + convId;
+            navigator.clipboard.writeText(url).then(() => {
+                // Visual feedback
+                const btn = document.querySelector(`[data-id="${convId}"] .share-btn`);
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Link Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Scroll to and expand a specific prompt
+        function scrollToPrompt(convId) {
+            const promptElement = document.querySelector(`[data-id="${convId}"]`);
+            if (promptElement) {
+                // Expand the dropdown
+                if (promptElement.tagName === 'DETAILS') {
+                    promptElement.open = true;
+                }
+                
+                // Add highlight effect
+                promptElement.classList.add('prompt-highlight');
+                
+                // Scroll to element
+                setTimeout(() => {
+                    promptElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 100);
+                
+                // Remove highlight after animation
+                setTimeout(() => {
+                    promptElement.classList.remove('prompt-highlight');
+                }, 2000);
+            }
+        }
+        
+        // Check URL hash on page load
+        function checkUrlHash() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#prompt-')) {
+                const convId = parseInt(hash.replace('#prompt-', ''));
+                setTimeout(() => {
+                    scrollToPrompt(convId);
+                }, 500); // Wait for content to render
+            }
+        }
+        
+        // Updated render function with share buttons
         function renderConversations(filteredConversations = conversations) {
             const container = document.getElementById('conversationsContainer');
             
@@ -293,16 +411,16 @@ plt.show()</code></pre>
             
             container.innerHTML = filteredConversations.map(conv => {
                 const userRating = userRatings[conv.id] || 0;
-                const avgRating = conv.rating;
+                const avgRating = conv.rating || 0;
                 
                 // Special handling for "How I Made This Website"
                 if (conv.id === 1) {
                     return `
-                        <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                        <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
                             <summary class="dropdown-header">
                                 <h2>Conversation: ${conv.title}</h2>
                                 <div class="conversation-meta">
-                                    <p style="margin: 0; font-size: 0.9em; color: #666;">
+                                    <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
                                         Date: ${conv.date} | Model: ${conv.modelName}
                                     </p>
                                     <div class="tags">
@@ -316,14 +434,14 @@ plt.show()</code></pre>
                                                 ★
                                             </span>
                                         `).join('')}
-                                        <small style="margin-left: 0.5em; color: #666;">
+                                        <small style="margin-left: 0.5em; color: var(--text-secondary);">
                                             (${avgRating.toFixed(1)})
                                         </small>
+                                        <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
                                     </div>
                                 </div>
                             </summary>
                             <div class="dropdown-content">
-                                <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
                                 ${conv.response}
                             </div>
                         </details>
@@ -332,11 +450,11 @@ plt.show()</code></pre>
                 
                 // Standard rendering for other conversations
                 return `
-                    <details class="main-dropdown" data-id="${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                    <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
                         <summary class="dropdown-header">
                             <h2>Conversation: ${conv.title}</h2>
                             <div class="conversation-meta">
-                                <p style="margin: 0; font-size: 0.9em; color: #666;">
+                                <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
                                     Date: ${conv.date} | Model: ${conv.modelName}
                                 </p>
                                 <div class="tags">
@@ -350,14 +468,14 @@ plt.show()</code></pre>
                                             ★
                                         </span>
                                     `).join('')}
-                                    <small style="margin-left: 0.5em; color: #666;">
+                                    <small style="margin-left: 0.5em; color: var(--text-secondary);">
                                         (${avgRating.toFixed(1)})
                                     </small>
+                                    <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
                                 </div>
                             </div>
                         </summary>
                         <div class="dropdown-content">
-                            <button class="copy-btn" onclick="copyPrompt(${conv.id})">Copy Prompt</button>
                             
                             <h3>Prompt:</h3>
                             <div class="prompt-box" style="padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
@@ -378,22 +496,8 @@ plt.show()</code></pre>
                 `;
             }).join('');
             
-            // Re-attach event listeners for ratings
+            // Re-attach event listeners
             attachRatingListeners();
-        }
-        
-        // Copy prompt function
-        function copyPrompt(convId) {
-            const conv = conversations.find(c => c.id === convId);
-            navigator.clipboard.writeText(conv.prompt).then(() => {
-                // Visual feedback
-                const btn = document.querySelector(`[data-id="${convId}"] .copy-btn`);
-                const originalText = btn.textContent;
-                btn.textContent = 'Copied!';
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 1500);
-            });
         }
         
         // Attach rating listeners
@@ -413,9 +517,13 @@ plt.show()</code></pre>
                             s.classList.toggle('active', i < rating);
                         });
                         
-                        // Update average rating (in a real app, this would update the backend)
-                        conversations.find(c => c.id === convId).rating = 
-                            (conversations.find(c => c.id === convId).rating + rating) / 2;
+                        // Update average rating
+                        const conv = conversations.find(c => c.id === convId);
+                        if (conv.rating) {
+                            conv.rating = (conv.rating + rating) / 2;
+                        } else {
+                            conv.rating = rating;
+                        }
                     });
                 });
             });
@@ -461,59 +569,16 @@ plt.show()</code></pre>
             });
         });
         
-        // Initial render
+        // Listen for hash changes
+        window.addEventListener('hashchange', checkUrlHash);
+        
+        // Initial render and hash check
         renderConversations();
+        checkUrlHash();
     </script>
-    
-    <script>
-    // Dark mode toggle functionality - FIXED
-    (function() {
-        'use strict';
-        
-        // Check for saved theme preference or default to dark mode
-        const savedTheme = localStorage.getItem('theme');
-        
-        // Apply dark mode by default (no attribute = dark mode)
-        if (savedTheme === 'light') {
-            document.body.setAttribute('data-theme', 'light');
-        }
-        
-        // Create and insert the toggle button
-        const toggleButton = document.createElement('button');
-        toggleButton.className = 'theme-toggle';
-        
-        // Set button text based on current theme
-        function updateButtonText() {
-            const isLightMode = document.body.hasAttribute('data-theme');
-            toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
-        }
-        
-        updateButtonText();
-        toggleButton.setAttribute('aria-label', 'Toggle theme');
-        
-        // Insert at the beginning of body
-        document.body.insertBefore(toggleButton, document.body.firstChild);
-        
-        // Toggle function
-        function toggleTheme() {
-            const isLightMode = document.body.hasAttribute('data-theme');
-            
-            if (isLightMode) {
-                // Switch to dark mode
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                // Switch to light mode
-                document.body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            }
-            
-            updateButtonText();
-        }
-        
-        // Add click listener
-        toggleButton.addEventListener('click', toggleTheme);
-    })();
-</script>
+    <!-- Load navigation and theme only (prompt builder is inline below) -->
+    <script src="/what-can-ai-do/js/navigation.js"></script>
+    <script src="/what-can-ai-do/js/theme.js"></script>
+	
 </body>
 </html>
