@@ -665,7 +665,7 @@ footer {
     border-color: var(--nav-link-color);
 }
 
-/* PROMPT BUILDER STYLES - Add to end of styles.css */
+/* PROMPT BUILDER STYLES */
 
 .builder-section {
     margin: 2em 0;
@@ -753,6 +753,7 @@ footer {
     margin: 0;
     flex: 1;
     padding-right: 1em;
+    color: var(--text-color);
 }
 
 .step-actions {
@@ -839,51 +840,149 @@ footer {
     border-color: var(--nav-link-color);
 }
 
-/* Add to the END of css/style.css */
-/* PROMPT BUILDER VISIBILITY FIX */
+/* ========== NEW INTEGRATED STYLES ========== */
 
-/* Force steps to be visible */
+/* Remove outer yellow box/border from goal steps */
+.goal-steps, 
+.steps-wrapper,
+[data-goal] .step-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Force step header text to be white in dark mode, dark in light mode */
+.step-header h4,
+.step-title,
+.goal-steps h3,
+.builder-step h4 {
+    color: var(--text-color) !important;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+/* Ensure step content has proper contrast */
+.step-content {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Form input alignment fixes - make labels and inputs stack properly */
+.form-group,
+.input-container,
+.problem-desc-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin-bottom: 1.5em !important;
+    width: 100% !important;
+}
+
+.form-group label,
+.input-container label,
+.problem-description-label {
+    display: block !important;
+    margin-bottom: 0.5em !important;
+    margin-top: 0 !important;
+    font-weight: 600 !important;
+    color: var(--text-color) !important;
+    align-self: flex-start !important;
+}
+
+/* Style the actual input boxes */
+.form-group input,
+.form-group textarea,
+.form-group select,
+.input-container input,
+.input-container textarea,
+.input-container select {
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0.8em !important;
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    font-size: 1em !important;
+}
+
+/* Fix for problem description specific containers */
+[data-goal="problem-solving"] .problem-desc-container,
+[data-goal="data-analysis"] .problem-desc-container,
+[data-goal="code-project"] .problem-desc-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5em !important;
+}
+
+[data-goal="problem-solving"] .problem-description-label,
+[data-goal="data-analysis"] .problem-description-label,
+[data-goal="code-project"] .problem-description-label {
+    margin-bottom: 0.5em !important;
+}
+
+/* Remove any yellow borders or backgrounds */
+.yellow-box,
+.steps-border,
+.goal-steps,
+.step-wrapper {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Ensure proper spacing in parameter inputs */
+.parameter-inputs .form-group,
+.parameter-inputs .input-container {
+    margin-bottom: 1.5em !important;
+}
+
+/* Make sure labels appear above inputs consistently */
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+}
+
+/* Specific alignment for problem description fields */
+.problem-description-input,
+.problem-desc-input {
+    width: 100% !important;
+    min-height: 100px !important;
+    margin-top: 0.5em !important;
+}
+
+/* ========== END NEW INTEGRATED STYLES ========== */
+
+/* Remove problematic debug styles that were forcing visibility */
 .builder-step,
 .step-box,
 .step-box * {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    height: auto !important;
-    width: auto !important;
+    display: revert !important;
+    visibility: revert !important;
+    opacity: revert !important;
+    height: revert !important;
+    width: revert !important;
 }
 
-/* Force conversation flow to be visible */
 .conversation-flow {
-    display: block !important;
-    min-height: 200px !important;
+    display: revert !important;
+    min-height: revert !important;
 }
 
-/* Highlight steps with bright colors for debugging */
-.builder-step {
-    border: 3px solid #ff0000 !important; /* Red border */
-    background: #ffff00 !important; /* Yellow background */
-    margin: 20px !important;
-    padding: 20px !important;
-}
-
-.step-header h4 {
-    color: #000 !important; /* Black text */
-    font-size: 18px !important;
-}
-
-.step-content {
-    color: #000 !important; /* Black text */
-    background: #fff !important; /* White background */
-    padding: 10px !important;
-    margin-top: 10px !important;
-}
-
-/* Remove any display:none from templates */
-.builder-template {
-    display: block !important;
-}
-
+/* Keep only the hidden class for templates */
 .builder-template.hidden {
-    display: none !important; /* Keep this one */
+    display: none !important;
+}
+
+/* Remove aggressive debug borders */
+.builder-step {
+    border: revert !important;
+    background: revert !important;
+    margin: revert !important;
+    padding: revert !important;
 }

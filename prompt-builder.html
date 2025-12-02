@@ -351,26 +351,78 @@
 <script>
 console.log('🚀 PROMPT BUILDER: Final version loading...');
 
+// Dynamic study template generator based on time available
+function getStudyTemplate(duration) {
+    const durationMap = {
+        '15': [
+            {
+                title: "Step 1: Quick Foundation (5 min)",
+                content: "I need a rapid overview of {{subject}} at a {{level}} level.\nCreate a focused study guide with the 3 most critical concepts only.\nKeep descriptions brief but clear."
+            },
+            {
+                title: "Step 2: Targeted Practice (7 min)",
+                content: "Generate 5 targeted practice questions covering these key concepts.\nMix: 2 definition-based and 3 quick application questions.\nKeep them concise for rapid review."
+            },
+            {
+                title: "Step 3: Quick Check (3 min)",
+                content: "Here's my brief attempt at answering: [PASTE YOUR ANSWERS HERE]\n\nQuickly check my answers and highlight only the most important corrections.\nFocus on the single biggest misconception I might have."
+            }
+        ],
+        '30': [
+            {
+                title: "Step 1: Foundation (5 min)",
+                content: "I need to study {{subject}} at a {{level}} level.\nFirst, create a concise study guide that covers the key concepts I must understand.\nInclude 3-5 main topics with brief descriptions."
+            },
+            {
+                title: "Step 2: Active Recall (10 min)",
+                content: "Based on the study guide you just provided, generate 10 practice questions about {{subject}}.\nMix question types: 4 definition/fact-based, 3 application problems, and 3 \"explain in your own words\" prompts.\nDon't provide the answers yet—I'll answer them first."
+            },
+            {
+                title: "Step 3: Check & Explain (10 min)",
+                content: "Here are my answers to your questions: [PASTE YOUR ANSWERS HERE]\n\nGrade my responses and explain what I got wrong or could improve.\nFor each incorrect answer, provide a detailed explanation and a mnemonic to help me remember it."
+            },
+            {
+                title: "Step 4: Connection & Application (5 min)",
+                content: "Now connect {{subject}} to real-world applications or current research.\nGive me 2 examples of how this is used in practice, and 1 area where our understanding is still developing."
+            }
+        ],
+        '60': [
+            {
+                title: "Step 1: Deep Foundation (12 min)",
+                content: "I need an in-depth study of {{subject}} at a {{level}} level.\nCreate a comprehensive study guide with 6-8 key concepts.\nInclude detailed explanations, examples, and common misconceptions for each topic."
+            },
+            {
+                title: "Step 2: Varied Practice (18 min)",
+                content: "Based on the study guide, generate 15 practice questions of varying difficulty.\nInclude: 5 definition/fact-based, 5 application problems, and 5 critical thinking questions.\nDon't provide the answers yet."
+            },
+            {
+                title: "Step 3: Detailed Feedback (20 min)",
+                content: "Here are my answers: [PASTE YOUR ANSWERS HERE]\n\nProvide detailed feedback on each answer, identify knowledge gaps, and suggest specific resources for further study.\nCreate a follow-up study plan based on my weaknesses."
+            },
+            {
+                title: "Step 4: Advanced Application (10 min)",
+                content: "Create 5 challenging scenario-based questions that require synthesizing multiple concepts from {{subject}}.\nThese should test deeper understanding and problem-solving skills."
+            }
+        ]
+    };
+    
+    return durationMap[duration] || durationMap['30']; // Default to 30 min
+}
+
+// Update study template based on dropdown
+function updateStudyTemplate() {
+    const duration = document.getElementById('study-duration')?.value || '30';
+    if (templates.study.original === undefined) {
+        // Store original template for reset functionality
+        templates.study.original = templates.study;
+    }
+    templates.study = getStudyTemplate(duration);
+    console.log('📚 Study template updated for', duration, 'minutes');
+}
+
 // Template definitions - ALL CATEGORIES
 const templates = {
-    study: [
-        {
-            title: "Step 1: Foundation (5 min)",
-            content: "I need to study {{subject}} at a {{level}} level.\nFirst, create a concise study guide that covers the key concepts I must understand.\nInclude 3-5 main topics with brief descriptions."
-        },
-        {
-            title: "Step 2: Active Recall (10 min)",
-            content: "Based on the study guide you just provided, generate 10 practice questions about {{subject}}.\nMix question types: 4 definition/fact-based, 3 application problems, and 3 \"explain in your own words\" prompts.\nDon't provide the answers yet—I'll answer them first."
-        },
-        {
-            title: "Step 3: Check & Explain (10 min)",
-            content: "Here are my answers to your questions: [PASTE YOUR ANSWERS HERE]\n\nGrade my responses and explain what I got wrong or could improve.\nFor each incorrect answer, provide a detailed explanation and a mnemonic to help me remember it."
-        },
-        {
-            title: "Step 4: Connection & Application (5 min)",
-            content: "Now connect {{subject}} to real-world applications or current research.\nGive me 2 examples of how this is used in practice, and 1 area where our understanding is still developing."
-        }
-    ],
+    study: getStudyTemplate('30'), // Initialize with default 30 min
     research: [
         {
             title: "Step 1: Research Plan",
@@ -478,6 +530,8 @@ function initWhenReady() {
     const flow = document.getElementById('study-flow');
     if (flow) {
         console.log('✅ DOM ready, initializing...');
+        // Initialize study template based on current dropdown value
+        updateStudyTemplate();
         renderSteps('study');
         bindEvents();
     } else {
@@ -510,7 +564,7 @@ function createStepElement(category, step, index) {
     const div = document.createElement('div');
     div.className = 'builder-step';
     div.innerHTML = `
-        <div class="step-box editable" style="border: 2px solid var(--border-color); margin: 1.5em 0; padding: 1.5em; background: #2a1a3a; border-radius: 12px; position: relative;">
+        <div class="step-box editable" style="border: 2px solid var(--border-color); margin: 1.5em 0; padding: 1.5em; background: var(--card-bg); border-radius: 12px; position: relative;">
             <!-- X button in top right -->
             <button class="btn-x" style="position: absolute; top: 1em; right: 1em; background: #dc3545; color: white; border: none; padding: 0.4em 0.8em; cursor: pointer; border-radius: 4px; font-size: 0.9em; font-weight: bold;">×</button>
             
@@ -518,7 +572,7 @@ function createStepElement(category, step, index) {
                 <h4 style="margin: 0; color: var(--text-color); font-weight: 600; font-size: 1.1em; letter-spacing: 0.5px;">${step.title}</h4>
             </div>
             
-            <pre class="step-content" contenteditable="true" data-step-content="${index}" style="margin: 0; padding: 1.5em; background: var(--card-bg); border: 1px solid var(--border-color); white-space: pre-wrap; font-family: 'Courier New', monospace; color: var(--text-color); border-radius: 6px; line-height: 1.6; min-height: 100px;">${step.content}</pre>
+            <pre class="step-content" contenteditable="true" data-step-content="${index}" style="margin: 0; padding: 1.5em; background: var(--dropdown-header-bg); border: 1px solid var(--border-color); white-space: pre-wrap; font-family: 'Courier New', monospace; color: var(--text-color); border-radius: 6px; line-height: 1.6; min-height: 100px;">${step.content}</pre>
             
             <!-- Copy button in bottom right -->
             <div style="margin-top: 1em; text-align: right;">
@@ -571,6 +625,19 @@ function bindEvents() {
             }
         });
     });
+    
+    // Study duration dropdown - DYNAMIC TEMPLATE CHANGER
+    const studyDurationDropdown = document.getElementById('study-duration');
+    if (studyDurationDropdown) {
+        studyDurationDropdown.addEventListener('change', () => {
+            console.log('📅 Study duration changed');
+            updateStudyTemplate();
+            const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
+            if (activeCategory === 'study') {
+                renderSteps('study');
+            }
+        });
+    }
 }
 
 // Update placeholders - FIXED TO WORK ON ALL CATEGORIES
@@ -675,6 +742,9 @@ window.copyAllPrompts = function(category) {
 
 window.resetTemplate = function(category) {
     if (confirm('Reset all steps to default?')) {
+        if (category === 'study') {
+            updateStudyTemplate(); // Reset to current duration template
+        }
         renderSteps(category);
     }
 };
