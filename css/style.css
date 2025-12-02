@@ -986,3 +986,81 @@ label {
     margin: revert !important;
     padding: revert !important;
 }
+
+/* ========== GLOBAL DROPDOWN CONTENT FIXES ========== */
+
+/* Fix text wrapping in <pre> tags inside dropdowns to prevent overflow */
+.dropdown-content pre,
+.nested-content pre,
+.prompt-box pre,
+.response-box pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+}
+
+/* Add consistent spacing between paragraphs in dropdown content */
+.dropdown-content p,
+.nested-content p,
+.ai-output-box p,
+.prompt-box p,
+.response-box p {
+    margin-bottom: 1em !important;
+    line-height: 1.6;
+}
+
+/* Remove bottom margin from last paragraph to avoid extra space */
+.dropdown-content p:last-child,
+.nested-content p:last-child,
+.ai-output-box p:last-child,
+.prompt-box p:last-child,
+.response-box p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Ensure nested lists have proper padding (bullet point fix) */
+.nested-content ul,
+.dropdown-content ul {
+    padding-left: 1.5em !important;
+    margin-left: 0 !important;
+    margin-top: 0.5em !important;
+    margin-bottom: 1em !important;
+}
+
+.nested-content li,
+.dropdown-content li {
+    margin-left: 0 !important;
+    padding-left: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* Ensure consistent header spacing in dropdown content */
+.dropdown-content h4,
+.nested-content h4,
+.ai-output-box h4,
+.response-box h4 {
+    font-size: 1.2em !important;
+    margin: 1.2em 0 0.6em 0 !important;
+    font-weight: 600 !important;
+}
+
+.dropdown-content h5,
+.nested-content h5,
+.response-box h5 {
+    font-size: 1.1em !important;
+    margin: 1em 0 0.5em 0 !important;
+    font-weight: 600 !important;
+}
+
+/* Code block styling with proper wrapping */
+.code-block,
+pre.code-block {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+}
+
+/* ========== END GLOBAL DROPDOWN FIXES ========== */

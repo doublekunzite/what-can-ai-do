@@ -21,72 +21,34 @@
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
     
-    <!-- Inline CSS fixes -->
     <style>
-        /* Fix text wrapping in code blocks */
-        .code-block {
-            white-space: pre-wrap !important;
-            word-wrap: break-word !important;
-            overflow-x: auto !important;
-            max-width: 100% !important;
-        }
-        
-        /* Fix bullet point collision in nested dropdowns */
-        .nested-content ul {
-            padding-left: 1.5em !important;
-            margin-left: 0 !important;
-        }
-        
-        .nested-content li {
-            margin-left: 0 !important;
-            padding-left: 0.5em !important;
-        }
-        
-        /* Ensure proper header hierarchy in responses */
-        .response-box h4 {
-            font-size: 1.2em !important;
-            margin: 1em 0 0.5em 0 !important;
-            font-weight: 600 !important;
-        }
-        
-        .response-box h5 {
-            font-size: 1.1em !important;
-            margin: 0.8em 0 0.4em 0 !important;
-            font-weight: 600 !important;
-        }
-        
-        .response-box p {
-            font-size: 1em !important;
-            margin: 0.5em 0 !important;
-        }
-        
-        /* Share button styling */
-        .share-btn {
-            background: var(--nav-link-color);
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin-left: 0.5em;
-            transition: background 0.3s;
-        }
-        
-        .share-btn:hover {
-            background: var(--nav-link-hover);
-        }
-        
-        /* Highlight shared prompt temporarily */
-        @keyframes highlight {
-            from { background-color: var(--nav-link-color); }
-            to { background-color: transparent; }
-        }
-        
-        .prompt-highlight {
-            animation: highlight 2s ease-in-out;
-        }
-    </style>
+    /* Share button styling */
+    .share-btn {
+        background: var(--nav-link-color);
+        color: white;
+        border: none;
+        padding: 0.5em 1em;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin-left: 0.5em;
+        transition: background 0.3s;
+    }
+    
+    .share-btn:hover {
+        background: var(--nav-link-hover);
+    }
+    
+    /* Highlight shared prompt temporarily */
+    @keyframes highlight {
+        from { background-color: var(--nav-link-color); }
+        to { background-color: transparent; }
+    }
+    
+    .prompt-highlight {
+        animation: highlight 2s ease-in-out;
+    }
+</style>
 </head>
 <body>
     <main>
