@@ -18,37 +18,71 @@
     </script>
     
     <title>Prompt Repo - What can AI do?</title>
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
     
+    <!-- Inline CSS fixes -->
     <style>
-    /* Share button styling */
-    .share-btn {
-        background: var(--nav-link-color);
-        color: white;
-        border: none;
-        padding: 0.5em 1em;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.9em;
-        margin-left: 0.5em;
-        transition: background 0.3s;
-    }
-    
-    .share-btn:hover {
-        background: var(--nav-link-hover);
-    }
-    
-    /* Highlight shared prompt temporarily */
-    @keyframes highlight {
-        from { background-color: var(--nav-link-color); }
-        to { background-color: transparent; }
-    }
-    
-    .prompt-highlight {
-        animation: highlight 2s ease-in-out;
-    }
-</style>
+        /* Share button styling */
+        .share-btn {
+            background: var(--nav-link-color);
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 0.5em;
+            transition: background 0.3s;
+        }
+        
+        .share-btn:hover {
+            background: var(--nav-link-hover);
+        }
+        
+        /* Highlight shared prompt temporarily */
+        @keyframes highlight {
+            from { background-color: var(--nav-link-color); }
+            to { background-color: transparent; }
+        }
+        
+        .prompt-highlight {
+            animation: highlight 2s ease-in-out;
+        }
+
+        /* Additional fixes for conversation meta layout */
+        .conversation-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 0.5em;
+            gap: 0.5em;
+        }
+
+        .conversation-meta p {
+            margin: 0;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+        }
+
+        .star {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            transition: color 0.2s;
+        }
+
+        .star.active {
+            color: #ffc107;
+        }
+    </style>
 </head>
 <body>
     <main>
@@ -362,7 +396,7 @@ plt.show()</code></pre>
             }
         }
         
-        // Updated render function with share buttons
+        // Updated render function with share buttons (NO INLINE STYLES)
         function renderConversations(filteredConversations = conversations) {
             const container = document.getElementById('conversationsContainer');
             
@@ -382,7 +416,7 @@ plt.show()</code></pre>
                             <summary class="dropdown-header">
                                 <h2>Conversation: ${conv.title}</h2>
                                 <div class="conversation-meta">
-                                    <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
+                                    <p>
                                         Date: ${conv.date} | Model: ${conv.modelName}
                                     </p>
                                     <div class="tags">
@@ -396,7 +430,7 @@ plt.show()</code></pre>
                                                 ★
                                             </span>
                                         `).join('')}
-                                        <small style="margin-left: 0.5em; color: var(--text-secondary);">
+                                        <small>
                                             (${avgRating.toFixed(1)})
                                         </small>
                                         <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
@@ -404,6 +438,11 @@ plt.show()</code></pre>
                                 </div>
                             </summary>
                             <div class="dropdown-content">
+                                <div class="ai-output-box">
+                                    <h4>Background</h4>
+                                    <p>This shows the original conversation that led to creating this entire website. It demonstrates how AI can help plan, structure, and execute a complete project from scratch.</p>
+                                    <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
+                                </div>
                                 ${conv.response}
                             </div>
                         </details>
@@ -416,7 +455,7 @@ plt.show()</code></pre>
                         <summary class="dropdown-header">
                             <h2>Conversation: ${conv.title}</h2>
                             <div class="conversation-meta">
-                                <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
+                                <p>
                                     Date: ${conv.date} | Model: ${conv.modelName}
                                 </p>
                                 <div class="tags">
@@ -430,7 +469,7 @@ plt.show()</code></pre>
                                             ★
                                         </span>
                                     `).join('')}
-                                    <small style="margin-left: 0.5em; color: var(--text-secondary);">
+                                    <small>
                                         (${avgRating.toFixed(1)})
                                     </small>
                                     <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
@@ -438,14 +477,13 @@ plt.show()</code></pre>
                             </div>
                         </summary>
                         <div class="dropdown-content">
-                            
                             <h3>Prompt:</h3>
-                            <div class="prompt-box" style="padding: 1em; border-left: 3px solid #0066cc; margin: 1em 0;">
-                                <pre style="margin: 0; white-space: pre-wrap; font-family: inherit;">${conv.prompt}</pre>
+                            <div class="prompt-box">
+                                <pre>${conv.prompt}</pre>
                             </div>
                             
                             <h3>Response:</h3>
-                            <div class="response-box" style="padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
+                            <div class="response-box">
                                 ${conv.response}
                             </div>
                             
@@ -538,9 +576,56 @@ plt.show()</code></pre>
         renderConversations();
         checkUrlHash();
     </script>
-    <!-- Load navigation and theme only (prompt builder is inline below) -->
-    <script src="/what-can-ai-do/js/navigation.js"></script>
-    <script src="/what-can-ai-do/js/theme.js"></script>
-	
+    
+    <script>
+    // Dark mode toggle functionality - FIXED
+    (function() {
+        'use strict';
+        
+        // Check for saved theme preference or default to dark mode
+        const savedTheme = localStorage.getItem('theme');
+        
+        // Apply dark mode by default (no attribute = dark mode)
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        }
+        
+        // Create and insert the toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'theme-toggle';
+        
+        // Set button text based on current theme
+        function updateButtonText() {
+            const isLightMode = document.body.hasAttribute('data-theme');
+            toggleButton.innerHTML = isLightMode ? '🌙 Dark Mode' : '☀️ Light Mode';
+        }
+        
+        updateButtonText();
+        toggleButton.setAttribute('aria-label', 'Toggle theme');
+        
+        // Insert at the beginning of body
+        document.body.insertBefore(toggleButton, document.body.firstChild);
+        
+        // Toggle function
+        function toggleTheme() {
+            const isLightMode = document.body.hasAttribute('data-theme');
+            
+            if (isLightMode) {
+                // Switch to dark mode
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                // Switch to light mode
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+            
+            updateButtonText();
+        }
+        
+        // Add click listener
+        toggleButton.addEventListener('click', toggleTheme);
+    })();
+    </script>
 </body>
 </html>
