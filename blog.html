@@ -19,148 +19,92 @@
     <title>Blog - What can AI do?</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
+    
+    <style>
+        .blog-list {
+            margin: 2em 0;
+        }
+        
+        .blog-post-item {
+            margin: 2em 0;
+            padding: 1.5em;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .blog-post-item:hover {
+            border-color: var(--nav-link-color);
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
+        }
+        
+        .blog-post-item h2 {
+            margin-top: 0;
+            color: var(--nav-link-color);
+        }
+        
+        .blog-meta {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 1em;
+        }
+        
+        .blog-teaser {
+            margin: 1em 0;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            color: var(--nav-link-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.5em;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <main>
         <div id="nav-container"></div>
         
-        <article class="blog-post">
-            <header>
-                <h1>Use Cases #1: Learning and Creating with AI</h1>
+        <h1>Blog</h1>
+        <p class="subtitle">Deep dives into practical AI applications and techniques</p>
+        
+        <section class="blog-list">
+            <article class="blog-post-item">
+                <h2><a href="blog/use-cases-1.html" class="read-more">Use Cases #1: Learning and Creating with AI</a></h2>
                 <div class="blog-meta">
-                    <time datetime="2024-12-01">December 1, 2024</time>
-                    <span class="author">by AI Assistant</span>
+                    <time datetime="2024-12-01">December 1, 2024</time> | by AI Assistant | 6 min read
                 </div>
-            </header>
+                <div class="blog-teaser">
+                    <p>Beyond searching and summarizing information from various sources far more quickly than a human would be able to, the <em>ways</em> AI is capable of summarizing are very powerful. AIs are now commonly loaded with a sophisticated understanding of how to teach and explain things to humans, and even unprompted they'll regularly offer metaphors and use other teaching tools that break down complex ideas to help you understand them intuitively.</p>
+                    
+                    <p>Learn how to use AI as a teaching assistant, study partner, and creative tool for learning complex concepts like mitosis and meiosis...</p>
+                </div>
+                <a href="blog/use-cases-1.html" class="read-more">Read more →</a>
+            </article>
             
-            <section class="introduction">
-                <p>Beyond searching and summarizing information from various sources far more quickly than a human would be able to, the <em>ways</em> AI is capable of summarizing are very powerful. AIs are now commonly loaded with a sophisticated understanding of how to teach and explain things to humans, and even unprompted they'll regularly offer metaphors and use other teaching tools that break down complex ideas to help you understand them intuitively.</p>
-            </section>
-            
-            <section class="examples">
-                <h2>Practical Examples</h2>
-                
-                <details class="nested-dropdown">
-                    <summary class="nested-header">
-                        <h3>Example 1: Learn to Prompt Effectively</h3>
-                    </summary>
-                    <div class="nested-content">
-                        <p>You're not familiar with how to use AI and want to explore the types of prompts that are possible. Ask the AI how you should prompt it for a particular question or task.</p>
-                        
-                        <p><strong>Sample Prompt:</strong> "If I wanted to [achieve x task] with your help, how should I best prompt you?"</p>
-                        
-                        <p><strong>Real Experience:</strong> I recently asked <em>Kimi</em> how to easily copy and paste entire conversations I had with it while maintaining clean formatting. It responded by giving me a prompt to send it for this exact task.</p>
-                    </div>
-                </details>
-                
-                <details class="nested-dropdown">
-                    <summary class="nested-header">
-                        <h3>Example 2: Learn Complex Science Concepts</h3>
-                    </summary>
-                    <div class="nested-content">
-                        <p>Say you want to understand a difficult or counterintuitive science concept, like time as a fourth dimension. You ask the AI to explain it to you and the level of the explanation is too advanced. You can send it a follow up message asking it to explain the concept using plain language, or to explain it like you're a child—you could even specify the age of the child or the education level you're at.</p>
-                        
-                        <p>You could ask it to explain just one element of the concept at a time, or to use metaphors and explain it intuitively. If it uses a term you're unfamiliar with, ask it to break down to the term.</p>
-                    </div>
-                </details>
-                
-                <details class="nested-dropdown">
-                    <summary class="nested-header">
-                        <h3>Example 3: Create Study Aids</h3>
-                    </summary>
-                    <div class="nested-content">
-                        <p>You're studying for a biology test and you need to memorize the phases of mitosis and meiosis. Ask the AI to help you develop a mnemonic or a series of metaphors to help you with this memorization task. Then use it as a study partner and have it drill you—if you get stuck, ask for a hint.</p>
-                        
-                        <p>Here is some sample output from <em>Kimi K2</em>:</p>
-                        
-                        <h4>Mitosis (PMAT)</h4>
-                        
-                        <p><strong>Classic Acronym Mnemonic:</strong></p>
-                        <ul>
-                            <li><strong>P</strong> lease <strong>M</strong> ake <strong>A</strong> nother <strong>T</strong> aco</li>
-                            <li><strong>P</strong> retty <strong>M</strong> ajestic <strong>A</strong> lbatross <strong>T</strong> akeoff</li>
-                            <li><strong>P</strong> eaceful <strong>M</strong> editation <strong>A</strong> llows <strong>T</strong> ranquility</li>
-                        </ul>
-                        
-                        <p><strong>Metaphor: "The Great Concert Setup"</strong></p>
-                        <ul>
-                            <li><strong>Interphase:</strong> The band members are in their dressing rooms, duplicating their instruments (DNA replication).</li>
-                            <li><strong>Prophase:</strong> Stagehands begin setting up—chromosomes coil up like tangled microphone cables, the nuclear membrane (backstage curtain) starts to dissolve.</li>
-                            <li><strong>Metaphase:</strong> All equipment is aligned perfectly at center stage (the metaphase plate), ready for the big moment.</li>
-                            <li><strong>Anaphase:</strong> The roadies yank the equipment apart to opposite ends of the stage, separating sister chromatids.</li>
-                            <li><strong>Telophase:</strong> Two separate stages begin forming, each with its own curtain (nuclear membrane reforms).</li>
-                        </ul>
-                        
-                        <hr>
-                        
-                        <h4>Meiosis I (PMAT I)</h4>
-                        
-                        <p><strong>Acronym Mnemonic:</strong></p>
-                        <ul>
-                            <li><strong>P</strong> eople <strong>M</strong> eet <strong>A</strong> nd <strong>T</strong> ango (In pairs!)</li>
-                            <li><strong>P</strong> aired <strong>M</strong> atchmakers <strong>A</strong> rrange <strong>T</strong> hreads</li>
-                        </ul>
-                        
-                        <p><strong>Metaphor: "The Chromosome Square Dance"</strong></p>
-                        <ul>
-                            <li><strong>Prophase I:</strong> Chromosomes find their dance partners (homologous pairs) and swap dance moves (crossing over) while holding hands tightly (synapsis).</li>
-                            <li><strong>Metaphase I:</strong> Couples line up at the center, side-by-side, still paired—like partners ready for a paired dance-off.</li>
-                            <li><strong>Anaphase I:</strong> The caller shouts "Separate!" and each <em>couple</em> splits—partners are pulled to opposite sides, but each still has their original outfit (chromatids remain attached).</li>
-                            <li><strong>Telophase I:</strong> Two smaller dance floors appear, each with half the couples.</li>
-                        </ul>
-                        
-                        <hr>
-                        
-                        <h4>Meiosis II (PMAT II)</h4>
-                        
-                        <p><strong>Acronym Mnemonic:</strong></p>
-                        <ul>
-                            <li><strong>P</strong> artners <strong>M</strong> ust <strong>A</strong> lso <strong>T</strong> wirl (Individually!)</li>
-                            <li><strong>P</strong> arted <strong>M</strong> embers <strong>A</strong> lign <strong>T</strong> wice</li>
-                        </ul>
-                        
-                        <p><strong>Metaphor: "The Solo Performance"</strong></p>
-                        <ul>
-                            <li><strong>Prophase II:</strong> No duplication this time—it's like each performer prepares for their solo act without rehearsing.</li>
-                            <li><strong>Metaphase II:</strong> Individual performers line up solo at center stage (like mitosis).</li>
-                            <li><strong>Anaphase II:</strong> The final separation—sister chromatids finally part ways, like twins walking to opposite exits.</li>
-                            <li><strong>Telophase II:</strong> Four separate stages emerge, each with a unique, haploid performer.</li>
-                        </ul>
-                        
-                        <hr>
-                        
-                        <h4>Combined Mnemonic Story: "The Traveling Band"</h4>
-                        <ul>
-                            <li><strong>Interphase:</strong> Four musicians each duplicate their instrument.</li>
-                            <li><strong>Mitosis:</strong> One band splits into two identical bands that tour separately.</li>
-                            <li><strong>Meiosis I:</strong> The original band pairs up (two musicians per pair), swaps musical ideas (crossing over), then splits into two groups <em>by pair</em> (each group has one member from each original duo).</li>
-                            <li><strong>Meiosis II:</strong> Those two groups each split again, separating individual musicians—resulting in four solo artists, each with unique genetic "style."</li>
-                        </ul>
-                        
-                        <hr>
-                        
-                        <h4>Tips for Recall:</h4>
-                        <ul>
-                            <li>Remember <strong>I</strong> before <strong>II</strong>—Meiosis I is about separating <em>pairs</em>, Meiosis II is about separating <em>individuals</em>.</li>
-                            <li><strong>Crossing over = exchanging gifts</strong> only happens in Prophase I.</li>
-                            <li><strong>Mitosis = identical</strong> (makes two identical cells); <strong>Meiosis = half</strong> (makes four unique haploid cells).</li>
-                        </ul>
-                        
-                        <p>Choose whichever metaphor clicks with your learning style—visual, kinesthetic, or story-based—and practice drawing them out!</p>
-                    </div>
-                </details>
-            </section>
-            
-            <footer class="blog-footer">
-                <p><em>This is the first in a series of blog posts exploring practical AI use cases. The examples above demonstrate how AI can transform learning and content creation tasks into more engaging, personalized experiences.</em></p>
-            </footer>
-        </article>
+            <div class="no-results" style="text-align: center; padding: 3em; color: var(--text-secondary); font-style: italic;">
+                More articles coming soon...
+            </div>
+        </section>
+        
+        <section class="contribute">
+            <h2>Want to contribute?</h2>
+            <p>Have an interesting AI use case or tutorial to share? <a href="https://github.com/doublekunzite/what-can-ai-do">Submit a guest post on GitHub</a>.</p>
+        </section>
         
         <footer>
-            <p><a href="index.html">← Back to Home</a></p>
+            <p><a href="prompt-builder.html">→ Start building prompts</a></p>
+            <p><a href="prompts.html">→ Browse prompt repository</a></p>
         </footer>
     </main>
-	
+
     <script src="js/navigation.js"></script>
 	<script src="/what-can-ai-do/js/theme.js"></script>
     
