@@ -1345,3 +1345,19 @@ pre.code-block {
     display: table;
     clear: both;
 }
+
+/* Fix visited link colors for both themes */
+a:visited {
+    color: var(--nav-link-color) !important;
+    opacity: 0.7; /* Slightly dim visited links to distinguish them */
+}
+
+a:visited:hover {
+    opacity: 1; /* Full brightness on hover */
+}
+
+/* Ensure the dimming affect doesn't apply to navigation */
+nav a:visited,
+.site-title:visited {
+    opacity: 1; /* Keep nav and site title at full brightness */
+}
