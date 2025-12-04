@@ -1278,3 +1278,34 @@ pre.code-block {
 }
 
 /* ========== END BLOG STYLES ========== */
+
+
+/* Blog image styling */
+.blog-image {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.blog-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.blog-image figcaption {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Full-width images */
+.blog-image.full-width {
+    margin: 2em -2em;
+}
+
+.blog-image.full-width img {
+    border-radius: 0;
+}
