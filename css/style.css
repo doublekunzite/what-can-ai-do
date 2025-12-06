@@ -51,7 +51,7 @@ body {
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Navigation */
@@ -72,6 +72,22 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
+}
+
+/* Fix visited link colors for both themes */
+a:visited {
+    color: var(--nav-link-color) !important;
+    opacity: 0.7;
+}
+
+a:visited:hover {
+    opacity: 1;
+}
+
+/* Ensure the dimming affect doesn't apply to navigation */
+nav a:visited,
+.site-title:visited {
+    opacity: 1;
 }
 
 /* Footer */
@@ -195,6 +211,12 @@ details.nested-dropdown[open] > summary.nested-header::before {
     font-weight: 600;
 }
 
+/* Bold highest scores in table */
+.highest-score {
+    font-weight: 600;
+    color: var(--nav-link-color);
+}
+
 /* Code Blocks */
 .code-content pre {
     margin: 0;
@@ -208,7 +230,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     word-wrap: break-word;
 }
 
-/* Theme Toggle - Fixed positioning */
+/* Theme Toggle */
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -240,7 +262,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     }
 }
 
-/* Prompt Repository Specific */
+/* Prompt Repository */
 .filter-controls {
     background-color: var(--dropdown-header-bg);
     padding: 1em;
@@ -285,16 +307,6 @@ details.nested-dropdown[open] > summary.nested-header::before {
 .filter-btn.active {
     background: var(--nav-link-color);
     color: white;
-}
-
-.model-select {
-    margin-top: 1em;
-    padding: 0.5em;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: var(--bg-color);
-    color: var(--text-color);
 }
 
 .conversation-meta {
@@ -373,7 +385,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     color: var(--nav-link-color);
 }
 
-/* Index Page Specific */
+/* Index Page */
 .hero {
     text-align: center;
     padding: 3em 0 2em;
@@ -555,732 +567,7 @@ footer {
     }
 }
 
-/* Prompt Builder Specific Fixes */
-.step-box {
-    background-color: var(--dropdown-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1em 0;
-    position: relative;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.step-box:hover {
-    border-color: var(--nav-link-color);
-    box-shadow: var(--shadow);
-}
-
-.step-box.editable {
-    cursor: text;
-    border-style: dashed;
-}
-
-.step-box.editable:hover {
-    background-color: var(--dropdown-header-bg);
-}
-
-.step-content {
-    margin-right: 80px; /* Space for buttons */
-    min-height: 60px;
-    outline: none;
-}
-
-.step-actions {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    display: flex;
-    gap: 0.5em;
-}
-
-.btn-x, .btn-copy {
-    background: var(--dropdown-header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 0.4em 0.8em;
-    cursor: pointer;
-    font-size: 0.8em;
-    transition: all 0.2s;
-}
-
-.btn-x:hover {
-    background: #dc3545;
-    color: white;
-    border-color: #dc3545;
-}
-
-.btn-copy:hover {
-    background: var(--nav-link-color);
-    color: white;
-    border-color: var(--nav-link-color);
-}
-
-/* Conversation flow container */
-.conversation-flow {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1.5em 0;
-    display: none; /* Hidden by default */
-}
-
-.conversation-flow.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Prompt selector buttons */
-.prompt-selector {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1em;
-    margin: 1.5em 0;
-}
-
-.prompt-btn {
-    padding: 1em;
-    background: var(--dropdown-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-}
-
-.prompt-btn:hover {
-    border-color: var(--nav-link-color);
-    transform: translateY(-2px);
-}
-
-.prompt-btn.active {
-    background: var(--nav-link-color);
-    color: white;
-    border-color: var(--nav-link-color);
-}
-
-/* PROMPT BUILDER STYLES */
-
-.builder-section {
-    margin: 2em 0;
-}
-
-.parameter-inputs {
-    background-color: var(--dropdown-header-bg);
-    padding: 1.5em;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    margin: 1.5em 0;
-}
-
-.parameter-inputs label {
-    display: block;
-    margin-bottom: 1em;
-    font-weight: 600;
-}
-
-.parameter-inputs input,
-.parameter-inputs select {
-    width: 100%;
-    padding: 0.8em;
-    margin-top: 0.5em;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-.parameter-inputs input:focus,
-.parameter-inputs select:focus {
-    border-color: var(--nav-link-color);
-    outline: none;
-}
-
-.builder-template {
-    display: block;
-}
-
-.builder-template.hidden {
-    display: none;
-}
-
-.builder-template h2 {
-    margin-top: 0;
-}
-
-.conversation-flow {
-    margin: 1.5em 0;
-}
-
-.builder-step {
-    margin: 1em 0;
-}
-
-.step-box {
-    background-color: var(--dropdown-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    position: relative;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.step-box.editable {
-    cursor: text;
-    border-style: dashed;
-}
-
-.step-box.editable:hover {
-    border-color: var(--nav-link-color);
-    box-shadow: var(--shadow);
-}
-
-.step-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1em;
-}
-
-.step-header h4 {
-    margin: 0;
-    flex: 1;
-    padding-right: 1em;
-    color: var(--text-color);
-}
-
-.step-actions {
-    display: flex;
-    gap: 0.5em;
-}
-
-.step-content {
-    margin: 0;
-    padding: 1em;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    line-height: 1.5;
-    outline: none;
-}
-
-.step-content:focus {
-    border-color: var(--nav-link-color);
-    background-color: var(--bg-color);
-}
-
-.step-controls {
-    margin: 1.5em 0;
-}
-
-.add-step-btn {
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.75em 1.5em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform 0.2s;
-}
-
-.add-step-btn:hover {
-    transform: translateY(-2px);
-    background-color: var(--nav-link-hover);
-}
-
-.builder-actions {
-    margin: 2em 0;
-    padding-top: 1.5em;
-    border-top: 1px solid var(--footer-border);
-}
-
-.filter-btn.secondary {
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: 2px solid var(--nav-link-color);
-}
-
-.filter-btn.secondary:hover {
-    background: var(--nav-link-color);
-    color: white;
-}
-
-/* Button styles */
-.btn-x, .btn-copy {
-    background: var(--dropdown-header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 0.4em 0.8em;
-    cursor: pointer;
-    font-size: 0.85em;
-    transition: all 0.2s;
-    color: var(--text-color);
-}
-
-.btn-x:hover {
-    background: #dc3545;
-    color: white;
-    border-color: #dc3545;
-}
-
-.btn-copy:hover {
-    background: var(--nav-link-color);
-    color: white;
-    border-color: var(--nav-link-color);
-}
-
-/* ========== NEW INTEGRATED STYLES ========== */
-
-/* Remove outer yellow box/border from goal steps */
-.goal-steps, 
-.steps-wrapper,
-[data-goal] .step-container {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Force step header text to be white in dark mode, dark in light mode */
-.step-header h4,
-.step-title,
-.goal-steps h3,
-.builder-step h4 {
-    color: var(--text-color) !important;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-}
-
-/* Ensure step content has proper contrast */
-.step-content {
-    background-color: var(--card-bg) !important;
-    color: var(--text-color) !important;
-    border-color: var(--border-color) !important;
-}
-
-/* Form input alignment fixes - make labels and inputs stack properly */
-.form-group,
-.input-container,
-.problem-desc-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    margin-bottom: 1.5em !important;
-    width: 100% !important;
-}
-
-.form-group label,
-.input-container label,
-.problem-description-label {
-    display: block !important;
-    margin-bottom: 0.5em !important;
-    margin-top: 0 !important;
-    font-weight: 600 !important;
-    color: var(--text-color) !important;
-    align-self: flex-start !important;
-}
-
-/* Style the actual input boxes */
-.form-group input,
-.form-group textarea,
-.form-group select,
-.input-container input,
-.input-container textarea,
-.input-container select {
-    width: 100% !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding: 0.8em !important;
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: 4px !important;
-    font-size: 1em !important;
-}
-
-/* Fix for problem description specific containers */
-[data-goal="problem-solving"] .problem-desc-container,
-[data-goal="data-analysis"] .problem-desc-container,
-[data-goal="code-project"] .problem-desc-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5em !important;
-}
-
-[data-goal="problem-solving"] .problem-description-label,
-[data-goal="data-analysis"] .problem-description-label,
-[data-goal="code-project"] .problem-description-label {
-    margin-bottom: 0.5em !important;
-}
-
-/* Remove any yellow borders or backgrounds */
-.yellow-box,
-.steps-border,
-.goal-steps,
-.step-wrapper {
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-}
-
-/* Ensure proper spacing in parameter inputs */
-.parameter-inputs .form-group,
-.parameter-inputs .input-container {
-    margin-bottom: 1.5em !important;
-}
-
-/* Make sure labels appear above inputs consistently */
-label {
-    display: block;
-    margin-bottom: 0.5em;
-    font-weight: 600;
-}
-
-/* Specific alignment for problem description fields */
-.problem-description-input,
-.problem-desc-input {
-    width: 100% !important;
-    min-height: 100px !important;
-    margin-top: 0.5em !important;
-}
-
-/* ========== END NEW INTEGRATED STYLES ========== */
-
-/* Remove problematic debug styles that were forcing visibility */
-.builder-step,
-.step-box,
-.step-box * {
-    display: revert !important;
-    visibility: revert !important;
-    opacity: revert !important;
-    height: revert !important;
-    width: revert !important;
-}
-
-.conversation-flow {
-    display: revert !important;
-    min-height: revert !important;
-}
-
-/* Keep only the hidden class for templates */
-.builder-template.hidden {
-    display: none !important;
-}
-
-/* Remove aggressive debug borders */
-.builder-step {
-    border: revert !important;
-    background: revert !important;
-    margin: revert !important;
-    padding: revert !important;
-}
-
-/* ========== GLOBAL DROPDOWN CONTENT FIXES ========== */
-
-/* Fix text wrapping in <pre> tags inside dropdowns to prevent overflow */
-.dropdown-content pre,
-.nested-content pre,
-.prompt-box pre,
-.response-box pre {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-x: auto !important;
-    max-width: 100% !important;
-}
-
-/* Add consistent spacing between paragraphs in dropdown content */
-.dropdown-content p,
-.nested-content p,
-.ai-output-box p,
-.prompt-box p,
-.response-box p {
-    margin-bottom: 1em !important;
-    line-height: 1.6;
-}
-
-/* Remove bottom margin from last paragraph to avoid extra space */
-.dropdown-content p:last-child,
-.nested-content p:last-child,
-.ai-output-box p:last-child,
-.prompt-box p:last-child,
-.response-box p:last-child {
-    margin-bottom: 0 !important;
-}
-
-/* Ensure nested lists have proper padding (bullet point fix) */
-.nested-content ul,
-.dropdown-content ul {
-    padding-left: 1.5em !important;
-    margin-left: 0 !important;
-    margin-top: 0.5em !important;
-    margin-bottom: 1em !important;
-}
-
-.nested-content li,
-.dropdown-content li {
-    margin-left: 0 !important;
-    padding-left: 0.5em !important;
-    margin-bottom: 0.5em !important;
-}
-
-/* Ensure consistent header spacing in dropdown content */
-.dropdown-content h4,
-.nested-content h4,
-.ai-output-box h4,
-.response-box h4 {
-    font-size: 1.2em !important;
-    margin: 1.2em 0 0.6em 0 !important;
-    font-weight: 600 !important;
-}
-
-.dropdown-content h5,
-.nested-content h5,
-.response-box h5 {
-    font-size: 1.1em !important;
-    margin: 1em 0 0.5em 0 !important;
-    font-weight: 600 !important;
-}
-
-/* Code block styling with proper wrapping */
-.code-block,
-pre.code-block {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-x: auto !important;
-    max-width: 100% !important;
-    display: block !important;
-}
-
-/* ========== END GLOBAL DROPDOWN FIXES ========== */
-
-/* ========== BLOG STYLES - No conflicts with existing CSS ========== */
-
-/* Blog index page */
-.blog-list {
-    margin: 2em 0;
-}
-
-.blog-post-item {
-    margin: 2em 0;
-    padding: 1.5em;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    transition: all 0.3s;
-}
-
-.blog-post-item:hover {
-    border-color: var(--nav-link-color);
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-}
-
-.blog-post-item h2 {
-    margin-top: 0;
-    color: var(--nav-link-color);
-}
-
-.blog-meta {
-    color: var(--text-secondary);
-    font-size: 0.9em;
-    margin-bottom: 1em;
-}
-
-.blog-teaser {
-    margin: 1em 0;
-    line-height: 1.6;
-}
-
-.read-more {
-    color: var(--nav-link-color);
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 0.5em;
-}
-
-.read-more:hover {
-    text-decoration: underline;
-}
-
-/* Individual blog post page */
-.blog-post {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.blog-post header {
-    margin-bottom: 3em;
-    padding-bottom: 1.5em;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.breadcrumb {
-    display: inline-block;
-    margin-bottom: 1em;
-    color: var(--nav-link-color);
-    text-decoration: none;
-    font-size: 0.9em;
-}
-
-.blog-post .blog-meta {
-    margin: 0.5em 0;
-}
-
-.author {
-    font-weight: 500;
-}
-
-.blog-tags {
-    margin: 1em 0;
-}
-
-.blog-tags .tag {
-    display: inline-block;
-    margin-right: 0.5em;
-}
-
-/* Pull-out quote styling */
-.pull-quote {
-    background: var(--card-bg);
-    border-left: 4px solid var(--nav-link-color);
-    padding: 1.5em;
-    margin: 2em 0;
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
-    font-size: 1.1em;
-    position: relative;
-}
-
-.pull-quote::before {
-    content: """;
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    font-size: 4em;
-    color: var(--nav-link-color);
-    opacity: 0.3;
-    font-family: serif;
-}
-
-/* Image placeholder styling */
-.image-placeholder {
-    background: var(--dropdown-bg);
-    border: 2px dashed var(--border-color);
-    padding: 3em 1em;
-    text-align: center;
-    margin: 2em 0;
-    border-radius: 8px;
-    color: var(--text-secondary);
-}
-
-.image-placeholder p {
-    margin: 0;
-    font-style: italic;
-}
-
-/* Example box styling */
-.example-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 2em 0;
-}
-
-.example-box h3 {
-    margin-top: 0;
-    color: var(--nav-link-color);
-}
-
-.highlight {
-    background: rgba(77, 166, 255, 0.1);
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    font-weight: 500;
-}
-
-/* Blog content spacing */
-.blog-post section {
-    margin: 3em 0;
-}
-
-.blog-post h2 {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.blog-post h3 {
-    margin-top: 1.5em;
-    margin-bottom: 0.8em;
-}
-
-.blog-post p {
-    margin-bottom: 1em;
-    line-height: 1.7;
-}
-
-.blog-post ul {
-    margin: 1.5em 0;
-    padding-left: 1.5em;
-}
-
-.blog-post li {
-    margin-bottom: 0.8em;
-}
-
-/* Blog footer navigation */
-.blog-footer {
-    margin-top: 4em;
-    padding-top: 2em;
-    border-top: 1px solid var(--footer-border);
-}
-
-.blog-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1em;
-}
-
-.blog-navigation a {
-    color: var(--nav-link-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.blog-navigation a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .blog-post {
-        padding: 0 1em;
-    }
-    
-    .pull-quote {
-        margin: 1.5em -1em;
-        padding: 1em;
-    }
-}
-
-/* ========== END BLOG STYLES ========== */
-
-
-/* Blog image styling */
+/* Blog Image Styling */
 .blog-image {
     margin: 2em 0;
     text-align: center;
@@ -1299,15 +586,6 @@ pre.code-block {
     font-size: 0.9em;
     color: var(--text-secondary);
     font-style: italic;
-}
-
-/* Full-width images */
-.blog-image.full-width {
-    margin: 2em -2em;
-}
-
-.blog-image.full-width img {
-    border-radius: 0;
 }
 
 /* Blog image size variations */
@@ -1346,18 +624,97 @@ pre.code-block {
     clear: both;
 }
 
-/* Fix visited link colors for both themes */
-a:visited {
-    color: var(--nav-link-color) !important;
-    opacity: 0.7; /* Slightly dim visited links to distinguish them */
+/* Blog Compose Styles */
+.compose-section {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 2em 0;
 }
 
-a:visited:hover {
-    opacity: 1; /* Full brightness on hover */
+.compose-controls {
+    margin: 1.5em 0;
 }
 
-/* Ensure the dimming affect doesn't apply to navigation */
-nav a:visited,
-.site-title:visited {
-    opacity: 1; /* Keep nav and site title at full brightness */
+.add-section-btn {
+    background-color: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.75em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s;
 }
+
+.add-section-btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--nav-link-hover);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+.status-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--card-bg);
+    border: 2px solid var(--nav-link-color);
+    padding: 1em 2em;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    z-index: 10000;
+}
+
+/* ========== COMPARE PAGE STYLES ========== */
+
+/* Add spacing between intro paragraphs */
+.intro-section p {
+    margin-bottom: 1.5em;
+}
+
+/* Share button styling for compare page */
+.share-btn {
+    background: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-left: 0.5em;
+    transition: background 0.3s;
+}
+
+.share-btn:hover {
+    background: var(--nav-link-hover);
+}
+
+/* Highlight shared model dropdown */
+@keyframes highlight {
+    from { background-color: var(--nav-link-color); }
+    to { background-color: transparent; }
+}
+
+.model-highlight {
+    animation: highlight 2s ease-in-out;
+}
+
+/* Bold highest scores in table */
+.highest-score {
+    font-weight: 600;
+    color: var(--nav-link-color);
+}
+
+/* ========== END COMPARE PAGE STYLES ========== */
