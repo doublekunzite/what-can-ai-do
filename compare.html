@@ -34,9 +34,12 @@
         
         <section class="comparison-section">
             <!-- Benchmarks section as dropdown -->
-            <details class="main-dropdown">
+            <details class="main-dropdown" data-id="benchmarks" id="model-benchmarks">
                 <summary class="dropdown-header">
                     <h2>Benchmarks</h2>
+                    <div class="conversation-meta">
+                        <button class="share-btn" onclick="shareModel('benchmarks')">Share</button>
+                    </div>
                 </summary>
                 <div class="dropdown-content">
                     <div class="ai-output-box">
@@ -130,15 +133,17 @@
                         <ol>
                             <li><a href="https://github.com/MoonshotAI/Kimi-K2" target="_blank">MoonshotAI Kimi K2 GitHub repository evaluation results</a></li>
                             <li><a href="https://scale.com/leaderboard/humanitys_last_exam" target="_blank">Scale AI Humanity's Last Exam Leaderboard</a></li>
-                            <li>Model technical reports and official benchmark publications (2024-2025)</li>
                         </ol>
                     </div>
                 </div>
             </details>
             
-            <details class="main-dropdown">
+            <details class="main-dropdown" data-id="agreeability" id="model-agreeability">
                 <summary class="dropdown-header">
                     <h2>Agreeability & Manipulation</h2>
+                    <div class="conversation-meta">
+                        <button class="share-btn" onclick="shareModel('agreeability')">Share</button>
+                    </div>
                 </summary>
                 <div class="dropdown-content">
                     <div class="ai-output-box">
@@ -252,18 +257,24 @@
                 </div>
             </details>
             
-            <details class="main-dropdown">
+            <details class="main-dropdown" data-id="energy" id="model-energy">
                 <summary class="dropdown-header">
                     <h2>Energy efficiency</h2>
+                    <div class="conversation-meta">
+                        <button class="share-btn" onclick="shareModel('energy')">Share</button>
+                    </div>
                 </summary>
                 <div class="dropdown-content">
                     <p>Content to be added...</p>
                 </div>
             </details>
             
-            <details class="main-dropdown">
+            <details class="main-dropdown" data-id="politics" id="model-politics">
                 <summary class="dropdown-header">
                     <h2>Politics</h2>
+                    <div class="conversation-meta">
+                        <button class="share-btn" onclick="shareModel('politics')">Share</button>
+                    </div>
                 </summary>
                 <div class="dropdown-content">
                     <!-- Nested dropdown for OpenAI -->
