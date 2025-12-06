@@ -802,3 +802,38 @@ a:visited {
 }
 
 /* ========== END COMPARE PAGE STYLES ========== */
+
+/* Enhance contrast for all links in dropdown content - targets the sycophancy link */
+.dropdown-content a,
+.dropdown-content a:visited {
+    color: var(--nav-link-color) !important;
+    opacity: 0.95; /* Higher opacity for better visibility */
+    font-weight: 500; /* Slightly bolder */
+    transition: opacity 0.2s;
+}
+
+.dropdown-content a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Add spacing between paragraphs in dropdown content */
+.dropdown-content > p {
+    margin-bottom: 1.2em; /* Slightly more than 1em for clearer separation */
+}
+
+.dropdown-content > p:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure list items also have proper spacing */
+.dropdown-content li {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+}
+
+/* Override the problematic visited link opacity from earlier in the stylesheet */
+/* This targets specifically the bracketed link format */
+a[href*="compare.html"]:visited {
+    opacity: 0.95 !important;
+}
