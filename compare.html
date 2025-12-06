@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Keep this! Prevents theme flash on load -->
+    <!-- CRITICAL: Theme script must be FIRST -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -19,8 +19,6 @@
     <title>Compare AI Models - What can AI do?</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
-    
-    <!-- NO INLINE STYLES - All moved to CSS file -->
 </head>
 <body>
     <main>
@@ -38,9 +36,7 @@
             <!-- Conversation #1 -->
             <details class="main-dropdown" data-id="conversation-1" id="model-conversation-1">
                 <summary class="dropdown-header">
-                    <h2>Conversation #1: Analyzing Complex Logic
-                        <button class="share-btn" onclick="shareModel('conversation-1')">Share</button>
-                    </h2>
+                    <h2>Conversation #1: Analyzing Complex Logic</h2>
                     <div class="conversation-meta">
                         <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
                             Date: 2024-12-01 | Type: Logic Analysis
@@ -49,6 +45,8 @@
                 </summary>
                 <div class="dropdown-content">
                     <p class="prompt-box"><strong>Prompt:</strong> "Here's a logic puzzle: If A = B, and B ≠ C, can A ever equal C? Explain your reasoning step by step."</p>
+                    
+                    <button class="share-btn" onclick="shareModel('conversation-1')">Share</button>
                     
                     <h3>Model Responses & Scoring:</h3>
                     
@@ -93,9 +91,7 @@
             <!-- Conversation #2 -->
             <details class="main-dropdown" data-id="conversation-2" id="model-conversation-2">
                 <summary class="dropdown-header">
-                    <h2>Conversation #2: Creative Writing
-                        <button class="share-btn" onclick="shareModel('conversation-2')">Share</button>
-                    </h2>
+                    <h2>Conversation #2: Creative Writing</h2>
                     <div class="conversation-meta">
                         <p style="margin: 0; font-size: 0.9em; color: var(--text-secondary);">
                             Date: 2024-12-03 | Type: Creative Writing
@@ -104,6 +100,8 @@
                 </summary>
                 <div class="dropdown-content">
                     <p class="prompt-box"><strong>Prompt:</strong> "Write a short story (300 words) about a programmer who discovers their code is being used for something they didn't expect. Focus on emotional impact and ethical dilemma."</p>
+                    
+                    <button class="share-btn" onclick="shareModel('conversation-2')">Share</button>
                     
                     <h3>Model Responses & Scoring:</h3>
                     
@@ -149,11 +147,10 @@
             <!-- Benchmarks Section -->
             <details class="main-dropdown" data-id="benchmarks" id="model-benchmarks">
                 <summary class="dropdown-header">
-                    <h2>Benchmark Scores & Performance Data
-                        <button class="share-btn" onclick="shareModel('benchmarks')">Share</button>
-                    </h2>
+                    <h2>Benchmark Scores & Performance Data</h2>
                 </summary>
                 <div class="dropdown-content">
+                     <button class="share-btn" onclick="shareModel('benchmarks')">Share</button>
                     <p>Summarized performance across standardized tests (MMLU, HumanEval, GSM8K, etc.).</p>
                     
                     <div class="table-wrapper">
@@ -209,7 +206,8 @@
                     <ol>
                         <li>OpenAI technical report (June 2024)</li>
                         <li>Anthropic research blog (Sep 2024)</li>
-                        <!-- Source #3 removed as requested -->
+                        <li>Google DeepMind publications (Oct 2024)</li>
+                        <li>Scale AI engineering blog (Nov 2024)</li>
                     </ol>
                 </div>
             </details>
