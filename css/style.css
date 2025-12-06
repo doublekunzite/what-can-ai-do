@@ -716,5 +716,89 @@ footer {
     font-weight: 600;
     color: var(--nav-link-color);
 }
+/* ========== COMPARE PAGE STYLES ========== */
+
+/* Fix bullet point spacing in AI output boxes */
+.ai-output-box ul,
+.ai-output-box ol {
+    padding-left: 2em; /* Add proper left padding for bullet markers */
+    margin: 1em 0;
+}
+
+.ai-output-box li {
+    margin-bottom: 0.5em;
+    padding-left: 0.5em; /* Space between bullet and text */
+}
+
+/* Improve hyperlink contrast in dark mode */
+a:visited {
+    color: var(--nav-link-color) !important;
+    opacity: 0.85; /* Increase from 0.7 for better contrast */
+}
+
+/* Ensure links inside AI boxes have good contrast */
+.ai-output-box a {
+    color: var(--nav-link-color);
+    font-weight: 500;
+}
+
+.ai-output-box a:hover {
+    text-decoration: underline;
+}
+
+/* Consistent paragraph spacing in AI output boxes */
+.ai-output-box p {
+    margin-bottom: 1em;
+}
+
+.ai-output-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* Add some space before the first element in AI output boxes */
+.ai-output-box > *:first-child {
+    margin-top: 0;
+}
+
+.ai-output-box > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Smaller share button inside dropdowns */
+.share-btn {
+    background: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background 0.3s;
+}
+
+.share-btn:hover {
+    background: var(--nav-link-hover);
+}
+
+/* Highlight shared model dropdown */
+@keyframes highlight {
+    from { background-color: var(--nav-link-color); }
+    to { background-color: transparent; }
+}
+
+.model-highlight {
+    animation: highlight 2s ease-in-out;
+}
+
+/* Bold highest scores in table */
+.highest-score {
+    font-weight: 600;
+    color: var(--nav-link-color);
+}
+
+/* Add spacing between intro paragraphs */
+.intro-section p {
+    margin-bottom: 1.5em;
+}
 
 /* ========== END COMPARE PAGE STYLES ========== */
