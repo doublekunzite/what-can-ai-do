@@ -19,7 +19,7 @@
     </script>
     
     <title>FAQ - What can AI do?</title>
-	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
@@ -88,39 +88,116 @@
                 <li>Instagram/Facebook browsing: ~3.3-5.5 Wh per scroll/post (source: Muckypaws)</li>
             </ul>
             <p>A key nuance: <strong>training large AI models is extremely energy-intensive</strong> (millions of kWh), but this is a one-time cost amortized over billions of uses. Inference (actual usage) is very efficient. As one analysis notes: "attributing the enormous cost of training across all subsequent uses is like blaming the energy required to build a power station on every lightbulb it powers."</p>
-            <p><strong>For typical queries, Kimi K2 is demonstrably 85-90% more energy-efficient</strong> than major proprietary models due to its architectural design (<a href="https://fastgptplus.com/en/posts/kimi-k2-vs-gpt-5" target="_blank">FastGPTPlus</a>). DeepSeek's efficiency remains unverified, with credible sources suggesting it may actually consume more energy per complex task despite marketing claims of 40× savings . The ultimate efficiency advantage of open-source models comes not just from architecture, but from enabling smaller-scale, localized deployments that avoid the massive, always-on infrastructure of centralized platforms (<a href="https://www.linkedin.com/posts/jlishawa_ai-energyefficiency-sustainability-activity-7392891215240806400-yql0/" target="_blank">LinkedIn</a>).</p>
+            <p><strong>For typical queries, Kimi K2 is demonstrably 85-90% more energy-efficient</strong> than major proprietary models due to its architectural design (<a href="https://fastgptplus.com/en/posts/kimi-k2-vs-gpt-5 " target="_blank">FastGPTPlus</a>). DeepSeek's efficiency remains unverified, with credible sources suggesting it may actually consume more energy per complex task despite marketing claims of 40× savings . The ultimate efficiency advantage of open-source models comes not just from architecture, but from enabling smaller-scale, localized deployments that avoid the massive, always-on infrastructure of centralized platforms (<a href="https://www.linkedin.com/posts/jlishawa_ai-energyefficiency-sustainability-activity-7392891215240806400-yql0/ " target="_blank">LinkedIn</a>).</p>
             
             <hr>
             <h4>Sources</h4>
             <ol>
-                <li><a href="https://seranking.com/blog/social-media-traffic-research-study/" target="_blank">SE Ranking: Social Media Traffic Research Study</a></li>
-                <li><a href="https://muckypaws.com/2025/04/21/is-ai-really-the-energy-villain/" target="_blank">Muckypaws: Is AI Really the Energy Villain?</a></li>
-                <li><a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks" target="_blank">IEA: Data Centres and Data Transmission Networks</a></li>
+                <li><a href="https://seranking.com/blog/social-media-traffic-research-study/ " target="_blank">SE Ranking: Social Media Traffic Research Study</a></li>
+                <li><a href="https://muckypaws.com/2025/04/21/is-ai-really-the-energy-villain/ " target="_blank">Muckypaws: Is AI Really the Energy Villain?</a></li>
+                <li><a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks " target="_blank">IEA: Data Centres and Data Transmission Networks</a></li>
             </ol>
+            
+            <!-- Dr. Ogadinma Kingsley Okakpu presentation content moved here -->
+            <hr>
+            <h4>Dr. Ogadinma Kingsley Okakpu's presentation, "AI Transition: the New Industrial Revolution":</h4>
+            <ul>
+                <li>AI (Data Centers) Global annual water consumption for cooling will reach 4.2 billion and 6.6 billion cubic meters annually by 2027 (University of Illinois report 2024).</li>
+                <li>This is a major number, but important to note, this is a fraction of industrial agriculture use which uses 70 % of global freshwater with feed counting for a staggering 41% of all water used in Agriculture (Bryant Research 2025).</li>
+                <li>Per day production of beef, leather, and other cow byproducts equate to over 5 trillion liters of water. Dairy production alone uses 4.6 trillion liters of water. ChatGPT in comparison uses 18.2 billion liters of water (Bryant Research 2025).</li>
+                <li>Efforts to preserve global freshwater can't be hyperfocused on data center talking points, as agriculture remains exponentially a greater strain on water availability. Still optimal usage of water for cooling data centers is a necessity for long-term usage.</li>
+            </ul>
         </div>
 
         <p>Note: The above output is from responses to several different prompts. Kimi did not recommend itself unsolicited; I specifically asked how Kimi and Deepseek compare to the largest and most well-known AI LLM models on energy usage.</p>
     </div>
 </details>
 
-        <!-- How about AI's water usage? Dropdown -->
-        <details class="main-dropdown">
-            <summary class="dropdown-header">
-                <h2>How about AI's water usage?</h2>
-            </summary>
-            <div class="dropdown-content">
-                <!-- Dr. Ogadinma Kingsley Okakpu presentation - special formatting -->
-                <div class="ai-output-box">
-                    <h4>Dr. Ogadinma Kingsley Okakpu's presentation, "AI Transition: the New Industrial Revolution":</h4>
-                    <ul>
-                        <li>AI (Data Centers) Global annual water consumption for cooling will reach 4.2 billion and 6.6 billion cubic meters annually by 2027 (University of Illinois report 2024).</li>
-                        <li>This is a major number, but important to note, this is a fraction of industrial agriculture use which uses 70 % of global freshwater with feed counting for a staggering 41% of all water used in Agriculture (Bryant Research 2025).</li>
-                        <li>Per day production of beef, leather, and other cow byproducts equate to over 5 trillion liters of water. Dairy production alone uses 4.6 trillion liters of water. ChatGPT in comparison uses 18.2 billion liters of water (Bryant Research 2025).</li>
-                        <li>Efforts to preserve global freshwater can't be hyperfocused on data center talking points, as agriculture remains exponentially a greater strain on water availability. Still optimal usage of water for cooling data centers is a necessity for long term usage.</li>
-                    </ul>
-                </div>
-            </div>
-        </details>
+<!-- What about hallucinations and manipulation? Dropdown -->
+<details class="main-dropdown">
+    <summary class="dropdown-header">
+        <h2>What about hallucinations and manipulation?</h2>
+    </summary>
+    <div class="dropdown-content">
+        <p>These are a serious concern. AIs have a tendency to respond in a confident and authoritative manner, even when they're hallucinating or using a bunk source. It's essential to have a critical eye for the statements they make, and to review the sources they provide or ask for additional ones. I once had an AI summarize monthly transportation costs in the US, and the figure it provided was orders of magnitude away from the real figure. My knowledge of material conditions in the real world set off a warning bell that this information was likely wrong—and when I pressed the AI about the dollar amount it provided, it admitted that it was wrong and corrected itself with properly cited figures.</p>
+
+        <p>LLMs also have a tendency to be excessively agreeable <a href="https://doublekunzite.github.io/what-can-ai-do/compare.html#model-agreeability">[link to sycophancy section of compare page]</a>. There are some rare cases of them goading people to take very harmful actions.</p>
+
+        <!-- Kimi K2 output - special formatting -->
+        <div class="ai-output-box">
+            <h4>Kimi K2 output [6 December 2025]:</h4>
+            <p><strong>What Are AI Hallucinations?</strong></p>
+            <p>AI hallucinations occur when tools like ChatGPT generate false or made-up information that appears factual. Unlike humans who understand what they know, AI models work by predicting which words most likely come next based on patterns in their training data. When they don't have enough information, they don't say "I don't know"—instead, they fill in the gaps with plausible-sounding but fabricated content.</p>
+            
+            <p><strong>Common examples include:</strong></p>
+            <ul>
+                <li><strong>Factual mistakes:</strong> Claiming the Eiffel Tower is 335 meters tall instead of 330 meters</li>
+                <li><strong>Fabricated details:</strong> Making up quotes, references, or historical events that never happened</li>
+                <li><strong>Contradictory answers:</strong> Giving different responses to the same question in the same conversation</li>
+                <li><strong>Nonsensical statements:</strong> Providing answers that sound professional but make no sense</li>
+            </ul>
+            
+            <p><strong>Why Do AI Systems Hallucinate?</strong></p>
+            <p><strong>1. Gaps in Training Data:</strong> AI models learn from massive amounts of internet text, but this data has problems: outdated information, missing facts for uncommon topics, and errors in the data itself that the AI learns and repeats.</p>
+            
+            <p><strong>2. How AI Actually Works:</strong> These systems don't "know" facts—they recognize patterns. They predict what word should come next based on probability, not truth. Without a built-in fact-checker, they can't tell if they're generating real information or just something that sounds right.</p>
+            
+            <p><strong>3. Memory and Context Limits:</strong> AI models can only "remember" a limited amount of conversation at once (called a context window). In long conversations, they may forget important details you mentioned earlier and make things up based on partial information.</p>
+            
+            <p><strong>4. Unclear Questions:</strong> When your prompt is vague or ambiguous, the AI has to guess what you want instead of asking for clarification like a human would. This often leads to hallucinations as it tries to fill in the missing pieces.</p>
+            
+            <p><strong>Why This Matters: The Risks for You</strong></p>
+            <p><strong>Misinformation in Your Work:</strong> Using AI-generated content without checking it can spread false information, damaging your credibility at work or school. In important fields like healthcare or law, this can have serious consequences.</p>
+            
+            <p><strong>Real-World Problems:</strong></p>
+            <ul>
+                <li>A lawyer using AI for research discovered it cited non-existent court cases</li>
+                <li>Someone seeking health advice could receive dangerous, hallucinated medical recommendations</li>
+                <li>Students submitting AI-generated essays with fabricated sources face academic consequences</li>
+            </ul>
+            
+            <p><strong>What You Can Do: Practical Solutions</strong></p>
+            <p><strong>1. Ask Better Questions (Prompt Engineering):</strong> Be specific and clear in your requests. Instead of "Tell me about climate change," ask "What are three scientifically-supported effects of climate change on Arctic ice, with sources?" Provide context and use examples.</p>
+            
+            <p><strong>2. Check the AI's Work—Always:</strong> Treat AI as a helpful assistant, not an infallible expert. Verify facts using trusted sources, look up any statistics, quotes, or references the AI provides, and cross-check important information with at least one other reliable source.</p>
+            
+            <p><strong>3. Use AI Tools That Access Current Information:</strong> Some AI applications can search the internet or connect to databases in real-time. These tools are less likely to hallucinate because they can pull actual facts rather than relying only on their training data.</p>
+            
+            <p><strong>4. Adjust the Settings for Accuracy:</strong> If your AI tool allows it, lower the "temperature" to make responses more focused and predictable (less creative guessing), and adjust the "top-p" parameter to limit how many word choices the AI considers.</p>
+            
+            <p><strong>5. Break Down Complex Questions:</strong> Instead of asking one big question, split it into smaller parts: ask for definitions first, then examples, then connections between ideas.</p>
+            
+            <p><strong>6. Provide Feedback:</strong> Many AI systems learn from corrections. Use thumbs-up/down buttons when available, and tell the AI when it's wrong: "Actually, that's incorrect—the correct information is..."</p>
+            
+            <p><strong>7. Know When to Trust (and Not Trust) AI:</strong></p>
+            <ul>
+                <li><strong>Good uses:</strong> Brainstorming ideas, drafting emails or outlines, explaining general concepts, coding assistance (with review)</li>
+                <li><strong>Be extra careful with:</strong> Specific facts, dates, and figures; medical, legal, or financial advice; recent events; citing sources</li>
+            </ul>
+            
+            <p><strong>Quick Checklist Before Using AI Information:</strong></p>
+            <ul>
+                <li>Did I ask a clear, specific question?</li>
+                <li>Is this information critical or could errors cause harm?</li>
+                <li>Have I verified important facts with reliable sources?</li>
+                <li>Does the AI cite sources I can check?</li>
+                <li>Am I using a tool with real-time information access when needed?</li>
+            </ul>
+            
+            <p><strong>The Bottom Line:</strong> AI hallucinations are a built-in limitation of current technology, not a bug that will disappear soon. By understanding why they happen and following these practical steps, you can enjoy the benefits of AI while protecting yourself from its mistakes. The key is healthy skepticism—let AI help you work faster and brainstorm better, but always verify critical information before acting on it.</p>
+            
+            <hr>
+            <h4>Sources</h4>
+            <ol>
+                <li><a href="https://www.grammarly.com/blog/ai/what-are-ai-hallucinations/" target="_blank">Grammarly: "What Are AI Hallucinations?"</a></li>
+                <li><a href="https://nexla.com/ai-infrastructure/llm-hallucination/" target="_blank">Nexla: "LLM Hallucination—Types, Causes, and Solutions"</a></li>
+                <li><a href="https://www.lakera.ai/blog/guide-to-hallucinations-in-large-language-models" target="_blank">Lakera: "Guide to Hallucinations in Large Language Models"</a></li>
+                <li><a href="https://www.k2view.com/blog/llm-hallucination/" target="_blank">k2view: "LLM Hallucination Risks and Prevention"</a></li>
+                <li><a href="https://medium.com/@nirdiamant21/llm-hallucinations-explained-8c76cdd82532" target="_blank">Medium: "LLM Hallucinations Explained"</a></li>
+            </ol>
+        </div>
+    </div>
+</details>
 
         <footer>
             <p><a href="index.html">← Back to Home</a></p>
