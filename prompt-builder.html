@@ -135,104 +135,6 @@
                         <button class="filter-btn secondary" onclick="resetTemplate('website')">🔄 Reset</button>
                     </div>
                 </div>
-                
-                <!-- Content Creation Template -->
-                <div class="builder-template hidden" id="write-template">
-                    <h2>Content Creation Builder</h2>
-                    <p>Create structured content from idea to final draft.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label><strong>Content type:</strong>
-                            <select id="write-type">
-                                <option value="a blog post">Blog Post</option>
-                                <option value="a report">Report</option>
-                                <option value="social media content">Social Media</option>
-                                <option value="an email">Email</option>
-                            </select>
-                        </label>
-                        <label><strong>Topic:</strong>
-                            <input type="text" id="write-topic" placeholder="e.g., AI in healthcare" value="AI in healthcare">
-                        </label>
-                        <label><strong>Target audience:</strong>
-                            <input type="text" id="write-audience" placeholder="e.g., general readers" value="general readers">
-                        </label>
-                        <label><strong>Word count:</strong>
-                            <input type="number" id="write-count" placeholder="e.g., 800" value="800" min="100" max="5000">
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="write-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('write')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('write')">📋 Copy Complete Flow</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('write')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <!-- Problem Solving Template -->
-                <div class="builder-template hidden" id="solve-template">
-                    <h2>Problem Solving Builder</h2>
-                    <p>Work through complex problems systematically.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label><strong>Problem description:</strong>
-                            <textarea id="solve-problem" rows="4" placeholder="Describe the problem you're trying to solve">My website loads slowly and I'm losing visitors</textarea>
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="solve-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('solve')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('solve')">📋 Copy Complete Flow</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('solve')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <!-- Code Project Template -->
-                <div class="builder-template hidden" id="code-template">
-                    <h2>Code Project Builder</h2>
-                    <p>Plan, build, and review code projects.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label><strong>Project description:</strong>
-                            <textarea id="code-project" rows="4" placeholder="Describe your project">Build a simple task manager app</textarea>
-                        </label>
-                        <label><strong>Programming language:</strong>
-                            <select id="code-language">
-                                <option value="Python">Python</option>
-                                <option value="JavaScript">JavaScript</option>
-                                <option value="Java">Java</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="code-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('code')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('code')">📋 Copy Complete Flow</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('code')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <!-- Data Analysis Template -->
-                <div class="builder-template hidden" id="analyze-template">
-                    <h2>Data Analysis Builder</h2>
-                    <p>Analyze datasets and extract insights.</p>
-                    
-                    <div class="parameter-inputs">
-                        <label><strong>Dataset description:</strong>
-                            <textarea id="analyze-dataset" rows="4" placeholder="Describe your dataset">Customer survey responses from Q3 2024</textarea>
-                        </label>
-                    </div>
-                    
-                    <div class="conversation-flow" id="analyze-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('analyze')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('analyze')">📋 Copy Complete Flow</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('analyze')">🔄 Reset</button>
-                    </div>
-                </div>
             </div>
         </section>
         
@@ -245,9 +147,9 @@
     <script src="/what-can-ai-do/js/navigation.js"></script>
     <script src="/what-can-ai-do/js/theme.js"></script>
 
-<!-- INLINE PROMPT BUILDER JS - FINAL POLISHED VERSION -->
+<!-- INLINE PROMPT BUILDER JS - ROBUST VERSION -->
 <script>
-console.log('🚀 PROMPT BUILDER: Final version loading...');
+console.log('🚀 PROMPT BUILDER: Starting initialization...');
 
 // Dynamic study template generator based on time available
 function getStudyTemplate(duration) {
@@ -423,20 +325,6 @@ const templates = {
     ]
 };
 
-// Initialize when ready
-function initWhenReady() {
-    const flow = document.getElementById('study-flow');
-    if (flow) {
-        console.log('✅ DOM ready, initializing...');
-        // Initialize study template based on current dropdown value
-        updateStudyTemplate();
-        renderSteps('study');
-        bindEvents();
-    } else {
-        setTimeout(initWhenReady, 200);
-    }
-}
-
 // Render steps for a category
 function renderSteps(category) {
     const flow = document.getElementById(category + '-flow');
@@ -457,7 +345,7 @@ function renderSteps(category) {
     updatePlaceholders(category);
 }
 
-// Create a single step element - NEW BUTTON LAYOUT
+// Create a single step element
 function createStepElement(category, step, index) {
     const div = document.createElement('div');
     div.className = 'builder-step';
@@ -488,60 +376,13 @@ function createStepElement(category, step, index) {
     delBtn.addEventListener('click', () => deleteStep(category, index));
     contentEl.addEventListener('input', () => {
         templates[category][index].content = contentEl.textContent;
-        // Don't call updatePlaceholders here to avoid overwriting while typing
     });
     
     return div;
 }
 
-// Bind events
-function bindEvents() {
-    // Category buttons
-    document.querySelectorAll('.filter-btn[data-category]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const category = btn.dataset.category;
-            
-            // Update active button
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Show/hide templates
-            document.querySelectorAll('.builder-template').forEach(t => {
-                t.classList.toggle('hidden', t.id !== category + '-template');
-            });
-            
-            renderSteps(category);
-        });
-    });
-    
-    // Parameter inputs - CRITICAL FOR DYNAMIC FILL
-    document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
-        input.addEventListener('input', () => {
-            const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
-            if (activeCategory) {
-                updatePlaceholders(activeCategory);
-            }
-        });
-    });
-    
-    // Study duration dropdown - DYNAMIC TEMPLATE CHANGER
-    const studyDurationDropdown = document.getElementById('study-duration');
-    if (studyDurationDropdown) {
-        studyDurationDropdown.addEventListener('change', () => {
-            console.log('📅 Study duration changed');
-            updateStudyTemplate();
-            const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category;
-            if (activeCategory === 'study') {
-                renderSteps('study');
-            }
-        });
-    }
-}
-
 // Update placeholders - FIXED TO WORK ON ALL CATEGORIES
 function updatePlaceholders(category) {
-    console.log('🔄 Updating placeholders for:', category);
-    
     let params = {};
     switch(category) {
         case 'study':
@@ -576,22 +417,17 @@ function updatePlaceholders(category) {
             break;
     }
     
-    console.log('📊 Parameters object:', params);
-    
     // Update ALL step content with placeholders
     const steps = templates[category] || [];
     steps.forEach((step, index) => {
         const contentEl = document.querySelector(`#${category}-flow [data-step-content="${index}"]`);
         if (contentEl) {
-            // Start with original template content, not current content
             let content = step.content;
-            // Replace all placeholders
             Object.keys(params).forEach(key => {
                 const regex = new RegExp(`{{${key}}}`, 'g');
                 content = content.replace(regex, params[key]);
             });
             contentEl.textContent = content;
-            console.log(`✏️ Step ${index + 1} updated:`, content.substring(0, 50) + '...');
         }
     });
 }
@@ -641,14 +477,87 @@ window.copyAllPrompts = function(category) {
 window.resetTemplate = function(category) {
     if (confirm('Reset all steps to default?')) {
         if (category === 'study') {
-            updateStudyTemplate(); // Reset to current duration template
+            updateStudyTemplate();
         }
         renderSteps(category);
     }
 };
 
-// Start initialization
-initWhenReady();
+// ==================== CRITICAL: ROBUST INITIALIZATION ====================
+
+function initializeBuilder() {
+    console.log('⚙️ Initializing builder...');
+    
+    try {
+        // Verify critical elements exist
+        const studyFlow = document.getElementById('study-flow');
+        const categoryButtons = document.querySelectorAll('.filter-btn[data-category]');
+        
+        if (!studyFlow) throw new Error('study-flow element not found');
+        if (categoryButtons.length === 0) throw new Error('No category buttons found');
+        
+        // Initialize study template
+        updateStudyTemplate();
+        renderSteps('study');
+        
+        // Setup category button handlers - CRITICAL FIX
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const category = this.dataset.category;
+                console.log('🖱️ Category clicked:', category);
+                
+                // Update active state
+                document.querySelectorAll('.filter-btn[data-category]').forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show/hide templates with BOTH class and style
+                document.querySelectorAll('.builder-template').forEach(template => {
+                    const shouldShow = template.id === category + '-template';
+                    template.classList.toggle('hidden', !shouldShow);
+                    template.style.display = shouldShow ? 'block' : 'none';
+                    
+                    if (shouldShow) {
+                        renderSteps(category);
+                    }
+                });
+            });
+        });
+        
+        // Setup parameter handlers
+        document.querySelectorAll('.parameter-inputs input, .parameter-inputs select, .parameter-inputs textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                const activeCategory = document.querySelector('.filter-btn[data-category].active')?.dataset.category;
+                if (activeCategory) updatePlaceholders(activeCategory);
+            });
+        });
+        
+        // Setup study duration handler
+        const studyDuration = document.getElementById('study-duration');
+        if (studyDuration) {
+            studyDuration.addEventListener('change', () => {
+                updateStudyTemplate();
+                const activeCategory = document.querySelector('.filter-btn[data-category].active')?.dataset.category;
+                if (activeCategory === 'study') renderSteps('study');
+            });
+        }
+        
+        console.log('✅ Builder initialized successfully!');
+        
+    } catch (error) {
+        console.error('❌ Builder initialization failed:', error);
+    }
+}
+
+// Wait for DOM and run
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeBuilder);
+} else {
+    initializeBuilder();
+}
 </script>
 </body>
 </html>
