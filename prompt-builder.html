@@ -48,38 +48,103 @@
             
             <div id="builder-content">
     <!-- Study Session Template -->
-    <div class="builder-template" id="study-template">
-        <h2>30-Minute Study Session Builder</h2>
-        <p>Create a structured learning workflow with an AI tutor.</p>
-        
-        <div class="parameter-inputs">
-            <label><strong>Subject:</strong>
-                <input type="text" id="study-subject" placeholder="e.g., Mitosis and Meiosis" value="Mitosis and Meiosis">
-            </label>
-            <label><strong>Your level:</strong>
-                <select id="study-level">
-                    <option value="high school">High School</option>
-                    <option value="college">College</option>
-                    <option value="graduate">Graduate</option>
-                    <option value="casual">Casual Learner</option>
-                </select>
-            </label>
-            <label><strong>Time available:</strong>
-                <select id="study-duration">
-                    <option value="15">15 minutes</option>
-                    <option value="30" selected>30 minutes</option>
-                    <option value="60">60 minutes</option>
-                </select>
-            </label>
-        </div>
-        
-        <div class="conversation-flow" id="study-flow"><h3>Conversation Flow:</h3></div>
-        <div class="step-controls"><button class="add-step-btn" onclick="addStep('study')">+ Add Step</button></div>
-        <div class="builder-actions">
-            <button class="filter-btn" onclick="copyAllPrompts('study')">📋 Copy Complete Flow</button>
-            <button class="filter-btn secondary" onclick="resetTemplate('study')">🔄 Reset</button>
-        </div>
+    <!-- In the builder-content div, REPLACE everything after the website-template with this: -->
+
+<div class="builder-template hidden" id="write-template">
+    <h2>Content Creation Builder</h2>
+    <p>Create structured content from idea to final draft.</p>
+    
+    <div class="parameter-inputs">
+        <label><strong>Content type:</strong>
+            <select id="write-type">
+                <option value="a blog post">Blog Post</option>
+                <option value="a report">Report</option>
+                <option value="social media content">Social Media</option>
+                <option value="an email">Email</option>
+            </select>
+        </label>
+        <label><strong>Topic:</strong>
+            <input type="text" id="write-topic" placeholder="e.g., AI in healthcare" value="AI in healthcare">
+        </label>
+        <label><strong>Target audience:</strong>
+            <input type="text" id="write-audience" placeholder="e.g., general readers" value="general readers">
+        </label>
+        <label><strong>Word count:</strong>
+            <input type="number" id="write-count" placeholder="e.g., 800" value="800" min="100" max="5000">
+        </label>
     </div>
+    
+    <div class="conversation-flow" id="write-flow"><h3>Conversation Flow:</h3></div>
+    <div class="step-controls"><button class="add-step-btn" onclick="addStep('write')">+ Add Step</button></div>
+    <div class="builder-actions">
+        <button class="filter-btn" onclick="copyAllPrompts('write')">📋 Copy Complete Flow</button>
+        <button class="filter-btn secondary" onclick="resetTemplate('write')">🔄 Reset</button>
+    </div>
+</div>
+
+<div class="builder-template hidden" id="solve-template">
+    <h2>Problem Solving Builder</h2>
+    <p>Work through complex problems systematically.</p>
+    
+    <div class="parameter-inputs">
+        <label><strong>Problem description:</strong>
+            <textarea id="solve-problem" rows="4" placeholder="Describe the problem you're trying to solve">My website loads slowly and I'm losing visitors</textarea>
+        </label>
+    </div>
+    
+    <div class="conversation-flow" id="solve-flow"><h3>Conversation Flow:</h3></div>
+    <div class="step-controls"><button class="add-step-btn" onclick="addStep('solve')">+ Add Step</button></div>
+    <div class="builder-actions">
+        <button class="filter-btn" onclick="copyAllPrompts('solve')">📋 Copy Complete Flow</button>
+        <button class="filter-btn secondary" onclick="resetTemplate('solve')">🔄 Reset</button>
+    </div>
+</div>
+
+<div class="builder-template hidden" id="code-template">
+    <h2>Code Project Builder</h2>
+    <p>Plan, build, and review code projects.</p>
+    
+    <div class="parameter-inputs">
+        <label><strong>Project description:</strong>
+            <textarea id="code-project" rows="4" placeholder="Describe your project">Build a simple task manager app</textarea>
+        </label>
+        <label><strong>Programming language:</strong>
+            <select id="code-language">
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+                <option value="Other">Other</option>
+            </select>
+        </label>
+    </div>
+    
+    <div class="conversation-flow" id="code-flow"><h3>Conversation Flow:</h3></div>
+    <div class="step-controls"><button class="add-step-btn" onclick="addStep('code')">+ Add Step</button></div>
+    <div class="builder-actions">
+        <button class="filter-btn" onclick="copyAllPrompts('code')">📋 Copy Complete Flow</button>
+        <button class="filter-btn secondary" onclick="resetTemplate('code')">🔄 Reset</button>
+    </div>
+</div>
+
+<div class="builder-template hidden" id="analyze-template">
+    <h2>Data Analysis Builder</h2>
+    <p>Analyze datasets and extract insights.</p>
+    
+    <div class="parameter-inputs">
+        <label><strong>Dataset description:</strong>
+            <textarea id="analyze-dataset" rows="4" placeholder="Describe your dataset">Customer survey responses from Q3 2024</textarea>
+        </label>
+    </div>
+    
+    <div class="conversation-flow" id="analyze-flow"><h3>Conversation Flow:</h3></div>
+    <div class="step-controls"><button class="add-step-btn" onclick="addStep('analyze')">+ Add Step</button></div>
+    <div class="builder-actions">
+        <button class="filter-btn" onclick="copyAllPrompts('analyze')">📋 Copy Complete Flow</button>
+        <button class="filter-btn secondary" onclick="resetTemplate('analyze')">🔄 Reset</button>
+    </div>
+</div>
+
+   
     
     <!-- Research Project Template -->
     <div class="builder-template hidden" id="research-template">
@@ -235,108 +300,6 @@
         </div>
     </div>
 </div>
-                
-                <!-- Other templates hidden -->
-                <div class="builder-template hidden" id="research-template">
-                    <h2>Research Project Builder</h2>
-                    <div class="parameter-inputs">
-                        <label><strong>Research topic:</strong>
-                            <input type="text" id="research-topic" placeholder="e.g., Climate adaptation strategies" value="Climate adaptation strategies">
-                        </label>
-                        <label><strong>Number of sources:</strong>
-                            <input type="number" id="research-sources" placeholder="e.g., 15" value="15" min="5" max="50">
-                        </label>
-                    </div>
-                    <div class="conversation-flow" id="research-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('research')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('research')">📋 Copy</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('research')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <div class="builder-template hidden" id="write-template">
-                    <h2>Content Creation Builder</h2>
-                    <div class="parameter-inputs">
-                        <label><strong>Content type:</strong>
-                            <select id="write-type">
-                                <option value="a blog post">Blog Post</option>
-                                <option value="a report">Report</option>
-                                <option value="social media content">Social Media</option>
-                                <option value="an email">Email</option>
-                            </select>
-                        </label>
-                        <label><strong>Topic:</strong>
-                            <input type="text" id="write-topic" placeholder="e.g., AI in healthcare" value="AI in healthcare">
-                        </label>
-                        <label><strong>Target audience:</strong>
-                            <input type="text" id="write-audience" placeholder="e.g., general readers" value="general readers">
-                        </label>
-                        <label><strong>Word count:</strong>
-                            <input type="number" id="write-count" placeholder="e.g., 800" value="800" min="100" max="5000">
-                        </label>
-                    </div>
-                    <div class="conversation-flow" id="write-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('write')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('write')">📋 Copy</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('write')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <div class="builder-template hidden" id="solve-template">
-                    <h2>Problem Solving Builder</h2>
-                    <div class="parameter-inputs">
-                        <label><strong>Problem description:</strong>
-                            <textarea id="solve-problem" rows="4">My website loads slowly and I'm losing visitors</textarea>
-                        </label>
-                    </div>
-                    <div class="conversation-flow" id="solve-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('solve')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('solve')">📋 Copy</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('solve')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <div class="builder-template hidden" id="code-template">
-                    <h2>Code Project Builder</h2>
-                    <div class="parameter-inputs">
-                        <label><strong>Project description:</strong>
-                            <textarea id="code-project" rows="4">Build a simple task manager app</textarea>
-                        </label>
-                        <label><strong>Programming language:</strong>
-                            <select id="code-language">
-                                <option value="Python">Python</option>
-                                <option value="JavaScript">JavaScript</option>
-                                <option value="Java">Java</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="conversation-flow" id="code-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('code')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('code')">📋 Copy</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('code')">🔄 Reset</button>
-                    </div>
-                </div>
-                
-                <div class="builder-template hidden" id="analyze-template">
-                    <h2>Data Analysis Builder</h2>
-                    <div class="parameter-inputs">
-                        <label><strong>Dataset description:</strong>
-                            <textarea id="analyze-dataset" rows="4">Customer survey responses from Q3 2024</textarea>
-                        </label>
-                    </div>
-                    <div class="conversation-flow" id="analyze-flow"><h3>Conversation Flow:</h3></div>
-                    <div class="step-controls"><button class="add-step-btn" onclick="addStep('analyze')">+ Add Step</button></div>
-                    <div class="builder-actions">
-                        <button class="filter-btn" onclick="copyAllPrompts('analyze')">📋 Copy</button>
-                        <button class="filter-btn secondary" onclick="resetTemplate('analyze')">🔄 Reset</button>
-                    </div>
-                </div>
-            </div>
         </section>
         
         <footer>
