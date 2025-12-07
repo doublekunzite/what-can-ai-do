@@ -7,7 +7,7 @@
     const navItems = [
         { name: 'Home', url: `${repoRoot}/index.html` },
         { name: 'Blog', url: `${repoRoot}/blog.html` },
-        { name: 'Prompts', url: `${repoRoot}/prompts.html` },
+        { name: 'Prompt Repository', url: `${repoRoot}/prompts.html` },
         { name: 'Prompt Builder', url: `${repoRoot}/prompt-builder.html` },
         { name: 'Compare Models', url: `${repoRoot}/compare.html` },
         { name: 'Common Concerns', url: `${repoRoot}/faq.html` }
