@@ -16,8 +16,8 @@
     function injectNavigation() {
         const currentPath = window.location.pathname;
         
-        // Inject site title BEFORE nav
-        const titleHTML = `<h1 class="site-title" style="text-align:center; margin: 1em 0 0.5em; font-size: 2.5em;">What Can AI Do?</h1>`;
+        // Make site title a link back to index
+        const titleHTML = `<h1 class="site-title" style="text-align:center; margin: 1em 0 0.5em; font-size: 2.5em;"><a href="${repoRoot}/index.html" style="color: var(--text-color); text-decoration: none;">What Can AI Do?</a></h1>`;
 
         const navHTML = `
             <nav>
