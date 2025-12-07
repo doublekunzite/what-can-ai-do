@@ -868,3 +868,126 @@ a[href*="compare.html"]:visited {
 .dropdown-content > p + .ai-output-box {
     margin-top: 1.5em;
 }
+
+/* Blog post specific styling */
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.blog-meta {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin: 1em 0 2em;
+}
+
+.breadcrumb {
+    color: var(--nav-link-color);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.breadcrumb:hover {
+    text-decoration: underline;
+}
+
+.introduction {
+    margin-bottom: 2em;
+}
+
+.pull-quote {
+    background: var(--dropdown-header-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5em;
+    margin: 2em 0;
+    font-style: italic;
+    font-size: 1.1em;
+    border-radius: 0 8px 8px 0;
+}
+
+.example-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 2em 0;
+}
+
+.example-box h3 {
+    color: var(--nav-link-color);
+    margin-top: 0;
+}
+
+.example-box h4 {
+    color: var(--text-color);
+    margin-top: 1.5em;
+}
+
+.highlight {
+    color: var(--accent-color);
+    font-weight: 600;
+    margin: 1em 0 0.5em;
+}
+
+.blog-image {
+    margin: 2em 0;
+    text-align: center;
+}
+
+.blog-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.blog-image figcaption {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.blog-image.small {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.learn-section, .create-section {
+    margin: 3em 0;
+}
+
+.blog-footer {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid var(--footer-border);
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.blog-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+}
+
+/* Ensure nested dropdowns work properly in blog context */
+.blog-post .nested-dropdown {
+    margin: 1.5em 0;
+}
+
+.blog-post .nested-content {
+    padding: 0 1em 1em 0;
+}
+
+/* Fix paragraph spacing in blog posts */
+.blog-post p {
+    margin-bottom: 1.2em;
+    line-height: 1.7;
+}
+
+.blog-post p:last-child {
+    margin-bottom: 0;
+}
