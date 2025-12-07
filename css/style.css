@@ -837,3 +837,34 @@ a:visited {
 a[href*="compare.html"]:visited {
     opacity: 0.95 !important;
 }
+
+/* Fix link contrast in contribute section and other dropdown content areas */
+.contribute a,
+.contribute a:visited,
+.dropdown-content a,
+.dropdown-content a:visited {
+    color: var(--nav-link-color) !important;
+    opacity: 0.95; /* Higher opacity for better visibility on dark backgrounds */
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.contribute a:hover,
+.dropdown-content a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Fix spacing between paragraphs in dropdown content */
+.dropdown-content > p {
+    margin-bottom: 1.2em; /* Add clear separation between paragraphs */
+}
+
+.dropdown-content > p:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure proper spacing for paragraphs before Kimi output boxes */
+.dropdown-content > p + .ai-output-box {
+    margin-top: 1.5em;
+}
