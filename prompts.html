@@ -18,7 +18,7 @@
     </script>
     
     <title>Prompt Repo - What can AI do?</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22  viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22   viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
     
     <!-- Inline CSS fixes -->
@@ -66,21 +66,10 @@
             color: var(--text-secondary);
         }
 
-        .rating {
+        .conversation-meta .tags {
             display: flex;
-            align-items: center;
-            gap: 0.3em;
-        }
-
-        .star {
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 1.2em;
-            transition: color 0.2s;
-        }
-
-        .star.active {
-            color: #ffc107;
+            gap: 0.5em;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -251,94 +240,86 @@ a page titled something like "Isn't AI bad?" which will address common talking p
                 takeaways: []
             },
             {
-                id: 2,
-                title: "How to Copy Tables from AI Chats",
-                date: "2024-11-26",
+                id: 5,
+                title: "Creating a Workout Plan",
+                date: "2025-12-05",
                 model: "kimi",
                 modelName: "Kimi K2",
-                tags: ["coding", "formatting"],
-                rating: 4.5,
-                prompt: "How do I copy our conversation including tables while preserving formatting for my website?",
-                response: `<p>For tables, use this HTML structure:</p>
-                    <pre class="code-block"><code>&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Header 1&lt;/th&gt;
-      &lt;th&gt;Header 2&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Data 1&lt;/td&gt;
-      &lt;td&gt;Data 2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>`,
+                tags: ["creative", "business"],
+                rating: 0,
+                prompt: "help me create a weekly workout routine that i can complete in 30-45 minutes. assume i have a typical level of strength for a 30 year old. provide options for either doing this at home with minimal equipment or in a gym.",
+                response: `<h2>Weekly Structure</h2>
+                <ul>
+                    <li><strong>3 Strength Days</strong> (full body)</li>
+                    <li><strong>1 Cardio Day</strong></li>
+                    <li><strong>1 Mobility/Active Recovery Day</strong></li>
+                    <li><strong>2 Rest Days</strong></li>
+                </ul>
+                
+                <hr>
+                
+                <h3>Strength Days (Mon/Wed/Fri)</h3>
+                <p><em>Warm-up: 5 min (jumping jacks, arm circles, leg swings)</em></p>
+                
+                <h4>Home Version (Minimal Equipment: 2 dumbbells + resistance band)</h4>
+                <ul>
+                    <li>Goblet Squats: 3×10-12</li>
+                    <li>Push-ups: 3×8-12 (modify on knees if needed)</li>
+                    <li>Dumbbell Rows: 3×10-12 each arm</li>
+                    <li>Bulgarian Split Squats: 3×10 each leg (use chair)</li>
+                    <li>Band Pull-aparts: 3×15</li>
+                    <li>Plank: 3×30-60 sec</li>
+                </ul>
+                
+                <h4>Gym Version</h4>
+                <ul>
+                    <li>Goblet Squats or Leg Press: 3×10-12</li>
+                    <li>Dumbbell Bench Press: 3×10-12</li>
+                    <li>Lat Pulldown: 3×10-12</li>
+                    <li>Romanian Deadlifts: 3×10-12</li>
+                    <li>Face Pulls: 3×15</li>
+                    <li>Cable Pallof Press: 3×12 each side</li>
+                </ul>
+                
+                <p><em>Rest 60-90 sec between sets</em></p>
+                
+                <hr>
+                
+                <h3>Cardio Day (Tue)</h3>
+                <ul>
+                    <li><strong>Home:</strong> 30 min brisk walk/jog, jump rope intervals (1 min on/1 min off), or burpee circuits</li>
+                    <li><strong>Gym:</strong> 20-30 min treadmill intervals (30 sec sprint/90 sec walk) or rowing machine</li>
+                </ul>
+                
+                <hr>
+                
+                <h3>Mobility/Active Recovery (Thu)</h3>
+                <ul>
+                    <li>10 min yoga flow (downward dog, cat-cow, child's pose)</li>
+                    <li>10 min stretching (hip flexors, hamstrings, shoulders)</li>
+                    <li>10 min core/glute activation: glute bridges, bird-dogs, dead bugs</li>
+                </ul>
+                
+                <hr>
+                
+                <h3>Rest Days (Sat/Sun)</h3>
+                <p>Full rest or light activity (walking, hiking)</p>
+                
+                <hr>
+                
+                <h4>Tips:</h4>
+                <ul>
+                    <li>Progress by adding reps or weight when you complete all sets comfortably</li>
+                    <li>Focus on form over speed</li>
+                    <li>Stay hydrated and sleep 7-8 hours</li>
+                    <li>Adjust intensity if you feel overly sore</li>
+                </ul>
+                
+                <p><em>This hits all major muscle groups, builds strength, and improves conditioning efficiently!</em></p>`,
                 takeaways: [
-                    "Convert markdown tables to HTML &lt;table&gt; syntax",
-                    "Use &lt;thead&gt; for headers and &lt;tbody&gt; for data",
-                    "Wrap code in &lt;pre&gt;&lt;code&gt; blocks for proper formatting"
-                ]
-            },
-            {
-                id: 3,
-                title: "Role-Based Prompt for Marketing Copy",
-                date: "2024-11-25",
-                model: "gpt-4",
-                modelName: "GPT-4",
-                tags: ["writing", "business", "role-based"],
-                rating: 4.8,
-                prompt: "Act as a senior marketing copywriter with 15 years of experience in SaaS. Write a compelling landing page headline and sub-headline for a new project management tool targeting remote teams. Focus on benefits, not features. Include 3 variations.",
-                response: `<p>Here are 3 variations:</p>
-                    <h4>Variation 1:</h4>
-                    <p><strong>Headline:</strong> Finally, Project Management That Doesn't Feel Like Work</p>
-                    <p><strong>Sub-headline:</strong> Your remote team stays aligned effortlessly—so you can ship products people love without the endless status meetings.</p>
-                    
-                    <h4>Variation 2:</h4>
-                    <p><strong>Headline:</strong> Projects Move Forward. Teams Stay Connected. You Stay Sane.</p>
-                    <p><strong>Sub-headline:</strong> Built for remote-first companies who've outgrown Slack threads and spreadsheet trackers.</p>
-                    
-                    <h4>Variation 3:</h4>
-                    <p><strong>Headline:</strong> The Last Project Management Tool Your Remote Team Will Ever Need</p>
-                    <p><strong>Sub-headline:</strong> Proven workflows that adapt to your team—not the other way around. Onboard in minutes, not weeks.</p>`,
-                takeaways: [
-                    "Role-definition sets tone and expertise level",
-                    "Specific constraints (3 variations) prevent generic output",
-                    "Benefit-focused framing resonates more than features"
-                ]
-            },
-            {
-                id: 4,
-                title: "Data Analysis Prompt for Survey Results",
-                date: "2024-11-24",
-                model: "claude",
-                modelName: "Claude 3.5",
-                tags: ["analysis", "coding"],
-                rating: 4.3,
-                prompt: "I have survey data in CSV format: user_id, satisfaction_rating (1-5), feature_request (text), usage_frequency (daily/weekly/monthly). Analyze this data and provide:\n1. Summary statistics with visualizations\n2. Thematic analysis of feature requests\n3. Correlation between usage frequency and satisfaction\n4. Actionable recommendations\n\nPlease use Python code blocks for any data processing.",
-                response: `<p>Here's a comprehensive analysis framework:</p>
-                    <pre class="code-block"><code>import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from collections import Counter
-
-# Load data
-df = pd.read_csv('survey_data.csv')
-
-# 1. Summary statistics
-print(f"Total responses: {len(df)}")
-print(df['satisfaction_rating'].describe())
-
-# Create satisfaction distribution plot
-plt.figure(figsize=(10, 6))
-sns.countplot(data=df, x='satisfaction_rating', hue='usage_frequency')
-plt.title('Satisfaction Distribution by Usage Frequency')
-plt.show()</code></pre>
-                    <p>Thematic analysis approach: Use TF-IDF vectorization followed by K-means clustering to identify common themes in feature requests.</p>`,
-                takeaways: [
-                    "Structured multi-part prompts yield comprehensive results",
-                    "Specifying output format (code blocks) ensures usable responses",
-                    "Including data context helps AI provide relevant analysis"
+                    "Specify time constraints (30-45 min) to get realistic routines",
+                    "Mention equipment availability (home vs gym) for tailored options",
+                    "Include progression tips for long-term use"
                 ]
             }
         ];
@@ -398,7 +379,7 @@ plt.show()</code></pre>
             }
         }
         
-        // Updated render function with share buttons (NO INLINE STYLES)
+        // Updated render function WITHOUT star ratings
         function renderConversations(filteredConversations = conversations) {
             const container = document.getElementById('conversationsContainer');
             
@@ -408,48 +389,30 @@ plt.show()</code></pre>
             }
             
             container.innerHTML = filteredConversations.map(conv => {
-                const userRating = userRatings[conv.id] || 0;
-                const avgRating = conv.rating || 0;
-                
                 // Special handling for "How I Made This Website"
-                if (conv.id === 1) {
-                    return `
-                        <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
-                            <summary class="dropdown-header">
-                                <h2>Conversation: ${conv.title}</h2>
-                                <div class="conversation-meta">
-                                    <p>
-                                        Date: ${conv.date} | Model: ${conv.modelName}
-                                    </p>
-                                    <div class="tags">
-                                        ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                    </div>
-                                    <div class="rating" data-conversation-id="${conv.id}">
-                                        ${[1,2,3,4,5].map(i => `
-                                            <span class="star ${i <= userRating ? 'active' : ''}" 
-                                                  data-rating="${i}"
-                                                  title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
-                                                ★
-                                            </span>
-                                        `).join('')}
-                                        <small>
-                                            (${avgRating.toFixed(1)})
-                                        </small>
-                                        <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div class="dropdown-content">
-                                <div class="ai-output-box">
-                                    <h4>Background</h4>
-                                    <p>This shows the original conversation that led to creating this entire website. It demonstrates how AI can help plan, structure, and execute a complete project from scratch.</p>
-                                    <p>I had next to no coding experience and had the website live in 15 minutes by following Kimi's guidance.</p>
-                                </div>
-                                ${conv.response}
-                            </div>
-                        </details>
-                    `;
-                }
+                // In the renderConversations function, update the conv.id === 1 section:
+
+if (conv.id === 1) {
+    return `
+        <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+            <summary class="dropdown-header">
+                <h2>Conversation: ${conv.title}</h2>
+                <div class="conversation-meta">
+                    <p>
+                        Date: ${conv.date} | Model: ${conv.modelName}
+                    </p>
+                    <div class="tags">
+                        ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
+                </div>
+            </summary>
+            <div class="dropdown-content">
+                ${conv.response} <!-- REMOVED the hardcoded ai-output-box background section -->
+            </div>
+        </details>
+    `;
+}
                 
                 // Standard rendering for other conversations
                 return `
@@ -463,19 +426,7 @@ plt.show()</code></pre>
                                 <div class="tags">
                                     ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                                 </div>
-                                <div class="rating" data-conversation-id="${conv.id}">
-                                    ${[1,2,3,4,5].map(i => `
-                                        <span class="star ${i <= userRating ? 'active' : ''}" 
-                                              data-rating="${i}"
-                                              title="${i <= userRating ? 'Your rating' : 'Click to rate'}">
-                                            ★
-                                        </span>
-                                    `).join('')}
-                                    <small>
-                                        (${avgRating.toFixed(1)})
-                                    </small>
-                                    <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
-                                </div>
+                                <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
                             </div>
                         </summary>
                         <div class="dropdown-content">
@@ -489,46 +440,16 @@ plt.show()</code></pre>
                                 ${conv.response}
                             </div>
                             
-                            <h3>Takeaways:</h3>
-                            <ul>
-                                ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
-                            </ul>
+                            ${conv.takeaways.length > 0 ? `
+                                <h3>Takeaways:</h3>
+                                <ul>
+                                    ${conv.takeaways.map(takeaway => `<li>${takeaway}</li>`).join('')}
+                                </ul>
+                            ` : ''}
                         </div>
                     </details>
                 `;
             }).join('');
-            
-            // Re-attach event listeners
-            attachRatingListeners();
-        }
-        
-        // Attach rating listeners
-        function attachRatingListeners() {
-            document.querySelectorAll('.rating').forEach(ratingContainer => {
-                const convId = parseInt(ratingContainer.dataset.conversationId);
-                const stars = ratingContainer.querySelectorAll('.star');
-                
-                stars.forEach((star, index) => {
-                    star.addEventListener('click', () => {
-                        const rating = index + 1;
-                        userRatings[convId] = rating;
-                        localStorage.setItem('userRatings', JSON.stringify(userRatings));
-                        
-                        // Update star display
-                        stars.forEach((s, i) => {
-                            s.classList.toggle('active', i < rating);
-                        });
-                        
-                        // Update average rating
-                        const conv = conversations.find(c => c.id === convId);
-                        if (conv.rating) {
-                            conv.rating = (conv.rating + rating) / 2;
-                        } else {
-                            conv.rating = rating;
-                        }
-                    });
-                });
-            });
         }
         
         // Filter function
@@ -578,8 +499,7 @@ plt.show()</code></pre>
         renderConversations();
         checkUrlHash();
     </script>
-	
-		<script src="/what-can-ai-do/js/theme.js"></script>
-   
+    
+    <script src="/what-can-ai-do/js/theme.js"></script>
 </body>
 </html>

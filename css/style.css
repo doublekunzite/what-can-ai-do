@@ -991,3 +991,56 @@ a[href*="compare.html"]:visited {
 .blog-post p:last-child {
     margin-bottom: 0;
 }
+
+/* Fix prompt text wrapping */
+.prompt-box pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+    max-width: 100%;
+}
+
+/* Fix bullet point padding in responses */
+.response-box ul,
+.response-box ol {
+    padding-left: 2em !important;
+    margin: 1em 0 !important;
+}
+
+.response-box li {
+    padding-left: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    line-height: 1.6 !important;
+}
+
+/* Ensure nested content also has proper padding */
+.nested-content ul,
+.nested-content ol {
+    padding-left: 2em !important;
+    margin: 1em 0 !important;
+}
+
+.nested-content li {
+    padding-left: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+.conversation-meta {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important; /* Changed from center to prevent crowding */
+    flex-wrap: wrap !important;
+    margin-top: 0.5em !important;
+    gap: 0.5em !important;
+}
+
+.conversation-meta .tags {
+    display: flex !important;
+    gap: 0.5em !important;
+    flex-wrap: wrap !important;
+    flex: 1 1 auto !important; /* Allow tags to take available space */
+}
+
+.conversation-meta button {
+    flex-shrink: 0 !important; /* Prevent share button from shrinking */
+}
