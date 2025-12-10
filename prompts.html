@@ -469,6 +469,63 @@ function renderConversations(filteredConversations = conversations) {
         
         // Special handling for "How I Made This Website"
 if (conv.id === 1) {
+    const promptResponseHTML = `
+        <div class="prompt-box">
+            <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
+            <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
+        </div>
+        <div class="response-box">
+            <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
+            <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
+            
+            <h3>Overall Structure</h3>
+            <pre><code>index.html (Homepage)
+├── use-cases.html (AI Uses)
+├── risks.html (Risks & Challenges)
+├── compare.html (LLM Comparison)
+└── faq.html ("Isn't AI Bad?")</code></pre>
+            
+            <h3>1. Design Philosophy (Minimalist & Bare Bones)</h3>
+            <p><strong>Visual Style:</strong></p>
+            <ul>
+                <li>Single-column layout with generous white space</li>
+                <li>Monochromatic color scheme (black text, white background, one accent color like <code>#0066cc</code>)</li>
+                <li>System fonts only (<code>-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</code>)</li>
+                <li>No images unless absolutely necessary</li>
+                <li>No JavaScript frameworks—vanilla JS only where essential</li>
+            </ul>
+            <p><strong>Core CSS Template:</strong></p>
+            <pre><code>* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  max-width: 700px; 
+  margin: 40px auto; 
+  padding: 0 20px; 
+  font-family: -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #222;
+}
+h1, h2 { margin: 1.5em 0 0.5em; }
+a { color: #0066cc; text-decoration: none; }
+a:hover { text-decoration: underline; }</code></pre>
+            
+            <h3>2. Page-by-Page Content Strategy</h3>
+            <h4>Homepage (index.html)</h4>
+            <p>Simple hero with clear navigation:</p>
+            <pre><code>What can I do with AI?
+
+A practical guide to understanding and using artificial intelligence.
+
+[Explore Uses] [Learn Risks] [Compare Models] [Address Concerns]</code></pre>
+            
+            <h4>Use Cases Page (use-cases.html)</h4>
+            <p>Organize by <em>domains</em>, not just technical capabilities.</p>
+            <p><strong>Categories:</strong> Creative, Analytical, Communication, Productivity, Learning, Professional</p>
+            <p><em>[Additional content continues...]</em></p>
+        </div>
+    `;
+    
+    const responseWithPrompt = conv.response.replace('<!-- PROMPT_RESPONSE_HERE -->', promptResponseHTML);
+    
     return `
         <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
             <summary class="dropdown-header">
@@ -480,14 +537,7 @@ if (conv.id === 1) {
                 </div>
             </summary>
             <div class="dropdown-content">
-                <div class="prompt-box">
-                    <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
-                    <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
-                </div>
-                <div class="response-box">
-                    <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
-                    ${conv.response}
-                </div>
+                ${responseWithPrompt}
             </div>
         </details>
     `;

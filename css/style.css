@@ -1242,3 +1242,19 @@ a[href*="compare.html"]:visited {
 .response-box .nested-content {
     padding: 0 1em 1em 0 !important;
 }
+
+/* Fix bullet points in takeaways sections */
+.response-box ul ul,
+.nested-content ul ul,
+.dropdown-content ul ul {
+    padding-left: 2em !important;
+    margin: 0.5em 0 !important;
+}
+
+.response-box ul li,
+.nested-content ul li,
+.dropdown-content ul li {
+    padding-left: 0.5em !important;
+    margin-bottom: 0.3em !important;
+    line-height: 1.5 !important;
+}
