@@ -456,11 +456,17 @@ function renderConversations(filteredConversations = conversations) {
     const container = document.getElementById('conversationsContainer');
     
     if (filteredConversations.length === 0) {
-        container.innerHTML = '<div class="no-results">No conversations match your filters. Try adjusting your search.</div>';
+        container.innerHTML = '<div class="no-results">No conversations match your filters.</div>';
         return;
     }
     
     container.innerHTML = filteredConversations.map(conv => {
+        const metaInfo = `<p>Date: ${conv.date} | Model: ${conv.modelName}</p>`;
+        const tags = conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const takeawaysSection = conv.takeaways && conv.takeaways.length > 0 
+            ? `<div style="margin-top:1.5em;"><h4 style="color:var(--nav-link-color);font-weight:600;">Key Takeaways:</h4><ul style="padding-left:2em;margin-top:0.5em;">${conv.takeaways.map(t => `<li style="margin-bottom:0.5em;">${t}</li>`).join('')}</ul></div>`
+            : '';
+        
         // Special handling for "How I Made This Website"
         if (conv.id === 1) {
             return `
@@ -468,21 +474,42 @@ function renderConversations(filteredConversations = conversations) {
                     <summary class="dropdown-header">
                         <h2>Conversation: ${conv.title}</h2>
                         <div class="conversation-meta">
-                            <p>
-                                Date: ${conv.date} | Model: ${conv.modelName}
-                            </p>
-                            <div class="tags">
-                                ${conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                            </div>
+                            ${metaInfo}
+                            <div class="tags">${tags}</div>
                             <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
                         </div>
                     </summary>
-                    <div class="dropdown-content">
-                        ${conv.response}
-                    </div>
+                    <div class="dropdown-content">${conv.response}</div>
                 </details>
             `;
         }
+        
+        // Standard rendering for other conversations
+        return `
+            <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                <summary class="dropdown-header">
+                    <h2>Conversation: ${conv.title}</h2>
+                    <div class="conversation-meta">
+                        ${metaInfo}
+                        <div class="tags">${tags}</div>
+                        <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
+                    </div>
+                </summary>
+                <div class="dropdown-content">
+                    <div class="prompt-box">
+                        <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
+                        <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
+                    </div>
+                    <div class="response-box">
+                        <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
+                        ${conv.response}
+                    </div>
+                    ${takeawaysSection}
+                </div>
+            </details>
+        `;
+    }).join('');
+}
         
         // Standard rendering for other conversations
         return `
