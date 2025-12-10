@@ -1224,3 +1224,21 @@ a[href*="compare.html"]:visited {
     border-radius: 3px !important;
     font-size: 0.9em !important;
 }
+
+/* Allow nested dropdowns inside response boxes */
+.response-box .nested-dropdown {
+    margin: 1.5em 0 !important;
+    border-left: 3px solid var(--accent-color) !important;
+    padding-left: 1em !important;
+}
+
+.response-box .nested-header {
+    cursor: pointer !important;
+    padding: 0.5em 0 !important;
+    color: var(--nav-link-color) !important;
+    list-style: none !important;
+}
+
+.response-box .nested-content {
+    padding: 0 1em 1em 0 !important;
+}

@@ -468,21 +468,30 @@ function renderConversations(filteredConversations = conversations) {
             : '';
         
         // Special handling for "How I Made This Website"
-        if (conv.id === 1) {
-            return `
-                <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
-                    <summary class="dropdown-header">
-                        <h2>Conversation: ${conv.title}</h2>
-                        <div class="conversation-meta">
-                            ${metaInfo}
-                            <div class="tags">${tags}</div>
-                            <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
-                        </div>
-                    </summary>
-                    <div class="dropdown-content">${conv.response}</div>
-                </details>
-            `;
-        }
+if (conv.id === 1) {
+    return `
+        <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+            <summary class="dropdown-header">
+                <h2>Conversation: ${conv.title}</h2>
+                <div class="conversation-meta">
+                    ${metaInfo}
+                    <div class="tags">${tags}</div>
+                    <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
+                </div>
+            </summary>
+            <div class="dropdown-content">
+                <div class="prompt-box">
+                    <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
+                    <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
+                </div>
+                <div class="response-box">
+                    <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
+                    ${conv.response}
+                </div>
+            </div>
+        </details>
+    `;
+}
         
         // Standard rendering for other conversations
         return `
