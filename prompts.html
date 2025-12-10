@@ -374,9 +374,143 @@ A practical guide to understanding and using artificial intelligence.
 [Explore Uses] [Learn Risks] [Compare Models] [Address Concerns]</code></pre>
             
             <h4>Use Cases Page (use-cases.html)</h4>
-            <p>Organize by <em>domains</em>, not just technical capabilities.</p>
-            <p><strong>Categories:</strong> Creative, Analytical, Communication, Productivity, Learning, Professional</p>
-            <p><em>[Additional content continues...]</em></p>
+<p>Organize by <em>domains</em>, not just technical capabilities.</p>
+<p><strong>Categories:</strong> Creative, Analytical, Communication, Productivity, Learning, Professional</p>
+<p><strong>Format for each use case:</strong></p>
+<pre><code>### Use Case: Summarize Long Documents
+What it does: Extracts key points from articles, papers, or reports
+Examples:
+- Turn a 20-page research paper into 5 bullet points
+- Create meeting notes from a transcript
+- Digest a long email thread
+
+Try this prompt: "Summarize this article in 3 paragraphs: [paste text]"</code></pre>
+<p><strong>Key feature:</strong> Make it interactive—include sample prompts people can copy and try immediately.</p>
+
+<h4>Risks Page (risks.html)</h4>
+<p>Balance honesty with nuance. Organize by <em>severity</em> and <em>mitigation</em>.</p>
+<p><strong>Sections:</strong> Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption</p>
+<p><strong>Format for each risk:</strong></p>
+<pre><code>### Risk: AI "Hallucinations"
+What it is: AI can generate plausible-sounding but false information.
+Real example: A lawyer used ChatGPT for case research; it invented fake cases.
+How to mitigate:
+- Always verify factual claims
+- Use AI for drafts, not final authority
+- Cross-check with primary sources
+Severity: ⚠️⚠️⚠️ (High)</code></pre>
+<p><strong>Add a "Risk Mitigation Checklist" at the end</strong>—a simple list of habits users should develop.</p>
+
+<h4>LLM Comparison Page (compare.html)</h4>
+<p>Keep it simple and actionable. Compare 4-5 major models.</p>
+<p><strong>Comparison Table (responsive, minimal):</strong></p>
+<pre><code>Model      | Best For        | Cost   | Speed | Accuracy | Context Window
+-----------|-----------------|--------|-------|----------|---------------
+GPT-4o     | Complex reasoning| $$     | Fast  | High     | 128K tokens
+Claude 3.5 | Long documents | $$     | Med   | High     | 200K tokens
+Gemini 1.5 | Multimodal     | Free/$ | Fast  | Medium   | 2M tokens
+Llama 3    | Privacy/local  | Free   | Fast  | Medium   | 8-128K tokens</code></pre>
+<p><strong>Key:</strong> Add a "Which model should I use?" decision tree (e.g., "I need to analyze a 100-page PDF" → Claude)</p>
+<p><strong>Include a "How to read benchmarks" section</strong>—explain what MMLU, HumanEval, etc. actually measure.</p>
+
+<h4>"Isn't AI Bad?" Page (faq.html)</h4>
+<p>Frame this as a dialogue. List common objections with nuanced, non-defensive responses.</p>
+<p><strong>Structure:</strong></p>
+<pre><code>Concern: "AI is just stealing from artists/writers."
+
+Response:
+- Acknowledge the concern: "This is a valid and complex issue."
+- Explain the technical reality: Training data vs. copying
+- Discuss current mitigation: Opt-out systems, licensing deals
+- Present both sides: "Some argue... Others counter..."
+- Your action: "If this worries you, consider using models that train on licensed data."
+
+Related: [Link to risks page section on copyright]</code></pre>
+<p><strong>Include 6-8 common concerns:</strong> job loss, autocomplete vs intelligence, environmental impact, skill loss, bias, hype bubble</p>
+<p><strong>End with:</strong> "Your concerns are valid. AI is a tool, not a religion. Use it where it helps, question it where it harms."</p>
+
+<h3>3. Technical Implementation</h3>
+
+<p><strong>File Structure:</strong></p>
+<pre><code>/what-can-ai-do/
+├── index.html
+├── use-cases.html
+├── risks.html
+├── compare.html
+├── faq.html
+├── css/
+│   └── style.css (single 100-line file)
+└── js/
+    └── main.js (optional, for copy-to-clipboard)</code></pre>
+
+<p><strong>Navigation (include on every page):</strong></p>
+<pre><code>&lt;nav style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;"&gt;
+  &lt;a href="index.html"&gt;Home&lt;/a&gt; • 
+  &lt;a href="use-cases.html"&gt;Use Cases&lt;/a&gt; • 
+  &lt;a href="risks.html"&gt;Risks&lt;/a&gt; • 
+  &lt;a href="compare.html"&gt;Compare Models&lt;/a&gt; • 
+  &lt;a href="faq.html"&gt;FAQ&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+<p><strong>Make it lightweight:</strong> Total page size under 50KB. No external dependencies.</p>
+
+<h3>4. Content Best Practices</h3>
+
+<p><strong>Tone:</strong></p>
+<ul>
+    <li>Plain language, no jargon</li>
+    <li>Acknowledge uncertainty ("We don't know yet...")</li>
+    <li>Action-oriented (always include "Try this:" or "Here's what to do:")</li>
+</ul>
+
+<p><strong>Maintainability:</strong></p>
+<ul>
+    <li>Write content in Markdown first, then convert to HTML</li>
+    <li>Keep a <code>content.md</code> file with all text for easy updates</li>
+    <li>Date-stamp your comparisons: "Updated: November 2024"</li>
+</ul>
+
+<p><strong>Accessibility:</strong></p>
+<ul>
+    <li>Semantic HTML only (<code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>)</li>
+    <li>Ensure 4.5:1 contrast ratio</li>
+    <li>Works without JavaScript</li>
+</ul>
+
+<h3>5. MVP Launch Plan</h3>
+
+<ul>
+    <li><strong>Week 1:</strong> Build static HTML/CSS structure for all 5 pages</li>
+    <li><strong>Week 2:</strong> Write content for Use Cases and FAQ pages (most valuable)</li>
+    <li><strong>Week 3:</strong> Add Risks and Comparison pages</li>
+    <li><strong>Week 4:</strong> Test on mobile, compress CSS, launch on GitHub Pages</li>
+</ul>
+
+<p><strong>Launch with just 3 pages if needed:</strong> Homepage, Use Cases, and FAQ. Add the others later.</p>
+
+<h3>6. Optional Enhancements (Post-Launch)</h3>
+
+<ul>
+    <li>Dark mode (CSS <code>prefers-color-scheme</code>)</li>
+    <li>Search functionality (tiny vanilla JS script)</li>
+    <li>"Print to PDF" stylesheet for each page</li>
+    <li>Multilingual support (if you have volunteers)</li>
+</ul>
+
+<p><strong>Would you like me to:</strong></p>
+<ol>
+    <li>Draft the full HTML/CSS for a specific page?</li>
+    <li>Expand the content outline for one section?</li>
+    <li>Create a sample "Use Case" entry with perfect prompt examples?</li>
+    <li>Research current LLM benchmarks for the comparison table?</li>
+</ol>
+<p><em>This structure gives you a solid, educational foundation that respects visitors' intelligence while staying truly minimalist.</em></p>`,
+    takeaways: [
+        "Use role-definition to set tone and expertise level",
+        "Specify output format (code blocks) for better structure",
+        "Include decision trees for actionable guidance"
+    ]
+}
         </div>
     `;
     
