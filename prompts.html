@@ -9,21 +9,20 @@
         // Apply theme immediately before page renders
         (function() {
             const savedTheme = localStorage.getItem('theme');
-            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             
-            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
                 document.documentElement.style.backgroundColor = '#1a1a1a';
             }
         })();
     </script>
     
     <title>Prompt Repo - What can AI do?</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22   viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css?v=2">
     
     <!-- Inline CSS fixes -->
     <style>
-        /* Share button styling */
         .share-btn {
             background: var(--nav-link-color);
             color: white;
@@ -40,7 +39,6 @@
             background: var(--nav-link-hover);
         }
         
-        /* Highlight shared prompt temporarily */
         @keyframes highlight {
             from { background-color: var(--nav-link-color); }
             to { background-color: transparent; }
@@ -50,7 +48,6 @@
             animation: highlight 2s ease-in-out;
         }
 
-        /* Additional fixes for conversation meta layout */
         .conversation-meta {
             display: flex;
             justify-content: space-between;
@@ -70,6 +67,23 @@
             display: flex;
             gap: 0.5em;
             flex-wrap: wrap;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2em;
+            color: var(--text-secondary);
+        }
+
+        .prompt-box, .response-box {
+            margin: 1em 0;
+        }
+
+        .prompt-box pre {
+            background: var(--code-bg);
+            padding: 1em;
+            border-radius: 4px;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -104,7 +118,6 @@
             </select>
         </div>
         
-        
         <!-- Conversations Container -->
         <div id="conversationsContainer">
             <!-- Conversations will be dynamically inserted here -->
@@ -114,59 +127,56 @@
             <p><a href="index.html">← Back to Home</a></p>
         </footer>
     </main>
+    
     <script src="js/navigation.js"></script>
     
     <script>
         // Sample data structure for conversations
         const conversations = [
             {
-    id: 1,
-    title: "How I Made This Website",
-    date: "2024-12-01",
-    model: "kimi",
-    modelName: "Kimi K2",
-    tags: ["coding", "creative"],
-    rating: 4.9,
-    prompt: "help me create an educational website about AI. the name i have in mind for now is \"what can I do with AI?\". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:\n\na page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.\n\na page about the risks, dangers, and other challenges of using AI\n\na page comparing different AI LLMs, how they perform on various metrics\n\na page titled something like \"Isn't AI bad?\" which will address common talking points against AI",
-    response: `
-        <details class="nested-dropdown">
-            <summary class="nested-header">
-                <h4>Prompt 1: Website Conception</h4>
-            </summary>
-            <div class="nested-content">
-                <!-- PROMPT_RESPONSE_HERE -->
-            </div>
-        </details>
-        
-        <details class="nested-dropdown">
-            <summary class="nested-header">
-                <h4>Prompt 2: Design Philosophy (to be added)</h4>
-            </summary>
-            <div class="nested-content">
-                <p>Content for design philosophy discussion...</p>
-            </div>
-        </details>
-        
-        <details class="nested-dropdown">
-            <summary class="nested-header">
-                <h4>Prompt 3: Content Structure (to be added)</h4>
-            </summary>
-            <div class="nested-content">
-                <p>Content for content structure discussion...</p>
-            </div>
-        </details>
-        
-        <details class="nested-dropdown">
-            <summary class="nested-header">
-                <h4>Prompt 4: Deployment Plan (to be added)</h4>
-            </summary>
-            <div class="nested-content">
-                <p>Content for deployment discussion...</p>
-            </div>
-        </details>
-    `,
-    takeaways: []
-},
+                id: 1,
+                title: "How I Made This Website",
+                date: "2024-12-01",
+                model: "kimi",
+                modelName: "Kimi K2",
+                tags: ["coding", "creative"],
+                rating: 4.9,
+                prompt: `help me create an educational website about AI. the name i have in mind for now is "what can I do with AI?". i'm envisioning something quite minimalist and bare bones in terms of design. these are some of the features i want it to have:
+
+a page that lists possible uses of AI and examples of each use case. the idea is to help people think about possible uses that might not have occurred to them.
+
+a page about the risks, dangers, and other challenges of using AI
+
+a page comparing different AI LLMs, how they perform on various metrics
+
+a page titled something like "Isn't AI bad?" which will address common talking points against AI`,
+                response: `<p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
+                
+                <h3>Overall Structure</h3>
+                <pre><code>index.html (Homepage)
+├── use-cases.html (AI Uses)
+├── risks.html (Risks & Challenges)
+├── compare.html (LLM Comparison)
+└── faq.html ("Isn't AI Bad?")</code></pre>
+                
+                <h3>1. Design Philosophy (Minimalist & Bare Bones)</h3>
+                <p><strong>Visual Style:</strong></p>
+                <ul>
+                    <li>Single-column layout with generous white space</li>
+                    <li>Monochromatic color scheme (black text, white background, one accent color like <code>#0066cc</code>)</li>
+                    <li>System fonts only (<code>-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</code>)</li>
+                    <li>No images unless absolutely necessary</li>
+                    <li>No JavaScript frameworks—vanilla JS only where essential</li>
+                </ul>
+                
+                <h3>2. Page-by-Page Content Strategy</h3>
+                <p>Organize by domains, not just technical capabilities. Categories: Creative, Analytical, Communication, Productivity, Learning, Professional.</p>`,
+                takeaways: [
+                    "Use role-definition to set tone and expertise level",
+                    "Specify output format (code blocks) for better structure",
+                    "Include decision trees for actionable guidance"
+                ]
+            },
             {
                 id: 5,
                 title: "Creating a Workout Plan",
@@ -184,66 +194,16 @@
                     <li><strong>2 Rest Days</strong></li>
                 </ul>
                 
-                <hr>
-                
                 <h3>Strength Days (Mon/Wed/Fri)</h3>
-                <p><em>Warm-up: 5 min (jumping jacks, arm circles, leg swings)</em></p>
-                
                 <h4>Home Version (Minimal Equipment: 2 dumbbells + resistance band)</h4>
                 <ul>
                     <li>Goblet Squats: 3×10-12</li>
-                    <li>Push-ups: 3×8-12 (modify on knees if needed)</li>
+                    <li>Push-ups: 3×8-12</li>
                     <li>Dumbbell Rows: 3×10-12 each arm</li>
-                    <li>Bulgarian Split Squats: 3×10 each leg (use chair)</li>
+                    <li>Bulgarian Split Squats: 3×10 each leg</li>
                     <li>Band Pull-aparts: 3×15</li>
                     <li>Plank: 3×30-60 sec</li>
-                </ul>
-                
-                <h4>Gym Version</h4>
-                <ul>
-                    <li>Goblet Squats or Leg Press: 3×10-12</li>
-                    <li>Dumbbell Bench Press: 3×10-12</li>
-                    <li>Lat Pulldown: 3×10-12</li>
-                    <li>Romanian Deadlifts: 3×10-12</li>
-                    <li>Face Pulls: 3×15</li>
-                    <li>Cable Pallof Press: 3×12 each side</li>
-                </ul>
-                
-                <p><em>Rest 60-90 sec between sets</em></p>
-                
-                <hr>
-                
-                <h3>Cardio Day (Tue)</h3>
-                <ul>
-                    <li><strong>Home:</strong> 30 min brisk walk/jog, jump rope intervals (1 min on/1 min off), or burpee circuits</li>
-                    <li><strong>Gym:</strong> 20-30 min treadmill intervals (30 sec sprint/90 sec walk) or rowing machine</li>
-                </ul>
-                
-                <hr>
-                
-                <h3>Mobility/Active Recovery (Thu)</h3>
-                <ul>
-                    <li>10 min yoga flow (downward dog, cat-cow, child's pose)</li>
-                    <li>10 min stretching (hip flexors, hamstrings, shoulders)</li>
-                    <li>10 min core/glute activation: glute bridges, bird-dogs, dead bugs</li>
-                </ul>
-                
-                <hr>
-                
-                <h3>Rest Days (Sat/Sun)</h3>
-                <p>Full rest or light activity (walking, hiking)</p>
-                
-                <hr>
-                
-                <h4>Tips:</h4>
-                <ul>
-                    <li>Progress by adding reps or weight when you complete all sets comfortably</li>
-                    <li>Focus on form over speed</li>
-                    <li>Stay hydrated and sleep 7-8 hours</li>
-                    <li>Adjust intensity if you feel overly sore</li>
-                </ul>
-                
-                <p><em>This hits all major muscle groups, builds strength, and improves conditioning efficiently!</em></p>`,
+                </ul>`,
                 takeaways: [
                     "Specify time constraints (30-45 min) to get realistic routines",
                     "Mention equipment availability (home vs gym) for tailored options",
@@ -271,17 +231,11 @@
         
         // Scroll to and expand a specific prompt
         function scrollToPrompt(convId) {
-            const promptElement = document.querySelector(`[data-id="${convId}"]`);
+            const promptElement = document.querySelector(`#prompt-${convId}`);
             if (promptElement) {
-                // Expand the dropdown
-                if (promptElement.tagName === 'DETAILS') {
-                    promptElement.open = true;
-                }
-                
-                // Add highlight effect
+                promptElement.open = true;
                 promptElement.classList.add('prompt-highlight');
                 
-                // Scroll to element
                 setTimeout(() => {
                     promptElement.scrollIntoView({
                         behavior: 'smooth',
@@ -289,7 +243,6 @@
                     });
                 }, 100);
                 
-                // Remove highlight after animation
                 setTimeout(() => {
                     promptElement.classList.remove('prompt-highlight');
                 }, 2000);
@@ -303,264 +256,51 @@
                 const convId = parseInt(hash.replace('#prompt-', ''));
                 setTimeout(() => {
                     scrollToPrompt(convId);
-                }, 500); // Wait for content to render
+                }, 500);
             }
         }
         
         // Updated render function with improved formatting and model names
-function renderConversations(filteredConversations = conversations) {
-    const container = document.getElementById('conversationsContainer');
-    
-    if (filteredConversations.length === 0) {
-        container.innerHTML = '<div class="no-results">No conversations match your filters.</div>';
-        return;
-    }
-    
-    container.innerHTML = filteredConversations.map(conv => {
-        const metaInfo = `<p>Date: ${conv.date} | Model: ${conv.modelName}</p>`;
-        const tags = conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-        const takeawaysSection = conv.takeaways && conv.takeaways.length > 0 
-            ? `<div style="margin-top:1.5em;"><h4 style="color:var(--nav-link-color);font-weight:600;">Key Takeaways:</h4><ul style="padding-left:2em;margin-top:0.5em;">${conv.takeaways.map(t => `<li style="margin-bottom:0.5em;">${t}</li>`).join('')}</ul></div>`
-            : '';
-        
-        // Special handling for "How I Made This Website"
-if (conv.id === 1) {
-    const promptResponseHTML = `
-        <div class="prompt-box">
-            <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
-            <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
-        </div>
-        <div class="response-box">
-            <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
-            <p>I'll help you plan this educational AI website! Here's a comprehensive roadmap for "What can I do with AI?" with a minimalist approach.</p>
+        function renderConversations(filteredConversations = conversations) {
+            const container = document.getElementById('conversationsContainer');
             
-            <h3>Overall Structure</h3>
-            <pre><code>index.html (Homepage)
-├── use-cases.html (AI Uses)
-├── risks.html (Risks & Challenges)
-├── compare.html (LLM Comparison)
-└── faq.html ("Isn't AI Bad?")</code></pre>
+            if (filteredConversations.length === 0) {
+                container.innerHTML = '<div class="no-results">No conversations match your filters.</div>';
+                return;
+            }
             
-            <h3>1. Design Philosophy (Minimalist & Bare Bones)</h3>
-            <p><strong>Visual Style:</strong></p>
-            <ul>
-                <li>Single-column layout with generous white space</li>
-                <li>Monochromatic color scheme (black text, white background, one accent color like <code>#0066cc</code>)</li>
-                <li>System fonts only (<code>-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</code>)</li>
-                <li>No images unless absolutely necessary</li>
-                <li>No JavaScript frameworks—vanilla JS only where essential</li>
-            </ul>
-            <p><strong>Core CSS Template:</strong></p>
-            <pre><code>* { margin:0; padding:0; box-sizing:border-box; }
-body { 
-  max-width: 700px; 
-  margin: 40px auto; 
-  padding: 0 20px; 
-  font-family: -apple-system, sans-serif;
-  line-height: 1.6;
-  color: #222;
-}
-h1, h2 { margin: 1.5em 0 0.5em; }
-a { color: #0066cc; text-decoration: none; }
-a:hover { text-decoration: underline; }</code></pre>
-            
-            <h3>2. Page-by-Page Content Strategy</h3>
-            <h4>Homepage (index.html)</h4>
-            <p>Simple hero with clear navigation:</p>
-            <pre><code>What can I do with AI?
-
-A practical guide to understanding and using artificial intelligence.
-
-[Explore Uses] [Learn Risks] [Compare Models] [Address Concerns]</code></pre>
-            
-            <h4>Use Cases Page (use-cases.html)</h4>
-<p>Organize by <em>domains</em>, not just technical capabilities.</p>
-<p><strong>Categories:</strong> Creative, Analytical, Communication, Productivity, Learning, Professional</p>
-<p><strong>Format for each use case:</strong></p>
-<pre><code>### Use Case: Summarize Long Documents
-What it does: Extracts key points from articles, papers, or reports
-Examples:
-- Turn a 20-page research paper into 5 bullet points
-- Create meeting notes from a transcript
-- Digest a long email thread
-
-Try this prompt: "Summarize this article in 3 paragraphs: [paste text]"</code></pre>
-<p><strong>Key feature:</strong> Make it interactive—include sample prompts people can copy and try immediately.</p>
-
-<h4>Risks Page (risks.html)</h4>
-<p>Balance honesty with nuance. Organize by <em>severity</em> and <em>mitigation</em>.</p>
-<p><strong>Sections:</strong> Privacy & Data, Accuracy & Hallucinations, Bias & Fairness, Dependency & Skill Loss, Environmental Impact, Economic Disruption</p>
-<p><strong>Format for each risk:</strong></p>
-<pre><code>### Risk: AI "Hallucinations"
-What it is: AI can generate plausible-sounding but false information.
-Real example: A lawyer used ChatGPT for case research; it invented fake cases.
-How to mitigate:
-- Always verify factual claims
-- Use AI for drafts, not final authority
-- Cross-check with primary sources
-Severity: ⚠️⚠️⚠️ (High)</code></pre>
-<p><strong>Add a "Risk Mitigation Checklist" at the end</strong>—a simple list of habits users should develop.</p>
-
-<h4>LLM Comparison Page (compare.html)</h4>
-<p>Keep it simple and actionable. Compare 4-5 major models.</p>
-<p><strong>Comparison Table (responsive, minimal):</strong></p>
-<pre><code>Model      | Best For        | Cost   | Speed | Accuracy | Context Window
------------|-----------------|--------|-------|----------|---------------
-GPT-4o     | Complex reasoning| $$     | Fast  | High     | 128K tokens
-Claude 3.5 | Long documents | $$     | Med   | High     | 200K tokens
-Gemini 1.5 | Multimodal     | Free/$ | Fast  | Medium   | 2M tokens
-Llama 3    | Privacy/local  | Free   | Fast  | Medium   | 8-128K tokens</code></pre>
-<p><strong>Key:</strong> Add a "Which model should I use?" decision tree (e.g., "I need to analyze a 100-page PDF" → Claude)</p>
-<p><strong>Include a "How to read benchmarks" section</strong>—explain what MMLU, HumanEval, etc. actually measure.</p>
-
-<h4>"Isn't AI Bad?" Page (faq.html)</h4>
-<p>Frame this as a dialogue. List common objections with nuanced, non-defensive responses.</p>
-<p><strong>Structure:</strong></p>
-<pre><code>Concern: "AI is just stealing from artists/writers."
-
-Response:
-- Acknowledge the concern: "This is a valid and complex issue."
-- Explain the technical reality: Training data vs. copying
-- Discuss current mitigation: Opt-out systems, licensing deals
-- Present both sides: "Some argue... Others counter..."
-- Your action: "If this worries you, consider using models that train on licensed data."
-
-Related: [Link to risks page section on copyright]</code></pre>
-<p><strong>Include 6-8 common concerns:</strong> job loss, autocomplete vs intelligence, environmental impact, skill loss, bias, hype bubble</p>
-<p><strong>End with:</strong> "Your concerns are valid. AI is a tool, not a religion. Use it where it helps, question it where it harms."</p>
-
-<h3>3. Technical Implementation</h3>
-
-<p><strong>File Structure:</strong></p>
-<pre><code>/what-can-ai-do/
-├── index.html
-├── use-cases.html
-├── risks.html
-├── compare.html
-├── faq.html
-├── css/
-│   └── style.css (single 100-line file)
-└── js/
-    └── main.js (optional, for copy-to-clipboard)</code></pre>
-
-<p><strong>Navigation (include on every page):</strong></p>
-<pre><code>&lt;nav style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;"&gt;
-  &lt;a href="index.html"&gt;Home&lt;/a&gt; • 
-  &lt;a href="use-cases.html"&gt;Use Cases&lt;/a&gt; • 
-  &lt;a href="risks.html"&gt;Risks&lt;/a&gt; • 
-  &lt;a href="compare.html"&gt;Compare Models&lt;/a&gt; • 
-  &lt;a href="faq.html"&gt;FAQ&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-
-<p><strong>Make it lightweight:</strong> Total page size under 50KB. No external dependencies.</p>
-
-<h3>4. Content Best Practices</h3>
-
-<p><strong>Tone:</strong></p>
-<ul>
-    <li>Plain language, no jargon</li>
-    <li>Acknowledge uncertainty ("We don't know yet...")</li>
-    <li>Action-oriented (always include "Try this:" or "Here's what to do:")</li>
-</ul>
-
-<p><strong>Maintainability:</strong></p>
-<ul>
-    <li>Write content in Markdown first, then convert to HTML</li>
-    <li>Keep a <code>content.md</code> file with all text for easy updates</li>
-    <li>Date-stamp your comparisons: "Updated: November 2024"</li>
-</ul>
-
-<p><strong>Accessibility:</strong></p>
-<ul>
-    <li>Semantic HTML only (<code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>)</li>
-    <li>Ensure 4.5:1 contrast ratio</li>
-    <li>Works without JavaScript</li>
-</ul>
-
-<h3>5. MVP Launch Plan</h3>
-
-<ul>
-    <li><strong>Week 1:</strong> Build static HTML/CSS structure for all 5 pages</li>
-    <li><strong>Week 2:</strong> Write content for Use Cases and FAQ pages (most valuable)</li>
-    <li><strong>Week 3:</strong> Add Risks and Comparison pages</li>
-    <li><strong>Week 4:</strong> Test on mobile, compress CSS, launch on GitHub Pages</li>
-</ul>
-
-<p><strong>Launch with just 3 pages if needed:</strong> Homepage, Use Cases, and FAQ. Add the others later.</p>
-
-<h3>6. Optional Enhancements (Post-Launch)</h3>
-
-<ul>
-    <li>Dark mode (CSS <code>prefers-color-scheme</code>)</li>
-    <li>Search functionality (tiny vanilla JS script)</li>
-    <li>"Print to PDF" stylesheet for each page</li>
-    <li>Multilingual support (if you have volunteers)</li>
-</ul>
-
-<p><strong>Would you like me to:</strong></p>
-<ol>
-    <li>Draft the full HTML/CSS for a specific page?</li>
-    <li>Expand the content outline for one section?</li>
-    <li>Create a sample "Use Case" entry with perfect prompt examples?</li>
-    <li>Research current LLM benchmarks for the comparison table?</li>
-</ol>
-<p><em>This structure gives you a solid, educational foundation that respects visitors' intelligence while staying truly minimalist.</em></p>`,
-    takeaways: [
-        "Use role-definition to set tone and expertise level",
-        "Specify output format (code blocks) for better structure",
-        "Include decision trees for actionable guidance"
-    ]
-}
-        </div>
-    `;
-    
-    const responseWithPrompt = conv.response.replace('<!-- PROMPT_RESPONSE_HERE -->', promptResponseHTML);
-    
-    return `
-        <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
-            <summary class="dropdown-header">
-                <h2>Conversation: ${conv.title}</h2>
-                <div class="conversation-meta">
-                    ${metaInfo}
-                    <div class="tags">${tags}</div>
-                    <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
-                </div>
-            </summary>
-            <div class="dropdown-content">
-                ${responseWithPrompt}
-            </div>
-        </details>
-    `;
-}
-        
-        // Standard rendering for other conversations
-        return `
-            <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
-                <summary class="dropdown-header">
-                    <h2>Conversation: ${conv.title}</h2>
-                    <div class="conversation-meta">
-                        ${metaInfo}
-                        <div class="tags">${tags}</div>
-                        <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
-                    </div>
-                </summary>
-                <div class="dropdown-content">
-                    <div class="prompt-box">
-                        <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
-                        <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
-                    </div>
-                    <div class="response-box">
-                        <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
-                        ${conv.response}
-                    </div>
-                    ${takeawaysSection}
-                </div>
-            </details>
-        `;
-    }).join('');
-}
-        
-       
+            container.innerHTML = filteredConversations.map(conv => {
+                const metaInfo = `<p>Date: ${conv.date} | Model: ${conv.modelName}</p>`;
+                const tags = conv.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                const takeawaysSection = conv.takeaways && conv.takeaways.length > 0 
+                    ? `<div style="margin-top:1.5em;"><h4 style="color:var(--nav-link-color);font-weight:600;">Key Takeaways:</h4><ul style="padding-left:2em;margin-top:0.5em;">${conv.takeaways.map(t => `<li style="margin-bottom:0.5em;">${t}</li>`).join('')}</ul></div>`
+                    : '';
+                
+                return `
+                    <details class="main-dropdown" data-id="${conv.id}" id="prompt-${conv.id}" data-categories="${conv.tags.join(' ')}" data-model="${conv.model}">
+                        <summary class="dropdown-header">
+                            <h2>Conversation: ${conv.title}</h2>
+                            <div class="conversation-meta">
+                                ${metaInfo}
+                                <div class="tags">${tags}</div>
+                                <button class="share-btn" onclick="sharePrompt(${conv.id})">Share</button>
+                            </div>
+                        </summary>
+                        <div class="dropdown-content">
+                            <div class="prompt-box">
+                                <h4 style="color:var(--nav-link-color);font-weight:600;">Prompt:</h4>
+                                <pre style="margin:0;white-space:pre-wrap;">${conv.prompt}</pre>
+                            </div>
+                            <div class="response-box">
+                                <h4 style="color:var(--nav-link-color);font-weight:600;">${conv.modelName} Response:</h4>
+                                ${conv.response}
+                            </div>
+                            ${takeawaysSection}
+                        </div>
+                    </details>
+                `;
+            }).join('');
+        }
         
         // Filter function
         function filterConversations() {
@@ -569,18 +309,15 @@ Related: [Link to risks page section on copyright]</code></pre>
             const selectedModel = document.getElementById('modelSelect').value;
             
             const filtered = conversations.filter(conv => {
-                // Search filter
                 const matchesSearch = !searchTerm || 
                     conv.title.toLowerCase().includes(searchTerm) ||
                     conv.prompt.toLowerCase().includes(searchTerm) ||
                     conv.response.toLowerCase().includes(searchTerm) ||
                     conv.tags.some(tag => tag.toLowerCase().includes(searchTerm));
                 
-                // Category filter
                 const matchesCategory = selectedCategory === 'all' || 
                     conv.tags.includes(selectedCategory);
                 
-                // Model filter
                 const matchesModel = selectedModel === 'all' || 
                     conv.model === selectedModel;
                 
