@@ -690,3 +690,62 @@ details.nested-dropdown[open] > summary.nested-header::before {
         gap: 1em;
     }
 }
+
+/* ========== FIXES FOR SPACING & LOST STYLES ========== */
+
+/* 1. Add breathing room around submission section */
+.submission-section {
+    margin: 4em 0 3em !important; /* Increased top/bottom space */
+}
+
+.submission-content > p:first-child {
+    margin-bottom: 1.5em !important; /* Space after intro text */
+}
+
+/* 2. Fix footer spacing */
+footer {
+    padding: 2em 1em !important; /* Add padding inside footer */
+    text-align: center !important; /* Center the content */
+}
+
+footer p {
+    margin: 0 auto !important; /* Center the paragraph */
+    display: inline-block !important; /* Prevent full-width stretch */
+}
+
+/* 3. Restore index page intro box */
+.intro-section {
+    background: var(--dropdown-header-bg) !important;
+    padding: 2em !important;
+    border-radius: 8px !important;
+    margin: 2em 0 !important;
+    border: 1px solid var(--border-color) !important; /* Add subtle border */
+}
+
+/* 4. Restore blog post card styling */
+.feature-cards .feature-card:first-child {
+    background: var(--card-bg) !important;
+    padding: 1.5em !important;
+    border-radius: 8px !important;
+    border: 2px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important; /* Restore shadow */
+}
+
+/* 5. Restore blog date/author styling */
+.blog-meta {
+    color: var(--text-secondary) !important;
+    font-size: 0.9em !important;
+    margin: 1em 0 2em !important;
+    display: block !important; /* Ensure it's treated as a block element */
+}
+
+/* 6. Ensure all pullout boxes have consistent spacing */
+.contribute,
+.quick-start,
+.updates {
+    margin: 2em 0 !important;
+    padding: 1.5em !important;
+    border-radius: 8px !important;
+    background: var(--dropdown-header-bg) !important;
+    border: 1px solid var(--border-color) !important;
+}
