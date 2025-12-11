@@ -606,7 +606,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
 
 /* Intro section spacing */
 .intro-section p {
-    margin-bottom: 1.5em;
+    margin-bottom: 0.5em;
 }
 
 /* Share button size for compare page (specific override) */
