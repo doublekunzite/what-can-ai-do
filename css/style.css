@@ -860,3 +860,13 @@ main > h1 {
 .blog-posts .feature-card + .feature-card {
     margin-top: 1.5em !important;
 }
+
+/* ========== BLOG IMAGE SIZE FIX ========== */
+
+.blog-image.small img {
+    max-width: 400px !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
