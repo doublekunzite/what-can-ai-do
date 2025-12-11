@@ -12,6 +12,7 @@
 :root {
     /* DARK MODE (Default) */
     --bg-color: #1a1a1a;
+    --bg-secondary: #252525; /* NEW: for submission section */
     --text-color: #e0e0e0;
     --text-secondary: #b0b0b0;
     --border-color: #444444;
@@ -23,11 +24,13 @@
     --footer-border: #444444;
     --accent-color: #4da6ff;
     --shadow: 0 2px 8px rgba(0,0,0,0.3);
+    --code-bg: #1e1e1e; /* NEW: for code backgrounds */
 }
 
 /* Light Mode - Applied when data-theme="light" is set */
 [data-theme="light"] {
     --bg-color: #ffffff;
+    --bg-secondary: #f5f5f5; /* NEW */
     --text-color: #222222;
     --text-secondary: #555555;
     --border-color: #dddddd;
@@ -39,6 +42,7 @@
     --footer-border: #dddddd;
     --accent-color: #0066cc;
     --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --code-bg: #f5f5f5; /* NEW */
 }
 
 /* Base Styles */
@@ -77,7 +81,7 @@ nav a:hover {
 /* Fix visited link colors for both themes */
 a:visited {
     color: var(--nav-link-color) !important;
-    opacity: 0.7;
+    opacity: 0.85; /* Better contrast than 0.7 */
 }
 
 a:visited:hover {
@@ -262,7 +266,9 @@ details.nested-dropdown[open] > summary.nested-header::before {
     }
 }
 
-/* Prompt Repository */
+/* ========== PROMPT REPOSITORY STYLES ========== */
+
+/* Filter controls */
 .filter-controls {
     background-color: var(--dropdown-header-bg);
     padding: 1em;
@@ -309,21 +315,69 @@ details.nested-dropdown[open] > summary.nested-header::before {
     color: white;
 }
 
+.model-select {
+    margin-top: 1em;
+    width: 100%;
+    padding: 0.8em;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1em;
+}
+
+/* Share button (consolidated - works for both compare and prompt repo) */
+.share-btn {
+    background: var(--nav-link-color);
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em; /* Compromise size for both contexts */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em; /* Slightly smaller for consistency */
+    margin-left: 0.5em;
+    transition: background 0.3s;
+}
+.share-btn:hover {
+    background: var(--nav-link-hover);
+}
+
+/* Highlight animation (consolidated) */
+@keyframes highlight {
+    from { background-color: var(--nav-link-color); }
+    to { background-color: transparent; }
+}
+.prompt-highlight,
+.model-highlight { /* Works for both prompt and model highlighting */
+    animation: highlight 2s ease-in-out;
+}
+
+/* Conversation meta (consolidated) */
 .conversation-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Better for multi-line content */
     flex-wrap: wrap;
     margin-top: 0.5em;
     gap: 0.5em;
 }
-
-.tags {
+.conversation-meta p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+.conversation-meta .tags {
     display: flex;
     gap: 0.5em;
     flex-wrap: wrap;
+    flex: 1 1 auto; /* Allow tags to take space */
+}
+.conversation-meta button {
+    flex-shrink: 0; /* Prevent button from shrinking */
+    margin-left: auto;
 }
 
+/* Tags */
 .tag {
     background: var(--dropdown-header-bg);
     color: var(--text-color);
@@ -333,45 +387,106 @@ details.nested-dropdown[open] > summary.nested-header::before {
     border: 1px solid var(--border-color);
 }
 
-.rating {
-    display: flex;
-    gap: 0.3em;
-}
-
-.star {
-    cursor: pointer;
-    color: var(--text-secondary);
-    font-size: 1.2em;
-    transition: color 0.2s;
-}
-
-.star.active {
-    color: #ffc107;
-}
-
-.copy-btn {
-    background: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background 0.3s;
-}
-
-.copy-btn:hover {
-    background: var(--nav-link-hover);
-}
-
+/* No results (consolidated) */
 .no-results {
     text-align: center;
-    padding: 3em;
+    padding: 2em; /* Standardized padding */
     color: var(--text-secondary);
     font-style: italic;
 }
 
-/* AI Output Box */
+/* Prompt/Response Boxes */
+.prompt-box pre,
+.response-box pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-x: auto !important;
+    max-width: 100%;
+    display: block;
+}
+
+/* Fix bullet points in ALL content areas */
+.dropdown-content ul,
+.dropdown-content ol,
+.nested-content ul,
+.nested-content ol,
+.ai-output-box ul,
+.ai-output-box ol {
+    padding-left: 2em !important;
+    margin: 1em 0 !important;
+}
+.dropdown-content li,
+.nested-content li,
+.ai-output-box li {
+    padding-left: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    line-height: 1.6 !important;
+}
+
+/* Code blocks in responses */
+.response-box pre,
+.nested-content pre,
+.ai-output-box pre {
+    background: var(--dropdown-header-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    padding: 1em !important;
+    margin: 1em 0 !important;
+    overflow-x: auto !important;
+}
+
+/* Professional prompt/response boxes */
+.prompt-box {
+    background: rgba(77, 166, 255, 0.08);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+.response-box {
+    background: rgba(45, 45, 45, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    font-size: 0.95em;
+}
+[data-theme="light"] .prompt-box {
+    background: rgba(0, 102, 204, 0.05);
+}
+[data-theme="light"] .response-box {
+    background: rgba(240, 240, 240, 0.5);
+}
+
+/* Submission Section (NEW) */
+.submission-section {
+    margin: 3em 0 2em;
+    padding: 0; /* Padding is on the content div */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+}
+.submission-header {
+    padding: 1em;
+    margin: 0;
+}
+.submission-content {
+    padding: 0 1em 1em 1em;
+}
+.submission-notice {
+    font-size: 0.9em;
+    margin-top: 1em;
+    padding: 1em;
+    background: var(--dropdown-header-bg);
+    border-left: 4px solid var(--nav-link-color);
+    border-radius: 4px;
+}
+.submission-notice strong {
+    color: var(--nav-link-color);
+}
+
+/* AI Output Box (consolidated) */
 .ai-output-box {
     background-color: var(--dropdown-header-bg);
     border: 1px solid var(--border-color);
@@ -380,12 +495,14 @@ details.nested-dropdown[open] > summary.nested-header::before {
     margin: 1.5em 0;
     font-size: 0.95em;
 }
-
 .ai-output-box h4 {
     color: var(--nav-link-color);
+    margin-top: 0;
 }
 
-/* Index Page */
+/* ========== INDEX PAGE STYLES ========== */
+
+/* Hero section */
 .hero {
     text-align: center;
     padding: 3em 0 2em;
@@ -426,18 +543,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     transform: translateY(-2px);
 }
 
-.intro-section {
-    background: var(--dropdown-header-bg);
-    padding: 2em;
-    border-radius: 8px;
-    margin: 2em 0;
-}
-
-.features h2 {
-    text-align: center;
-    margin-bottom: 1.5em;
-}
-
+/* Feature cards */
 .feature-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -466,27 +572,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
     margin-bottom: 0.5em;
 }
 
-.feature-card h3 {
-    color: var(--nav-link-color);
-    margin-bottom: 0.5em;
-}
-
-.feature-card p {
-    margin-bottom: 0.5em;
-}
-
-.feature-card small {
-    color: var(--text-secondary);
-    font-size: 0.8em;
-}
-
-.quick-start {
-    background: var(--dropdown-header-bg);
-    padding: 2em;
-    border-radius: 8px;
-    margin: 2em 0;
-}
-
+/* Quick start steps */
 .steps {
     list-style: none;
     counter-reset: step-counter;
@@ -516,369 +602,24 @@ details.nested-dropdown[open] > summary.nested-header::before {
     font-weight: bold;
 }
 
-.updates {
-    margin: 2em 0;
-}
-
-.updates ul {
-    list-style: none;
-    padding: 0;
-}
-
-.updates li {
-    padding: 0.5em 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.updates li:last-child {
-    border-bottom: none;
-}
-
-.contribute {
-    background: var(--dropdown-header-bg);
-    padding: 1.5em;
-    border-radius: 8px;
-    text-align: center;
-    margin: 2em 0;
-}
-
-footer {
-    text-align: center;
-    padding: 2em 0 1em;
-    border-top: 1px solid var(--footer-border);
-    margin-top: 2em;
-    color: var(--text-secondary);
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        gap: 1em;
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-/* Blog Image Styling */
-.blog-image {
-    margin: 2em 0;
-    text-align: center;
-}
-
-.blog-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-}
-
-.blog-image figcaption {
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-/* Blog image size variations */
-.blog-image.small {
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.blog-image.medium {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.blog-image.large {
-    max-width: 800px;
-}
-
-.blog-image.left {
-    float: left;
-    margin: 0 1.5em 1em 0;
-    max-width: 300px;
-}
-
-.blog-image.right {
-    float: right;
-    margin: 0 0 1em 1.5em;
-    max-width: 300px;
-}
-
-/* Clearfix for floated images */
-.blog-post::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Blog Compose Styles */
-.compose-section {
-    background: var(--card-bg);
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 2em 0;
-}
-
-.compose-controls {
-    margin: 1.5em 0;
-}
-
-.add-section-btn {
-    background-color: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.75em 1.5em;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform 0.2s;
-}
-
-.add-section-btn:hover {
-    transform: translateY(-2px);
-    background-color: var(--nav-link-hover);
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
-}
-
-.status-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--card-bg);
-    border: 2px solid var(--nav-link-color);
-    padding: 1em 2em;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    z-index: 10000;
-}
-
 /* ========== COMPARE PAGE STYLES ========== */
 
-/* Add spacing between intro paragraphs */
+/* Intro section spacing */
 .intro-section p {
     margin-bottom: 1.5em;
 }
 
-/* Smaller share button inside dropdowns */
-.share-btn {
-    background: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.3em 0.6em; /* Smaller padding */
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8em; /* Smaller font */
-    margin-left: 0.5em;
-    transition: background 0.3s;
-}
-
-.share-btn:hover {
-    background: var(--nav-link-hover);
-}
-
-/* Highlight shared model dropdown */
-@keyframes highlight {
-    from { background-color: var(--nav-link-color); }
-    to { background-color: transparent; }
-}
-
-.model-highlight {
-    animation: highlight 2s ease-in-out;
-}
-
-/* Bold highest scores in table */
-.highest-score {
-    font-weight: 600;
-    color: var(--nav-link-color);
-}
-/* ========== COMPARE PAGE STYLES ========== */
-
-/* Fix bullet point spacing in AI output boxes */
-.ai-output-box ul,
-.ai-output-box ol {
-    padding-left: 2em; /* Add proper left padding for bullet markers */
-    margin: 1em 0;
-}
-
-.ai-output-box li {
-    margin-bottom: 0.5em;
-    padding-left: 0.5em; /* Space between bullet and text */
-}
-
-/* Improve hyperlink contrast in dark mode */
-a:visited {
-    color: var(--nav-link-color) !important;
-    opacity: 0.85; /* Increase from 0.7 for better contrast */
-}
-
-/* Ensure links inside AI boxes have good contrast */
-.ai-output-box a {
-    color: var(--nav-link-color);
-    font-weight: 500;
-}
-
-.ai-output-box a:hover {
-    text-decoration: underline;
-}
-
-/* Consistent paragraph spacing in AI output boxes */
-.ai-output-box p {
-    margin-bottom: 1em;
-}
-
-.ai-output-box p:last-child {
-    margin-bottom: 0;
-}
-
-/* Add some space before the first element in AI output boxes */
-.ai-output-box > *:first-child {
-    margin-top: 0;
-}
-
-.ai-output-box > *:last-child {
-    margin-bottom: 0;
-}
-
-/* Smaller share button inside dropdowns */
-.share-btn {
-    background: var(--nav-link-color);
-    color: white;
-    border: none;
+/* Share button size for compare page (specific override) */
+.compare-page .share-btn {
     padding: 0.3em 0.6em;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 0.8em;
-    transition: background 0.3s;
 }
 
-.share-btn:hover {
-    background: var(--nav-link-hover);
-}
+/* ========== BLOG PAGE STYLES ========== */
 
-/* Highlight shared model dropdown */
-@keyframes highlight {
-    from { background-color: var(--nav-link-color); }
-    to { background-color: transparent; }
-}
-
-.model-highlight {
-    animation: highlight 2s ease-in-out;
-}
-
-/* Bold highest scores in table */
-.highest-score {
-    font-weight: 600;
-    color: var(--nav-link-color);
-}
-
-/* Add spacing between intro paragraphs */
-.intro-section p {
-    margin-bottom: 1.5em;
-}
-
-/* ========== END COMPARE PAGE STYLES ========== */
-
-/* Enhance contrast for all links in dropdown content - targets the sycophancy link */
-.dropdown-content a,
-.dropdown-content a:visited {
-    color: var(--nav-link-color) !important;
-    opacity: 0.95; /* Higher opacity for better visibility */
-    font-weight: 500; /* Slightly bolder */
-    transition: opacity 0.2s;
-}
-
-.dropdown-content a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-/* Add spacing between paragraphs in dropdown content */
-.dropdown-content > p {
-    margin-bottom: 1.2em; /* Slightly more than 1em for clearer separation */
-}
-
-.dropdown-content > p:last-child {
-    margin-bottom: 0;
-}
-
-/* Ensure list items also have proper spacing */
-.dropdown-content li {
-    margin-bottom: 0.5em;
-    line-height: 1.6;
-}
-
-/* Override the problematic visited link opacity from earlier in the stylesheet */
-/* This targets specifically the bracketed link format */
-a[href*="compare.html"]:visited {
-    opacity: 0.95 !important;
-}
-
-/* Fix link contrast in contribute section and other dropdown content areas */
-.contribute a,
-.contribute a:visited,
-.dropdown-content a,
-.dropdown-content a:visited {
-    color: var(--nav-link-color) !important;
-    opacity: 0.95; /* Higher opacity for better visibility on dark backgrounds */
-    font-weight: 500;
-    transition: opacity 0.2s;
-}
-
-.contribute a:hover,
-.dropdown-content a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-/* Fix spacing between paragraphs in dropdown content */
-.dropdown-content > p {
-    margin-bottom: 1.2em; /* Add clear separation between paragraphs */
-}
-
-.dropdown-content > p:last-child {
-    margin-bottom: 0;
-}
-
-/* Ensure proper spacing for paragraphs before Kimi output boxes */
-.dropdown-content > p + .ai-output-box {
-    margin-top: 1.5em;
-}
-
-/* Blog post specific styling */
 .blog-post {
     max-width: 800px;
     margin: 0 auto;
-}
-
-.blog-meta {
-    color: var(--text-secondary);
-    font-size: 0.9em;
-    margin: 1em 0 2em;
 }
 
 .breadcrumb {
@@ -886,13 +627,8 @@ a[href*="compare.html"]:visited {
     text-decoration: none;
     font-size: 0.9em;
 }
-
 .breadcrumb:hover {
     text-decoration: underline;
-}
-
-.introduction {
-    margin-bottom: 2em;
 }
 
 .pull-quote {
@@ -913,27 +649,10 @@ a[href*="compare.html"]:visited {
     margin: 2em 0;
 }
 
-.example-box h3 {
-    color: var(--nav-link-color);
-    margin-top: 0;
-}
-
-.example-box h4 {
-    color: var(--text-color);
-    margin-top: 1.5em;
-}
-
-.highlight {
-    color: var(--accent-color);
-    font-weight: 600;
-    margin: 1em 0 0.5em;
-}
-
 .blog-image {
     margin: 2em 0;
     text-align: center;
 }
-
 .blog-image img {
     max-width: 100%;
     height: auto;
@@ -941,7 +660,6 @@ a[href*="compare.html"]:visited {
     box-shadow: var(--shadow);
     border: 1px solid var(--border-color);
 }
-
 .blog-image figcaption {
     margin-top: 0.5em;
     font-size: 0.9em;
@@ -949,312 +667,26 @@ a[href*="compare.html"]:visited {
     font-style: italic;
 }
 
-.blog-image.small {
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+/* ========== UTILITY CLASSES ========== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
-.learn-section, .create-section {
-    margin: 3em 0;
-}
-
-.blog-footer {
-    margin-top: 3em;
-    padding-top: 2em;
-    border-top: 1px solid var(--footer-border);
-    text-align: center;
-    color: var(--text-secondary);
-}
-
-.blog-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2em;
-}
-
-/* Ensure nested dropdowns work properly in blog context */
-.blog-post .nested-dropdown {
-    margin: 1.5em 0;
-}
-
-.blog-post .nested-content {
-    padding: 0 1em 1em 0;
-}
-
-/* Fix paragraph spacing in blog posts */
-.blog-post p {
-    margin-bottom: 1.2em;
-    line-height: 1.7;
-}
-
-.blog-post p:last-child {
-    margin-bottom: 0;
-}
-
-/* Fix prompt text wrapping */
-.prompt-box pre {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-x: auto !important;
-    max-width: 100%;
-}
-
-/* Fix bullet point padding in responses */
-.response-box ul,
-.response-box ol {
-    padding-left: 2em !important;
-    margin: 1em 0 !important;
-}
-
-.response-box li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.5em !important;
-    line-height: 1.6 !important;
-}
-
-/* Ensure nested content also has proper padding */
-.nested-content ul,
-.nested-content ol {
-    padding-left: 2em !important;
-    margin: 1em 0 !important;
-}
-
-.nested-content li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.5em !important;
-}
-
-.conversation-meta {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important; /* Changed from center to prevent crowding */
-    flex-wrap: wrap !important;
-    margin-top: 0.5em !important;
-    gap: 0.5em !important;
-}
-
-.conversation-meta .tags {
-    display: flex !important;
-    gap: 0.5em !important;
-    flex-wrap: wrap !important;
-    flex: 1 1 auto !important; /* Allow tags to take available space */
-}
-
-.conversation-meta button {
-    flex-shrink: 0 !important; /* Prevent share button from shrinking */
-}
-
-/* Fix prompt text wrapping */
-.prompt-box pre,
-.prompt-box code {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-x: auto !important;
-    max-width: 100%;
-    display: block;
-}
-
-/* Fix bullet point padding in ALL response boxes */
-.response-box ul,
-.response-box ol,
-.nested-content ul,
-.nested-content ol,
-.dropdown-content ul,
-.dropdown-content ol {
-    padding-left: 2em !important;
-    margin: 1em 0 !important;
-}
-
-.response-box li,
-.nested-content li,
-.dropdown-content li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.5em !important;
-    line-height: 1.6 !important;
-}
-
-/* Ensure nested dropdowns inside responses also get proper padding */
-.nested-dropdown .nested-content ul,
-.nested-dropdown .nested-content ol {
-    padding-left: 2em !important;
-}
-
-/* Fix code block styling to match Kimi's formatting */
-.response-box pre,
-.nested-content pre {
-    background: var(--dropdown-header-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 4px !important;
-    padding: 1em !important;
-    overflow-x: auto !important;
-    margin: 1em 0 !important;
-}
-
-.response-box code,
-.nested-content code {
-    font-family: 'Courier New', monospace !important;
-    font-size: 0.9em !important;
-    color: var(--text-color) !important;
-}
-
-/* Fix conversation meta to prevent crowding */
-.conversation-meta {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    flex-wrap: wrap !important;
-    margin-top: 0.5em !important;
-    gap: 0.5em !important;
-}
-
-.conversation-meta > p {
-    flex: 1 1 100% !important;
-    margin-bottom: 0.5em !important;
-}
-
-.conversation-meta .tags {
-    display: flex !important;
-    gap: 0.5em !important;
-    flex-wrap: wrap !important;
-    flex: 1 1 auto !important;
-}
-
-.conversation-meta button {
-    flex-shrink: 0 !important;
-    margin-left: auto !important;
-}
-
-/* Professional prompt/response boxes with subtle backgrounds */
-.prompt-box {
-    background: rgba(77, 166, 255, 0.08); /* Very light blue, low opacity */
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-
-.response-box {
-    background: rgba(45, 45, 45, 0.05); /* Very light gray, low opacity */
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-
-/* Dark mode adjustments */
-[data-theme="dark"] .prompt-box {
-    background: rgba(77, 166, 255, 0.05); /* Even lower opacity for dark mode */
-}
-
-[data-theme="dark"] .response-box {
-    background: rgba(240, 240, 240, 0.03); /* Very subtle light background */
-}
-
-/* Fix font size hierarchy in response boxes */
-.response-box h2,
-.response-box h3,
-.response-box h4,
-.response-box h5,
-.response-box h6 {
-    font-size: 1em !important; /* Consistent size with parent */
-    margin: 1.2em 0 0.6em !important;
-    color: var(--text-color) !important;
-}
-
-.response-box h2::before,
-.response-box h3::before,
-.response-box h4::before,
-.response-box h5::before,
-.response-box h6::before {
-    content: none; /* Remove any extra decorators */
-}
-
-/* Ensure first heading in response matches spacing */
-.response-box > h2:first-child,
-.response-box > h3:first-child,
-.response-box > h4:first-child {
-    margin-top: 0 !important;
-}
-
-/* Style the response header with model name */
-.response-header {
-    color: var(--nav-link-color) !important;
-    font-weight: 600 !important;
-    font-size: 1.1em !important;
-    margin-bottom: 1em !important;
-    padding-bottom: 0.5em !important;
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-/* Fix bullet points inside boxes */
-.prompt-box ul,
-.prompt-box ol,
-.response-box ul,
-.response-box ol {
-    padding-left: 2em !important;
-    margin: 1em 0 !important;
-}
-
-.prompt-box li,
-.response-box li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.6em !important;
-    line-height: 1.6 !important;
-}
-
-/* Code blocks inside boxes */
-.prompt-box pre,
-.response-box pre {
-    background: var(--dropdown-header-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 4px !important;
-    padding: 1em !important;
-    margin: 1em 0 !important;
-    overflow-x: auto !important;
-}
-
-/* Inline code styling */
-.prompt-box code,
-.response-box code {
-    background: var(--dropdown-header-bg) !important;
-    padding: 0.2em 0.4em !important;
-    border-radius: 3px !important;
-    font-size: 0.9em !important;
-}
-
-/* Allow nested dropdowns inside response boxes */
-.response-box .nested-dropdown {
-    margin: 1.5em 0 !important;
-    border-left: 3px solid var(--accent-color) !important;
-    padding-left: 1em !important;
-}
-
-.response-box .nested-header {
-    cursor: pointer !important;
-    padding: 0.5em 0 !important;
-    color: var(--nav-link-color) !important;
-    list-style: none !important;
-}
-
-.response-box .nested-content {
-    padding: 0 1em 1em 0 !important;
-}
-
-/* Fix bullet points in takeaways sections */
-.response-box ul ul,
-.nested-content ul ul,
-.dropdown-content ul ul {
-    padding-left: 2em !important;
-    margin: 0.5em 0 !important;
-}
-
-.response-box ul li,
-.nested-content ul li,
-.dropdown-content ul li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.3em !important;
-    line-height: 1.5 !important;
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 1em;
+    }
 }

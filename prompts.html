@@ -123,25 +123,33 @@
             <!-- Conversations will be dynamically inserted here -->
         </div>
         
-		<hr>
-		
-		<h3>Submission form:</h3>
-		
-		<div style="border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden;">
-    <iframe 
-        src="https://cryptpad.fr/form/#/2/form/view/bkhFdw3Kmk61KLmJI5uLKH7GuV1nXwt1b3cEtbHSXzY/" 
-        width="100%" 
-        height="600px" 
-        frameborder="0" 
-        style="display: block;"
-        title="Secure prompt submission form"
-    ></iframe>
-</div>
+		<!-- Replace everything from <hr> to </p> before <footer> -->
 
-<p style="font-size: 0.9em; margin-top: 1em;">
-    <strong>Privacy notice:</strong> This form is hosted on CryptPad, a privacy-first platform. 
-    All responses are encrypted before leaving your browser. We cannot see your IP address or any metadata. Link to form here: <a href="https://cryptpad.fr/form/#/2/form/view/bkhFdw3Kmk61KLmJI5uLKH7GuV1nXwt1b3cEtbHSXzY/">https://cryptpad.fr/form/#/2/form/view/bkhFdw3Kmk61KLmJI5uLKH7GuV1nXwt1b3cEtbHSXzY/</a>
-</p>
+<details class="main-dropdown submission-section">
+    <summary class="dropdown-header submission-header">
+        <h2>Submit a Prompt</h2>
+        <span class="icon">+</span>
+    </summary>
+    <div class="dropdown-content submission-content">
+        <p style="margin-top: 0;">Share your own AI conversations to help others learn. All submissions are encrypted and private.</p>
+        
+        <div style="border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden;">
+            <iframe 
+                src="https://cryptpad.fr/form/#/2/form/view/bkhFdw3Kmk61KLmJI5uLKH7GuV1nXwt1b3cEtbHSXzY/" 
+                width="100%" 
+                height="600px" 
+                frameborder="0" 
+                style="display: block;"
+                title="Secure prompt submission form"
+            ></iframe>
+        </div>
+
+        <div class="submission-notice">
+            <strong>Privacy notice:</strong> This form is hosted on CryptPad, a privacy-first platform. 
+            All responses are end-to-end encrypted before leaving your browser. We cannot see your IP address or any metadata. 
+            Direct link: <a href="https://cryptpad.fr/form/#/2/form/view/bkhFdw3Kmk61KLmJI5uLKH7GuV1nXwt1b3cEtbHSXzY/" target="_blank">https://cryptpad.fr/form/…</a>
+        </div>
+    </div>
 		
         <footer>
             <p><a href="index.html">← Back to Home</a></p>
