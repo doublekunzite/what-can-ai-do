@@ -870,3 +870,48 @@ main > h1 {
     display: block !important;
     margin: 0 auto !important;
 }
+
+/* ========== BLOG POST FORMATTING FIXES ========== */
+
+/* 1. Restore example box styling */
+.example-box {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 1.5em !important;
+    margin: 2em 0 !important;
+}
+
+.example-box h3 {
+    color: var(--nav-link-color) !important;
+    margin-top: 0 !important;
+    margin-bottom: 1em !important;
+}
+
+/* 2. Add proper paragraph spacing */
+.blog-content p {
+    margin-bottom: 1.5em !important; /* Add empty line after paragraphs */
+    line-height: 1.7 !important;
+}
+
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+    margin-top: 2em !important;
+    margin-bottom: 1em !important;
+}
+
+/* 3. Fix spacing around images */
+.blog-image {
+    margin: 2em 0 !important;
+}
+
+/* 4. Ensure code blocks keep their styling */
+.blog-content pre {
+    background: var(--dropdown-header-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    padding: 1em !important;
+    margin: 1.5em 0 !important;
+    overflow-x: auto !important;
+}
