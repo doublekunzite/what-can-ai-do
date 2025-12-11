@@ -749,3 +749,114 @@ footer p {
     background: var(--dropdown-header-bg) !important;
     border: 1px solid var(--border-color) !important;
 }
+
+/* ========== DARK MODE LINK CONTRAST FIX ========== */
+
+/* Remove opacity reduction on visited links in dark mode */
+[data-theme="dark"] a:visited,
+[data-theme="dark"] .dropdown-content a:visited,
+[data-theme="dark"] .ai-output-box a:visited,
+[data-theme="dark"] .response-box a:visited,
+[data-theme="dark"] .nested-content a:visited {
+    opacity: 1 !important;
+    color: var(--nav-link-color) !important;
+}
+
+/* Ensure all links have full opacity in dark mode */
+[data-theme="dark"] a,
+[data-theme="dark"] .dropdown-content a,
+[data-theme="dark"] .ai-output-box a,
+[data-theme="dark"] .response-box a,
+[data-theme="dark"] .nested-content a {
+    opacity: 1 !important;
+    color: var(--nav-link-color);
+}
+
+/* Make hovered links brighter for better visibility */
+[data-theme="dark"] a:hover {
+    color: var(--nav-link-hover) !important;
+    text-decoration: underline;
+}
+
+/* Fix any lingering opacity on footer and navigation */
+[data-theme="dark"] footer a,
+[data-theme="dark"] nav a {
+    opacity: 1 !important;
+    color: var(--nav-link-color);
+}
+
+[data-theme="dark"] footer a:hover,
+[data-theme="dark"] nav a:hover {
+    color: var(--nav-link-hover) !important;
+}
+
+/* ========== BLOG PAGE FIXES ========== */
+
+/* 1. Restore card styling for blog posts */
+.blog-posts {
+    margin: 2em 0;
+}
+
+.blog-posts .feature-card {
+    background: var(--card-bg) !important;
+    padding: 1.5em !important;
+    border-radius: 8px !important;
+    border: 2px solid var(--border-color) !important;
+    box-shadow: var(--shadow) !important;
+    margin-bottom: 1.5em !important;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s !important;
+}
+
+.blog-posts .feature-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--shadow) !important;
+    border-color: var(--nav-link-color) !important;
+}
+
+/* 2. Fix blog meta spacing */
+.blog-meta {
+    color: var(--text-secondary) !important;
+    font-size: 0.9em !important;
+    margin: 0.5em 0 1em !important;
+    display: block !important;
+}
+
+/* 3. Add proper spacing around blog content */
+.blog-posts h2 {
+    margin-bottom: 2em !important;
+}
+
+.blog-posts p {
+    margin-bottom: 1.2em !important;
+    line-height: 1.7 !important;
+}
+
+/* 4. Fix contribute section spacing */
+.contribute {
+    background: var(--dropdown-header-bg) !important;
+    padding: 1.5em !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    margin: 3em 0 2em !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* 5. Ensure consistent link styling */
+.blog-posts a {
+    color: var(--nav-link-color) !important;
+    text-decoration: none !important;
+}
+
+.blog-posts a:hover {
+    text-decoration: underline !important;
+}
+
+/* 6. Add breathing room around page title */
+main > h1 {
+    margin-bottom: 1.5em !important;
+}
+
+/* 7. Fix spacing between blog post cards */
+.blog-posts .feature-card + .feature-card {
+    margin-top: 1.5em !important;
+}
