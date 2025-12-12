@@ -915,3 +915,35 @@ main > h1 {
     margin: 1.5em 0 !important;
     overflow-x: auto !important;
 }
+
+/* ========== FINAL PARAGRAPH SPACING FIX ========== */
+
+/* Target paragraphs inside blog content with maximum specificity */
+.blog-post .blog-content p,
+.blog-post section p,
+.blog-post .example-box p,
+.blog-post .introduction p,
+.blog-post .learn-section p,
+.blog-post .create-section p,
+.blog-post .nested-content p,
+.blog-post .ai-output-box p {
+    margin-bottom: 1.5em !important;
+    line-height: 1.7 !important;
+}
+
+/* Remove bottom margin from last paragraph in containers */
+.blog-post .blog-content p:last-child,
+.blog-post section p:last-child,
+.blog-post .example-box p:last-child,
+.blog-post .nested-content p:last-child,
+.blog-post .ai-output-box p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Add spacing after headings before paragraphs */
+.blog-post h2 + p,
+.blog-post h3 + p,
+.blog-post h4 + p,
+.blog-post .highlight + p {
+    margin-top: 1em !important;
+}
