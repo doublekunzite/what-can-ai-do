@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CRITICAL: Theme script must be FIRST -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    
+    <title>Prompting Basics - AI 101 | What Can AI Do?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+
+    <main>
+        <div id="nav-container"></div>
+
+        <div class="nav-module">
+            <a href="../ai-101.html">← Back to Course</a>
+            <span style="color: var(--text-secondary); font-size: 0.9em;">Track A: Professionals | Module 1 of 2</span>
+            <a href="getting-started.html">Next Module →</a>
+        </div>
+
+        <article class="blog-post">
+            <h1>Prompting Basics</h1>
+            <p class="blog-meta">⏱️ 5 minutes | Track A: For Professionals</p>
+
+            <div class="key-takeaway">
+                <strong>Key Takeaway:</strong> AI doesn't give you what you *want*. It gives you what you *ask for*. The gap between those two is filled by specificity, constraints, and follow-up prompts that make AI critique its own work.
+            </div>
+
+            <section class="blog-content">
+                <h2>🎯 The #1 Mistake People Make</h2>
+                <p>Treating AI like Google. You don't ask AI <em>for</em> information—you ask it to <em>do</em> something. But here's the real secret: <strong>the first prompt is just a draft</strong>. The magic happens when you treat it like a conversation and ask AI to critique its own work.</p>
+
+                <h2>📐 The 3-C Framework</h2>
+                <p>Think of AI as a brilliant but literal-minded assistant. It needs:</p>
+                <ul>
+                    <li><strong>Clear Instructions</strong> – What job are you hiring it for?</li>
+                    <li><strong>Context</strong> – What background info matters?</li>
+                    <li><strong>Constraints</strong> – What are the rules and boundaries?</li>
+                </ul>
+                <p>The magic happens when you stack all three. Watch how follow-up prompts unlock depth:</p>
+
+                <h2>📝 Example 1: The Writing Task</h2>
+
+                <div class="example-box">
+                    <h3>❌ Vague Prompt:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Write an email to my team about the project delay.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>✅ Initial Prompt with Constraints:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Write a calm, reassuring email to my 5-person marketing team about a one-week project delay. Keep it under 120 words, include a clear next step (reconvene Friday), and add a brief apology without sounding panicked.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>🎯 Follow-Up Prompt (The Real Work):</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px; border-left: 4px solid var(--accent-color);">This is good, but feels a bit stiff. Rewrite it to be more conversational, and critique your own draft—which sentence is the weakest and why?</pre>
+                    <p><strong>Why it works:</strong> The AI not only refines tone but flags its own flaws. You'll often get insights like <em>"The third sentence is vague; 'address the vendor issue' lacks specificity,"</em> teaching you what to fix next time.</p>
+                </div>
+
+                <h2>📚 Example 2: The Learning Task</h2>
+
+                <div class="example-box">
+                    <h3>❌ Vague Prompt:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Explain quantum computing.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>✅ Initial Prompt with Constraints:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Explain quantum computing like I'm a smart 12-year-old who loves soccer. Use one soccer analogy, keep it under 150 words, and end with one question I could ask my science teacher.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>🎯 Follow-Up Prompt:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px; border-left: 4px solid var(--accent-color);">I like this, but the soccer analogy might not land with everyone. Give me two backup analogies from music or cooking. Then, judge your own three analogies—which is clearest for a mixed classroom?</pre>
+                    <p><strong>Why it works:</strong> Asking AI to compare its own outputs forces it to evaluate clarity, not just generate text. It'll often pick a non-obvious winner and explain <em>why</em> it works better for diverse audiences.</p>
+                </div>
+
+                <h2>🎁 Example 3: The Creative Task</h2>
+
+                <div class="example-box">
+                    <h3>❌ Vague Prompt:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Give me ideas for my mom's birthday.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>✅ Initial Prompt with Constraints:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px;">Suggest 3 birthday gift ideas for my 68-year-old mom who loves gardening but has back pain. Each must be under $50, require no heavy lifting, and be available on Amazon Prime.</pre>
+                </div>
+
+                <div class="example-box">
+                    <h3>🎯 Follow-Up Prompt:</h3>
+                    <pre style="background: var(--code-bg); padding: 1em; border-radius: 4px; border-left: 4px solid var(--accent-color);">Option #2 is perfect but it's actually $65. Give me two alternatives under $50. Then critique all five ideas—what's the biggest hidden drawback of each?</pre>
+                    <p><strong>Why it works:</strong> AI often spots flaws you missed: <em>"The kneeling pad might remind her of her limitations,"</em> or <em>"The book seems impersonal."</em> This turns a list into a curated, thoughtful decision.</p>
+                </div>
+
+                <h2>🔄 The Iteration Loop Rule</h2>
+                <p><strong>First Prompt = Rough Sketch</strong><br>Your goal is directionally correct, not perfect.</p>
+                <p><strong>Second Prompt = The Real Work</strong><br>Ask AI to:</p>
+                <ul>
+                    <li><strong>Refine:</strong> "Make it 20% more formal."</li>
+                    <li><strong>Critique:</strong> "What's the weakest part of your answer?"</li>
+                    <li><strong>Compare:</strong> "Which of these two options would you choose?"</li>
+                </ul>
+                <p><strong>Pro Move:</strong> End every session with <em>"What question should I have asked but didn't?"</em> You'll discover angles you never considered.</p>
+
+                <div class="contribute">
+                    <h3>⚡ Your 60-Second Practice</h3>
+                    <p><strong>Before your next prompt, ask yourself:</strong></p>
+                    <ol>
+                        <li>What's the <em>exact</em> job? (Email? Summary? Brainstorm?)</li>
+                        <li>Who is this for? (My boss? A 3rd grader?)</li>
+                        <li>What are 2 hard rules? (Word count? Tone? Format?)</li>
+                        <li><strong>What's one follow-up question to improve it?</strong> (Draft the critique prompt <em>before</em> you see the answer.)</li>
+                    </ol>
+                </div>
+            </section>
+        </article>
+
+        <div class="updates">
+            <h3>🚀 Try This Today</h3>
+            <p>60-Second Challenge: Take a task you've been putting off (drafting an email, summarizing a long article). Write a constrained prompt, get the response, then ask AI to critique it and suggest two improvements.</p>
+            <p style="margin-top: 1em;"><strong>End with:</strong> <em>"What question should I have asked but didn't?"</em></p>
+        </div>
+
+        <div class="updates">
+            <h3>📄 Module Resources</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li>📥 <a href="prompting-basics-cheat-sheet.pdf">Download Cheat Sheet (PDF)</a></li>
+                <li>🔍 <a href="../prompts.html">Browse Prompt Repository</a></li>
+                <li>🤖 <a href="../compare.html">Compare AI Models</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-module">
+            <a href="../ai-101.html">← Back to Course</a>
+            <span style="color: var(--text-secondary); font-size: 0.9em;">Track A: Professionals</span>
+            <a href="getting-started.html">Next: Getting Started →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p><a href="../how-i-made-this.html">How I made this site</a> | <a href="https://github.com/doublekunz/what-can-ai-do">GitHub</a></p>
+    </footer>
+
+    <script src="../js/navigation.js"></script>
+    <script src="../js/theme.js"></script>
+</body>
+</html>

@@ -947,3 +947,64 @@ main > h1 {
 .blog-post .highlight + p {
     margin-top: 1em !important;
 }
+
+/* ========== AI 101 COURSE STYLES ========== */
+
+/* Course navigation bar */
+.nav-module {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9em;
+}
+
+.nav-module a {
+    color: var(--nav-link-color);
+    text-decoration: none;
+}
+
+.nav-module a:hover {
+    text-decoration: underline;
+}
+
+.module-meta {
+    color: var(--text-secondary);
+}
+
+/* Key takeaway boxes */
+.key-takeaway {
+    background: var(--dropdown-header-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5em;
+    margin: 2em 0;
+    font-style: italic;
+}
+
+/* Course CTA box */
+.cta-box {
+    text-align: center;
+    margin: 3em 0;
+    padding: 2em;
+    background: var(--dropdown-header-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Module cards in course grid */
+.feature-card summary h3 {
+    margin: 0;
+}
+
+.feature-card[open] {
+    border-color: var(--nav-link-color);
+}
+
+/* Progress indicator (subtle) */
+.progress-indicator {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    margin-bottom: 1em;
+}

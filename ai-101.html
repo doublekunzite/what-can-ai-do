@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CRITICAL: Theme script must be FIRST -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && systemPrefersLight)) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    
+    <title>AI 101: A 30-Minute Primer - What Can AI Do?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
+
+    <main>
+        <div id="nav-container"></div>
+
+        <div class="hero">
+            <h1>AI 101: A 30-Minute Primer</h1>
+            <p>A practical, no-hype guide for beginners. Learn what AI is, what it can do, and how to use it safely.</p>
+        </div>
+
+        <section class="quick-start">
+            <h2>🏁 Core Track (18 min) – Required</h2>
+            <p>Start here. These four modules give you the essential foundation.</p>
+            
+            <div class="feature-cards">
+                <details class="feature-card" data-module="what-is-ai">
+                    <summary style="list-style: none; cursor: pointer;">
+                        <h3>What Is AI? <span style="color: var(--text-secondary); font-weight: normal;">(5 min)</span></h3>
+                        <p>Living definition: pattern recognition + prediction. Three categories that matter.</p>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Learn the difference between Narrow AI (what we actually have), General AI (sci-fi), and Generative AI (the practical stuff you're using).</p>
+                        <div style="margin-top: 1em;">
+                            <a href="ai-101/what-is-ai.html" class="cta-primary">Start Module →</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="feature-card" data-module="ai-toolbox">
+                    <summary style="list-style: none; cursor: pointer;">
+                        <h3>Your AI Toolbox <span style="color: var(--text-secondary); font-weight: normal;">(5 min)</span></h3>
+                        <p>Top 5 real-world uses with the highest ROI for everyday work.</p>
+                    </summary>
+                    <div class="nested-content">
+                        <p>Drafting, data analysis, brainstorming, code help, and learning complex topics—demystified with concrete examples.</p>
+                        <div style="margin-top: 1em;">
+                            <a href="ai-101/ai-toolbox.html" class="cta-primary">Start Module →</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="feature-card" data-module="risks-guardrails">
+                    <summary style="list-style: none; cursor: pointer;">
+                        <h3>Risks & Guardrails <span style="color: var(--text-secondary); font-weight: normal;">(4 min)</span></h3>
+                        <p>Privacy, bias, over-reliance—and a 3-question safety checklist.</p>
+                    </summary>
+                    <div class="nested-content">
+                        <p>What not to share, how AI reflects its training data, and the "think for yourself" rule.</p>
+                        <div style="margin-top: 1em;">
+                            <a href="ai-101/risks-guardrails.html" class="cta-primary">Start Module →</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="feature-card" data-module="model-landscape">
+                    <summary style="list-style: none; cursor: pointer;">
+                        <h3>Model Landscape <span style="color: var(--text-secondary); font-weight: normal;">(4 min)</span></h3>
+                        <p>The Big 4 for beginners and a simple decision tree for choosing.</p>
+                    </summary>
+                    <div class="nested-content">
+                        <p>ChatGPT, Claude, Gemini, and open-source options—when to use which and why.</p>
+                        <div style="margin-top: 1em;">
+                            <a href="ai-101/model-landscape.html" class="cta-primary">Start Module →</a>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="contribute">
+            <h2>🎯 Elective Modules (10 min) – Choose Your Path</h2>
+            <p>Complete one track after finishing the Core Track.</p>
+            
+            <details class="main-dropdown">
+                <summary class="dropdown-header">
+                    <h3>Track A: For Professionals</h3>
+                </summary>
+                <div class="dropdown-content">
+                    <p><strong>Focus:</strong> Prompting Basics + Getting Started Guide</p>
+                    <a href="ai-101/prompting-basics.html" class="cta-secondary">Start Track A →</a>
+                </div>
+            </details>
+
+            <details class="main-dropdown">
+                <summary class="dropdown-header">
+                    <h3>Track B: For Skeptics</h3>
+                </summary>
+                <div class="dropdown-content">
+                    <p><strong>Focus:</strong> Limitations + Future of Work</p>
+                    <a href="ai-101/limitations.html" class="cta-secondary">Start Track B →</a>
+                </div>
+            </details>
+        </section>
+
+        <section class="cta-box" style="text-align: center;">
+            <h3>🚀 Ready to Start?</h3>
+            <p>Begin with "What Is AI?" and work your way through. Total time: ~30 minutes.</p>
+            <a href="ai-101/what-is-ai.html" class="cta-primary">Start Core Track →</a>
+        </section>
+    </main>
+    
+    <footer>
+        <p><a href="how-i-made-this.html">How I made this site</a> | <a href="https://github.com/doublekunz/what-can-ai-do">GitHub</a></p>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
