@@ -6,6 +6,7 @@
 
     const navItems = [
         { name: 'Home', url: `${repoRoot}/index.html` },
+        { name: 'AI 101 Course', url: `${repoRoot}/ai-101.html` },
         { name: 'Blog', url: `${repoRoot}/blog.html` },
         { name: 'Prompt Repository', url: `${repoRoot}/prompts.html` },
         { name: 'Prompt Builder', url: `${repoRoot}/prompt-builder.html` },
