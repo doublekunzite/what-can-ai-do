@@ -1107,3 +1107,13 @@ main > h1 {
 .blog-post .highlight + p {
     margin-top: 1em !important;
 }
+
+/* Fix for AI 101 page card padding */
+.ai-101-page .feature-card {
+    padding-top: 1em !important;
+}
+
+/* Ensure first child elements have no top margin */
+.ai-101-page .feature-card > *:first-child {
+    margin-top: 0 !important;
+}
