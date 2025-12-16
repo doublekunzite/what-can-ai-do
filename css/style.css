@@ -749,6 +749,11 @@ footer a:hover {
     margin: 1em 0 !important;
 }
 
+/* Module cards in course grid */
+.feature-card summary h3 {
+    margin: 0;
+}
+
 /* ========== AI 101 FINAL POLISH FIXES ========== */
 
 /* 1. Balance card padding by removing top margin from first child */
