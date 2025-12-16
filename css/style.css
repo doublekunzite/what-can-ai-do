@@ -641,14 +641,6 @@ details.nested-dropdown[open] > summary.nested-header::before {
     border-radius: 0 8px 8px 0;
 }
 
-.example-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 2em 0;
-}
-
 .blog-image {
     margin: 2em 0;
     text-align: center;
@@ -1110,4 +1102,3 @@ main > h1 {
 .blog-post .highlight + p {
     margin-top: 1em !important;
 }
-
