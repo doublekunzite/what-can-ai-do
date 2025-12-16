@@ -21,12 +21,45 @@
     <link rel="stylesheet" href="../css/style.css">
     
 </head>
-
 <body>
     <button id="theme-toggle" class="theme-toggle">🌙 Dark</button>
 
     <main>
         <div id="nav-container"></div>
+
+        <!-- Mobile section navigation (collapsible) -->
+        <details class="section-nav-mobile">
+            <summary>Jump to Section ▼</summary>
+            <div class="dropdown-content">
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li><a href="#eager-intern">The "Eager Intern" Analogy</a></li>
+                    <li><a href="#definition">Pattern Recognition + Prediction</a></li>
+                    <li><a href="#three-categories">Three Categories of AI</a></li>
+                    <li><a href="#llm-deep-dive">LLMs Explained</a></li>
+                    <ul style="list-style: none; padding-left: 1em; margin: 0;">
+                        <li><a href="#llm-acronym">Breaking Down the Acronym</a></li>
+                        <li><a href="#llm-works">How It Actually Works</a></li>
+                        <li><a href="#llm-report-card">The Intern's Report Card</a></li>
+                    </ul>
+                    <li><a href="#practice">60-Second Practice</a></li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- Desktop floating navigation -->
+        <nav class="section-nav" aria-label="Section navigation">
+            <h4>On This Page</h4>
+            <ul>
+                <li><a href="#eager-intern">The "Eager Intern"</a></li>
+                <li><a href="#definition">Pattern Recognition</a></li>
+                <li><a href="#three-categories">Three Categories</a></li>
+                <li><a href="#llm-deep-dive">LLMs Explained</a></li>
+                <li class="sub-item"><a href="#llm-acronym">• The Acronym</a></li>
+                <li class="sub-item"><a href="#llm-works">• How It Works</a></li>
+                <li class="sub-item"><a href="#llm-report-card">• Report Card</a></li>
+                <li><a href="#practice">Practice</a></li>
+            </ul>
+        </nav>
 
         <div class="nav-module">
             <a href="../ai-101.html">← Back to Course</a>
@@ -36,25 +69,23 @@
 
         <article class="blog-post">
             <h1>What Is AI... Really?</h1>
-            <p class="blog-meta">⏱️ 5 minutes | Core Track</p>
+            <p class="blog-meta">⏱️ 10 minutes | Core Track</p>
 
             <div class="key-takeaway">
-                <strong>Key Takeaway:</strong> AI isn't magic—it's pattern recognition at scale. Think of it as a very eager intern with internet access: brilliant at finding connections, but needs clear instructions and constant fact-checking.
+                <strong>Key Takeaway:</strong> AI doesn't think. It remembers patterns from billions of examples and guesses what comes next. Your job is to make sure its guess is the right kind of guess.
             </div>
 
             <section class="blog-content">
-                <h2>🤖 Start Here: The "Eager Intern" Analogy</h2>
-                <p>Forget the sci-fi. Today's AI is best understood as <strong>a very eager intern who has read the entire internet</strong>:</p>
-                <ul>
-                    <li>They can recall facts, spot patterns, and generate ideas instantly</li>
-                    <li>They'll confidently answer questions outside their expertise (sometimes incorrectly)</li>
-                    <li>They need clear instructions and context to produce good work</li>
-                    <li>They get better when you give them feedback and refine your requests</li>
-                </ul>
+                <p>Let’s skip the Hollywood plots and start with a simple analogy. While there are many types of AI tools (e.g. image generators, social media algorithms) this course will focus on Large Language Models (LLMs) since they have the most practical uses for most people.</p>
+
+                <h2 id="eager-intern">🤖 The "Eager Intern" Analogy</h2>
+                <p>Today's AI is best understood as <strong>a very eager intern who has read the entire internet</strong>. They can recall facts, spot patterns, and generate ideas instantly.</p>
+                
+                <p>But your intern has some quirks: they'll confidently cite a non-existent study because they've seen thousands of citations formatted that way. They need clear instructions and context to produce good work. And while they get better when you give feedback, you'll always need to double-check their "facts."</p>
                 
                 <p>This analogy isn't perfect, but it's more useful than treating AI like a search engine or a sentient being. Let's break down what that intern is actually doing.</p>
 
-                <h2>🧠 The Living Definition: Pattern Recognition + Prediction</h2>
+                <h2 id="definition">🧠 The Living Definition: Pattern Recognition + Prediction</h2>
                 <p>At its core, AI is software that <strong>recognizes patterns in data</strong> and <strong>uses those patterns to make predictions</strong> about what comes next.</p>
 
                 <div class="example-box">
@@ -66,20 +97,20 @@
                 <div class="example-box">
                     <h3>Complex Example: ChatGPT Writing an Essay</h3>
                     <p>When ChatGPT writes an essay, it's doing the same thing—just scaled up. For each word, it asks: "Based on the patterns in everything I've read, what word is most likely to come next?" It repeats this process, building sentences, paragraphs, and entire arguments that <em>statistically match</em> well-written essays.</p>
-                    <p><strong>The magic isn't intelligence—it's scale.</strong> The "intern" has read more text than any human could in a thousand lifetimes.</p>
+                    <p><strong>The surprise isn't intelligence—it's the sheer volume of patterns.</strong> The "intern" has read more text than any human could in a thousand lifetimes.</p>
                 </div>
 
-                <h2>📊 The Three Categories That Actually Matter</h2>
+                <h2 id="three-categories">📊 The Three Categories That Actually Matter</h2>
                 <p>AI researchers talk about dozens of subfields, but you only need to know three categories:</p>
 
                 <div class="example-box">
                     <h3>1. Narrow AI (What We Actually Have)</h3>
                     <p><strong>Definition:</strong> AI designed for one specific task.</p>
+                    <p>Narrow AI isn't just one thing. It includes:</p>
                     <ul>
-                        <li>Spam filters (recognizes patterns in spam vs. legitimate email)</li>
-                        <li>Facial recognition (recognizes patterns in facial features)</li>
-                        <li>Chess engines (recognizes patterns in winning board positions)</li>
-                        <li>Google Translate (recognizes patterns between languages)</li>
+                        <li>Computer vision systems that "see" patterns in pixels (facial recognition, medical scans)</li>
+                        <li>Recommendation engines that "see" patterns in behavior (Netflix, Spotify)</li>
+                        <li>Specialized tools like chess engines or spam filters</li>
                     </ul>
                     <p><strong>Key point:</strong> Each of these is an expert in its narrow domain and useless outside it. A spam filter can't play chess. A chess engine can't translate languages.</p>
                 </div>
@@ -100,103 +131,46 @@
                         <li>GitHub Copilot (predicts patterns in code)</li>
                         <li>Voice clones (predict patterns in speech)</li>
                     </ul>
-                    <p>This is the category that's changing everything right now. The "intern" learned not just to recall information, but to generate new content that <em>fits the patterns</em> of what it's seen before.</p>
+                    <p>This is the category you're actually using. The "intern" learned not just to recall information, but to generate new content that <em>fits the patterns</em> of what it's seen before.</p>
                 </div>
 
-                <h2>🔍 Deep Dive: LLMs (Large Language Models) Explained</h2>
-                <p>Since LLMs like ChatGPT are the AI you're most likely to use, let's unpack what "Large Language Model" actually means:</p>
+                <h2 id="llm-deep-dive">🔍 Deep Dive: LLMs (Large Language Models) Explained</h2>
+                <p>Since LLMs like ChatGPT are the AI you're most likely to use, let's unpack what "Large Language Model" actually means across three dimensions:</p>
 
-                <div class="example-box">
-                    <h3>Breaking Down the Acronym</h3>
-                    <ul>
-                        <li><strong>Large:</strong> Trained on hundreds of billions of words (Wikipedia, books, websites, code, etc.). The "intern" has essentially read the public internet.</li>
-                        <li><strong>Language:</strong> Focused specifically on understanding and generating human language—not images, not sound, not abstract reasoning.</li>
-                        <li><strong>Model:</strong> A statistical representation of all the patterns it found in that language data. It doesn't "know" facts; it knows that certain words tend to appear near other words.</li>
-                    </ul>
-                </div>
-
-                <div class="example-box">
-                    <h3>How It Actually Works (Simplified)</h3>
-                    <p>LLMs use something called a <strong>transformer architecture</strong>—specifically, an "attention mechanism" that learns which words matter most in context.</p>
-                    <p><strong>Concrete example:</strong> When processing "The bank refused the loan," the model learns to "pay attention" to the word "bank" differently than in "He sat on the bank of the river." It learns from thousands of examples that "loan" and "river" change the meaning of "bank."</p>
-                    <p>At generation time, it doesn't "think"—it calculates probabilities: "Given 'The bank refused', what word is most likely next?" (Answer: probably "the"). Then it repeats this process, building word by word.</p>
-                </div>
-
-                <div class="example-box">
-                    <h3>What LLMs Are Good At (The Intern's Strengths)</h3>
-                    <ul>
-                        <li><strong>Pattern matching:</strong> Finding connections across domains it has seen before</li>
-                        <li><strong>Format following:</strong> Mimicking structure—emails, code, poems, legal documents</li>
-                        <li><strong>Creative recombination:</strong> Blending ideas in novel (but pattern-based) ways</li>
-                        <li><strong>Surface reasoning:</strong> Step-by-step logic that mirrors examples in its training data</li>
-                        <li><strong>Language translation & summary:</strong> Rephrasing while preserving meaning</li>
-                    </ul>
-                </div>
-
-                <div class="example-box">
-                    <h3>What LLMs Are Bad At (The Intern's Weaknesses)</h3>
-                    <ul>
-                        <li><strong>True reasoning:</strong> They can simulate logic but don't "understand" it. They'll make arithmetic errors or logical leaps that a human would catch.</li>
-                        <li><strong>Real-time information:</strong> The model is frozen in time (its training data has a cutoff date). It doesn't know today's news or your personal files unless you provide them.</li>
-                        <li><strong>Consistency:</strong> Give it the same prompt twice, you might get different answers. The "intern" is creatively unpredictable.</li>
-                        <li><strong>Factual accuracy:</strong> LLMs hallucinate—confidently stating false information that fits the pattern of their training data.</li>
-                    </ul>
-                </div>
-
-                <h2>🎨 Other AI Types: A Quick Tour</h2>
-                <p>While LLMs are the headline-grabbers, understanding the broader landscape helps you choose the right tool:</p>
-
-                <div class="example-box">
-                    <h3>Computer Vision AI</h3>
-                    <p><strong>What it does:</strong> Recognizes patterns in images and video.</p>
-                    <ul>
-                        <li>Face unlock on your phone</li>
-                        <li>Medical scan analysis</li>
-                        <li>Self-driving car perception</li>
-                        <li>Quality control in factories</li>
-                    </ul>
-                    <p><strong>Key difference:</strong> Works with pixels, not words. The "intern" became an expert by looking at millions of labeled images.</p>
-                </div>
-
-                <div class="example-box">
-                    <h3>Recommendation Systems</h3>
-                    <p><strong>What it does:</strong> Predicts what you'll like based on pattern matching with similar users.</p>
-                    <ul>
-                        <li>Netflix suggestions</li>
-                        <li>Amazon "customers also bought"</li>
-                        <li>Spotify Discover Weekly</li>
-                    </ul>
-                    <p><strong>Key difference:</strong> The prediction is personalized to you, based on your behavior patterns.</p>
-                </div>
-
-                <div class="example-box">
-                    <h3>Game-Playing & Simulation AI</h3>
-                    <p><strong>What it does:</strong> Recognizes patterns in game states to choose optimal moves.</p>
-                    <ul>
-                        <li>AlphaGo (beat world Go champion)</li>
-                        <li>Chess engines</li>
-                        <li>AI for video game NPCs</li>
-                        <li>Climate simulations</li>
-                    </ul>
-                    <p><strong>Key difference:</strong> Often uses reinforcement learning—learning from trial and error rather than human examples.</p>
-                </div>
-
-                <h2>💡 Why This Matters: From Theory to Practice</h2>
-                <p>Understanding these categories transforms how you approach AI:</p>
+                <h3 id="llm-acronym">Breaking Down the Acronym</h3>
                 <ul>
-                    <li><strong>Choose the right tool:</strong> Don't ask an LLM to analyze a spreadsheet (use a data analysis AI). Don't ask a computer vision model to write an email (use an LLM).</li>
-                    <li><strong>Set realistic expectations:</strong> Your LLM intern can draft a brilliant blog post but can't reliably multiply large numbers. Use it for what it's good at.</li>
-                    <li><strong>Spot the hype:</strong> When someone claims AI will "soon be able to do X," ask: "Is that pattern recognition or true reasoning?" Most impressive AI feats are still just very sophisticated pattern matching.</li>
+                    <li><strong>Large:</strong> Trained on hundreds of billions of words (Wikipedia, books, websites, code, etc.). The "intern" has essentially read the public internet.</li>
+                    <li><strong>Language:</strong> Focused specifically on understanding and generating human language—not images, not sound, not abstract reasoning.</li>
+                    <li><strong>Model:</strong> A statistical representation of all the patterns it found in that language data. It doesn't "know" facts; it knows that certain words tend to appear near other words.</li>
                 </ul>
 
-                <div class="contribute">
+                <h3 id="llm-works">How It Actually Works (Simplified)</h3>
+                <p>LLMs use something called a <strong>transformer architecture</strong>—specifically, an "attention mechanism" that learns which words matter most in context.</p>
+                <p><strong>Concrete example:</strong> When processing "The bank refused the loan," the model learns to "pay attention" to the word "bank" differently than in "He sat on the bank of the river." It learns from thousands of examples that "loan" and "river" change the meaning of "bank."</p>
+                <p>At generation time, it doesn't "think"—it calculates probabilities: "Given 'The bank refused', what word is most likely next?" (Answer: probably "the"). Then it repeats this process, building word by word.</p>
+
+                <h3 id="llm-report-card">The Intern's Report Card</h3>
+                <p><strong>Strengths:</strong></p>
+                <ul>
+                    <li>Pattern matching: Finding connections across domains it has seen before</li>
+                    <li>Format following: Mimicking structure—emails, code, poems, legal documents</li>
+                    <li>Creative recombination: Blending ideas in novel (but pattern-based) ways</li>
+                    <li>Language translation & summary: Rephrasing while preserving meaning</li>
+                </ul>
+                
+                <p style="margin-top: 1.5em;"><strong>Weaknesses:</strong></p>
+                <ul>
+                    <li>True reasoning: They can simulate logic but don't "understand" it. They'll make arithmetic errors or logical leaps a human would catch.</li>
+                    <li>Real-time information: The model is frozen in time (training data cutoff). It doesn't know today's news or your personal files unless you provide them.</li>
+                    <li>Consistency: Give the same prompt twice, you might get different answers. The "intern" is creatively unpredictable.</li>
+                    <li>Factual accuracy: LLMs hallucinate—confidently stating false information that fits their training patterns.</li>
+                </ul>
+
+                <div class="contribute" id="practice">
                     <h3>⚡ Your 60-Second Practice</h3>
-                    <p>Open any chat-based AI and try this two-part exercise:</p>
-                    <ol>
-                        <li><strong>Ask:</strong> "Explain machine learning to me in 50 words or less."</li>
-                        <li><strong>Then ask:</strong> "Now critique your own explanation—what important detail did you oversimplify or leave out?"</li>
-                    </ol>
-                    <p><strong>What you'll learn:</strong> The AI's critique reveals its own limitations. It often points out missing context or oversimplifications that you can then dig into.</p>
+                    <p><strong>Step 1:</strong> Ask an AI: "Explain machine learning in one sentence using a kitchen metaphor."</p>
+                    <p><strong>Step 2:</strong> Then ask: "Now critique your own explanation—what did you oversimplify?"</p>
+                    <p><strong>What you'll learn:</strong> The AI's critique often reveals its own blind spots. If it says "I didn't explain the role of data," that's your cue to ask: "What data would a kitchen metaphor need to include?"</p>
                 </div>
             </section>
         </article>
