@@ -667,6 +667,96 @@ details.nested-dropdown[open] > summary.nested-header::before {
     font-style: italic;
 }
 
+/* ========== AI 101 COURSE STYLES ========== */
+
+/* --- Module navigation bar --- */
+.nav-module {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9em;
+}
+
+.nav-module a {
+    color: var(--nav-link-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-module a:hover {
+    text-decoration: underline;
+}
+
+.module-meta {
+    color: var(--text-secondary);
+}
+
+.key-takeaway {
+    background: var(--dropdown-header-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5em;
+    margin: 2em 0;
+    font-style: italic;
+}
+
+/* --- Fix bullet spacing and indentation --- */
+.blog-content ul,
+.blog-content ol {
+    margin: 1.5em 0 !important;
+    padding-left: 2em !important;
+}
+
+.blog-content li {
+    margin-bottom: 0.8em !important;
+    line-height: 1.7 !important;
+}
+
+/* --- Fix paragraph spacing after lists --- */
+.blog-content ul + p,
+.blog-content ol + p,
+.blog-content .example-box + p {
+    margin-top: 1.5em !important;
+}
+
+/* --- Fix link contrast in boxes --- */
+.updates a,
+.contribute a,
+footer a {
+    color: var(--nav-link-color) !important;
+    font-weight: 500 !important;
+    opacity: 1 !important;
+}
+
+.updates a:hover,
+.contribute a:hover,
+footer a:hover {
+    text-decoration: underline !important;
+}
+
+/* --- Fix numbered list alignment --- */
+.blog-content ol {
+    padding-left: 2em !important;
+    margin-left: 0 !important;
+}
+
+/* --- Add breathing room between sections --- */
+.content-section {
+    margin-bottom: 2.5em;
+}
+
+.example-box {
+    margin: 2em 0;
+}
+
+/* --- Fix nested list spacing --- */
+.example-box ul,
+.example-box ol {
+    margin: 1em 0 !important;
+}
+
 /* ========== UTILITY CLASSES ========== */
 
 .sr-only {
