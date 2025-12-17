@@ -17,7 +17,6 @@
   --border-color: #444444;
   --nav-link-color: #4da6ff;
   --nav-link-hover: #66b3ff;
-  /* Darkened link color for better contrast */
   --nav-link-visited: #3d96e6;
   --dropdown-bg: #2d2d2d;
   --dropdown-header-bg: #252525;
@@ -153,7 +152,6 @@ a:link {
 
 a:visited {
   color: var(--nav-link-visited);
-  /* REMOVED opacity reduction for better contrast */
 }
 
 a:hover {
@@ -230,9 +228,8 @@ footer {
    LAYER 4: SELF-CONTAINED COMPONENTS (NEW ARCHITECTURE)
    ========================================================================== */
 
-/* ===== Universal Card Component ===== */
+/* ===== Universal Card Component - SIMPLIFIED PADDING ===== */
 .card {
-  container-type: inline-size;
   padding: var(--space-md);
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -240,14 +237,6 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-}
-
-@container (min-width: 400px) {
-  .card { padding: var(--space-lg); }
-}
-
-@container (min-width: 600px) {
-  .card { padding: var(--space-xl); }
 }
 
 .card-interactive {
@@ -263,7 +252,6 @@ footer {
 
 /* ===== Content Box Component ===== */
 .content-box {
-  container-type: inline-size;
   padding: var(--space-lg);
   margin-block: var(--space-xl);
   border-radius: 8px;
@@ -272,10 +260,6 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-}
-
-@container (min-width: 500px) {
-  .content-box { padding: var(--space-xl); }
 }
 
 /* ===== List Component ===== */
@@ -295,13 +279,13 @@ footer {
   padding-left: var(--space-md);
 }
 
-/* ===== Navigation Aside ===== */
-.nav-aside {
-  container-type: inline-size;
-  position: sticky;
-  top: var(--space-md);
-  width: 100%;
-  max-width: 240px;
+/* ===== Navigation Aside - FIXED POSITIONING ===== */
+.nav-aside,
+.section-nav {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 240px;
   padding: var(--space-md);
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -309,18 +293,15 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  z-index: 100;
 }
 
-@container (min-width: 200px) {
-  .nav-aside {
-    position: fixed;
-    right: var(--space-lg);
-    margin: 0;
-  }
-}
-
+/* Hide navigation on mobile */
 @media (max-width: 1200px) {
-  .nav-container { display: none; }
+  .nav-aside,
+  .section-nav {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -336,7 +317,6 @@ footer {
 .contribute,
 .blog-posts .feature-card {
   /* Copied from .card */
-  container-type: inline-size;
   padding: var(--space-md);
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -346,26 +326,7 @@ footer {
   gap: var(--space-sm);
   /* Additional legacy spacing */
   margin-block: var(--space-lg);
-}
-
-@container (min-width: 400px) {
-  .feature-card,
-  .example-box,
-  .updates,
-  .contribute,
-  .blog-posts .feature-card {
-    padding: var(--space-lg);
-  }
-}
-
-@container (min-width: 600px) {
-  .feature-card,
-  .example-box,
-  .updates,
-  .contribute,
-  .blog-posts .feature-card {
-    padding: var(--space-xl);
-  }
+  /* FIXED: Removed container queries that inflated padding */
 }
 
 /* Interactive hover effects for legacy cards */
@@ -439,11 +400,6 @@ footer {
   line-height: 1.7;
 }
 
-/* OLD: Content boxes - NEW: replaced by flow */
-.content-section {
-  margin-block: var(--space-2xl);
-}
-
 /* OLD: Nested lists - NEW: use .list-nested */
 .blog-content ul ul,
 .blog-content ol ol,
@@ -463,91 +419,34 @@ footer {
   padding-left: var(--space-md);
 }
 
-/* OLD: .section-nav - NEW: wraps .nav-aside */
-.section-nav {
-  /* Copied from .nav-aside */
-  container-type: inline-size;
-  position: sticky;
-  top: var(--space-md);
-  width: 100%;
-  max-width: 240px;
-  padding: var(--space-md);
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-@container (min-width: 200px) {
-  .section-nav {
-    position: fixed;
-    right: var(--space-lg);
-    margin: 0;
-  }
-}
-
-@media (max-width: 1200px) {
-  .section-nav { display: none; }
-}
-
 /* ===== Specific Page Fixes ===== */
 
-/* Index page - ensure cards appear */
-.feature-cards .feature-card,
-.index-page .feature-card {
-  display: flex !important;
-  flex-direction: column;
-  gap: var(--space-sm);
+/* Blog content - FIXED PARAGRAPH SPACING */
+.blog-content p {
+  margin-block: var(--space-md); /* Consistent spacing above and below paragraphs */
 }
 
-/* Blog page - restore post cards */
-.blog-posts .feature-card {
-  margin-bottom: var(--space-lg);
-  text-decoration: none;
-  color: inherit;
+.blog-content p:first-child {
+  margin-top: 0; /* Remove top margin on first paragraph */
 }
 
-/* Use cases page - ensure content is visible */
-.use-cases-page .content-section,
-.use-cases-page .example-box {
-  display: block !important;
-  margin: var(--space-xl) 0;
+/* Ensure headings have appropriate spacing */
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm); /* Reduced from space-xs for tighter grouping */
+}
+
+/* Ensure lists have consistent spacing */
+.blog-content ul,
+.blog-content ol {
+  margin-block: var(--space-md);
 }
 
 /* ==========================================================================
    LAYER 6: PAGE-SPECIFIC LAYOUTS
    ========================================================================== */
-
-/* ===== Blog Content Flow - FIXES MISSING PARAGRAPH BREAKS ===== */
-.blog-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md); /* Adds spacing between all direct children */
-}
-
-.blog-content p {
-  margin-block: 0; /* Reset any browser defaults */
-}
-
-.blog-content p + p {
-  margin-top: var(--space-md); /* Space between consecutive paragraphs */
-}
-
-/* Ensure headings have spacing above */
-.blog-content h2,
-.blog-content h3,
-.blog-content h4 {
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-xs);
-}
-
-/* Ensure lists have spacing */
-.blog-content ul,
-.blog-content ol {
-  margin-block: var(--space-md);
-}
 
 /* ===== Index Page ===== */
 .hero {
@@ -926,24 +825,6 @@ footer {
 .hide-mobile { display: block; }
 @media (max-width: 600px) {
   .hide-mobile { display: none; }
-}
-
-/* ==========================================================================
-   LAYER 8: MOBILE ADJUSTMENTS
-   ========================================================================== */
-
-@media (max-width: 600px) {
-  h1 { font-size: 2em; }
-  
-  nav ul {
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-  
-  body {
-    margin: var(--space-lg) auto;
-    padding: 0 var(--space-md);
-  }
 }
 
 /* Theme Toggle Button - ADDED MISSING STYLES */
