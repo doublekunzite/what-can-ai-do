@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MINIMALIST STYLESHEET - Self-Contained Component Architecture WITH BACKWARD COMPATIBILITY
+   MINIMALIST STYLESHEET - Self-Contained Component Architecture
    No external fonts, no frameworks, no dependencies
    ========================================================================== */
 
@@ -68,7 +68,6 @@
   box-sizing: border-box;
 }
 
-/* Remove default margins - we'll add back systematically */
 h1, h2, h3, h4, h5, h6,
 p, ul, ol, dl, blockquote,
 pre, figure, hr {
@@ -83,7 +82,6 @@ p {
    LAYER 2: LAYOUT PRIMITIVES
    ========================================================================== */
 
-/* ===== Flow: Vertical rhythm between siblings ===== */
 .flow {
   display: flex;
   flex-direction: column;
@@ -94,14 +92,12 @@ p {
 .flow-lg { gap: var(--space-lg); }
 .flow-xl { gap: var(--space-xl); }
 
-/* ===== Stack: Tight grouping of related elements ===== */
 .stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
 }
 
-/* ===== Grid: Responsive columns with consistent gaps ===== */
 .grid {
   display: grid;
   gap: var(--space-md);
@@ -126,7 +122,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Navigation */
 nav ul {
   list-style: none;
   margin: var(--space-xl) 0 var(--space-2xl);
@@ -143,11 +138,9 @@ nav a {
 
 nav a:hover { text-decoration: underline; }
 
-/* Links - IMPROVED CONTRAST */
-a,
-a:link {
+a, a:link {
   color: var(--nav-link-color);
-  transition: opacity 0.2s;
+  transition: color 0.2s;
 }
 
 a:visited {
@@ -156,19 +149,12 @@ a:visited {
 
 a:hover {
   color: var(--nav-link-hover);
-  opacity: 1;
-}
-
-a:visited:hover {
-  opacity: 1;
 }
 
 nav a:visited { 
   color: var(--nav-link-color);
-  opacity: 1; 
 }
 
-/* Footer */
 footer {
   margin-top: var(--space-3xl);
   padding-top: var(--space-xl);
@@ -178,7 +164,6 @@ footer {
   text-align: center;
 }
 
-/* Tables */
 .table-wrapper {
   overflow-x: auto;
   margin: var(--space-lg) 0;
@@ -205,7 +190,6 @@ footer {
   font-weight: 600;
 }
 
-/* Code Blocks */
 .code-content pre,
 .blog-content pre,
 .response-box pre,
@@ -225,10 +209,10 @@ footer {
 }
 
 /* ==========================================================================
-   LAYER 4: SELF-CONTAINED COMPONENTS (NEW ARCHITECTURE)
+   LAYER 4: SELF-CONTAINED COMPONENTS
    ========================================================================== */
 
-/* ===== Universal Card Component - SIMPLIFIED PADDING ===== */
+/* ===== Universal Card Component - NEW ARCHITECTURE ===== */
 .card {
   padding: var(--space-md);
   border-radius: 8px;
@@ -248,6 +232,32 @@ footer {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
   border-color: var(--nav-link-color);
+}
+
+/* Content spacing within cards */
+.card h3,
+.card h4 {
+  margin: 0 0 var(--space-xs) 0;
+  line-height: 1.3;
+}
+
+.card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.card p + p {
+  margin-top: var(--space-xs);
+}
+
+.card ul,
+.card ol {
+  margin: 0;
+  padding-left: var(--space-md);
+}
+
+.card li {
+  margin-block: var(--space-2xs);
 }
 
 /* ===== Content Box Component ===== */
@@ -296,7 +306,6 @@ footer {
   z-index: 100;
 }
 
-/* Hide navigation on mobile */
 @media (max-width: 1200px) {
   .nav-aside,
   .section-nav {
@@ -305,75 +314,14 @@ footer {
 }
 
 /* ==========================================================================
-   ADD TO LAYER 4: Self-Contained Components
+   LAYER 5: BACKWARD COMPATIBILITY (Temporary)
    ========================================================================== */
 
-/* ===== Enhanced Card Component for Rich Content ===== */
-
-/* Base card with balanced spacing */
-.card {
-  padding: var(--space-md);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm); /* Consistent spacing between children */
-}
-
-/* Interactive variant */
-.card-interactive {
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-
-.card-interactive:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: var(--nav-link-color);
-}
-
-/* Content spacing within cards */
-.card h3,
-.card h4 {
-  margin: 0 0 var(--space-xs) 0; /* Small gap below headings */
-  line-height: 1.3;
-}
-
-.card p {
-  margin: 0; /* Remove default margins - gap handles vertical rhythm */
-  line-height: 1.6;
-}
-
-/* If you need multiple paragraphs with slightly more breathing room */
-.card p + p {
-  margin-top: var(--space-xs); /* Small gap between paragraphs */
-}
-
-/* For lists inside cards */
-.card ul,
-.card ol {
-  margin: 0;
-  padding-left: var(--space-md);
-}
-
-.card li {
-  margin-block: var(--space-2xs);
-}
-
-/* ==========================================================================
-   LAYER 5: BACKWARD COMPATIBILITY WRAPPERS - FIXED
-   ========================================================================== */
-
-/* ===== Legacy Card Support (DEPRECATED - but required for existing pages) ===== */
-
-/* OLD: .feature-card, .example-box, .updates, .contribute - NEW: wraps .card */
-.feature-card,
+/* Legacy support until all pages migrated */
 .example-box,
-.updates,
 .contribute,
-.blog-posts .feature-card {
-  /* Copied from .card */
+.updates,
+.feature-card {
   padding: var(--space-md);
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -381,15 +329,13 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  /* Additional legacy spacing */
   margin-block: var(--space-lg);
-  /* FIXED: Removed container queries that inflated padding */
 }
 
-/* Interactive hover effects for legacy cards */
-.feature-card:hover,
-.feature-cards .feature-card:hover,
-.blog-posts .feature-card:hover {
+.example-box:hover,
+.contribute:hover,
+.updates:hover,
+.feature-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
   border-color: var(--nav-link-color);
@@ -397,15 +343,12 @@ footer {
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-/* OLD: .feature-cards grid - NEW: wraps .grid */
 .feature-cards,
 .blog-posts,
 .card-grid {
-  /* Copied from .grid */
   display: grid;
   gap: var(--space-md);
   grid-template-columns: repeat(var(--grid-col, 1), minmax(0, 1fr));
-  /* Additional legacy spacing */
   margin-block: var(--space-xl);
 }
 
@@ -425,85 +368,30 @@ footer {
   }
 }
 
-/* OLD: List overrides - NEW: wraps .list */
-.blog-content ul,
-.blog-content ol,
-.dropdown-content ul,
-.dropdown-content ol,
-.nested-content ul,
-.nested-content ol,
-.contribute ul,
-.contribute ol,
-.updates ul,
-.updates ol {
-  /* Copied from .list */
-  padding-left: var(--space-md);
-  margin: 0;
-}
+/* ==========================================================================
+   LAYER 6: PAGE-SPECIFIC LAYOUTS
+   ========================================================================== */
 
-.blog-content ul li,
-.blog-content ol li,
-.dropdown-content ul li,
-.dropdown-content ol li,
-.nested-content ul li,
-.nested-content ol li,
-.contribute ul li,
-.contribute ol li,
-.updates ul li,
-.updates ol li {
-  /* Copied from .list li */
-  padding-left: var(--space-xs);
-  margin-block: var(--space-2xs);
-  line-height: 1.7;
-}
-
-/* OLD: Nested lists - NEW: use .list-nested */
-.blog-content ul ul,
-.blog-content ol ol,
-.blog-content ul ol,
-.blog-content ol ul,
-.dropdown-content ul ul,
-.dropdown-content ol ol,
-.nested-content ul ul,
-.nested-content ol ol,
-.nested-content ul ol,
-.nested-content ol ul,
-.contribute ul ul,
-.contribute ol ol,
-.updates ul ul,
-.updates ol ol {
-  margin-block: var(--space-xs);
-  padding-left: var(--space-md);
-}
-
-/* ===== Specific Page Fixes ===== */
-
-/* Blog content - FIXED PARAGRAPH SPACING */
+/* ===== Blog Content Spacing ===== */
 .blog-content p {
-  margin-block: var(--space-md); /* Consistent spacing above and below paragraphs */
+  margin-block: var(--space-md);
 }
 
 .blog-content p:first-child {
-  margin-top: 0; /* Remove top margin on first paragraph */
+  margin-top: 0;
 }
 
-/* Ensure headings have appropriate spacing */
 .blog-content h2,
 .blog-content h3,
 .blog-content h4 {
   margin-top: var(--space-xl);
-  margin-bottom: var(--space-sm); /* Reduced from space-xs for tighter grouping */
+  margin-bottom: var(--space-sm);
 }
 
-/* Ensure lists have consistent spacing */
 .blog-content ul,
 .blog-content ol {
   margin-block: var(--space-md);
 }
-
-/* ==========================================================================
-   LAYER 6: PAGE-SPECIFIC LAYOUTS
-   ========================================================================== */
 
 /* ===== Index Page ===== */
 .hero {
@@ -726,76 +614,6 @@ footer {
   font-size: 1em;
 }
 
-/* ===== Share & Meta Components ===== */
-.share-btn {
-  background: var(--nav-link-color);
-  color: white;
-  border: none;
-  padding: 0.4em 0.8em;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85em;
-  margin-left: var(--space-sm);
-  transition: background 0.3s;
-}
-
-.share-btn:hover {
-  background: var(--nav-link-hover);
-}
-
-@keyframes highlight {
-  from { background-color: var(--nav-link-color); }
-  to { background-color: transparent; }
-}
-
-.prompt-highlight,
-.model-highlight {
-  animation: highlight 2s ease-in-out;
-}
-
-.conversation-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: var(--space-sm);
-  gap: var(--space-sm);
-}
-
-.conversation-meta p {
-  margin: 0;
-  font-size: 0.9em;
-  color: var(--text-secondary);
-}
-
-.conversation-meta .tags {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-  flex: 1 1 auto;
-}
-
-.conversation-meta button {
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.tag {
-  background: var(--dropdown-header-bg);
-  color: var(--text-color);
-  padding: 0.3em 0.6em;
-  border-radius: 12px;
-  font-size: 0.8em;
-  border: 1px solid var(--border-color);
-}
-
-.no-results {
-  text-align: center;
-  padding: var(--space-xl);
-  color: var(--text-secondary);
-  font-style: italic;
-}
-
 /* ===== Prompt/Response/AI Output Boxes ===== */
 .prompt-box,
 .response-box,
@@ -884,7 +702,7 @@ footer {
   .hide-mobile { display: none; }
 }
 
-/* Theme Toggle Button - ADDED MISSING STYLES */
+/* ===== Theme Toggle Button - ESSENTIAL STYLES ===== */
 .theme-toggle {
   position: fixed;
   top: var(--space-md);
@@ -895,7 +713,7 @@ footer {
   border-radius: 4px;
   color: var(--text-color);
   cursor: pointer;
-  z-index: 100;
+  z-index: 1000;
   font-size: 0.9em;
   transition: all 0.2s;
 }
