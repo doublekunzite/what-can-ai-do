@@ -1,1119 +1,827 @@
-/* MINIMALIST STYLESHEET - Fixed Dark Mode */
-/* No external fonts, no frameworks, no dependencies */
+/* ==========================================================================
+   MINIMALIST STYLESHEET - Self-Contained Component Architecture
+   No external fonts, no frameworks, no dependencies
+   ========================================================================== */
 
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ==========================================================================
+   LAYER 1: GLOBAL TOKENS & RESET
+   ========================================================================== */
 
-/* CSS Variables - Dark Mode Default */
+/* ===== CSS Variables - Design System Tokens ===== */
 :root {
-    /* DARK MODE (Default) */
-    --bg-color: #1a1a1a;
-    --bg-secondary: #252525; /* NEW: for submission section */
-    --text-color: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --border-color: #444444;
-    --nav-link-color: #4da6ff;
-    --nav-link-hover: #66b3ff;
-    --dropdown-bg: #2d2d2d;
-    --dropdown-header-bg: #252525;
-    --card-bg: #2a2a2a;
-    --footer-border: #444444;
-    --accent-color: #4da6ff;
-    --shadow: 0 2px 8px rgba(0,0,0,0.3);
-    --code-bg: #1e1e1e; /* NEW: for code backgrounds */
+  /* Colors - Dark Mode Default */
+  --bg-color: #1a1a1a;
+  --bg-secondary: #252525;
+  --text-color: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border-color: #444444;
+  --nav-link-color: #4da6ff;
+  --nav-link-hover: #66b3ff;
+  --dropdown-bg: #2d2d2d;
+  --dropdown-header-bg: #252525;
+  --card-bg: #2a2a2a;
+  --footer-border: #444444;
+  --accent-color: #4da6ff;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  --code-bg: #1e1e1e;
+
+  /* Spacing Scale - Systematic Rhythm */
+  --space-3xs: 0.25rem;  /* 4px */
+  --space-2xs: 0.5rem;   /* 8px */
+  --space-xs: 0.75rem;   /* 12px */
+  --space-sm: 1rem;      /* 16px */
+  --space-md: 1.5rem;    /* 24px */
+  --space-lg: 2rem;      /* 32px */
+  --space-xl: 2.5rem;    /* 40px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+
+  /* Layout Constraints */
+  --content-max: 700px;
+  --blog-max: 800px;
 }
 
-/* Light Mode - Applied when data-theme="light" is set */
+/* ===== Light Mode Override ===== */
 [data-theme="light"] {
-    --bg-color: #ffffff;
-    --bg-secondary: #f5f5f5; /* NEW */
-    --text-color: #222222;
-    --text-secondary: #555555;
-    --border-color: #dddddd;
-    --nav-link-color: #0066cc;
-    --nav-link-hover: #0052a3;
-    --dropdown-bg: #f9f9f9;
-    --dropdown-header-bg: #f5f5f5;
-    --card-bg: #ffffff;
-    --footer-border: #dddddd;
-    --accent-color: #0066cc;
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-    --code-bg: #f5f5f5; /* NEW */
+  --bg-color: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-color: #222222;
+  --text-secondary: #555555;
+  --border-color: #dddddd;
+  --nav-link-color: #0066cc;
+  --nav-link-hover: #0052a3;
+  --dropdown-bg: #f9f9f9;
+  --dropdown-header-bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --footer-border: #dddddd;
+  --accent-color: #0066cc;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --code-bg: #f5f5f5;
 }
 
-/* Base Styles */
+/* ===== Modern Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove default margins - we'll add back systematically */
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, dl, blockquote,
+pre, figure, hr {
+  margin-block: 0;
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   LAYER 2: LAYOUT PRIMITIVES
+   ========================================================================== */
+
+/* ===== Flow: Vertical rhythm between siblings ===== */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.flow-sm { gap: var(--space-sm); }
+.flow-lg { gap: var(--space-lg); }
+.flow-xl { gap: var(--space-xl); }
+
+/* ===== Stack: Tight grouping of related elements ===== */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* ===== Grid: Responsive columns with consistent gaps ===== */
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(var(--grid-col, 1), minmax(0, 1fr));
+}
+
+@media (min-width: 600px) { .grid { --grid-col: 2; } }
+@media (min-width: 900px) { .grid { --grid-col: 3; } }
+
+/* ==========================================================================
+   LAYER 3: BASE ELEMENTS
+   ========================================================================== */
+
+/* ===== Typography ===== */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                 Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 20px;
-    line-height: 1.6;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  max-width: var(--content-max);
+  margin: 40px auto;
+  padding: 0 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Navigation */
+/* ===== Navigation ===== */
 nav ul {
-    list-style: none;
-    margin: 2em 0 3em 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
+  list-style: none;
+  margin: var(--space-xl) 0 var(--space-2xl);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
 }
 
 nav a {
-    color: var(--nav-link-color);
-    padding: 0.2em 0;
-    font-weight: 500;
-    text-decoration: none;
+  color: var(--nav-link-color);
+  font-weight: 500;
+  text-decoration: none;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
+nav a:hover { text-decoration: underline; }
 
-/* Fix visited link colors for both themes */
+/* ===== Links ===== */
 a:visited {
-    color: var(--nav-link-color) !important;
-    opacity: 0.85; /* Better contrast than 0.7 */
+  color: var(--nav-link-color);
+  opacity: 0.85;
 }
 
-a:visited:hover {
-    opacity: 1;
-}
+a:visited:hover { opacity: 1; }
 
-/* Ensure the dimming affect doesn't apply to navigation */
-nav a:visited,
-.site-title:visited {
-    opacity: 1;
-}
+/* Navigation links keep full opacity */
+nav a:visited { opacity: 1; }
 
-/* Footer */
+/* ===== Footer ===== */
 footer {
-    margin-top: 4em;
-    padding-top: 2em;
-    border-top: 1px solid var(--footer-border);
-    font-size: 0.9em;
-    color: var(--text-secondary);
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--footer-border);
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  text-align: center;
 }
 
-/* Dropdowns */
-details.main-dropdown {
-    margin: 2em 0;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--dropdown-bg);
-    box-shadow: var(--shadow);
-}
-
-summary.dropdown-header {
-    cursor: pointer;
-    padding: 1em;
-    background-color: var(--dropdown-header-bg);
-    list-style: none;
-    position: relative;
-}
-
-summary.dropdown-header::-webkit-details-marker {
-    display: none;
-}
-
-summary.dropdown-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    transition: transform 0.2s;
-}
-
-details.main-dropdown[open] > summary.dropdown-header::before {
-    transform: rotate(90deg);
-}
-
-summary.dropdown-header > h2 {
-    display: inline-block;
-    margin: 0;
-    font-size: 1.8em;
-}
-
-.dropdown-content {
-    padding: 0 1em 1em 1em;
-}
-
-/* Nested Dropdowns */
-details.nested-dropdown {
-    margin: 1em 0;
-    border-left: 3px solid var(--accent-color);
-    padding-left: 1em;
-}
-
-summary.nested-header {
-    cursor: pointer;
-    padding: 0.5em 0;
-    color: var(--nav-link-color);
-    list-style: none;
-}
-
-summary.nested-header::-webkit-details-marker {
-    display: none;
-}
-
-summary.nested-header::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 0.8em;
-    transition: transform 0.2s;
-}
-
-details.nested-dropdown[open] > summary.nested-header::before {
-    transform: rotate(90deg);
-}
-
-.nested-content {
-    padding: 0 1em 1em 0;
-}
-
-/* Tables */
+/* ===== Tables ===== */
 .table-wrapper {
-    overflow-x: auto;
-    margin: 1.5em 0;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+  overflow-x: auto;
+  margin: var(--space-lg) 0;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
 }
 
 .data-table {
-    font-size: 0.85em;
-    min-width: 700px;
-    border-collapse: collapse;
-    width: 100%;
+  font-size: 0.85em;
+  min-width: 700px;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .data-table th,
 .data-table td {
-    padding: 0.6em 0.5em;
-    border: 1px solid var(--border-color);
-    vertical-align: top;
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+  vertical-align: top;
 }
 
 .data-table th {
-    background-color: var(--dropdown-header-bg);
-    font-weight: 600;
+  background-color: var(--dropdown-header-bg);
+  font-weight: 600;
 }
 
-.data-table td {
-    text-align: center;
-}
-
+.data-table td { text-align: center; }
 .data-table td:first-child {
-    text-align: left;
-    font-weight: 600;
+  text-align: left;
+  font-weight: 600;
 }
 
-/* Bold highest scores in table */
 .highest-score {
-    font-weight: 600;
-    color: var(--nav-link-color);
+  font-weight: 600;
+  color: var(--nav-link-color);
 }
 
-/* Code Blocks */
-.code-content pre {
-    margin: 0;
-    padding: 1em;
-    background-color: var(--dropdown-header-bg);
-    border-radius: 3px;
-    font-size: 0.9em;
-    line-height: 1.4;
-    font-family: 'Courier New', monospace;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+/* ===== Code Blocks ===== */
+.code-content pre,
+.blog-content pre,
+.response-box pre,
+.nested-content pre,
+.ai-output-box pre {
+  margin: 0;
+  padding: var(--space-md);
+  background-color: var(--dropdown-header-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.9em;
+  line-height: 1.4;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
 }
 
-/* Theme Toggle */
+/* ==========================================================================
+   LAYER 4: INTERACTIVE COMPONENTS
+   ========================================================================== */
+
+/* ===== Dropdowns ===== */
+details.main-dropdown {
+  margin: var(--space-lg) 0;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--dropdown-bg);
+  box-shadow: var(--shadow);
+}
+
+summary.dropdown-header {
+  cursor: pointer;
+  padding: var(--space-md);
+  background-color: var(--dropdown-header-bg);
+  list-style: none;
+  position: relative;
+}
+
+summary.dropdown-header::-webkit-details-marker { display: none; }
+
+summary.dropdown-header::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: var(--space-xs);
+  transition: transform 0.2s;
+}
+
+details.main-dropdown[open] > summary.dropdown-header::before {
+  transform: rotate(90deg);
+}
+
+.dropdown-content {
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+/* Nested Dropdowns */
+details.nested-dropdown {
+  margin: var(--space-md) 0;
+  border-left: 3px solid var(--accent-color);
+  padding-left: var(--space-md);
+}
+
+summary.nested-header {
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  color: var(--nav-link-color);
+  list-style: none;
+}
+
+summary.nested-header::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: var(--space-xs);
+  font-size: 0.8em;
+  transition: transform 0.2s;
+}
+
+details.nested-dropdown[open] > summary.nested-header::before {
+  transform: rotate(90deg);
+}
+
+.nested-content {
+  padding: 0 var(--space-md) var(--space-md) 0;
+}
+
+/* ===== Theme Toggle ===== */
 .theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: var(--dropdown-header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 0.5em 1em;
-    cursor: pointer;
-    font-size: 0.9em;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-    z-index: 9999;
-    box-shadow: var(--shadow);
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  background-color: var(--dropdown-header-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  font-size: 0.9em;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  box-shadow: var(--shadow);
 }
 
 .theme-toggle:hover {
-    background-color: var(--nav-link-color);
-    color: white;
-    transform: translateY(-1px);
+  background-color: var(--nav-link-color);
+  color: white;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
-    .theme-toggle {
-        top: 10px;
-        right: 10px;
-        font-size: 0.8em;
-        padding: 0.4em 0.8em;
-    }
+  .theme-toggle {
+    top: var(--space-md);
+    right: var(--space-md);
+    font-size: 0.8em;
+    padding: var(--space-xs) var(--space-sm);
+  }
 }
 
-/* ========== PROMPT REPOSITORY STYLES ========== */
+/* ==========================================================================
+   LAYER 5: SELF-CONTAINED COMPONENTS
+   ========================================================================== */
 
-/* Filter controls */
+/* ===== Universal Card Component ===== */
+.card {
+  container-type: inline-size;
+  padding: var(--space-md);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@container (min-width: 400px) {
+  .card { padding: var(--space-lg); }
+}
+
+@container (min-width: 600px) {
+  .card { padding: var(--space-xl); }
+}
+
+.card-interactive {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--nav-link-color);
+}
+
+/* ===== Content Box Component ===== */
+.content-box {
+  container-type: inline-size;
+  padding: var(--space-lg);
+  margin-block: var(--space-xl);
+  border-radius: 8px;
+  background: var(--dropdown-header-bg);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@container (min-width: 500px) {
+  .content-box { padding: var(--space-xl); }
+}
+
+/* ===== List Component (Bullet-Proof Spacing) ===== */
+.list {
+  padding-left: var(--space-md);
+  margin: 0;
+}
+
+.list li {
+  padding-left: var(--space-xs);
+  margin-block: var(--space-2xs);
+  line-height: 1.7;
+}
+
+.list-nested {
+  margin-block: var(--space-xs);
+  padding-left: var(--space-md);
+}
+
+/* ===== Navigation Aside Component ===== */
+.nav-aside {
+  container-type: inline-size;
+  position: sticky;
+  top: var(--space-md);
+  width: 100%;
+  max-width: 240px;
+  padding: var(--space-md);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@container (min-width: 200px) {
+  .nav-aside {
+    position: fixed;
+    right: var(--space-lg);
+    margin: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-container { display: none; }
+}
+
+/* ===== Prompt/Response Boxes ===== */
+.prompt-box,
+.response-box,
+.ai-output-box {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin-block: var(--space-lg);
+  font-size: 0.95em;
+}
+
+.prompt-box {
+  background: rgba(77, 166, 255, 0.08);
+}
+
+.response-box {
+  background: rgba(45, 45, 45, 0.05);
+}
+
+[data-theme="light"] .prompt-box {
+  background: rgba(0, 102, 204, 0.05);
+}
+
+[data-theme="light"] .response-box {
+  background: rgba(240, 240, 240, 0.5);
+}
+
+.ai-output-box {
+  background-color: var(--dropdown-header-bg);
+}
+
+.ai-output-box h4 {
+  color: var(--nav-link-color);
+}
+
+/* ===== Submission Section ===== */
+.submission-section {
+  margin: var(--space-2xl) 0 var(--space-xl);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+.submission-header {
+  padding: var(--space-md);
+  margin: 0;
+}
+
+.submission-content {
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.submission-notice {
+  font-size: 0.9em;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--dropdown-header-bg);
+  border-left: 4px solid var(--nav-link-color);
+  border-radius: 4px;
+}
+
+.submission-notice strong {
+  color: var(--nav-link-color);
+}
+
+/* ==========================================================================
+   LAYER 6: PAGE-SPECIFIC LAYOUTS
+   ========================================================================== */
+
+/* ===== Index Page ===== */
+.hero {
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: var(--space-sm);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-primary, .cta-secondary {
+  padding: 0.75em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+.cta-primary {
+  background: var(--nav-link-color);
+  color: white;
+}
+
+.cta-secondary {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 2px solid var(--nav-link-color);
+}
+
+.cta-primary:hover,
+.cta-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.card-grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-block: var(--space-xl);
+}
+
+.card-icon {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: var(--space-sm);
+}
+
+.steps {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+}
+
+.steps li {
+  counter-increment: step-counter;
+  margin: var(--space-md) 0;
+  padding-left: 2.5em;
+  position: relative;
+}
+
+.steps li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--nav-link-color);
+  color: white;
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ===== Blog Page ===== */
+.blog-layout {
+  max-width: var(--blog-max);
+  margin: 0 auto;
+}
+
+.blog-layout > section {
+  margin-block: var(--space-2xl);
+}
+
+.breadcrumb {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.breadcrumb:hover { text-decoration: underline; }
+
+.pull-quote {
+  background: var(--dropdown-header-bg);
+  border-left: 4px solid var(--accent-color);
+  padding: var(--space-lg);
+  margin-block: var(--space-xl);
+  font-style: italic;
+  font-size: 1.1em;
+  border-radius: 0 8px 8px 0;
+}
+
+.blog-image {
+  margin-block: var(--space-xl);
+  text-align: center;
+}
+
+.blog-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+}
+
+.blog-image.small img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.blog-image figcaption {
+  margin-top: var(--space-sm);
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ===== AI 101 Course ===== */
+.nav-module {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--space-xl) 0;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9em;
+}
+
+.nav-module a {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-module a:hover { text-decoration: underline; }
+
+.module-meta {
+  color: var(--text-secondary);
+}
+
+.key-takeaway {
+  background: var(--dropdown-header-bg);
+  border-left: 4px solid var(--accent-color);
+  padding: var(--space-lg);
+  margin-block: var(--space-xl);
+  font-style: italic;
+}
+
+/* ===== Compare & Prompt Repository Pages ===== */
 .filter-controls {
-    background-color: var(--dropdown-header-bg);
-    padding: 1em;
-    margin: 1.5em 0;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+  background-color: var(--dropdown-header-bg);
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
 .search-box {
-    width: 100%;
-    padding: 0.8em;
-    margin-bottom: 1em;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  width: 100%;
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .search-box::placeholder {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .filter-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
 .filter-btn {
-    padding: 0.5em 1em;
-    background: var(--bg-color);
-    border: 2px solid var(--nav-link-color);
-    color: var(--nav-link-color);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 0.9em;
+  padding: 0.5em 1em;
+  background: var(--bg-color);
+  border: 2px solid var(--nav-link-color);
+  color: var(--nav-link-color);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9em;
 }
 
 .filter-btn:hover,
 .filter-btn.active {
-    background: var(--nav-link-color);
-    color: white;
+  background: var(--nav-link-color);
+  color: white;
 }
 
 .model-select {
-    margin-top: 1em;
-    width: 100%;
-    padding: 0.8em;
-    border: 2px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-size: 1em;
+  margin-top: var(--space-md);
+  width: 100%;
+  padding: var(--space-sm);
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1em;
 }
 
-/* Share button (consolidated - works for both compare and prompt repo) */
+/* ===== Share & Meta Components ===== */
 .share-btn {
-    background: var(--nav-link-color);
-    color: white;
-    border: none;
-    padding: 0.4em 0.8em; /* Compromise size for both contexts */
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85em; /* Slightly smaller for consistency */
-    margin-left: 0.5em;
-    transition: background 0.3s;
+  background: var(--nav-link-color);
+  color: white;
+  border: none;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  margin-left: var(--space-sm);
+  transition: background 0.3s;
 }
+
 .share-btn:hover {
-    background: var(--nav-link-hover);
+  background: var(--nav-link-hover);
 }
 
-/* Highlight animation (consolidated) */
 @keyframes highlight {
-    from { background-color: var(--nav-link-color); }
-    to { background-color: transparent; }
+  from { background-color: var(--nav-link-color); }
+  to { background-color: transparent; }
 }
+
 .prompt-highlight,
-.model-highlight { /* Works for both prompt and model highlighting */
-    animation: highlight 2s ease-in-out;
+.model-highlight {
+  animation: highlight 2s ease-in-out;
 }
 
-/* Conversation meta (consolidated) */
 .conversation-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Better for multi-line content */
-    flex-wrap: wrap;
-    margin-top: 0.5em;
-    gap: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+  gap: var(--space-sm);
 }
+
 .conversation-meta p {
-    margin: 0;
-    font-size: 0.9em;
-    color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--text-secondary);
 }
+
 .conversation-meta .tags {
-    display: flex;
-    gap: 0.5em;
-    flex-wrap: wrap;
-    flex: 1 1 auto; /* Allow tags to take space */
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  flex: 1 1 auto;
 }
+
 .conversation-meta button {
-    flex-shrink: 0; /* Prevent button from shrinking */
-    margin-left: auto;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
-/* Tags */
 .tag {
-    background: var(--dropdown-header-bg);
-    color: var(--text-color);
-    padding: 0.3em 0.6em;
-    border-radius: 12px;
-    font-size: 0.8em;
-    border: 1px solid var(--border-color);
+  background: var(--dropdown-header-bg);
+  color: var(--text-color);
+  padding: 0.3em 0.6em;
+  border-radius: 12px;
+  font-size: 0.8em;
+  border: 1px solid var(--border-color);
 }
 
-/* No results (consolidated) */
 .no-results {
-    text-align: center;
-    padding: 2em; /* Standardized padding */
-    color: var(--text-secondary);
-    font-style: italic;
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
-/* Prompt/Response Boxes */
-.prompt-box pre,
-.response-box pre {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-x: auto !important;
-    max-width: 100%;
-    display: block;
-}
-
-/* Fix bullet points in ALL content areas */
-.dropdown-content ul,
-.dropdown-content ol,
-.nested-content ul,
-.nested-content ol,
-.ai-output-box ul,
-.ai-output-box ol {
-    padding-left: 2em !important;
-    margin: 1em 0 !important;
-}
-.dropdown-content li,
-.nested-content li,
-.ai-output-box li {
-    padding-left: 0.5em !important;
-    margin-bottom: 0.5em !important;
-    line-height: 1.6 !important;
-}
-
-/* Code blocks in responses */
-.response-box pre,
-.nested-content pre,
-.ai-output-box pre {
-    background: var(--dropdown-header-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 4px !important;
-    padding: 1em !important;
-    margin: 1em 0 !important;
-    overflow-x: auto !important;
-}
-
-/* Professional prompt/response boxes */
-.prompt-box {
-    background: rgba(77, 166, 255, 0.08);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-.response-box {
-    background: rgba(45, 45, 45, 0.05);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-[data-theme="light"] .prompt-box {
-    background: rgba(0, 102, 204, 0.05);
-}
-[data-theme="light"] .response-box {
-    background: rgba(240, 240, 240, 0.5);
-}
-
-/* Submission Section (NEW) */
-.submission-section {
-    margin: 3em 0 2em;
-    padding: 0; /* Padding is on the content div */
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--bg-secondary);
-}
-.submission-header {
-    padding: 1em;
-    margin: 0;
-}
-.submission-content {
-    padding: 0 1em 1em 1em;
-}
-.submission-notice {
-    font-size: 0.9em;
-    margin-top: 1em;
-    padding: 1em;
-    background: var(--dropdown-header-bg);
-    border-left: 4px solid var(--nav-link-color);
-    border-radius: 4px;
-}
-.submission-notice strong {
-    color: var(--nav-link-color);
-}
-
-/* AI Output Box (consolidated) */
-.ai-output-box {
-    background-color: var(--dropdown-header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 1.2em;
-    margin: 1.5em 0;
-    font-size: 0.95em;
-}
-.ai-output-box h4 {
-    color: var(--nav-link-color);
-    margin-top: 0;
-}
-
-/* ========== INDEX PAGE STYLES ========== */
-
-/* Hero section */
-.hero {
-    text-align: center;
-    padding: 3em 0 2em;
-}
-
-.hero h1 {
-    font-size: 2.5em;
-    margin-bottom: 0.5em;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 1em;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.cta-primary, .cta-secondary {
-    padding: 0.75em 1.5em;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s;
-}
-
-.cta-primary {
-    background: var(--nav-link-color);
-    color: white;
-}
-
-.cta-secondary {
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: 2px solid var(--nav-link-color);
-}
-
-.cta-primary:hover, .cta-secondary:hover {
-    transform: translateY(-2px);
-}
-
-/* Feature cards */
-.feature-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5em;
-    margin-bottom: 2em;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    padding: 1.5em;
-    border-radius: 8px;
-    border: 2px solid var(--border-color);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-    border-color: var(--nav-link-color);
-}
-
-.card-icon {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 0.5em;
-}
-
-/* Quick start steps */
-.steps {
-    list-style: none;
-    counter-reset: step-counter;
-    padding: 0;
-}
-
-.steps li {
-    counter-increment: step-counter;
-    margin: 1em 0;
-    padding-left: 2.5em;
-    position: relative;
-}
-
-.steps li::before {
-    content: counter(step-counter);
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: var(--nav-link-color);
-    color: white;
-    width: 1.8em;
-    height: 1.8em;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-/* ========== COMPARE PAGE STYLES ========== */
-
-/* Intro section spacing */
-.intro-section p {
-    margin-bottom: 0.5em;
-}
-
-/* Share button size for compare page (specific override) */
-.compare-page .share-btn {
-    padding: 0.3em 0.6em;
-    font-size: 0.8em;
-}
-
-/* ========== BLOG PAGE STYLES ========== */
-
-.blog-post {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.breadcrumb {
-    color: var(--nav-link-color);
-    text-decoration: none;
-    font-size: 0.9em;
-}
-.breadcrumb:hover {
-    text-decoration: underline;
-}
-
-.pull-quote {
-    background: var(--dropdown-header-bg);
-    border-left: 4px solid var(--accent-color);
-    padding: 1.5em;
-    margin: 2em 0;
-    font-style: italic;
-    font-size: 1.1em;
-    border-radius: 0 8px 8px 0;
-}
-
-.blog-image {
-    margin: 2em 0;
-    text-align: center;
-}
-.blog-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-}
-.blog-image figcaption {
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    color: var(--text-secondary);
-    font-style: italic;
-}
-
-/* ========== AI 101 COURSE STYLES ========== */
-
-/* --- Module navigation bar --- */
-.nav-module {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2em 0;
-    padding: 1em 0;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.9em;
-}
-
-.nav-module a {
-    color: var(--nav-link-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.nav-module a:hover {
-    text-decoration: underline;
-}
-
-.module-meta {
-    color: var(--text-secondary);
-}
-
-.key-takeaway {
-    background: var(--dropdown-header-bg);
-    border-left: 4px solid var(--accent-color);
-    padding: 1.5em;
-    margin: 2em 0;
-    font-style: italic;
-}
-
-/* --- Fix bullet spacing and indentation --- */
-.blog-content ul,
-.blog-content ol {
-    margin: 1.5em 0 !important;
-    padding-left: 2em !important;
-}
-
-.blog-content li {
-    margin-bottom: 0.8em !important;
-    line-height: 1.7 !important;
-}
-
-/* --- Fix paragraph spacing after lists --- */
-.blog-content ul + p,
-.blog-content ol + p,
-.blog-content .example-box + p {
-    margin-top: 1.5em !important;
-}
-
-/* --- Fix link contrast in boxes --- */
-.updates a,
-.contribute a,
-footer a {
-    color: var(--nav-link-color) !important;
-    font-weight: 500 !important;
-    opacity: 1 !important;
-}
-
-.updates a:hover,
-.contribute a:hover,
-footer a:hover {
-    text-decoration: underline !important;
-}
-
-/* --- Fix numbered list alignment --- */
-.blog-content ol {
-    padding-left: 2em !important;
-    margin-left: 0 !important;
-}
-
-/* --- Add breathing room between sections --- */
-.content-section {
-    margin-bottom: 2.5em;
-}
-
-.example-box {
-    margin: 2em 0;
-}
-
-/* --- Fix nested list spacing --- */
-.example-box ul,
-.example-box ol {
-    margin: 1em 0 !important;
-}
-
-/* Module cards in course grid */
-.feature-card summary h3 {
-    margin: 0;
-}
-
-/* ========== AI 101 FINAL POLISH FIXES ========== */
-
-/* 1. Balance card padding by removing top margin from first child */
-.feature-card > *:first-child,
-.example-box > *:first-child,
-.updates > *:first-child,
-.contribute > *:first-child {
-    margin-top: 0;
-}
-
-/* 2. Left-justify lists in contribute boxes */
-.contribute ol,
-.contribute ul {
-    text-align: left;
-    margin-left: 0;
-    padding-left: 2em;
-}
-
-/* 3. Add paragraph break after "Try This Today" heading */
-.updates h3 {
-    margin-bottom: 1em;
-}
-
-/* 4. Floating nav - sticky on desktop, hidden on mobile */
-.section-nav {
-    position: sticky;
-    top: 20px;
-    float: right;
-    width: 200px;
-    margin-right: -220px; /* Pulls it outside the content flow */
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1em;
-    font-size: 0.85em;
-}
-
-.section-nav h4 {
-    margin-top: 0;
-    color: var(--accent-color);
-    font-size: 0.95em;
-}
-
-.section-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.section-nav li {
-    margin-bottom: 0.6em;
-}
-
-.section-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    display: block;
-    padding: 0.3em 0;
-    border-radius: 3px;
-}
-
-.section-nav a:hover {
-    background: var(--dropdown-header-bg);
-    color: var(--nav-link-color);
-}
-
-/* Mobile: hide floating nav */
-@media (max-width: 1200px) {
-    .section-nav {
-        display: none;
-    }
-}
-
-/* ========== UTILITY CLASSES ========== */
+/* ==========================================================================
+   LAYER 7: UTILITY CLASSES
+   ========================================================================== */
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
 }
 
-/* Mobile adjustments */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+.hide-mobile { display: block; }
 @media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-    nav ul {
-        flex-direction: column;
-        gap: 1em;
-    }
+  .hide-mobile { display: none; }
 }
 
-/* ========== FIXES FOR SPACING & LOST STYLES ========== */
+/* ==========================================================================
+   LAYER 8: MOBILE ADJUSTMENTS
+   ========================================================================== */
 
-/* 1. Add breathing room around submission section */
-.submission-section {
-    margin: 4em 0 3em !important; /* Increased top/bottom space */
-}
-
-.submission-content > p:first-child {
-    margin-bottom: 1.5em !important; /* Space after intro text */
-}
-
-/* 2. Fix footer spacing */
-footer {
-    padding: 2em 1em !important; /* Add padding inside footer */
-    text-align: center !important; /* Center the content */
-}
-
-footer p {
-    margin: 0 auto !important; /* Center the paragraph */
-    display: inline-block !important; /* Prevent full-width stretch */
-}
-
-/* 3. Restore index page intro box */
-.intro-section {
-    background: var(--dropdown-header-bg) !important;
-    padding: 2em !important;
-    border-radius: 8px !important;
-    margin: 2em 0 !important;
-    border: 1px solid var(--border-color) !important; /* Add subtle border */
-}
-
-/* 4. Restore blog post card styling */
-.feature-cards .feature-card:first-child {
-    background: var(--card-bg) !important;
-    padding: 1.5em !important;
-    border-radius: 8px !important;
-    border: 2px solid var(--border-color) !important;
-    box-shadow: var(--shadow) !important; /* Restore shadow */
-}
-
-/* 5. Restore blog date/author styling */
-.blog-meta {
-    color: var(--text-secondary) !important;
-    font-size: 0.9em !important;
-    margin: 1em 0 2em !important;
-    display: block !important; /* Ensure it's treated as a block element */
-}
-
-/* 6. Ensure all pullout boxes have consistent spacing */
-.contribute,
-.quick-start,
-.updates {
-    margin: 2em 0 !important;
-    padding: 1.5em !important;
-    border-radius: 8px !important;
-    background: var(--dropdown-header-bg) !important;
-    border: 1px solid var(--border-color) !important;
-}
-
-/* ========== DARK MODE LINK CONTRAST FIX ========== */
-
-/* Remove opacity reduction on visited links in dark mode */
-[data-theme="dark"] a:visited,
-[data-theme="dark"] .dropdown-content a:visited,
-[data-theme="dark"] .ai-output-box a:visited,
-[data-theme="dark"] .response-box a:visited,
-[data-theme="dark"] .nested-content a:visited {
-    opacity: 1 !important;
-    color: var(--nav-link-color) !important;
-}
-
-/* Ensure all links have full opacity in dark mode */
-[data-theme="dark"] a,
-[data-theme="dark"] .dropdown-content a,
-[data-theme="dark"] .ai-output-box a,
-[data-theme="dark"] .response-box a,
-[data-theme="dark"] .nested-content a {
-    opacity: 1 !important;
-    color: var(--nav-link-color);
-}
-
-/* Make hovered links brighter for better visibility */
-[data-theme="dark"] a:hover {
-    color: var(--nav-link-hover) !important;
-    text-decoration: underline;
-}
-
-/* Fix any lingering opacity on footer and navigation */
-[data-theme="dark"] footer a,
-[data-theme="dark"] nav a {
-    opacity: 1 !important;
-    color: var(--nav-link-color);
-}
-
-[data-theme="dark"] footer a:hover,
-[data-theme="dark"] nav a:hover {
-    color: var(--nav-link-hover) !important;
-}
-
-/* ========== BLOG PAGE FIXES ========== */
-
-/* 1. Restore card styling for blog posts */
-.blog-posts {
-    margin: 2em 0;
-}
-
-.blog-posts .feature-card {
-    background: var(--card-bg) !important;
-    padding: 1.5em !important;
-    border-radius: 8px !important;
-    border: 2px solid var(--border-color) !important;
-    box-shadow: var(--shadow) !important;
-    margin-bottom: 1.5em !important;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s !important;
-}
-
-.blog-posts .feature-card:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: var(--shadow) !important;
-    border-color: var(--nav-link-color) !important;
-}
-
-/* 2. Fix blog meta spacing */
-.blog-meta {
-    color: var(--text-secondary) !important;
-    font-size: 0.9em !important;
-    margin: 0.5em 0 1em !important;
-    display: block !important;
-}
-
-/* 3. Add proper spacing around blog content */
-.blog-posts h2 {
-    margin-bottom: 2em !important;
-}
-
-.blog-posts p {
-    margin-bottom: 1.2em !important;
-    line-height: 1.7 !important;
-}
-
-/* 4. Fix contribute section spacing */
-.contribute {
-    background: var(--dropdown-header-bg) !important;
-    padding: 1.5em !important;
-    border-radius: 8px !important;
-    text-align: center !important;
-    margin: 3em 0 2em !important;
-    border: 1px solid var(--border-color) !important;
-}
-
-/* 5. Ensure consistent link styling */
-.blog-posts a {
-    color: var(--nav-link-color) !important;
-    text-decoration: none !important;
-}
-
-.blog-posts a:hover {
-    text-decoration: underline !important;
-}
-
-/* 6. Add breathing room around page title */
-main > h1 {
-    margin-bottom: 1.5em !important;
-}
-
-/* 7. Fix spacing between blog post cards */
-.blog-posts .feature-card + .feature-card {
-    margin-top: 1.5em !important;
-}
-
-/* ========== BLOG IMAGE SIZE FIX ========== */
-
-.blog-image.small img {
-    max-width: 400px !important;
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    margin: 0 auto !important;
-}
-
-/* ========== BLOG POST FORMATTING FIXES ========== */
-
-/* 1. Restore example box styling */
-.example-box {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 8px !important;
-    padding: 1.5em !important;
-    margin: 2em 0 !important;
-}
-
-.example-box h3 {
-    color: var(--nav-link-color) !important;
-    margin-top: 0 !important;
-    margin-bottom: 1em !important;
-}
-
-/* 2. Add proper paragraph spacing */
-.blog-content p {
-    margin-bottom: 1.5em !important; /* Add empty line after paragraphs */
-    line-height: 1.7 !important;
-}
-
-.blog-content h2,
-.blog-content h3,
-.blog-content h4 {
-    margin-top: 2em !important;
-    margin-bottom: 1em !important;
-}
-
-/* 3. Fix spacing around images */
-.blog-image {
-    margin: 2em 0 !important;
-}
-
-/* 4. Ensure code blocks keep their styling */
-.blog-content pre {
-    background: var(--dropdown-header-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 4px !important;
-    padding: 1em !important;
-    margin: 1.5em 0 !important;
-    overflow-x: auto !important;
-}
-
-/* ========== FINAL PARAGRAPH SPACING FIX ========== */
-
-/* Target paragraphs inside blog content with maximum specificity */
-.blog-post .blog-content p,
-.blog-post section p,
-.blog-post .example-box p,
-.blog-post .introduction p,
-.blog-post .learn-section p,
-.blog-post .create-section p,
-.blog-post .nested-content p,
-.blog-post .ai-output-box p {
-    margin-bottom: 1.5em !important;
-    line-height: 1.7 !important;
-}
-
-/* Remove bottom margin from last paragraph in containers */
-.blog-post .blog-content p:last-child,
-.blog-post section p:last-child,
-.blog-post .example-box p:last-child,
-.blog-post .nested-content p:last-child,
-.blog-post .ai-output-box p:last-child {
-    margin-bottom: 0 !important;
-}
-
-/* Add spacing after headings before paragraphs */
-.blog-post h2 + p,
-.blog-post h3 + p,
-.blog-post h4 + p,
-.blog-post .highlight + p {
-    margin-top: 1em !important;
-}
-
-/* Fix for AI 101 page card padding */
-.ai-101-page .feature-card {
-    padding-top: 1em !important;
-}
-
-/* Ensure first child elements have no top margin */
-.ai-101-page .feature-card > *:first-child {
-    margin-top: 0 !important;
+@media (max-width: 600px) {
+  h1 { font-size: 2em; }
+  
+  nav ul {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  body {
+    margin: var(--space-lg) auto;
+    padding: 0 var(--space-md);
+  }
 }
