@@ -304,39 +304,87 @@ footer {
 }
 
 /* ==========================================================================
-   LAYER 5: BACKWARD COMPATIBILITY WRAPPERS
+   LAYER 5: BACKWARD COMPATIBILITY WRAPPERS - FIXED
    ========================================================================== */
 
 /* ===== Legacy Card Support (DEPRECATED - but required for existing pages) ===== */
 
-/* OLD: .feature-card - NEW: wraps .card */
+/* OLD: .feature-card, .example-box, .updates, .contribute - NEW: wraps .card */
 .feature-card,
 .example-box,
 .updates,
 .contribute,
 .blog-posts .feature-card {
-  @extend .card; /* Inherit all .card styles */
-  margin-block: var(--space-lg); /* Add external spacing */
+  /* Copied from .card */
+  container-type: inline-size;
+  padding: var(--space-md);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  /* Additional legacy spacing */
+  margin-block: var(--space-lg);
 }
 
-/* OLD: .feature-card:hover - NEW: wraps .card-interactive */
+@container (min-width: 400px) {
+  .feature-card,
+  .example-box,
+  .updates,
+  .contribute,
+  .blog-posts .feature-card {
+    padding: var(--space-lg);
+  }
+}
+
+@container (min-width: 600px) {
+  .feature-card,
+  .example-box,
+  .updates,
+  .contribute,
+  .blog-posts .feature-card {
+    padding: var(--space-xl);
+  }
+}
+
+/* Interactive hover effects for legacy cards */
 .feature-card:hover,
 .feature-cards .feature-card:hover,
 .blog-posts .feature-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
   border-color: var(--nav-link-color);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-
-/* OLD: .feature-card > *:first-child - SOLVED by gap */
-/* No need - .card uses gap which handles this automatically */
 
 /* OLD: .feature-cards grid - NEW: wraps .grid */
 .feature-cards,
 .blog-posts,
 .card-grid {
-  @extend .grid; /* Inherit grid layout */
+  /* Copied from .grid */
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(var(--grid-col, 1), minmax(0, 1fr));
+  /* Additional legacy spacing */
   margin-block: var(--space-xl);
+}
+
+@media (min-width: 600px) {
+  .feature-cards,
+  .blog-posts,
+  .card-grid {
+    --grid-col: 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .feature-cards,
+  .blog-posts,
+  .card-grid {
+    --grid-col: 3;
+  }
 }
 
 /* OLD: List overrides - NEW: wraps .list */
@@ -350,28 +398,78 @@ footer {
 .contribute ol,
 .updates ul,
 .updates ol {
-  @extend .list; /* Inherit list styling */
+  /* Copied from .list */
+  padding-left: var(--space-md);
+  margin: 0;
 }
 
-/* OLD: Content boxes - NEW: wraps .content-box */
+.blog-content ul li,
+.blog-content ol li,
+.dropdown-content ul li,
+.dropdown-content ol li,
+.nested-content ul li,
+.nested-content ol li,
+.contribute ul li,
+.contribute ol li,
+.updates ul li,
+.updates ol li {
+  /* Copied from .list li */
+  padding-left: var(--space-xs);
+  margin-block: var(--space-2xs);
+  line-height: 1.7;
+}
+
+/* OLD: Content boxes - NEW: replaced by flow */
 .content-section {
   margin-block: var(--space-2xl);
 }
 
+/* OLD: Nested lists - NEW: use .list-nested */
+.blog-content ul ul,
+.blog-content ol ol,
+.blog-content ul ol,
+.blog-content ol ul,
+.dropdown-content ul ul,
+.dropdown-content ol ol,
+.nested-content ul ul,
+.nested-content ol ol,
+.nested-content ul ol,
+.nested-content ol ul,
+.contribute ul ul,
+.contribute ol ol,
+.updates ul ul,
+.updates ol ol {
+  margin-block: var(--space-xs);
+  padding-left: var(--space-md);
+}
+
 /* OLD: .section-nav - NEW: wraps .nav-aside */
 .section-nav {
-  @extend .nav-aside; /* Inherit navigation styling */
+  /* Copied from .nav-aside */
+  container-type: inline-size;
+  position: sticky;
+  top: var(--space-md);
+  width: 100%;
+  max-width: 240px;
+  padding: var(--space-md);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-/* Hide on mobile */
+@container (min-width: 200px) {
+  .section-nav {
+    position: fixed;
+    right: var(--space-lg);
+    margin: 0;
+  }
+}
+
 @media (max-width: 1200px) {
   .section-nav { display: none; }
-}
-
-/* OLD: Spacing fixes - NEW: replaced by flow */
-.blog-content ul + p,
-.blog-content ol + p {
-  margin-top: var(--space-md);
 }
 
 /* ===== Specific Page Fixes ===== */
@@ -379,7 +477,7 @@ footer {
 /* Index page - ensure cards appear */
 .feature-cards .feature-card,
 .index-page .feature-card {
-  display: flex !important; /* Override any display issues */
+  display: flex !important;
   flex-direction: column;
   gap: var(--space-sm);
 }
