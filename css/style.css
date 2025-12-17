@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MINIMALIST STYLESHEET - Self-Contained Component Architecture
+   MINIMALIST STYLESHEET - Self-Contained Component Architecture WITH BACKWARD COMPATIBILITY
    No external fonts, no frameworks, no dependencies
    ========================================================================== */
 
@@ -113,7 +113,6 @@ p {
    LAYER 3: BASE ELEMENTS
    ========================================================================== */
 
-/* ===== Typography ===== */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
                Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -125,7 +124,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ===== Navigation ===== */
+/* Navigation */
 nav ul {
   list-style: none;
   margin: var(--space-xl) 0 var(--space-2xl);
@@ -142,18 +141,16 @@ nav a {
 
 nav a:hover { text-decoration: underline; }
 
-/* ===== Links ===== */
+/* Links */
 a:visited {
   color: var(--nav-link-color);
   opacity: 0.85;
 }
 
 a:visited:hover { opacity: 1; }
-
-/* Navigation links keep full opacity */
 nav a:visited { opacity: 1; }
 
-/* ===== Footer ===== */
+/* Footer */
 footer {
   margin-top: var(--space-3xl);
   padding-top: var(--space-xl);
@@ -163,7 +160,7 @@ footer {
   text-align: center;
 }
 
-/* ===== Tables ===== */
+/* Tables */
 .table-wrapper {
   overflow-x: auto;
   margin: var(--space-lg) 0;
@@ -190,18 +187,7 @@ footer {
   font-weight: 600;
 }
 
-.data-table td { text-align: center; }
-.data-table td:first-child {
-  text-align: left;
-  font-weight: 600;
-}
-
-.highest-score {
-  font-weight: 600;
-  color: var(--nav-link-color);
-}
-
-/* ===== Code Blocks ===== */
+/* Code Blocks */
 .code-content pre,
 .blog-content pre,
 .response-box pre,
@@ -221,107 +207,7 @@ footer {
 }
 
 /* ==========================================================================
-   LAYER 4: INTERACTIVE COMPONENTS
-   ========================================================================== */
-
-/* ===== Dropdowns ===== */
-details.main-dropdown {
-  margin: var(--space-lg) 0;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--dropdown-bg);
-  box-shadow: var(--shadow);
-}
-
-summary.dropdown-header {
-  cursor: pointer;
-  padding: var(--space-md);
-  background-color: var(--dropdown-header-bg);
-  list-style: none;
-  position: relative;
-}
-
-summary.dropdown-header::-webkit-details-marker { display: none; }
-
-summary.dropdown-header::before {
-  content: "▶";
-  display: inline-block;
-  margin-right: var(--space-xs);
-  transition: transform 0.2s;
-}
-
-details.main-dropdown[open] > summary.dropdown-header::before {
-  transform: rotate(90deg);
-}
-
-.dropdown-content {
-  padding: 0 var(--space-md) var(--space-md);
-}
-
-/* Nested Dropdowns */
-details.nested-dropdown {
-  margin: var(--space-md) 0;
-  border-left: 3px solid var(--accent-color);
-  padding-left: var(--space-md);
-}
-
-summary.nested-header {
-  cursor: pointer;
-  padding: var(--space-sm) 0;
-  color: var(--nav-link-color);
-  list-style: none;
-}
-
-summary.nested-header::before {
-  content: "▶";
-  display: inline-block;
-  margin-right: var(--space-xs);
-  font-size: 0.8em;
-  transition: transform 0.2s;
-}
-
-details.nested-dropdown[open] > summary.nested-header::before {
-  transform: rotate(90deg);
-}
-
-.nested-content {
-  padding: 0 var(--space-md) var(--space-md) 0;
-}
-
-/* ===== Theme Toggle ===== */
-.theme-toggle {
-  position: fixed;
-  top: var(--space-lg);
-  right: var(--space-lg);
-  background-color: var(--dropdown-header-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: var(--space-sm) var(--space-md);
-  cursor: pointer;
-  font-size: 0.9em;
-  color: var(--text-color);
-  transition: all 0.3s ease;
-  z-index: 9999;
-  box-shadow: var(--shadow);
-}
-
-.theme-toggle:hover {
-  background-color: var(--nav-link-color);
-  color: white;
-  transform: translateY(-1px);
-}
-
-@media (max-width: 600px) {
-  .theme-toggle {
-    top: var(--space-md);
-    right: var(--space-md);
-    font-size: 0.8em;
-    padding: var(--space-xs) var(--space-sm);
-  }
-}
-
-/* ==========================================================================
-   LAYER 5: SELF-CONTAINED COMPONENTS
+   LAYER 4: SELF-CONTAINED COMPONENTS (NEW ARCHITECTURE)
    ========================================================================== */
 
 /* ===== Universal Card Component ===== */
@@ -372,7 +258,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
   .content-box { padding: var(--space-xl); }
 }
 
-/* ===== List Component (Bullet-Proof Spacing) ===== */
+/* ===== List Component ===== */
 .list {
   padding-left: var(--space-md);
   margin: 0;
@@ -389,7 +275,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
   padding-left: var(--space-md);
 }
 
-/* ===== Navigation Aside Component ===== */
+/* ===== Navigation Aside ===== */
 .nav-aside {
   container-type: inline-size;
   position: sticky;
@@ -417,69 +303,99 @@ details.nested-dropdown[open] > summary.nested-header::before {
   .nav-container { display: none; }
 }
 
-/* ===== Prompt/Response Boxes ===== */
-.prompt-box,
-.response-box,
-.ai-output-box {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: var(--space-lg);
-  margin-block: var(--space-lg);
-  font-size: 0.95em;
+/* ==========================================================================
+   LAYER 5: BACKWARD COMPATIBILITY WRAPPERS
+   ========================================================================== */
+
+/* ===== Legacy Card Support (DEPRECATED - but required for existing pages) ===== */
+
+/* OLD: .feature-card - NEW: wraps .card */
+.feature-card,
+.example-box,
+.updates,
+.contribute,
+.blog-posts .feature-card {
+  @extend .card; /* Inherit all .card styles */
+  margin-block: var(--space-lg); /* Add external spacing */
 }
 
-.prompt-box {
-  background: rgba(77, 166, 255, 0.08);
+/* OLD: .feature-card:hover - NEW: wraps .card-interactive */
+.feature-card:hover,
+.feature-cards .feature-card:hover,
+.blog-posts .feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--nav-link-color);
 }
 
-.response-box {
-  background: rgba(45, 45, 45, 0.05);
+/* OLD: .feature-card > *:first-child - SOLVED by gap */
+/* No need - .card uses gap which handles this automatically */
+
+/* OLD: .feature-cards grid - NEW: wraps .grid */
+.feature-cards,
+.blog-posts,
+.card-grid {
+  @extend .grid; /* Inherit grid layout */
+  margin-block: var(--space-xl);
 }
 
-[data-theme="light"] .prompt-box {
-  background: rgba(0, 102, 204, 0.05);
+/* OLD: List overrides - NEW: wraps .list */
+.blog-content ul,
+.blog-content ol,
+.dropdown-content ul,
+.dropdown-content ol,
+.nested-content ul,
+.nested-content ol,
+.contribute ul,
+.contribute ol,
+.updates ul,
+.updates ol {
+  @extend .list; /* Inherit list styling */
 }
 
-[data-theme="light"] .response-box {
-  background: rgba(240, 240, 240, 0.5);
+/* OLD: Content boxes - NEW: wraps .content-box */
+.content-section {
+  margin-block: var(--space-2xl);
 }
 
-.ai-output-box {
-  background-color: var(--dropdown-header-bg);
+/* OLD: .section-nav - NEW: wraps .nav-aside */
+.section-nav {
+  @extend .nav-aside; /* Inherit navigation styling */
 }
 
-.ai-output-box h4 {
-  color: var(--nav-link-color);
+/* Hide on mobile */
+@media (max-width: 1200px) {
+  .section-nav { display: none; }
 }
 
-/* ===== Submission Section ===== */
-.submission-section {
-  margin: var(--space-2xl) 0 var(--space-xl);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--bg-secondary);
-}
-
-.submission-header {
-  padding: var(--space-md);
-  margin: 0;
-}
-
-.submission-content {
-  padding: 0 var(--space-md) var(--space-md);
-}
-
-.submission-notice {
-  font-size: 0.9em;
+/* OLD: Spacing fixes - NEW: replaced by flow */
+.blog-content ul + p,
+.blog-content ol + p {
   margin-top: var(--space-md);
-  padding: var(--space-md);
-  background: var(--dropdown-header-bg);
-  border-left: 4px solid var(--nav-link-color);
-  border-radius: 4px;
 }
 
-.submission-notice strong {
-  color: var(--nav-link-color);
+/* ===== Specific Page Fixes ===== */
+
+/* Index page - ensure cards appear */
+.feature-cards .feature-card,
+.index-page .feature-card {
+  display: flex !important; /* Override any display issues */
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Blog page - restore post cards */
+.blog-posts .feature-card {
+  margin-bottom: var(--space-lg);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Use cases page - ensure content is visible */
+.use-cases-page .content-section,
+.use-cases-page .example-box {
+  display: block !important;
+  margin: var(--space-xl) 0;
 }
 
 /* ==========================================================================
@@ -523,16 +439,8 @@ details.nested-dropdown[open] > summary.nested-header::before {
   border: 2px solid var(--nav-link-color);
 }
 
-.cta-primary:hover,
-.cta-secondary:hover {
+.cta-primary:hover, .cta-secondary:hover {
   transform: translateY(-2px);
-}
-
-.card-grid {
-  display: grid;
-  gap: var(--space-lg);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-block: var(--space-xl);
 }
 
 .card-icon {
@@ -657,7 +565,7 @@ details.nested-dropdown[open] > summary.nested-header::before {
   font-style: italic;
 }
 
-/* ===== Compare & Prompt Repository Pages ===== */
+/* ===== Compare & Prompt Repository ===== */
 .filter-controls {
   background-color: var(--dropdown-header-bg);
   padding: var(--space-md);
@@ -783,6 +691,71 @@ details.nested-dropdown[open] > summary.nested-header::before {
   padding: var(--space-xl);
   color: var(--text-secondary);
   font-style: italic;
+}
+
+/* ===== Prompt/Response/AI Output Boxes ===== */
+.prompt-box,
+.response-box,
+.ai-output-box {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin-block: var(--space-lg);
+  font-size: 0.95em;
+}
+
+.prompt-box {
+  background: rgba(77, 166, 255, 0.08);
+}
+
+.response-box {
+  background: rgba(45, 45, 45, 0.05);
+}
+
+[data-theme="light"] .prompt-box {
+  background: rgba(0, 102, 204, 0.05);
+}
+
+[data-theme="light"] .response-box {
+  background: rgba(240, 240, 240, 0.5);
+}
+
+.ai-output-box {
+  background-color: var(--dropdown-header-bg);
+}
+
+.ai-output-box h4 {
+  color: var(--nav-link-color);
+}
+
+/* ===== Submission Section ===== */
+.submission-section {
+  margin: var(--space-2xl) 0 var(--space-xl);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+.submission-header {
+  padding: var(--space-md);
+  margin: 0;
+}
+
+.submission-content {
+  padding: 0 var(--space-md) var(--space-md);
+}
+
+.submission-notice {
+  font-size: 0.9em;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--dropdown-header-bg);
+  border-left: 4px solid var(--nav-link-color);
+  border-radius: 4px;
+}
+
+.submission-notice strong {
+  color: var(--nav-link-color);
 }
 
 /* ==========================================================================
