@@ -1,6 +1,6 @@
 /* ==========================================================================
    MINIMALIST STYLESHEET - Self-Contained Component Architecture
-   Integrated Fixes for Layout and Spacing Consistency
+   Integrated Fixes for Layout, Spacing, and Navigation
    No external fonts, no frameworks, no dependencies
    ========================================================================== */
 
@@ -40,7 +40,7 @@
 
   /* Layout Constraints */
   --content-max: 700px;
-  --content-wide-max: 900px;  /* NEW: For pages with navigation */
+  --content-wide-max: 900px;  /* For pages with navigation */
   --blog-max: 800px;
 
   /* Enhanced Shadow Variables */
@@ -86,6 +86,10 @@ p {
   line-height: 1.7;
 }
 
+li {
+  margin-block: var(--space-xs); /* ADD: Consistent list item spacing */
+}
+
 /* ==========================================================================
    LAYER 2: LAYOUT PRIMITIVES
    ========================================================================== */
@@ -128,6 +132,11 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* NEW: Wider layout for pages with navigation */
+body.has-nav {
+  max-width: var(--content-wide-max); /* 900px instead of 700px */
 }
 
 nav ul {
@@ -217,7 +226,7 @@ footer {
 }
 
 /* ==========================================================================
-   LAYER 4: SELF-CONTAINED COMPONENTS - INTEGRATED FIXES
+   LAYER 4: SELF-CONTained COMPONENTS - INTEGRATED FIXES
    ========================================================================== */
 
 /* ===== Universal Card Component - BALANCED SPACING ===== */
@@ -283,9 +292,9 @@ footer {
   margin-bottom: 0;
 }
 
-/* FIX: Ensure paragraphs inside cards don't inherit blog-content spacing */
-.blog-content .card p {
-  margin-block: 0; /* Override blog-content p margins */
+/* FIX: Prevent blog-content margins from affecting cards */
+.blog-content > .card p {
+  margin-block: 0;
 }
 
 /* ===== Content Box Component ===== */
@@ -431,11 +440,16 @@ footer {
 
 /* ===== Blog Content Spacing - FIXED ===== */
 .blog-content > p {
-  margin-block: var(--space-sm); /* REDUCED from md (24px) to sm (16px) */
+  margin-block: var(--space-sm); /* 16px - reduced from 24px */
 }
 
 .blog-content > p:first-child {
   margin-top: 0;
+}
+
+/* FIX: Consistent spacing for list items in blog content */
+.blog-content li {
+  margin-block: var(--space-xs); /* 12px - matches card spacing */
 }
 
 .blog-content h2,
@@ -447,7 +461,7 @@ footer {
 
 .blog-content ul,
 .blog-content ol {
-  margin-block: var(--space-sm); /* REDUCED from md (24px) to sm (16px) */
+  margin-block: var(--space-sm); /* 16px - reduced from 24px */
 }
 
 /* ===== Index Page ===== */
@@ -782,45 +796,16 @@ footer {
   box-shadow: var(--shadow);
 }
 
-/* ===== Main Container - REFACTORED FOR BETTER LAYOUT ===== */
-.main-container {
-  max-width: var(--content-wide-max); /* NEW: Use wider layout when nav is present */
-  margin: 0 auto; /* NEW: Center the container */
-  padding-right: 280px; /* Space for navigation panel */
-}
-
-/* NEW: Modifier class for pages without navigation */
-.main-container--no-nav {
-  max-width: var(--content-max);
-  padding-right: 0;
-}
-
-@media (max-width: 1400px) {
-  .main-container {
-    padding-right: 240px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .main-container {
-    max-width: var(--content-max); /* Revert to normal width when nav hidden */
-    padding-right: 0;
-  }
-}
-
 /* ===== RESPONSIVE IMPROVEMENTS ===== */
 @media (max-width: 1400px) {
-  .nav-aside,
-  .section-nav {
-    width: 220px;
-    right: var(--space-md);
+  body.has-nav {
+    max-width: calc(var(--content-wide-max) - 60px); /* Slightly smaller on medium screens */
   }
 }
 
 @media (max-width: 1200px) {
-  .nav-aside,
-  .section-nav {
-    display: none;
+  body.has-nav {
+    max-width: var(--content-max); /* Revert to normal width when nav hidden */
   }
 }
 
@@ -871,11 +856,6 @@ footer {
   .nav-aside,
   .section-nav {
     display: none !important;
-  }
-  
-  .main-container {
-    padding-right: 0 !important;
-    max-width: 100% !important;
   }
   
   .card {
